@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-12T14:38:15.586Z",
+  "sources": [
+    "https://raw.githubusercontent.com/the-hideout/tarkov-dev/main/src/data/maps.json",
+    "https://json.tarkov.dev/regular/maps",
+    "https://json.tarkov.dev/regular/maps_en",
+    "https://json.tarkov.dev/regular/tasks",
+    "https://json.tarkov.dev/regular/tasks_en",
+    "https://json.tarkov.dev/pve/tasks",
+    "https://json.tarkov.dev/pve/tasks_en",
+    "https://raw.githubusercontent.com/the-hideout/tarkov-dev-svg-maps/main"
+  ],
+  "assetCount": 538
+}

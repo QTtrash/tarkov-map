@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - run: npm ci
+      - run: npm audit --audit-level=high
+      - run: npm test
+      - run: npm run build
+      - run: cargo test --manifest-path src-tauri/Cargo.toml
+      - run: cargo clippy --manifest-path src-tauri/Cargo.toml -- -D warnings
+      - name: Validate bundled intelligence
+        shell: pwsh
+        run: |
+          $maps = Get-ChildItem public/maps/poi/*.json
+          if ($maps.Count -ne 13) { throw "Expected 13 map intelligence bundles" }
+          foreach ($map in $maps) {
+            $data = Get-Content $map -Raw | ConvertFrom-Json
+            if ($data.schemaVersion -ne 2 -or -not $data.generatedAt) { throw "Invalid bundle: $map" }
+          }

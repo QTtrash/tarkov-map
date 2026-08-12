@@ -1,0 +1,978 @@
+{
+  "schemaVersion": 2,
+  "mapId": "terminal",
+  "generatedAt": "2026-08-12T14:38:15.022Z",
+  "sources": [
+    "https://json.tarkov.dev/regular/maps",
+    "https://json.tarkov.dev/regular/maps_en"
+  ],
+  "pois": [
+    {
+      "id": "artillery-0",
+      "kind": "hazard",
+      "category": "hazard",
+      "name": "Mortar danger zone",
+      "position": {
+        "x": 59,
+        "y": -60,
+        "z": -404
+      },
+      "outline": [
+        {
+          "x": -5.904676563766017,
+          "y": -60,
+          "z": -345.29835641012323
+        },
+        {
+          "x": 85.85827693369548,
+          "y": -60,
+          "z": -320.71054712538375
+        },
+        {
+          "x": 123.90467656376602,
+          "y": -60,
+          "z": -462.70164358987677
+        },
+        {
+          "x": 32.14172306630452,
+          "y": -60,
+          "z": -487.28945287461625
+        }
+      ],
+      "top": -55,
+      "bottom": null,
+      "hazardType": "mortar"
+    },
+    {
+      "id": "artillery-1",
+      "kind": "hazard",
+      "category": "hazard",
+      "name": "Mortar danger zone",
+      "position": {
+        "x": 46,
+        "y": -60,
+        "z": -245
+      },
+      "outline": [
+        {
+          "x": -28.09706471919114,
+          "y": -60,
+          "z": -202.22003973821387
+        },
+        {
+          "x": 88.77996026178613,
+          "y": -60,
+          "z": -170.90293528080886
+        },
+        {
+          "x": 120.09706471919114,
+          "y": -60,
+          "z": -287.77996026178613
+        },
+        {
+          "x": 3.2200397382138704,
+          "y": -60,
+          "z": -319.09706471919117
+        }
+      ],
+      "top": -55,
+      "bottom": null,
+      "hazardType": "mortar"
+    },
+    {
+      "id": "artillery-2",
+      "kind": "hazard",
+      "category": "hazard",
+      "name": "Mortar danger zone",
+      "position": {
+        "x": 218,
+        "y": -60,
+        "z": -329
+      },
+      "outline": [
+        {
+          "x": 159.3738413071129,
+          "y": -60,
+          "z": -268.61603261695683
+        },
+        {
+          "x": 238.57975906281652,
+          "y": -60,
+          "z": -247.39287091855013
+        },
+        {
+          "x": 276.6261586928871,
+          "y": -60,
+          "z": -389.38396738304317
+        },
+        {
+          "x": 197.42024093718348,
+          "y": -60,
+          "z": -410.6071290814499
+        }
+      ],
+      "top": -55,
+      "bottom": null,
+      "hazardType": "mortar"
+    },
+    {
+      "id": "artillery-3",
+      "kind": "hazard",
+      "category": "hazard",
+      "name": "Mortar danger zone",
+      "position": {
+        "x": -74,
+        "y": -60,
+        "z": -34
+      },
+      "outline": [
+        {
+          "x": -148.09706471919114,
+          "y": -60,
+          "z": 8.77996026178613
+        },
+        {
+          "x": -31.22003973821387,
+          "y": -60,
+          "z": 40.09706471919114
+        },
+        {
+          "x": 0.09706471919113824,
+          "y": -60,
+          "z": -76.77996026178613
+        },
+        {
+          "x": -116.77996026178613,
+          "y": -60,
+          "z": -108.09706471919114
+        }
+      ],
+      "top": -55,
+      "bottom": null,
+      "hazardType": "mortar"
+    },
+    {
+      "id": "artillery-4",
+      "kind": "hazard",
+      "category": "hazard",
+      "name": "Mortar danger zone",
+      "position": {
+        "x": -90,
+        "y": -60,
+        "z": 63
+      },
+      "outline": [
+        {
+          "x": -173.28945287461625,
+          "y": -60,
+          "z": 89.85827693369548
+        },
+        {
+          "x": -31.29835641012322,
+          "y": -60,
+          "z": 127.90467656376602
+        },
+        {
+          "x": -6.710547125383741,
+          "y": -60,
+          "z": 36.14172306630452
+        },
+        {
+          "x": -148.70164358987677,
+          "y": -60,
+          "z": -1.9046765637660172
+        }
+      ],
+      "top": -55,
+      "bottom": null,
+      "hazardType": "mortar"
+    },
+    {
+      "id": "artillery-5",
+      "kind": "hazard",
+      "category": "hazard",
+      "name": "Mortar danger zone",
+      "position": {
+        "x": -119,
+        "y": -60,
+        "z": 171
+      },
+      "outline": [
+        {
+          "x": -193.09706471919114,
+          "y": -60,
+          "z": 213.77996026178613
+        },
+        {
+          "x": -76.22003973821387,
+          "y": -60,
+          "z": 245.09706471919114
+        },
+        {
+          "x": -44.90293528080886,
+          "y": -60,
+          "z": 128.22003973821387
+        },
+        {
+          "x": -161.77996026178613,
+          "y": -60,
+          "z": 96.90293528080886
+        }
+      ],
+      "top": -55,
+      "bottom": null,
+      "hazardType": "mortar"
+    },
+    {
+      "id": "artillery-6",
+      "kind": "hazard",
+      "category": "hazard",
+      "name": "Mortar danger zone",
+      "position": {
+        "x": -162,
+        "y": -60,
+        "z": 247
+      },
+      "outline": [
+        {
+          "x": -236.09706471919114,
+          "y": -60,
+          "z": 289.77996026178613
+        },
+        {
+          "x": -119.22003973821387,
+          "y": -60,
+          "z": 321.09706471919117
+        },
+        {
+          "x": -87.90293528080886,
+          "y": -60,
+          "z": 204.22003973821387
+        },
+        {
+          "x": -204.77996026178613,
+          "y": -60,
+          "z": 172.90293528080886
+        }
+      ],
+      "top": -55,
+      "bottom": null,
+      "hazardType": "mortar"
+    },
+    {
+      "id": "artillery-7",
+      "kind": "hazard",
+      "category": "hazard",
+      "name": "Mortar danger zone",
+      "position": {
+        "x": -32,
+        "y": -60,
+        "z": 191
+      },
+      "outline": [
+        {
+          "x": -106.09706471919114,
+          "y": -60,
+          "z": 233.77996026178613
+        },
+        {
+          "x": 10.77996026178613,
+          "y": -60,
+          "z": 265.09706471919117
+        },
+        {
+          "x": 42.09706471919114,
+          "y": -60,
+          "z": 148.22003973821387
+        },
+        {
+          "x": -74.77996026178613,
+          "y": -60,
+          "z": 116.90293528080886
+        }
+      ],
+      "top": -55,
+      "bottom": null,
+      "hazardType": "mortar"
+    },
+    {
+      "id": "artillery-8",
+      "kind": "hazard",
+      "category": "hazard",
+      "name": "Mortar danger zone",
+      "position": {
+        "x": 222,
+        "y": -60,
+        "z": 198
+      },
+      "outline": [
+        {
+          "x": 174.5,
+          "y": -60,
+          "z": 271.5
+        },
+        {
+          "x": 269.5,
+          "y": -60,
+          "z": 271.5
+        },
+        {
+          "x": 269.5,
+          "y": -60,
+          "z": 124.5
+        },
+        {
+          "x": 174.5,
+          "y": -60,
+          "z": 124.5
+        }
+      ],
+      "top": -55,
+      "bottom": null,
+      "hazardType": "mortar"
+    },
+    {
+      "id": "artillery-9",
+      "kind": "hazard",
+      "category": "hazard",
+      "name": "Mortar danger zone",
+      "position": {
+        "x": 242,
+        "y": -60,
+        "z": 89
+      },
+      "outline": [
+        {
+          "x": 194.5,
+          "y": -60,
+          "z": 162.5
+        },
+        {
+          "x": 289.5,
+          "y": -60,
+          "z": 162.5
+        },
+        {
+          "x": 289.5,
+          "y": -60,
+          "z": 15.5
+        },
+        {
+          "x": 194.5,
+          "y": -60,
+          "z": 15.5
+        }
+      ],
+      "top": -55,
+      "bottom": null,
+      "hazardType": "mortar"
+    },
+    {
+      "id": "spawn-2",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 125.918,
+        "y": -60.073,
+        "z": -419.363953
+      },
+      "zoneName": "0e020a9c-77eb-4f9a-85b4-ebf9a534245c",
+      "sides": [
+        "pmc"
+      ]
+    },
+    {
+      "id": "spawn-13",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 127.574005,
+        "y": -60.067,
+        "z": -417.348938
+      },
+      "zoneName": "2a0506f3-9435-4c1a-8071-2f0a00d4d50b",
+      "sides": [
+        "pmc"
+      ]
+    },
+    {
+      "id": "spawn-15",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 125.011017,
+        "y": -60.07,
+        "z": -418.758972
+      },
+      "zoneName": "2e52ceb4-5491-4a44-bfe4-a658f87271ff",
+      "sides": [
+        "pmc"
+      ]
+    },
+    {
+      "id": "spawn-53",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 127.623016,
+        "y": -60.066,
+        "z": -419.16394
+      },
+      "zoneName": "89aafce3-54ce-46e9-b7e9-349b8aee8752",
+      "sides": [
+        "pmc"
+      ]
+    },
+    {
+      "id": "spawn-105",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 128.899017,
+        "y": -60.067,
+        "z": -420.03595
+      },
+      "zoneName": "eb593d7d-ce9c-4a4a-abad-07e66f5204ee",
+      "sides": [
+        "pmc"
+      ]
+    },
+    {
+      "id": "boss-blackDivision-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. · 1BD1PortAmbush1",
+      "aliases": [
+        "blackDivision",
+        "Zone1BD1PortAmbush1"
+      ],
+      "position": {
+        "x": 15.205017269999999,
+        "y": -60.366341325,
+        "z": -340.69746399999997
+      },
+      "bossId": "blackDivision",
+      "bossName": "Black Div.",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-blackDivision-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. · 1BD1PortAmbush1",
+      "aliases": [
+        "blackDivision",
+        "Zone1BD1PortAmbush1"
+      ],
+      "position": {
+        "x": 15.205017269999999,
+        "y": -60.366341325,
+        "z": -340.69746399999997
+      },
+      "bossId": "blackDivision",
+      "bossName": "Black Div.",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-blackDivision-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. · 1BDGateAmbush13",
+      "aliases": [
+        "blackDivision",
+        "Zone1BDGateAmbush13"
+      ],
+      "position": {
+        "x": 39.901001066666666,
+        "y": -60.4300092,
+        "z": -151.82497133333334
+      },
+      "bossId": "blackDivision",
+      "bossName": "Black Div.",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-vsRFSniper-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "AF · 1VSRFSnipeRoofPort2",
+      "aliases": [
+        "vsRFSniper",
+        "Zone1VSRFSnipeRoofPort2"
+      ],
+      "position": {
+        "x": 14.615051099999999,
+        "y": -51.8413429,
+        "z": -212.0999755
+      },
+      "bossId": "vsRFSniper",
+      "bossName": "AF",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-vsRF-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "AF · 1VSRF1Spawn3",
+      "aliases": [
+        "vsRF",
+        "Zone1VSRF1Spawn3"
+      ],
+      "position": {
+        "x": 135.32336266666667,
+        "y": -60.31134,
+        "z": -394.259969
+      },
+      "bossId": "vsRF",
+      "bossName": "AF",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-vsRF-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "AF · 1VSRF1Spawn3",
+      "aliases": [
+        "vsRF",
+        "Zone1VSRF1Spawn3"
+      ],
+      "position": {
+        "x": 135.32336266666667,
+        "y": -60.31134,
+        "z": -394.259969
+      },
+      "bossId": "vsRF",
+      "bossName": "AF",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-vsRF-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "AF · 1VSRFStoreAmbush10",
+      "aliases": [
+        "vsRF",
+        "Zone1VSRFStoreAmbush10"
+      ],
+      "position": {
+        "x": 179.22180525,
+        "y": -60.245842125,
+        "z": -228.34147625
+      },
+      "bossId": "vsRF",
+      "bossName": "AF",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-vsRF-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "AF · 1VSRFStoreAmbush10",
+      "aliases": [
+        "vsRF",
+        "Zone1VSRFStoreAmbush10"
+      ],
+      "position": {
+        "x": 179.22180525,
+        "y": -60.245842125,
+        "z": -228.34147625
+      },
+      "bossId": "vsRF",
+      "bossName": "AF",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-blackDivision-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. · 1BD1HangarAmbush11",
+      "aliases": [
+        "blackDivision",
+        "Zone1BD1HangarAmbush11"
+      ],
+      "position": {
+        "x": 277.55502075,
+        "y": -60.22134,
+        "z": -175.66747275
+      },
+      "bossId": "blackDivision",
+      "bossName": "Black Div.",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-blackDivision-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. · 1BD1HangarAmbush11",
+      "aliases": [
+        "blackDivision",
+        "Zone1BD1HangarAmbush11"
+      ],
+      "position": {
+        "x": 277.55502075,
+        "y": -60.22134,
+        "z": -175.66747275
+      },
+      "bossId": "blackDivision",
+      "bossName": "Black Div.",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-blackDivision-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. · 1BD1HangarAmbush11",
+      "aliases": [
+        "blackDivision",
+        "Zone1BD1HangarAmbush11"
+      ],
+      "position": {
+        "x": 277.55502075,
+        "y": -60.22134,
+        "z": -175.66747275
+      },
+      "bossId": "blackDivision",
+      "bossName": "Black Div.",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-vsRF-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "AF · 2VSRFPassMiddle15",
+      "aliases": [
+        "vsRF",
+        "Zone2VSRFPassMiddle15"
+      ],
+      "position": {
+        "x": -16.6529541,
+        "y": -60.2458414,
+        "z": -130.1604615
+      },
+      "bossId": "vsRF",
+      "bossName": "AF",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-blackDivision-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. · 2BDWarehouse18",
+      "aliases": [
+        "blackDivision",
+        "Zone2BDWarehouse18"
+      ],
+      "position": {
+        "x": 182.98335766666668,
+        "y": -60.40133999999999,
+        "z": -36.7666221
+      },
+      "bossId": "blackDivision",
+      "bossName": "Black Div.",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-blackDivision-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. · 2BDWarehouse19",
+      "aliases": [
+        "blackDivision",
+        "Zone2BDWarehouse19"
+      ],
+      "position": {
+        "x": 206.34000666666662,
+        "y": -60.46134000000001,
+        "z": 37.62003613333333
+      },
+      "bossId": "blackDivision",
+      "bossName": "Black Div.",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-vsRF-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "AF · 2VSRFColumns22",
+      "aliases": [
+        "vsRF",
+        "Zone2VSRFColumns22"
+      ],
+      "position": {
+        "x": 134.36340233333334,
+        "y": -60.371340000000004,
+        "z": 241.56003833333335
+      },
+      "bossId": "vsRF",
+      "bossName": "AF",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-blackDivision-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. · 2BDColumns23",
+      "aliases": [
+        "blackDivision",
+        "Zone2BDColumns23"
+      ],
+      "position": {
+        "x": 85.44901666666667,
+        "y": -60.27633333333333,
+        "z": 126.66569000000001
+      },
+      "bossId": "blackDivision",
+      "bossName": "Black Div.",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-vsRF-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "AF · 2VSRFContainers24",
+      "aliases": [
+        "vsRF",
+        "Zone2VSRFContainers24"
+      ],
+      "position": {
+        "x": -151.086629,
+        "y": -60.33134,
+        "z": 39.406697599999994
+      },
+      "bossId": "vsRF",
+      "bossName": "AF",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-blackDivision-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. · 2BDPort28",
+      "aliases": [
+        "blackDivision",
+        "Zone2BDPort28"
+      ],
+      "position": {
+        "x": -5.410644373333334,
+        "y": -60.06633466666667,
+        "z": 214.35967700000003
+      },
+      "bossId": "blackDivision",
+      "bossName": "Black Div.",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-blackDivision-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. · 2BDPort30",
+      "aliases": [
+        "blackDivision",
+        "Zone2BDPort30"
+      ],
+      "position": {
+        "x": -83.73995000000001,
+        "y": -60.42100000000001,
+        "z": 400.967347
+      },
+      "bossId": "blackDivision",
+      "bossName": "Black Div.",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-blackDivision-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. · 2BDPort31",
+      "aliases": [
+        "blackDivision",
+        "Zone2BDPort31"
+      ],
+      "position": {
+        "x": -178.916016,
+        "y": -60.40800285,
+        "z": 296.229
+      },
+      "bossId": "blackDivision",
+      "bossName": "Black Div.",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-blackDivision-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. · 2BDPort32",
+      "aliases": [
+        "blackDivision",
+        "Zone2BDPort32"
+      ],
+      "position": {
+        "x": -360.9876766666667,
+        "y": -60.373,
+        "z": 330.9990433333333
+      },
+      "bossId": "blackDivision",
+      "bossName": "Black Div.",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-vsRF-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "AF · 2VSRFExit33",
+      "aliases": [
+        "vsRF",
+        "Zone2VSRFExit33"
+      ],
+      "position": {
+        "x": -285.013627,
+        "y": -61.363006666666664,
+        "z": 65.18334966666666
+      },
+      "bossId": "vsRF",
+      "bossName": "AF",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-blackDivision-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. · 1BD1HangarBD11",
+      "aliases": [
+        "blackDivision",
+        "Zone1BD1HangarBD11"
+      ],
+      "position": {
+        "x": 274.0435155,
+        "y": -60.3096237,
+        "z": -242.87246699999997
+      },
+      "bossId": "blackDivision",
+      "bossName": "Black Div.",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossSanitar-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Sanitar · 2ScavPort29",
+      "aliases": [
+        "bossSanitar",
+        "Zone2ScavPort29"
+      ],
+      "position": {
+        "x": -70.68196666666665,
+        "y": -60.35034086666667,
+        "z": 190.15002266666667
+      },
+      "bossId": "bossSanitar",
+      "bossName": "Sanitar",
+      "spawnChance": 0.2,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossGluhar-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Glukhar · 2ScavPort29",
+      "aliases": [
+        "bossGluhar",
+        "Zone2ScavPort29"
+      ],
+      "position": {
+        "x": -70.68196666666665,
+        "y": -60.35034086666667,
+        "z": 190.15002266666667
+      },
+      "bossId": "bossGluhar",
+      "bossName": "Glukhar",
+      "spawnChance": 0.2,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossKilla-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Killa · 2ScavPort29",
+      "aliases": [
+        "bossKilla",
+        "Zone2ScavPort29"
+      ],
+      "position": {
+        "x": -70.68196666666665,
+        "y": -60.35034086666667,
+        "z": 190.15002266666667
+      },
+      "bossId": "bossKilla",
+      "bossName": "Killa",
+      "spawnChance": 0.2,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossBully-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Reshala · 2ScavPort29",
+      "aliases": [
+        "bossBully",
+        "Zone2ScavPort29"
+      ],
+      "position": {
+        "x": -70.68196666666665,
+        "y": -60.35034086666667,
+        "z": 190.15002266666667
+      },
+      "bossId": "bossBully",
+      "bossName": "Reshala",
+      "spawnChance": 0.2,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossTagilla-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Tagilla · 2ScavPort29",
+      "aliases": [
+        "bossTagilla",
+        "Zone2ScavPort29"
+      ],
+      "position": {
+        "x": -70.68196666666665,
+        "y": -60.35034086666667,
+        "z": 190.15002266666667
+      },
+      "bossId": "bossTagilla",
+      "bossName": "Tagilla",
+      "spawnChance": 0.2,
+      "zoneChance": 1
+    }
+  ]
+}

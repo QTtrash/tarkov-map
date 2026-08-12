@@ -1,0 +1,4450 @@
+{
+  "schemaVersion": 2,
+  "mapId": "factory",
+  "generatedAt": "2026-08-12T14:38:13.517Z",
+  "sources": [
+    "https://json.tarkov.dev/regular/maps",
+    "https://json.tarkov.dev/regular/maps_en"
+  ],
+  "pois": [
+    {
+      "id": "ffb8b37a6390d2c3b00baeee3295492ea1e19a93",
+      "kind": "extract",
+      "category": "extract-pmc",
+      "name": "Cellars",
+      "aliases": [
+        "Cellars"
+      ],
+      "position": {
+        "x": 73.89422,
+        "y": -3.2876668,
+        "z": -29.0818882
+      },
+      "outline": [
+        {
+          "x": 70.1951,
+          "y": -3.2876668,
+          "z": -32.29824
+        },
+        {
+          "x": 77.91415,
+          "y": -3.2876668,
+          "z": -31.8869953
+        },
+        {
+          "x": 77.5933456,
+          "y": -3.2876668,
+          "z": -25.8655338
+        },
+        {
+          "x": 69.87429,
+          "y": -3.2876668,
+          "z": -26.2767811
+        }
+      ],
+      "top": -0.9176669,
+      "bottom": -5.657667,
+      "faction": "pmc",
+      "switchIds": [],
+      "transferItem": null
+    },
+    {
+      "id": "a11f20d1f462bc4c8f39699e8a59fc0b58b71299",
+      "kind": "extract",
+      "category": "extract-scav",
+      "name": "Gate 3",
+      "aliases": [
+        "Gate 3"
+      ],
+      "position": {
+        "x": 58.709,
+        "y": 1.59233332,
+        "z": 60.86811
+      },
+      "outline": [
+        {
+          "x": 55.154,
+          "y": 1.59233332,
+          "z": 55.40811
+        },
+        {
+          "x": 62.264,
+          "y": 1.59233332,
+          "z": 55.40811
+        },
+        {
+          "x": 62.264,
+          "y": 1.59233332,
+          "z": 66.32811
+        },
+        {
+          "x": 55.154,
+          "y": 1.59233332,
+          "z": 66.32811
+        }
+      ],
+      "top": 3.04233336,
+      "bottom": 0.142333239,
+      "faction": "scav",
+      "switchIds": [],
+      "transferItem": null
+    },
+    {
+      "id": "7ae0a08942ce71d8d713ef3628c86619598160f4",
+      "kind": "extract",
+      "category": "extract-pmc",
+      "name": "Gate 3",
+      "aliases": [
+        "Gate 3"
+      ],
+      "position": {
+        "x": 58.43222,
+        "y": 3.17233324,
+        "z": 63.29811
+      },
+      "outline": [
+        {
+          "x": 54.87722,
+          "y": 3.17233324,
+          "z": 57.83811
+        },
+        {
+          "x": 61.98722,
+          "y": 3.17233324,
+          "z": 57.83811
+        },
+        {
+          "x": 61.98722,
+          "y": 3.17233324,
+          "z": 68.75811
+        },
+        {
+          "x": 54.87722,
+          "y": 3.17233324,
+          "z": 68.75811
+        }
+      ],
+      "top": 6.672333,
+      "bottom": -0.3276668,
+      "faction": "pmc",
+      "switchIds": [],
+      "transferItem": null
+    },
+    {
+      "id": "7e582daaf3ef18c90132998441c217f246387a06",
+      "kind": "extract",
+      "category": "extract-scav",
+      "name": "Camera Bunker Door",
+      "aliases": [
+        "Camera Bunker Door"
+      ],
+      "position": {
+        "x": -15.71578,
+        "y": -1.64766669,
+        "z": 40.1081123
+      },
+      "outline": [
+        {
+          "x": -18.97923,
+          "y": -1.64766669,
+          "z": 37.3606033
+        },
+        {
+          "x": -12.1788731,
+          "y": -1.64766669,
+          "z": 37.7229
+        },
+        {
+          "x": -12.45233,
+          "y": -1.64766669,
+          "z": 42.85562
+        },
+        {
+          "x": -19.2526875,
+          "y": -1.64766669,
+          "z": 42.4933243
+        }
+      ],
+      "top": -0.6476667,
+      "bottom": -2.64766669,
+      "faction": "scav",
+      "switchIds": [],
+      "transferItem": null
+    },
+    {
+      "id": "cbe6ccd60767142298488227e57ab554cf47cd2e",
+      "kind": "extract",
+      "category": "extract-scav",
+      "name": "Office Window",
+      "aliases": [
+        "Office Window"
+      ],
+      "position": {
+        "x": 17.8332214,
+        "y": 8.730333,
+        "z": 39.8851128
+      },
+      "outline": [
+        {
+          "x": 16.01026,
+          "y": 8.730333,
+          "z": 38.38853
+        },
+        {
+          "x": 19.8048782,
+          "y": 8.730333,
+          "z": 38.5907
+        },
+        {
+          "x": 19.6561832,
+          "y": 8.730333,
+          "z": 41.3816948
+        },
+        {
+          "x": 15.8615646,
+          "y": 8.730333,
+          "z": 41.1795273
+        }
+      ],
+      "top": 9.230333,
+      "bottom": 8.230333,
+      "faction": "scav",
+      "switchIds": [],
+      "transferItem": null
+    },
+    {
+      "id": "4f953558d3d7bca7bd7b4d40a6429adc34cc1834",
+      "kind": "extract",
+      "category": "extract-pmc",
+      "name": "Gate 0",
+      "aliases": [
+        "Gate 0"
+      ],
+      "position": {
+        "x": -63.66578,
+        "y": 2.85233331,
+        "z": 55.8781128
+      },
+      "outline": [
+        {
+          "x": -68.73051,
+          "y": 2.85233331,
+          "z": 52.4488068
+        },
+        {
+          "x": -58.26535,
+          "y": 2.85233331,
+          "z": 53.0063553
+        },
+        {
+          "x": -58.60105,
+          "y": 2.85233331,
+          "z": 59.30742
+        },
+        {
+          "x": -69.06621,
+          "y": 2.85233331,
+          "z": 58.74987
+        }
+      ],
+      "top": 4.397333,
+      "bottom": 1.30733335,
+      "faction": "pmc",
+      "switchIds": [],
+      "transferItem": null
+    },
+    {
+      "id": "7bb46d641d59983a58440a7a58d65933d981c211",
+      "kind": "extract",
+      "category": "extract-pmc",
+      "name": "Med Tent Gate",
+      "aliases": [
+        "Gate m",
+        "Med Tent Gate"
+      ],
+      "position": {
+        "x": -17.5257778,
+        "y": 1.99233329,
+        "z": -61.27189
+      },
+      "outline": [
+        {
+          "x": -20.5195751,
+          "y": 1.99233329,
+          "z": -66.91916
+        },
+        {
+          "x": -13.9488926,
+          "y": 1.99233329,
+          "z": -66.56909
+        },
+        {
+          "x": -14.5319805,
+          "y": 1.99233329,
+          "z": -55.62462
+        },
+        {
+          "x": -21.102663,
+          "y": 1.99233329,
+          "z": -55.9746857
+        }
+      ],
+      "top": 3.76233315,
+      "bottom": 0.222333282,
+      "faction": "pmc",
+      "switchIds": [],
+      "transferItem": null
+    },
+    {
+      "id": "1846030b40983ab096b3d1e39f72da5697f39154",
+      "kind": "extract",
+      "category": "extract-pmc",
+      "name": "Courtyard Gate",
+      "aliases": [
+        "Gate_o",
+        "Courtyard Gate"
+      ],
+      "position": {
+        "x": 23.7642212,
+        "y": 1.3623333,
+        "z": 68.93811
+      },
+      "outline": [
+        {
+          "x": 20.7704239,
+          "y": 1.3623333,
+          "z": 63.29084
+        },
+        {
+          "x": 27.3411064,
+          "y": 1.3623333,
+          "z": 63.6409073
+        },
+        {
+          "x": 26.7580185,
+          "y": 1.3623333,
+          "z": 74.58539
+        },
+        {
+          "x": 20.1873379,
+          "y": 1.3623333,
+          "z": 74.23532
+        }
+      ],
+      "top": 3.13233328,
+      "bottom": -0.4076667,
+      "faction": "pmc",
+      "switchIds": [],
+      "transferItem": null
+    },
+    {
+      "id": "3faf0c5c7f9dfe2c4ec9cf029fbe14ede9720cc1",
+      "kind": "extract",
+      "category": "extract-pmc",
+      "name": "Smugglers' Passage",
+      "aliases": [
+        "factory_secret_ark",
+        "Smugglers' Passage"
+      ],
+      "position": {
+        "x": 48.026,
+        "y": -1.61300015,
+        "z": -28.8580017
+      },
+      "outline": [
+        {
+          "x": 46.026,
+          "y": -1.61300015,
+          "z": -30.3580017
+        },
+        {
+          "x": 50.026,
+          "y": -1.61300015,
+          "z": -30.3580017
+        },
+        {
+          "x": 50.026,
+          "y": -1.61300015,
+          "z": -27.3580017
+        },
+        {
+          "x": 46.026,
+          "y": -1.61300015,
+          "z": -27.3580017
+        }
+      ],
+      "top": -0.113000393,
+      "bottom": -3.11300015,
+      "faction": "pmc",
+      "switchIds": [],
+      "transferItem": {
+        "itemId": "675aaaf674a7619a5304c233",
+        "count": 1
+      }
+    },
+    {
+      "id": "transit-12",
+      "sourceId": "12",
+      "kind": "transit",
+      "category": "transit",
+      "name": "Transit to Woods",
+      "position": {
+        "x": 23.7,
+        "y": 0.84,
+        "z": 61.61
+      },
+      "outline": [
+        {
+          "x": 20.14791,
+          "y": 2.24171662,
+          "z": 56.98326
+        },
+        {
+          "x": 20.14791,
+          "y": 2.24171662,
+          "z": 56.94559
+        },
+        {
+          "x": 28.5647964,
+          "y": 2.24171662,
+          "z": 56.94559
+        },
+        {
+          "x": 28.5647964,
+          "y": 2.24171662,
+          "z": 56.98326
+        },
+        {
+          "x": 28.5647964,
+          "y": 2.24171662,
+          "z": 63.4613647
+        },
+        {
+          "x": 28.5647964,
+          "y": 2.24171662,
+          "z": 63.49904
+        },
+        {
+          "x": 20.14791,
+          "y": 2.24171662,
+          "z": 63.49904
+        },
+        {
+          "x": 20.14791,
+          "y": 2.24171662,
+          "z": 63.4613647
+        }
+      ],
+      "top": 3.704809,
+      "bottom": 0.778624237
+    },
+    {
+      "id": "transit-13",
+      "sourceId": "13",
+      "kind": "transit",
+      "category": "transit",
+      "name": "Transit to Customs",
+      "position": {
+        "x": 18.51,
+        "y": -0.423,
+        "z": -48.33
+      },
+      "outline": [
+        {
+          "x": 9.822866,
+          "y": 0.577,
+          "z": -52.68202
+        },
+        {
+          "x": 24.8530216,
+          "y": 0.577,
+          "z": -52.68202
+        },
+        {
+          "x": 24.8530216,
+          "y": 0.577,
+          "z": -46.55313
+        },
+        {
+          "x": 9.822866,
+          "y": 0.577,
+          "z": -46.55313
+        }
+      ],
+      "top": 1.577,
+      "bottom": -0.423
+    },
+    {
+      "id": "transit-14",
+      "sourceId": "14",
+      "kind": "transit",
+      "category": "transit",
+      "name": "Transit to The Lab",
+      "position": {
+        "x": -26.539,
+        "y": -4.085,
+        "z": -42.013
+      },
+      "outline": [
+        {
+          "x": -30.0138531,
+          "y": -3.085,
+          "z": -44.51416
+        },
+        {
+          "x": -24.001791,
+          "y": -3.085,
+          "z": -44.51416
+        },
+        {
+          "x": -24.001791,
+          "y": -3.085,
+          "z": -40.99181
+        },
+        {
+          "x": -30.0138531,
+          "y": -3.085,
+          "z": -40.99181
+        }
+      ],
+      "top": -2.085,
+      "bottom": -4.085
+    },
+    {
+      "id": "spawn-0",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -45.3968,
+        "y": 0.2904,
+        "z": 5.5814
+      },
+      "zoneName": "0246436c-7d69-4036-999d-ebcb956970b5",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-1",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 11.22,
+        "y": 0.04,
+        "z": -42.1099968
+      },
+      "zoneName": "05e75eb3-eb43-46c6-94d3-59e1e9ba4435",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-2",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 42.433,
+        "y": -2.639,
+        "z": -8.306
+      },
+      "zoneName": "0a8181f7-c8f0-4db1-8eb2-932dfb3545f3",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-3",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 56.864,
+        "y": 0.261,
+        "z": 52.568
+      },
+      "zoneName": "0a92f51c-52b4-4e76-b839-f7ce82f2b36b",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-4",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -20.756,
+        "y": 0.166,
+        "z": 22.769
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-5",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 31.813,
+        "y": 0.141,
+        "z": 21.202
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-6",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 18.133,
+        "y": -2.668999,
+        "z": -19.516
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-7",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -43.8128,
+        "y": 0.2904,
+        "z": 6.7404
+      },
+      "zoneName": "120a0777-e825-4de7-a855-c3eaa8eba46b",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-8",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 12.595,
+        "y": 0.04,
+        "z": -42.522
+      },
+      "zoneName": "13883982-2ab8-4dd5-a9b4-45e2c6d8e1cc",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-9",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 57.7,
+        "y": 0.274,
+        "z": 53.413
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-10",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 42.256,
+        "y": -2.613,
+        "z": -9.516
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-11",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 58.1779976,
+        "y": 0.261,
+        "z": 51.283
+      },
+      "zoneName": "1a5819f2-ff42-4632-af5e-fe5ea8f886fc",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-12",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 15.7,
+        "y": 4.571,
+        "z": 38.976
+      },
+      "zoneName": "1c8f1067-d5df-401c-b05a-3c2c6b36ab9a",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-13",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -46.6908,
+        "y": 0.2904,
+        "z": 8.3904
+      },
+      "zoneName": "1facfcfc-9ee5-4638-83b3-117fce7b3303",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-14",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 70.75821,
+        "y": 0.311,
+        "z": -72.8016052
+      },
+      "zoneName": "22a7740a-5a91-4bca-af36-668342522b42",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-15",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -19.94,
+        "y": 1.11607242,
+        "z": 62.87
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-16",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 31.75,
+        "y": 0.15318726,
+        "z": -0.3
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-17",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 31.624,
+        "y": 0.119,
+        "z": 18.284
+      },
+      "zoneName": "2497205e-6fc4-49cd-a1e3-f46c780e214f",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-18",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 8.07,
+        "y": 0.1,
+        "z": -8.61
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-19",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -32.087,
+        "y": -2.581647,
+        "z": 29.9733315
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-20",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 32.272,
+        "y": 0.064,
+        "z": -34.013
+      },
+      "zoneName": "2a1f1b80-72be-444d-9d8d-5f645a3fc019",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-21",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 57.944,
+        "y": 0.261,
+        "z": 49.646
+      },
+      "zoneName": "2a5aad92-b5f9-40c0-a380-460247300227",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-22",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -16.91,
+        "y": 0.294,
+        "z": -39.428
+      },
+      "zoneName": "2e1843a1-fd2a-4ccd-8b38-747c1a70f228",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-23",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -42.4368,
+        "y": 0.2904,
+        "z": 7.44339943
+      },
+      "zoneName": "2eed18b6-9fbb-40de-979f-985f203f251e",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-24",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 35.924,
+        "y": 4.55418539,
+        "z": 35.339
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-25",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 27.775,
+        "y": 0.119,
+        "z": 20.567
+      },
+      "zoneName": "30edcdf0-73e0-4ab5-a9e7-4d24a9a83aa9",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-26",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 71.73021,
+        "y": 0.311,
+        "z": -71.4116
+      },
+      "zoneName": "336d3c25-9f38-475f-8eb9-db6393f06b6c",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-27",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -16.984,
+        "y": 0.26700002,
+        "z": -41.3249969
+      },
+      "zoneName": "38a8fe02-f871-4b79-91e5-69c2c68d1bbc",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-28",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 14.636,
+        "y": 4.571,
+        "z": 39.737
+      },
+      "zoneName": "3906ac26-47d3-4602-8783-049633778a29",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-29",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -22.174,
+        "y": 2.729,
+        "z": 23.772
+      },
+      "zoneName": "3bcd754a-b299-4d63-9d7f-e4d05c2f13e3",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-30",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 62.893,
+        "y": -2.63900042,
+        "z": 5.398
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-31",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -3.28900051,
+        "y": -3.858,
+        "z": -17.514
+      },
+      "zoneName": "42c3f263-52c6-428c-b97f-6acd100ec669",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-32",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 12.6300011,
+        "y": 1.797,
+        "z": 60.15
+      },
+      "zoneName": "4755c538-4ee5-4125-8cd3-885787da7ad5",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-33",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -16.7849979,
+        "y": 0.312,
+        "z": -37.434
+      },
+      "zoneName": "4a4e5ee5-a314-4a78-939d-cf3c05818435",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-34",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 7.90300035,
+        "y": 0.04,
+        "z": -44.6099968
+      },
+      "zoneName": "4bc2255b-75b0-44a3-91ed-c1b35499cbc5",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-35",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 15.249,
+        "y": 4.563,
+        "z": 41.209
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-36",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 0.015,
+        "y": -2.61,
+        "z": 55.868
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-37",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -44.191,
+        "y": 1.188,
+        "z": 48.4250031
+      },
+      "zoneName": "503cf951-8e80-4ca0-aa2d-993f71a6a4a6",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-38",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -17.6909981,
+        "y": 0.291,
+        "z": -43.159996
+      },
+      "zoneName": "50560c89-4136-4cfb-b155-485519110c93",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-39",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 22.37,
+        "y": 0.86,
+        "z": 4.33
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-40",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -42.617,
+        "y": 1.279,
+        "z": 48.353
+      },
+      "zoneName": "57254982-c470-440d-911a-e8854f42398a",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-41",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -46.2658,
+        "y": 0.2904,
+        "z": 7.04739952
+      },
+      "zoneName": "5be1a535-4865-433c-b645-33c7ff65bd94",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-42",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -5.918,
+        "y": -3.858,
+        "z": -14.1830006
+      },
+      "zoneName": "60b47eab-b2a6-4ba2-b30c-fea14a7169bf",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-43",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -44.299,
+        "y": 1.119,
+        "z": 38.871
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-44",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -0.09300041,
+        "y": -3.858,
+        "z": -12.227
+      },
+      "zoneName": "63f705ca-a0db-4f4f-8e50-20d5a97af053",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-45",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 21.4049988,
+        "y": -2.668999,
+        "z": -14.6159992
+      },
+      "zoneName": "67fb48f8-0359-458b-876c-2e4963cbd14e",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-46",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 69.98521,
+        "y": 0.311,
+        "z": -71.3536
+      },
+      "zoneName": "683f2734-6398-4b77-9bab-b87f3be35938",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-47",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 10.528,
+        "y": 0.039,
+        "z": -43.562
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-48",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 33.024,
+        "y": 0.047,
+        "z": -33.12
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-49",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 59.516,
+        "y": -2.63900042,
+        "z": 6.828
+      },
+      "zoneName": "6ce1f898-79ff-498e-8b52-fda05d7ee05d",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-50",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 9.994,
+        "y": 0.04,
+        "z": -42.204
+      },
+      "zoneName": "6d7bf2bb-6211-4495-8509-58ceadea72e0",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-51",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 10.2300014,
+        "y": 1.14,
+        "z": 58.7600021
+      },
+      "zoneName": "6d97a439-de10-42c5-99ef-6cf92e243aca",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-52",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 20.198,
+        "y": -2.668999,
+        "z": -16.3809986
+      },
+      "zoneName": "6ecc9492-5fbb-43d8-a0c0-8509fa39eb1d",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-54",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -21.81,
+        "y": 2.735,
+        "z": 32.556
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-55",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -2.81400013,
+        "y": -2.598,
+        "z": 18.476
+      },
+      "zoneName": "71c2ba1e-e226-47be-814f-d52ddd931603",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-56",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 4.73,
+        "y": 0.01,
+        "z": -35.1
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-57",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 2.363,
+        "y": -2.639,
+        "z": 49.415
+      },
+      "zoneName": "74059b40-4072-495f-a02c-2ffce404d728",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-58",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 41.089,
+        "y": -2.639,
+        "z": -9.549
+      },
+      "zoneName": "789a1686-f35d-4dc4-b469-0687a4fad804",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-59",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 32.2320023,
+        "y": 0.064,
+        "z": -31.639
+      },
+      "zoneName": "7ea1b4b8-a496-4bc0-bf61-e5ba4f3aa1fa",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-60",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 32.668,
+        "y": 0.064,
+        "z": -35.46
+      },
+      "zoneName": "80532206-b2e1-4578-b559-99eae931a957",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-61",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 70.015,
+        "y": 0.254,
+        "z": -69.04
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-62",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -4.302,
+        "y": -2.598,
+        "z": 14.318
+      },
+      "zoneName": "8128ea83-0d4f-4e64-b109-5acc9e477b33",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-63",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 58.4149971,
+        "y": 0.261,
+        "z": 52.6900024
+      },
+      "zoneName": "8429bed9-52e2-4731-a425-4912db8529a9",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-64",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 3.99100018,
+        "y": -2.639,
+        "z": 50.653
+      },
+      "zoneName": "85d68e69-87f9-4702-aa92-1d652dc47cf8",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-65",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -44.013,
+        "y": 1.41200006,
+        "z": 50.136
+      },
+      "zoneName": "867576c4-1152-48ad-80bf-a802d7318379",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-66",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -19.266,
+        "y": 0.26,
+        "z": -38.462
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-67",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -19.1069984,
+        "y": 0.26000002,
+        "z": -43.166
+      },
+      "zoneName": "8df78011-1568-4e66-99b8-5c4ed736b99a",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-68",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -1.06100035,
+        "y": -2.638,
+        "z": -7.05
+      },
+      "zoneName": "91c08464-492f-443d-8632-54e01d6bdd20",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-69",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 8.5,
+        "y": 0.04,
+        "z": -43.579998
+      },
+      "zoneName": "91ec8f79-6cc4-422d-966f-4cd6a02d5a87",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-70",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 35.354,
+        "y": 0.064,
+        "z": -34.507
+      },
+      "zoneName": "92822146-7c98-4570-8bde-8d0d042ae3cf",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-71",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -6.689,
+        "y": -2.598,
+        "z": 17.303
+      },
+      "zoneName": "97998a75-baa4-4b03-ac1f-f86dfbf48d79",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-72",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 18.637,
+        "y": -2.668999,
+        "z": -15.6589994
+      },
+      "zoneName": "990aa5a0-d549-4479-8af2-a196ddb3bb35",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-73",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 39.642,
+        "y": -2.639,
+        "z": -9.06
+      },
+      "zoneName": "9a858e10-3752-4543-9550-ddf6bc9b1891",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-74",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 60.093,
+        "y": 0.261,
+        "z": 52.592
+      },
+      "zoneName": "9dd99893-91c5-4e64-b808-bbe46852022a",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-75",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 30.26,
+        "y": 0.119,
+        "z": 21.699
+      },
+      "zoneName": "9f14e22f-3971-4440-8f48-c597cc7d9166",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-77",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -0.737,
+        "y": -2.639,
+        "z": 50.57
+      },
+      "zoneName": "a3a76c4b-983f-4920-9c87-c2705283f5ac",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-78",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -22.174,
+        "y": 2.729,
+        "z": 30.386
+      },
+      "zoneName": "a5c47219-1ebc-4254-90cb-934d6f9d4790",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-79",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 14.969,
+        "y": 4.571,
+        "z": 35.1550026
+      },
+      "zoneName": "a8635306-f041-47fe-bf9b-1f1d528d5d5b",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-80",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 14.855999,
+        "y": 4.571,
+        "z": 37.77
+      },
+      "zoneName": "aacb1cf6-c980-47f0-8ed0-c72f1a236ec1",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-81",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 72.0582047,
+        "y": 0.311,
+        "z": -73.8616
+      },
+      "zoneName": "ad0cbd99-02ee-4ff1-b799-6b50b8a3fa0f",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-82",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -44.2819977,
+        "y": 1.343,
+        "z": 46.326004
+      },
+      "zoneName": "adee9078-b5a3-4f9e-b384-e984cbea15fc",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-83",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 34.375,
+        "y": 0.064,
+        "z": -33.252
+      },
+      "zoneName": "ae4693d5-a309-4cbc-85db-ce8a59cf7ff4",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-84",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 41.166,
+        "y": -2.639,
+        "z": -7.624
+      },
+      "zoneName": "af816038-d1bd-4fb1-8355-e5adcdd4556e",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-85",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 69.198204,
+        "y": 0.311,
+        "z": -73.4416046
+      },
+      "zoneName": "afacfed6-7a03-418b-9fca-420590d639c0",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-86",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -42.916,
+        "y": 1.094,
+        "z": 39.102
+      },
+      "zoneName": "b776e3ed-a02d-4141-8eba-35d4746547ca",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-87",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -19.19,
+        "y": -3.78,
+        "z": -4.91
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-88",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 12.5600014,
+        "y": 1.21,
+        "z": 52.73
+      },
+      "zoneName": "bcae7a9f-8b2f-4a4c-9cb0-589d4a227c70",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-89",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -0.171000481,
+        "y": -3.858,
+        "z": -14.33
+      },
+      "zoneName": "be7bf7f0-6892-4d55-b1af-85492250ea55",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-90",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 28.743,
+        "y": 0.119,
+        "z": 17.499
+      },
+      "zoneName": "c249a42b-3b54-4680-ac4d-2c923ca4f530",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-91",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -6.47099972,
+        "y": -2.598,
+        "z": 15.79
+      },
+      "zoneName": "c2d01ce0-e0e4-41af-8311-44dc5cf38a93",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-92",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 38.839,
+        "y": -2.639,
+        "z": -7.702
+      },
+      "zoneName": "c61cee41-a0f3-470d-9b83-01f2189705fc",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-93",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 14.018,
+        "y": 1.18999994,
+        "z": 58.119
+      },
+      "zoneName": "c671337f-e58f-4de6-a387-307d877954a3",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-94",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 58.204,
+        "y": -2.63900042,
+        "z": 6.1590004
+      },
+      "zoneName": "cbe988f1-2264-414f-b070-79434b27a4ca",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-95",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 35.545,
+        "y": 8.231328,
+        "z": 36.41
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-96",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 20.348999,
+        "y": -2.668999,
+        "z": -13.374
+      },
+      "zoneName": "d2b48374-53d1-45a7-a3d2-5e1fc58a8499",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-97",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 23.83,
+        "y": -2.604,
+        "z": -30.66
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-98",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 18.6309986,
+        "y": -2.668999,
+        "z": -13.999999
+      },
+      "zoneName": "d6564897-4b3e-4b7e-9b56-34cb3b9a235d",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-99",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 26.467,
+        "y": -2.49,
+        "z": -34.414
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-100",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -5.89,
+        "y": 0.08,
+        "z": -27.46
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-101",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 2.104,
+        "y": 1.10050392,
+        "z": 63.056
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-102",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 15.502,
+        "y": 4.571,
+        "z": 36.609
+      },
+      "zoneName": "e0f65b5b-c67b-4e15-a102-f92bbdf95f65",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-103",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 57.079,
+        "y": -2.63900042,
+        "z": 7.11500025
+      },
+      "zoneName": "e1be22a2-9bba-40b5-a546-3bf6268b60cf",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-104",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 3.709,
+        "y": -2.639,
+        "z": 48.036
+      },
+      "zoneName": "e1dbe2e4-626f-4205-b71e-5f640eb764ac",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-105",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 15,
+        "y": 0.1483535,
+        "z": 3.79
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-106",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -1.302,
+        "y": -2.638,
+        "z": -5.504
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-107",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -22.174,
+        "y": 2.729,
+        "z": 29.192
+      },
+      "zoneName": "e5cd7bad-0f60-4cc2-bdd9-8a8943232b01",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-108",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 13.76,
+        "y": 1.1,
+        "z": 54.64
+      },
+      "zoneName": "e60d8dce-ee35-4b30-9c3a-afddf4c5445e",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-109",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -5.58,
+        "y": -2.598,
+        "z": 14.757
+      },
+      "zoneName": "ea010f6f-4860-4339-b576-09439f8f4c3a",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-110",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 55.517,
+        "y": -2.63900042,
+        "z": 6.433
+      },
+      "zoneName": "eb5c4efc-759f-4ff9-8a73-8cd3eb0eca03",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-111",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 31.781,
+        "y": 0.119,
+        "z": 19.447
+      },
+      "zoneName": "efb39132-1eff-4655-8fb0-d795f8f98eb3",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-112",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -22.174,
+        "y": 2.729,
+        "z": 25.5719986
+      },
+      "zoneName": "f0864450-ffa8-4d7e-aa93-59ea6b218641",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-113",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -0.128999949,
+        "y": -2.639,
+        "z": 48.722
+      },
+      "zoneName": "f23f74fc-1c16-41b9-aeeb-0ca222222cbc",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-114",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -22.174,
+        "y": 2.729,
+        "z": 31.529
+      },
+      "zoneName": "f3c6d9ee-ca4e-44ca-abdf-0622a8249f1d",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-116",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 13.78,
+        "y": -2.291,
+        "z": -21.65
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-117",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 0.337,
+        "y": -2.648,
+        "z": 14.702
+      },
+      "zoneName": "BotZone",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-118",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": 61.5259972,
+        "y": -2.63900042,
+        "z": 6.418
+      },
+      "zoneName": "feea31cd-8a3f-43a5-839f-fd2276a2cce8",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "boss-bossTagilla-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Tagilla · Any scav spawn",
+      "aliases": [
+        "bossTagilla",
+        "BotZone"
+      ],
+      "position": {
+        "x": 21.418599999999998,
+        "y": 1.2448000000000001,
+        "z": 25.1866
+      },
+      "bossId": "bossTagilla",
+      "bossName": "Tagilla",
+      "spawnChance": 0.3,
+      "zoneChance": 1
+    },
+    {
+      "id": "lock-652e989b37350298220c67699b6f77f0127d1a82",
+      "kind": "locked-door",
+      "category": "locked-door",
+      "name": "Locked access",
+      "aliases": [
+        "door",
+        "5448ba0b4bdc2d02308b456c"
+      ],
+      "position": {
+        "x": -19.077774,
+        "y": 1.44520187,
+        "z": -48.57139
+      },
+      "outline": [
+        {
+          "x": -18.8777752,
+          "y": 1.44520164,
+          "z": -48.82139
+        },
+        {
+          "x": -17.8777752,
+          "y": 1.44520164,
+          "z": -48.82139
+        },
+        {
+          "x": -17.8777752,
+          "y": 1.44520164,
+          "z": -48.32139
+        },
+        {
+          "x": -18.8777752,
+          "y": 1.44520164,
+          "z": -48.32139
+        }
+      ],
+      "top": 1.94520187,
+      "bottom": 0.9452017,
+      "keyIds": [
+        "5448ba0b4bdc2d02308b456c"
+      ]
+    },
+    {
+      "id": "lock-af1a98ea8ceacd2de0a43f046263771933fc4bad",
+      "kind": "locked-door",
+      "category": "locked-door",
+      "name": "Locked access",
+      "aliases": [
+        "door",
+        "5448ba0b4bdc2d02308b456c"
+      ],
+      "position": {
+        "x": 66.8279953,
+        "y": -1.60700011,
+        "z": -29.3244076
+      },
+      "outline": [
+        {
+          "x": 66.668,
+          "y": -1.59700012,
+          "z": -29.1044083
+        },
+        {
+          "x": 66.908,
+          "y": -1.59700012,
+          "z": -29.1044083
+        },
+        {
+          "x": 66.908,
+          "y": -1.59700012,
+          "z": -28.2844086
+        },
+        {
+          "x": 66.668,
+          "y": -1.59700012,
+          "z": -28.2844086
+        }
+      ],
+      "top": -1.18200016,
+      "bottom": -2.012,
+      "keyIds": [
+        "5448ba0b4bdc2d02308b456c"
+      ]
+    },
+    {
+      "id": "lock-6ead87b45f653123175a1d98f16162f95b3e3c61",
+      "kind": "locked-door",
+      "category": "locked-door",
+      "name": "Locked access",
+      "aliases": [
+        "door",
+        "5448ba0b4bdc2d02308b456c"
+      ],
+      "position": {
+        "x": 29.1163082,
+        "y": 9.08,
+        "z": 36.51697
+      },
+      "outline": [
+        {
+          "x": 29.3663082,
+          "y": 9.08,
+          "z": 36.3669739
+        },
+        {
+          "x": 30.0063076,
+          "y": 9.08,
+          "z": 36.3669739
+        },
+        {
+          "x": 30.0063076,
+          "y": 9.08,
+          "z": 36.60697
+        },
+        {
+          "x": 29.3663082,
+          "y": 9.08,
+          "z": 36.60697
+        }
+      ],
+      "top": 9.555,
+      "bottom": 8.6050005,
+      "keyIds": [
+        "5448ba0b4bdc2d02308b456c"
+      ]
+    },
+    {
+      "id": "lock-650d00f6452fa8da19d5d93e1c8ae335a695459c",
+      "kind": "locked-door",
+      "category": "locked-door",
+      "name": "Locked access",
+      "aliases": [
+        "door",
+        "66acd6702b17692df20144c0"
+      ],
+      "position": {
+        "x": -20.4309616,
+        "y": -1.51576364,
+        "z": 44.06125
+      },
+      "outline": [
+        {
+          "x": -20.2309647,
+          "y": -1.51576376,
+          "z": 43.8512459
+        },
+        {
+          "x": -19.4309635,
+          "y": -1.51576376,
+          "z": 43.8512421
+        },
+        {
+          "x": -19.4309616,
+          "y": -1.51576376,
+          "z": 44.15124
+        },
+        {
+          "x": -20.23096,
+          "y": -1.51576376,
+          "z": 44.15125
+        },
+        {
+          "x": -20.23096,
+          "y": -1.51576376,
+          "z": 44.1512451
+        }
+      ],
+      "top": -1.11576355,
+      "bottom": -1.91576374,
+      "keyIds": [
+        "66acd6702b17692df20144c0"
+      ]
+    },
+    {
+      "id": "loot-0",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": 27.38,
+        "y": 1.9004,
+        "z": 40.118
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-1",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": 24.0689869,
+        "y": 1.99,
+        "z": 43.6235428
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-2",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": 25.745,
+        "y": 7.181,
+        "z": -3.355
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-3",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": 29.98,
+        "y": 1.412,
+        "z": -11.9814
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-4",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": 32.57467,
+        "y": 0.537,
+        "z": 19.205
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-5",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": 34.2401733,
+        "y": 0.2590493,
+        "z": -31.2014141
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-6",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": 25.7777634,
+        "y": 0.443659961,
+        "z": -33.3156548
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-7",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": 33.2248154,
+        "y": 3.675,
+        "z": -17.6760368
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-8",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": 32.453,
+        "y": 2.181,
+        "z": 44.999
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-9",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": 33.03629,
+        "y": 1.723,
+        "z": 61.1793137
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-10",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": 9.45,
+        "y": 0.325,
+        "z": -41.343
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-11",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -22.132,
+        "y": 0.015,
+        "z": 24.766
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-12",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": -18.8755131,
+        "y": -1.52200007,
+        "z": 44.0499954
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-13",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": 18.722,
+        "y": 9.434,
+        "z": 36.601
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-14",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": 31.0333252,
+        "y": 9.353,
+        "z": 36.601
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-15",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": 73.762,
+        "y": 1.52,
+        "z": -34.998
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-16",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": 19.132,
+        "y": 9.444,
+        "z": 36.613
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-17",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": 12.283,
+        "y": 2.21,
+        "z": 34.337
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-18",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": 27.147,
+        "y": 1.37836051,
+        "z": 20.438
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-19",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": 16.8171444,
+        "y": 1.2130003,
+        "z": -38.331337
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-20",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": 29.9579,
+        "y": 1.31799984,
+        "z": -34.0317
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-21",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": 14.434001,
+        "y": 1.31799984,
+        "z": -39.102005
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-22",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": 45.321003,
+        "y": 5.39164352,
+        "z": 40.0099
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-23",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": 73.747,
+        "y": 1.514,
+        "z": -35.417
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-24",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": 16.8171463,
+        "y": 1.22299957,
+        "z": -37.91233
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-25",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": 26.328,
+        "y": 2.48403716,
+        "z": 45.091568
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-26",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": -46.0499954,
+        "y": 2.50050044,
+        "z": 63.678
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-27",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": 26.3269386,
+        "y": 2.47403717,
+        "z": 45.5106354
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-28",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": 27.147,
+        "y": 1.36836076,
+        "z": 20.857
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-29",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PMC body",
+      "position": {
+        "x": 22.260479,
+        "y": 4.672864,
+        "z": 45.845
+      },
+      "lootType": "pmc-body"
+    },
+    {
+      "id": "loot-30",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Dead Scav",
+      "position": {
+        "x": 0.0459880829,
+        "y": -2.67599988,
+        "z": 16.537
+      },
+      "lootType": "dead-scav"
+    },
+    {
+      "id": "loot-31",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Dead Scav",
+      "position": {
+        "x": 1.81264019,
+        "y": -2.661,
+        "z": 54.111
+      },
+      "lootType": "dead-scav"
+    },
+    {
+      "id": "loot-32",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PMC body",
+      "position": {
+        "x": 70.8463058,
+        "y": 0.171126008,
+        "z": -45.6459656
+      },
+      "lootType": "pmc-body"
+    },
+    {
+      "id": "loot-33",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Dead Scav",
+      "position": {
+        "x": -4.758012,
+        "y": -2.67599988,
+        "z": 16.812
+      },
+      "lootType": "dead-scav"
+    },
+    {
+      "id": "loot-34",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PMC body",
+      "position": {
+        "x": 22.778,
+        "y": 8.217575,
+        "z": 35.877
+      },
+      "lootType": "pmc-body"
+    },
+    {
+      "id": "loot-35",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Dead Scav",
+      "position": {
+        "x": -18.904,
+        "y": 0.0190000534,
+        "z": 21.937
+      },
+      "lootType": "dead-scav"
+    },
+    {
+      "id": "loot-36",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 97.3560257,
+        "y": 0.183999956,
+        "z": 22.78722
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-37",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 32.6827469,
+        "y": 0.460416615,
+        "z": 22.0241013
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-38",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 8.302,
+        "y": 2.326,
+        "z": 49.5770035
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-39",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 8.415287,
+        "y": 2.309,
+        "z": 50.1030045
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-40",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Grenade box",
+      "position": {
+        "x": -3.81912827,
+        "y": -3.3917408,
+        "z": -13.0781937
+      },
+      "lootType": "grenade-box"
+    },
+    {
+      "id": "loot-41",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Grenade box",
+      "position": {
+        "x": -13.2253675,
+        "y": -2.88601661,
+        "z": -12.5281811
+      },
+      "lootType": "grenade-box"
+    },
+    {
+      "id": "loot-42",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Grenade box",
+      "position": {
+        "x": -5.55627966,
+        "y": -2.71094036,
+        "z": -28.2738018
+      },
+      "lootType": "grenade-box"
+    },
+    {
+      "id": "loot-43",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Grenade box",
+      "position": {
+        "x": -22.7779083,
+        "y": -3.471342,
+        "z": -21.9796257
+      },
+      "lootType": "grenade-box"
+    },
+    {
+      "id": "loot-44",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Grenade box",
+      "position": {
+        "x": 30.37073,
+        "y": 3.691541,
+        "z": -31.597065
+      },
+      "lootType": "grenade-box"
+    },
+    {
+      "id": "loot-45",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Grenade box",
+      "position": {
+        "x": -40.8522148,
+        "y": 7.596658,
+        "z": 62.9581642
+      },
+      "lootType": "grenade-box"
+    },
+    {
+      "id": "loot-46",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Grenade box",
+      "position": {
+        "x": 36.0031624,
+        "y": 8.857657,
+        "z": 17.42241
+      },
+      "lootType": "grenade-box"
+    },
+    {
+      "id": "loot-47",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Grenade box",
+      "position": {
+        "x": 25.2509079,
+        "y": 7.728458,
+        "z": -30.7395554
+      },
+      "lootType": "grenade-box"
+    },
+    {
+      "id": "loot-48",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Grenade box",
+      "position": {
+        "x": 38.7246323,
+        "y": 5.225658,
+        "z": 40.3265457
+      },
+      "lootType": "grenade-box"
+    },
+    {
+      "id": "loot-49",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Grenade box",
+      "position": {
+        "x": 44.54714,
+        "y": 4.06060266,
+        "z": 29.7667847
+      },
+      "lootType": "grenade-box"
+    },
+    {
+      "id": "loot-50",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medbag SMU06",
+      "position": {
+        "x": -15.419714,
+        "y": 1.10800016,
+        "z": -27.6324348
+      },
+      "lootType": "medbag-smu06"
+    },
+    {
+      "id": "loot-51",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medbag SMU06",
+      "position": {
+        "x": -19.6936378,
+        "y": 1.11500025,
+        "z": -27.0430489
+      },
+      "lootType": "medbag-smu06"
+    },
+    {
+      "id": "loot-52",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medbag SMU06",
+      "position": {
+        "x": -14.9358416,
+        "y": 0.895000339,
+        "z": -29.05753
+      },
+      "lootType": "medbag-smu06"
+    },
+    {
+      "id": "loot-53",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medbag SMU06",
+      "position": {
+        "x": 27.4200821,
+        "y": 4.49756145,
+        "z": -35.5717
+      },
+      "lootType": "medbag-smu06"
+    },
+    {
+      "id": "loot-54",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medbag SMU06",
+      "position": {
+        "x": 28.7987537,
+        "y": 4.65200663,
+        "z": -29.1715641
+      },
+      "lootType": "medbag-smu06"
+    },
+    {
+      "id": "loot-55",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medbag SMU06",
+      "position": {
+        "x": 29.12467,
+        "y": 4.57230663,
+        "z": -17.8317814
+      },
+      "lootType": "medbag-smu06"
+    },
+    {
+      "id": "loot-56",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medbag SMU06",
+      "position": {
+        "x": -19.3958645,
+        "y": -2.49290514,
+        "z": 47.467186
+      },
+      "lootType": "medbag-smu06"
+    },
+    {
+      "id": "loot-57",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": 30.3306847,
+        "y": -1.2235,
+        "z": -12.0143471
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-58",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": 30.0765285,
+        "y": -1.2055,
+        "z": -8.688386
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-59",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": 36.80759,
+        "y": 0.3385,
+        "z": -12.5655947
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-60",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": 18.2129345,
+        "y": 1.3575,
+        "z": -13.6199942
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-61",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": 25.7455139,
+        "y": 1.68550014,
+        "z": 39.2552719
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-62",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": 18.7818756,
+        "y": 2.676,
+        "z": 43.71494
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-63",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": 20.77718,
+        "y": 1.2525,
+        "z": 34.75805
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-64",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": 42.8884239,
+        "y": 0.301499844,
+        "z": -7.17161846
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-65",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": 38.66429,
+        "y": 0.341499925,
+        "z": -13.3932772
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-66",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": 42.43586,
+        "y": -2.40950012,
+        "z": -15.0858507
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-67",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": 32.2568626,
+        "y": 1.4435,
+        "z": 15.7314119
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-68",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -23.7559566,
+        "y": -3.3185,
+        "z": -26.66657
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-69",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": 62.2953873,
+        "y": -0.00149998069,
+        "z": -12.5357189
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-70",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -18.4132061,
+        "y": -1.7495,
+        "z": 46.73313
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-71",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": 1.13261688,
+        "y": -2.36850023,
+        "z": 51.2104034
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-72",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": 15.3266764,
+        "y": -1.36849988,
+        "z": 38.4897766
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-73",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -4.524597,
+        "y": 1.42250013,
+        "z": -38.4206772
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-74",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": 53.9677658,
+        "y": 0.4465001,
+        "z": 21.7294788
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-75",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -5.32363033,
+        "y": 1.43357611,
+        "z": 48.802784
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-76",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": 6.13282871,
+        "y": 1.61696815,
+        "z": 50.9063873
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-77",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": 69.81701,
+        "y": 0.433968574,
+        "z": 41.7418747
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-78",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": 19.4133511,
+        "y": 2.23896861,
+        "z": -36.96493
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-79",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -21.2601566,
+        "y": 1.479,
+        "z": 0.4941191
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-80",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": 25.9830036,
+        "y": 0.147,
+        "z": -18.79423
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-81",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -22.8127232,
+        "y": 7.59900045,
+        "z": -3.16834116
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-82",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": 51.499,
+        "y": 7.607,
+        "z": -29.76
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-83",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": 1.91783381,
+        "y": 1.46199989,
+        "z": -16.9347267
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-84",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": 20.729,
+        "y": 1.574,
+        "z": 22.605
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-85",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": 22.9170837,
+        "y": 7.40705538,
+        "z": 15.8577747
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-86",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": 13.6641846,
+        "y": 1.161,
+        "z": 30.7005558
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-87",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": 1.5727818,
+        "y": 1.127,
+        "z": 23.5205669
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-88",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Bank safe",
+      "position": {
+        "x": -23.7311745,
+        "y": -2.181,
+        "z": 46.6397858
+      },
+      "lootType": "bank-safe"
+    },
+    {
+      "id": "loot-89",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Bank safe",
+      "position": {
+        "x": -20.8287239,
+        "y": -2.181,
+        "z": 48.518734
+      },
+      "lootType": "bank-safe"
+    },
+    {
+      "id": "loot-90",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": 42.1323929,
+        "y": 0.4926284,
+        "z": -50.2884865
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-91",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": 59.76564,
+        "y": 0.2926265,
+        "z": -39.8844337
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-92",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -30.3239822,
+        "y": 0.492635,
+        "z": 10.0942078
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-93",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -45.3299675,
+        "y": -1.258589,
+        "z": 44.23487
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-94",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": 11.667037,
+        "y": 8.899676,
+        "z": 36.9013863
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-95",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": 11.667037,
+        "y": 8.899676,
+        "z": 36.9013863
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-96",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": 11.667037,
+        "y": 8.899676,
+        "z": 36.9013863
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-97",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": 11.667037,
+        "y": 8.899676,
+        "z": 36.9013863
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-98",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": 11.4882212,
+        "y": 8.899676,
+        "z": 41.18196
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-99",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": 11.4882212,
+        "y": 8.899676,
+        "z": 41.18196
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-100",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": 11.4882212,
+        "y": 8.899676,
+        "z": 41.18196
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-101",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": 11.4882212,
+        "y": 8.899676,
+        "z": 41.18196
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-102",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Technical supply crate",
+      "position": {
+        "x": -18.6593113,
+        "y": 0.9649999,
+        "z": -15.9997444
+      },
+      "lootType": "technical-supply-crate"
+    },
+    {
+      "id": "loot-103",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Technical supply crate",
+      "position": {
+        "x": -8.176986,
+        "y": -2.94,
+        "z": -35.1888771
+      },
+      "lootType": "technical-supply-crate"
+    },
+    {
+      "id": "loot-104",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Safe",
+      "position": {
+        "x": 21.10839,
+        "y": 8.376442,
+        "z": 40.6695251
+      },
+      "lootType": "safe"
+    },
+    {
+      "id": "loot-105",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Safe",
+      "position": {
+        "x": 12.2467155,
+        "y": 1.29811859,
+        "z": 38.7536774
+      },
+      "lootType": "safe"
+    },
+    {
+      "id": "loot-106",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -47.215,
+        "y": 1.14949965,
+        "z": 60.076004
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-107",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 6.017002,
+        "y": 7.77419567,
+        "z": 63.7316551
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-108",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": -4.323278,
+        "y": 4.10638332,
+        "z": 35.112545
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-109",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": -23.63124,
+        "y": 1.42500091,
+        "z": 57.3927155
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-110",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": -9.847935,
+        "y": 1.4193002,
+        "z": 65.5163345
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-111",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 1.87002182,
+        "y": 1.609,
+        "z": 60.97603
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-112",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": -2.84584713,
+        "y": 1.43161678,
+        "z": 44.8952522
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-113",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": -25.6493568,
+        "y": 1.41900039,
+        "z": 66.62331
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-114",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": -40.8214378,
+        "y": 7.85700035,
+        "z": 50.1834068
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-115",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": -9.960975,
+        "y": 0.404685974,
+        "z": 38.1945648
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-116",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 8.01371,
+        "y": 1.38400006,
+        "z": 32.3432
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-117",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 3.72652841,
+        "y": 1.21299994,
+        "z": 26.028965
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-118",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": -19.1141167,
+        "y": 3.10300016,
+        "z": 26.786129
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-119",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": -20.8153839,
+        "y": 3.10299969,
+        "z": 27.4692955
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-120",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 34.4447021,
+        "y": 1.34771585,
+        "z": 33.74901
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-121",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 35.7874,
+        "y": 1.32700014,
+        "z": 19.848299
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-122",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 25.263607,
+        "y": 0.406615138,
+        "z": 17.7037735
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-123",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 0.667441845,
+        "y": 1.375,
+        "z": 10.454937
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-124",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": -24.3534737,
+        "y": 0.6050001,
+        "z": 10.5459757
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-125",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 36.4738922,
+        "y": 0.402999938,
+        "z": 8.9045
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-126",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 19.4213867,
+        "y": 0.4050002,
+        "z": 10.2966452
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-127",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 31.20214,
+        "y": 0.406000257,
+        "z": -0.274885178
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-128",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": -22.27534,
+        "y": 1.247,
+        "z": 17.6162014
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-129",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 17.9228077,
+        "y": 1.22861528,
+        "z": -29.6287861
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-130",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 2.22370434,
+        "y": 7.67725,
+        "z": -18.8342171
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-131",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 34.7676239,
+        "y": 3.67499971,
+        "z": -8.210784
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-132",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 11.0671024,
+        "y": 0.406,
+        "z": -19.304594
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-133",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": -8.343611,
+        "y": 1.484,
+        "z": -36.02479
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-134",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 25.6299133,
+        "y": 7.487,
+        "z": -35.5676079
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-135",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": -12.5797043,
+        "y": 0.404999971,
+        "z": -6.50516129
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-136",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 33.3629341,
+        "y": 3.96525,
+        "z": -24.5729046
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-137",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 55.7180939,
+        "y": 4.475,
+        "z": 2.851406
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-138",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 66.68451,
+        "y": 7.65499973,
+        "z": -28.4706821
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-139",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 67.2164459,
+        "y": 7.651,
+        "z": 40.93339
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-140",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 55.4381523,
+        "y": -0.506999969,
+        "z": -22.1777439
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-141",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 56.64212,
+        "y": 0.404000223,
+        "z": 24.78873
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-142",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 58.3678932,
+        "y": -0.493999928,
+        "z": -6.63301849
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-143",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 26.50296,
+        "y": 1.36100054,
+        "z": 45.5077133
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-144",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 15.67514,
+        "y": 4.924,
+        "z": 35.3793373
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-145",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 32.91975,
+        "y": 5.792,
+        "z": 47.53418
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-146",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 32.0960426,
+        "y": 8.448,
+        "z": 38.8852921
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-147",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 14.4359913,
+        "y": 1.3828001,
+        "z": 40.35382
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-148",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 36.181427,
+        "y": -2.29400015,
+        "z": 35.0951958
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-149",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 9.666927,
+        "y": -2.29400015,
+        "z": 40.82493
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-150",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 47.0899277,
+        "y": -2.279,
+        "z": 13.4121132
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-151",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 70.0412,
+        "y": -2.275,
+        "z": 13.3859062
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-152",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 55.7911873,
+        "y": -2.29,
+        "z": 3.60941315
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-153",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 64.55047,
+        "y": -2.29,
+        "z": -30.84914
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-154",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 48.0535278,
+        "y": -1.18600011,
+        "z": -20.9299374
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-155",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 53.8990135,
+        "y": -1.18600011,
+        "z": -17.7044258
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-156",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 14.1104965,
+        "y": -1.21899986,
+        "z": -25.7103043
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-157",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 30.32619,
+        "y": -2.26200032,
+        "z": -33.9215851
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-158",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 17.974329,
+        "y": -1.322,
+        "z": -32.6785126
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-159",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 34.0316925,
+        "y": -2.29400039,
+        "z": -25.829792
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-160",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 13.8805962,
+        "y": -1.3210001,
+        "z": 1.34713745
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-161",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 26.2861271,
+        "y": -1.31800032,
+        "z": 1.06806564
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-162",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 19.682127,
+        "y": -2.29400039,
+        "z": -10.1969347
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-163",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 8.242199,
+        "y": -1.30300021,
+        "z": -0.5975876
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-164",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": -16.17033,
+        "y": -2.384,
+        "z": -31.5584869
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-165",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 2.80438614,
+        "y": -3.50899982,
+        "z": -23.7852154
+      },
+      "lootType": "wooden-crate"
+    },
+    {
+      "id": "loot-166",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Wooden crate",
+      "position": {
+        "x": 3.375496,
+        "y": -3.473,
+        "z": -8.657269
+      },
+      "lootType": "wooden-crate"
+    }
+  ]
+}

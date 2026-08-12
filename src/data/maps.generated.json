@@ -1,0 +1,2407 @@
+[
+  {
+    "id": "streets-of-tarkov",
+    "displayName": "Streets of Tarkov",
+    "logAliases": [
+      "tarkovstreets",
+      "streets"
+    ],
+    "bounds": [
+      [
+        323,
+        -295
+      ],
+      [
+        -280,
+        532
+      ]
+    ],
+    "svgBounds": null,
+    "transform": [
+      0.38,
+      0,
+      0.38,
+      0
+    ],
+    "coordinateRotation": 180,
+    "minZoom": 1,
+    "maxZoom": 6,
+    "baseAsset": {
+      "type": "svg",
+      "path": "/maps/svg/StreetsOfTarkov.svg",
+      "baseLayer": "Ground_Level"
+    },
+    "baseFloor": {
+      "id": "Ground_Level",
+      "name": "Ground / Main"
+    },
+    "floors": [
+      {
+        "id": "Second_Floor",
+        "name": "2nd Floor",
+        "svgLayer": "Second_Floor",
+        "extents": [
+          {
+            "height": [
+              10,
+              15
+            ]
+          }
+        ],
+        "asset": null
+      },
+      {
+        "id": "Third_Floor",
+        "name": "3rd Floor",
+        "svgLayer": "Third_Floor",
+        "extents": [
+          {
+            "height": [
+              15,
+              20
+            ]
+          }
+        ],
+        "asset": null
+      },
+      {
+        "id": "Fourth_Floor",
+        "name": "4th Floor",
+        "svgLayer": "Fourth_Floor",
+        "extents": [
+          {
+            "height": [
+              20,
+              25
+            ]
+          }
+        ],
+        "asset": null
+      },
+      {
+        "id": "Fifth_Floor",
+        "name": "5th Floor",
+        "svgLayer": "Fifth_Floor",
+        "extents": [
+          {
+            "height": [
+              25,
+              10000
+            ]
+          }
+        ],
+        "asset": null
+      },
+      {
+        "id": "Underground_Level",
+        "name": "Underground",
+        "svgLayer": "Underground_Level",
+        "extents": [
+          {
+            "height": [
+              -10000,
+              -6
+            ]
+          }
+        ],
+        "asset": null
+      }
+    ],
+    "poiPath": "/maps/poi/streets-of-tarkov.json",
+    "poiCounts": {
+      "extract-scav": 6,
+      "extract-pmc": 10,
+      "extract-shared": 1,
+      "transit": 3,
+      "hazard": 197,
+      "btr": 6,
+      "spawn-pmc": 196,
+      "spawn-scav": 32,
+      "spawn-sniper": 9,
+      "boss-zone": 3,
+      "locked-door": 58,
+      "loot": 1282,
+      "stationary-weapon": 8
+    },
+    "attribution": {
+      "name": "Shebuka",
+      "url": "https://github.com/the-hideout/tarkov-dev-svg-maps/"
+    }
+  },
+  {
+    "id": "ground-zero",
+    "displayName": "Ground Zero",
+    "logAliases": [
+      "sandbox",
+      "sandbox_high",
+      "groundzero"
+    ],
+    "bounds": [
+      [
+        249,
+        -124
+      ],
+      [
+        -99,
+        364
+      ]
+    ],
+    "svgBounds": null,
+    "transform": [
+      0.524,
+      167.3,
+      0.524,
+      65.1
+    ],
+    "coordinateRotation": 180,
+    "minZoom": 1,
+    "maxZoom": 6,
+    "baseAsset": {
+      "type": "svg",
+      "path": "/maps/svg/GroundZero.svg",
+      "baseLayer": "Ground_Level"
+    },
+    "baseFloor": {
+      "id": "Ground_Level",
+      "name": "Ground / Main"
+    },
+    "floors": [
+      {
+        "id": "Second_Floor",
+        "name": "2nd Floor",
+        "svgLayer": "Second_Floor",
+        "extents": [
+          {
+            "height": [
+              28,
+              32.3
+            ]
+          },
+          {
+            "height": [
+              26,
+              31
+            ],
+            "bounds": [
+              [
+                [
+                  98,
+                  216
+                ],
+                [
+                  91,
+                  228
+                ],
+                "m showroom"
+              ]
+            ]
+          }
+        ],
+        "asset": null
+      },
+      {
+        "id": "Third_Floor",
+        "name": "3rd Floor",
+        "svgLayer": "Third_Floor",
+        "extents": [
+          {
+            "height": [
+              32.3,
+              1000
+            ]
+          }
+        ],
+        "asset": null
+      },
+      {
+        "id": "Underground_Level",
+        "name": "Garage",
+        "svgLayer": "Underground_Level",
+        "extents": [
+          {
+            "height": [
+              -1000,
+              21
+            ],
+            "bounds": [
+              [
+                [
+                  117,
+                  -100
+                ],
+                [
+                  43,
+                  190
+                ],
+                "garage"
+              ],
+              [
+                [
+                  143,
+                  49
+                ],
+                [
+                  117,
+                  80
+                ],
+                "underpass"
+              ]
+            ]
+          }
+        ],
+        "asset": null
+      }
+    ],
+    "poiPath": "/maps/poi/ground-zero.json",
+    "poiCounts": {
+      "extract-pmc": 3,
+      "extract-shared": 3,
+      "transit": 1,
+      "hazard": 9,
+      "spawn-scav": 28,
+      "spawn-pmc": 100,
+      "locked-door": 6,
+      "loot": 523,
+      "stationary-weapon": 2
+    },
+    "attribution": {
+      "name": "Shebuka",
+      "url": "https://github.com/the-hideout/tarkov-dev-svg-maps/"
+    }
+  },
+  {
+    "id": "customs",
+    "displayName": "Customs",
+    "logAliases": [
+      "bigmap"
+    ],
+    "bounds": [
+      [
+        698,
+        -307
+      ],
+      [
+        -372,
+        237
+      ]
+    ],
+    "svgBounds": null,
+    "transform": [
+      0.239,
+      168.65,
+      0.239,
+      136.35
+    ],
+    "coordinateRotation": 180,
+    "minZoom": 2,
+    "maxZoom": 6,
+    "baseAsset": {
+      "type": "svg",
+      "path": "/maps/svg/Customs.svg",
+      "baseLayer": "Ground_Level"
+    },
+    "baseFloor": {
+      "id": "Ground_Level",
+      "name": "Ground / Main"
+    },
+    "floors": [
+      {
+        "id": "Second_Floor",
+        "name": "2nd Floor",
+        "svgLayer": "Second_Floor",
+        "extents": [
+          {
+            "height": [
+              2.7,
+              6.5
+            ],
+            "bounds": [
+              [
+                [
+                  243,
+                  190
+                ],
+                [
+                  165,
+                  125
+                ],
+                "dorms"
+              ],
+              [
+                [
+                  116,
+                  -83
+                ],
+                [
+                  72,
+                  -170
+                ],
+                "mechanic"
+              ],
+              [
+                [
+                  356,
+                  -30
+                ],
+                [
+                  341,
+                  -84
+                ],
+                "switch 2nd"
+              ],
+              [
+                [
+                  334,
+                  -52
+                ],
+                [
+                  321,
+                  -59
+                ],
+                "switch 2nd"
+              ],
+              [
+                [
+                  589,
+                  10
+                ],
+                [
+                  577,
+                  -1
+                ],
+                "scav checkpoint"
+              ],
+              [
+                [
+                  580,
+                  -104
+                ],
+                [
+                  532,
+                  -134
+                ],
+                "dead scav warehouse"
+              ],
+              [
+                [
+                  625,
+                  -120
+                ],
+                [
+                  599,
+                  -139
+                ],
+                "pump 2nd"
+              ]
+            ]
+          },
+          {
+            "height": [
+              5.7,
+              1000
+            ],
+            "bounds": [
+              [
+                [
+                  580,
+                  -104
+                ],
+                [
+                  532,
+                  -134
+                ],
+                "dead scav warehouse"
+              ],
+              [
+                [
+                  -199,
+                  -90
+                ],
+                [
+                  -223,
+                  -131
+                ],
+                "big red 2nd"
+              ],
+              [
+                [
+                  239,
+                  3
+                ],
+                [
+                  169,
+                  -160
+                ],
+                "skeleton"
+              ],
+              [
+                [
+                  336,
+                  -56
+                ],
+                [
+                  316,
+                  -95
+                ],
+                "switch snipe"
+              ],
+              [
+                [
+                  584,
+                  -46
+                ],
+                [
+                  556,
+                  -92
+                ],
+                "USEC 2nd"
+              ],
+              [
+                [
+                  93,
+                  0
+                ],
+                [
+                  65,
+                  -22
+                ],
+                "construction 2nd"
+              ]
+            ]
+          },
+          {
+            "height": [
+              14,
+              15
+            ],
+            "bounds": [
+              [
+                [
+                  497,
+                  -44
+                ],
+                [
+                  450,
+                  -90
+                ],
+                "chemical warehouse sniper scav"
+              ]
+            ]
+          },
+          {
+            "height": [
+              3.9,
+              7.6
+            ],
+            "bounds": [
+              [
+                [
+                  73,
+                  57
+                ],
+                [
+                  22,
+                  -38
+                ],
+                "warehouse 17"
+              ]
+            ]
+          },
+          {
+            "height": [
+              4.4,
+              6.5
+            ],
+            "bounds": [
+              [
+                [
+                  119,
+                  -57
+                ],
+                [
+                  100,
+                  -42
+                ],
+                "boiler"
+              ]
+            ]
+          },
+          {
+            "height": [
+              4.6,
+              7.9
+            ],
+            "bounds": [
+              [
+                [
+                  279,
+                  -79
+                ],
+                [
+                  246,
+                  -1.4
+                ],
+                "oilrig & panda"
+              ]
+            ]
+          }
+        ],
+        "asset": null
+      },
+      {
+        "id": "Third_Floor",
+        "name": "3rd Floor",
+        "svgLayer": "Third_Floor",
+        "extents": [
+          {
+            "height": [
+              5.7,
+              1000
+            ],
+            "bounds": [
+              [
+                [
+                  243,
+                  190
+                ],
+                [
+                  165,
+                  125
+                ],
+                "dorms"
+              ]
+            ]
+          },
+          {
+            "height": [
+              7.7,
+              11.3
+            ],
+            "bounds": [
+              [
+                [
+                  73,
+                  -73
+                ],
+                [
+                  22,
+                  -38
+                ],
+                "warehouse 17"
+              ]
+            ]
+          },
+          {
+            "height": [
+              6.7,
+              11.6
+            ],
+            "bounds": [
+              [
+                [
+                  126,
+                  -64
+                ],
+                [
+                  88,
+                  -35
+                ],
+                "boiler"
+              ]
+            ]
+          },
+          {
+            "height": [
+              8,
+              11.1
+            ],
+            "bounds": [
+              [
+                [
+                  279,
+                  -79
+                ],
+                [
+                  246,
+                  -1.4
+                ],
+                "oilrig & panda"
+              ]
+            ]
+          }
+        ],
+        "asset": null
+      },
+      {
+        "id": "4th-floor",
+        "name": "4th Floor",
+        "svgLayer": null,
+        "extents": [
+          {
+            "height": [
+              11.2,
+              54.7
+            ],
+            "bounds": [
+              [
+                [
+                  279,
+                  -79
+                ],
+                [
+                  246,
+                  -1.4
+                ],
+                "oilrig & panda"
+              ]
+            ]
+          }
+        ],
+        "asset": null
+      },
+      {
+        "id": "Underground_Level",
+        "name": "Underground",
+        "svgLayer": "Underground_Level",
+        "extents": [
+          {
+            "height": [
+              -1000,
+              0.5
+            ],
+            "bounds": [
+              [
+                [
+                  635,
+                  -137
+                ],
+                [
+                  620,
+                  -125
+                ],
+                "zb-1011"
+              ],
+              [
+                [
+                  473,
+                  -122
+                ],
+                [
+                  458,
+                  -110
+                ],
+                "zb-1012"
+              ],
+              [
+                [
+                  314,
+                  -173
+                ],
+                [
+                  308,
+                  -184
+                ],
+                "old gas"
+              ],
+              [
+                [
+                  349,
+                  -88
+                ],
+                [
+                  323,
+                  -32
+                ],
+                "switch basement"
+              ],
+              [
+                [
+                  219,
+                  -158
+                ],
+                [
+                  193,
+                  -137
+                ],
+                "zb-013"
+              ],
+              [
+                [
+                  122,
+                  -61
+                ],
+                [
+                  88,
+                  -40
+                ],
+                "boiler room"
+              ]
+            ]
+          }
+        ],
+        "asset": null
+      }
+    ],
+    "poiPath": "/maps/poi/customs.json",
+    "poiCounts": {
+      "extract-pmc": 9,
+      "extract-shared": 2,
+      "extract-scav": 16,
+      "transit": 4,
+      "switch": 1,
+      "hazard": 7,
+      "spawn-scav": 115,
+      "spawn-pmc": 120,
+      "spawn-other": 2,
+      "boss-zone": 5,
+      "locked-door": 34,
+      "loot": 551,
+      "stationary-weapon": 4
+    },
+    "attribution": {
+      "name": "Shebuka",
+      "url": "https://github.com/the-hideout/tarkov-dev-svg-maps/"
+    }
+  },
+  {
+    "id": "factory",
+    "displayName": "Factory",
+    "logAliases": [
+      "factory4_day",
+      "factory4_night"
+    ],
+    "bounds": [
+      [
+        77,
+        -64.5
+      ],
+      [
+        -65.5,
+        67.4
+      ]
+    ],
+    "svgBounds": null,
+    "transform": [
+      1.629,
+      119.9,
+      1.629,
+      139.3
+    ],
+    "coordinateRotation": 90,
+    "minZoom": 1,
+    "maxZoom": 6,
+    "baseAsset": {
+      "type": "svg",
+      "path": "/maps/svg/Factory.svg",
+      "baseLayer": "Ground_Floor"
+    },
+    "baseFloor": {
+      "id": "Ground_Floor",
+      "name": "Ground / Main"
+    },
+    "floors": [
+      {
+        "id": "Second_Floor",
+        "name": "2nd Floor",
+        "svgLayer": "Second_Floor",
+        "extents": [
+          {
+            "height": [
+              3,
+              6
+            ]
+          }
+        ],
+        "asset": null
+      },
+      {
+        "id": "Third_Floor",
+        "name": "3rd Floor",
+        "svgLayer": "Third_Floor",
+        "extents": [
+          {
+            "height": [
+              6,
+              10000
+            ]
+          }
+        ],
+        "asset": null
+      },
+      {
+        "id": "Basement",
+        "name": "Tunnels",
+        "svgLayer": "Basement",
+        "extents": [
+          {
+            "height": [
+              -10000,
+              -1
+            ]
+          }
+        ],
+        "asset": null
+      }
+    ],
+    "poiPath": "/maps/poi/factory.json",
+    "poiCounts": {
+      "extract-pmc": 6,
+      "extract-scav": 3,
+      "transit": 3,
+      "spawn-pmc": 85,
+      "spawn-scav": 31,
+      "boss-zone": 1,
+      "locked-door": 4,
+      "loot": 167
+    },
+    "attribution": {
+      "name": "Shebuka",
+      "url": "https://github.com/the-hideout/tarkov-dev-svg-maps/"
+    }
+  },
+  {
+    "id": "icebreaker",
+    "displayName": "Icebreaker",
+    "logAliases": [
+      "icebreaker"
+    ],
+    "bounds": [
+      [
+        77,
+        -64.5
+      ],
+      [
+        -65.5,
+        67.4
+      ]
+    ],
+    "svgBounds": null,
+    "transform": [
+      2,
+      125,
+      3.5,
+      91
+    ],
+    "coordinateRotation": 180,
+    "minZoom": 1,
+    "maxZoom": 6,
+    "baseAsset": {
+      "type": "tiles",
+      "template": "/maps/tiles/icebreaker/06-infirmary/{z}/{x}/{y}.png",
+      "nativeZoom": 2,
+      "tileSize": 256
+    },
+    "baseFloor": {
+      "id": "base",
+      "name": "Ground / Main"
+    },
+    "floors": [
+      {
+        "id": "infirmary",
+        "name": "Infirmary",
+        "svgLayer": null,
+        "extents": [
+          {
+            "height": [
+              18.92,
+              19.56
+            ]
+          }
+        ],
+        "asset": {
+          "type": "tiles",
+          "template": "/maps/tiles/icebreaker/infirmary/{z}/{x}/{y}.png",
+          "nativeZoom": 2,
+          "tileSize": 256
+        }
+      },
+      {
+        "id": "helipad",
+        "name": "Helipad",
+        "svgLayer": null,
+        "extents": [
+          {
+            "height": [
+              19.57,
+              22.1
+            ]
+          }
+        ],
+        "asset": {
+          "type": "tiles",
+          "template": "/maps/tiles/icebreaker/helipad/{z}/{x}/{y}.png",
+          "nativeZoom": 2,
+          "tileSize": 256
+        }
+      },
+      {
+        "id": "gym-canteen",
+        "name": "Gym/Canteen",
+        "svgLayer": null,
+        "extents": [
+          {
+            "height": [
+              22.2,
+              25.2
+            ]
+          }
+        ],
+        "asset": {
+          "type": "tiles",
+          "template": "/maps/tiles/icebreaker/gym-canteen/{z}/{x}/{y}.png",
+          "nativeZoom": 2,
+          "tileSize": 256
+        }
+      },
+      {
+        "id": "accommodation-lower",
+        "name": "Accommodation (lower)",
+        "svgLayer": null,
+        "extents": [
+          {
+            "height": [
+              25.3,
+              28.2
+            ]
+          }
+        ],
+        "asset": {
+          "type": "tiles",
+          "template": "/maps/tiles/icebreaker/accommodation-lower/{z}/{x}/{y}.png",
+          "nativeZoom": 2,
+          "tileSize": 256
+        }
+      },
+      {
+        "id": "accommodation-mid",
+        "name": "Accommodation (mid)",
+        "svgLayer": null,
+        "extents": [
+          {
+            "height": [
+              28.3,
+              31.3
+            ]
+          }
+        ],
+        "asset": {
+          "type": "tiles",
+          "template": "/maps/tiles/icebreaker/accommodation-mid/{z}/{x}/{y}.png",
+          "nativeZoom": 2,
+          "tileSize": 256
+        }
+      },
+      {
+        "id": "accommodation-upper",
+        "name": "Accommodation (upper)",
+        "svgLayer": null,
+        "extents": [
+          {
+            "height": [
+              31.4,
+              34.4
+            ]
+          }
+        ],
+        "asset": {
+          "type": "tiles",
+          "template": "/maps/tiles/icebreaker/accommodation-upper/{z}/{x}/{y}.png",
+          "nativeZoom": 2,
+          "tileSize": 256
+        }
+      },
+      {
+        "id": "officers-deck",
+        "name": "Officers' Deck",
+        "svgLayer": null,
+        "extents": [
+          {
+            "height": [
+              34.5,
+              37.5
+            ]
+          }
+        ],
+        "asset": {
+          "type": "tiles",
+          "template": "/maps/tiles/icebreaker/officers-deck/{z}/{x}/{y}.png",
+          "nativeZoom": 2,
+          "tileSize": 256
+        }
+      },
+      {
+        "id": "stairs-blocked",
+        "name": "Stairs (blocked)",
+        "svgLayer": null,
+        "extents": [
+          {
+            "height": [
+              37.6,
+              40.6
+            ]
+          }
+        ],
+        "asset": {
+          "type": "tiles",
+          "template": "/maps/tiles/icebreaker/stairs-blocked/{z}/{x}/{y}.png",
+          "nativeZoom": 2,
+          "tileSize": 256
+        }
+      },
+      {
+        "id": "bridge",
+        "name": "Bridge",
+        "svgLayer": null,
+        "extents": [
+          {
+            "height": [
+              40.7,
+              43.7
+            ]
+          }
+        ],
+        "asset": {
+          "type": "tiles",
+          "template": "/maps/tiles/icebreaker/bridge/{z}/{x}/{y}.png",
+          "nativeZoom": 2,
+          "tileSize": 256
+        }
+      },
+      {
+        "id": "bridge-roof",
+        "name": "Bridge Roof",
+        "svgLayer": null,
+        "extents": [
+          {
+            "height": [
+              43.8,
+              10000
+            ]
+          }
+        ],
+        "asset": {
+          "type": "tiles",
+          "template": "/maps/tiles/icebreaker/bridge-roof/{z}/{x}/{y}.png",
+          "nativeZoom": 2,
+          "tileSize": 256
+        }
+      },
+      {
+        "id": "control-room",
+        "name": "Control Room",
+        "svgLayer": null,
+        "extents": [
+          {
+            "height": [
+              -10000,
+              3.5
+            ]
+          }
+        ],
+        "asset": {
+          "type": "tiles",
+          "template": "/maps/tiles/icebreaker/control-room/{z}/{x}/{y}.png",
+          "nativeZoom": 2,
+          "tileSize": 256
+        }
+      },
+      {
+        "id": "engine-room",
+        "name": "Engine Room",
+        "svgLayer": null,
+        "extents": [
+          {
+            "height": [
+              3.6,
+              5.6
+            ]
+          }
+        ],
+        "asset": {
+          "type": "tiles",
+          "template": "/maps/tiles/icebreaker/engine-room/{z}/{x}/{y}.png",
+          "nativeZoom": 2,
+          "tileSize": 256
+        }
+      },
+      {
+        "id": "engine-room-upper",
+        "name": "Engine Room (upper)",
+        "svgLayer": null,
+        "extents": [
+          {
+            "height": [
+              5.7,
+              8.7
+            ]
+          }
+        ],
+        "asset": {
+          "type": "tiles",
+          "template": "/maps/tiles/icebreaker/engine-room-upper/{z}/{x}/{y}.png",
+          "nativeZoom": 2,
+          "tileSize": 256
+        }
+      },
+      {
+        "id": "fuel-pumps-lower",
+        "name": "Fuel Pumps (lower)",
+        "svgLayer": null,
+        "extents": [
+          {
+            "height": [
+              8.8,
+              11.8
+            ]
+          }
+        ],
+        "asset": {
+          "type": "tiles",
+          "template": "/maps/tiles/icebreaker/fuel-pumps-lower/{z}/{x}/{y}.png",
+          "nativeZoom": 2,
+          "tileSize": 256
+        }
+      },
+      {
+        "id": "fuel-pumps",
+        "name": "Fuel Pumps",
+        "svgLayer": null,
+        "extents": [
+          {
+            "height": [
+              11.9,
+              14.9
+            ]
+          }
+        ],
+        "asset": {
+          "type": "tiles",
+          "template": "/maps/tiles/icebreaker/fuel-pumps/{z}/{x}/{y}.png",
+          "nativeZoom": 2,
+          "tileSize": 256
+        }
+      },
+      {
+        "id": "storage-security",
+        "name": "Storage/Security",
+        "svgLayer": null,
+        "extents": [
+          {
+            "height": [
+              15,
+              18.93
+            ]
+          }
+        ],
+        "asset": {
+          "type": "tiles",
+          "template": "/maps/tiles/icebreaker/storage-security/{z}/{x}/{y}.png",
+          "nativeZoom": 2,
+          "tileSize": 256
+        }
+      }
+    ],
+    "poiPath": "/maps/poi/icebreaker.json",
+    "poiCounts": {
+      "spawn-scav": 14,
+      "spawn-pmc": 2,
+      "boss-zone": 40
+    },
+    "attribution": {
+      "name": "TarkovBOT.eu",
+      "url": "https://tarkovbot.eu/"
+    }
+  },
+  {
+    "id": "interchange",
+    "displayName": "Interchange",
+    "logAliases": [
+      "interchange"
+    ],
+    "bounds": [
+      [
+        598,
+        -442
+      ],
+      [
+        -433,
+        426
+      ]
+    ],
+    "svgBounds": null,
+    "transform": [
+      0.265,
+      150.6,
+      0.265,
+      134.6
+    ],
+    "coordinateRotation": 180,
+    "minZoom": 1,
+    "maxZoom": 6,
+    "baseAsset": {
+      "type": "svg",
+      "path": "/maps/svg/Interchange.svg",
+      "baseLayer": "Ground_Level"
+    },
+    "baseFloor": {
+      "id": "Ground_Level",
+      "name": "Ground / Main"
+    },
+    "floors": [
+      {
+        "id": "First_Floor",
+        "name": "2nd Floor",
+        "svgLayer": "First_Floor",
+        "extents": [
+          {
+            "height": [
+              25,
+              34
+            ],
+            "bounds": [
+              [
+                [
+                  120,
+                  218
+                ],
+                [
+                  -222,
+                  -327
+                ],
+                "mall"
+              ]
+            ]
+          }
+        ],
+        "asset": null
+      },
+      {
+        "id": "Second_Floor",
+        "name": "3rd Floor",
+        "svgLayer": "Second_Floor",
+        "extents": [
+          {
+            "height": [
+              34,
+              1000
+            ],
+            "bounds": [
+              [
+                [
+                  120,
+                  218
+                ],
+                [
+                  -222,
+                  -327
+                ],
+                "mall"
+              ]
+            ]
+          }
+        ],
+        "asset": null
+      }
+    ],
+    "poiPath": "/maps/poi/interchange.json",
+    "poiCounts": {
+      "extract-shared": 3,
+      "extract-pmc": 3,
+      "transit": 2,
+      "switch": 6,
+      "spawn-pmc": 130,
+      "spawn-scav": 71,
+      "boss-zone": 5,
+      "locked-door": 101,
+      "loot": 823
+    },
+    "attribution": {
+      "name": "Shebuka",
+      "url": "https://github.com/the-hideout/tarkov-dev-svg-maps/"
+    }
+  },
+  {
+    "id": "the-lab",
+    "displayName": "The Lab",
+    "logAliases": [
+      "laboratory",
+      "lab"
+    ],
+    "bounds": [
+      [
+        -80,
+        -477
+      ],
+      [
+        -287,
+        -193
+      ]
+    ],
+    "svgBounds": null,
+    "transform": [
+      0.575,
+      281.2,
+      0.575,
+      193.7
+    ],
+    "coordinateRotation": 270,
+    "minZoom": 2,
+    "maxZoom": 6,
+    "baseAsset": {
+      "type": "svg",
+      "path": "/maps/svg/Labs.svg",
+      "baseLayer": "First_Level"
+    },
+    "baseFloor": {
+      "id": "First_Level",
+      "name": "Ground / Main"
+    },
+    "floors": [
+      {
+        "id": "Second_Level",
+        "name": "Second Level",
+        "svgLayer": "Second_Level",
+        "extents": [
+          {
+            "height": [
+              3,
+              10000
+            ],
+            "bounds": [
+              [
+                [
+                  -101,
+                  -422
+                ],
+                [
+                  -271,
+                  -270
+                ]
+              ]
+            ]
+          }
+        ],
+        "asset": null
+      },
+      {
+        "id": "Technical_Level",
+        "name": "Technical",
+        "svgLayer": "Technical_Level",
+        "extents": [
+          {
+            "height": [
+              -10000,
+              -0.9
+            ]
+          }
+        ],
+        "asset": null
+      }
+    ],
+    "poiPath": "/maps/poi/the-lab.json",
+    "poiCounts": {
+      "extract-shared": 3,
+      "extract-pmc": 4,
+      "switch": 15,
+      "spawn-pmc": 70,
+      "spawn-scav": 12,
+      "boss-zone": 16,
+      "locked-door": 14,
+      "loot": 319
+    },
+    "attribution": {
+      "name": "Tarkov.dev",
+      "url": "https://tarkov.dev"
+    }
+  },
+  {
+    "id": "the-labyrinth",
+    "displayName": "The Labyrinth",
+    "logAliases": [
+      "labyrinth"
+    ],
+    "bounds": [
+      [
+        -52,
+        -37
+      ],
+      [
+        53,
+        76
+      ]
+    ],
+    "svgBounds": null,
+    "transform": [
+      2.115,
+      85.5,
+      2.115,
+      128
+    ],
+    "coordinateRotation": 270,
+    "minZoom": 1,
+    "maxZoom": 6,
+    "baseAsset": {
+      "type": "tiles",
+      "template": "/maps/tiles/the-labyrinth/main/{z}/{x}/{y}.png",
+      "nativeZoom": 4,
+      "tileSize": 256
+    },
+    "baseFloor": {
+      "id": "base",
+      "name": "Ground / Main"
+    },
+    "floors": [],
+    "poiPath": "/maps/poi/the-labyrinth.json",
+    "poiCounts": {
+      "extract-pmc": 2,
+      "switch": 12,
+      "hazard": 19,
+      "spawn-pmc": 5,
+      "locked-door": 11,
+      "loot": 35
+    },
+    "attribution": {
+      "name": "Tarkov.dev",
+      "url": "https://tarkov.dev"
+    }
+  },
+  {
+    "id": "lighthouse",
+    "displayName": "Lighthouse",
+    "logAliases": [
+      "lighthouse"
+    ],
+    "bounds": [
+      [
+        515,
+        -998
+      ],
+      [
+        -545,
+        725
+      ]
+    ],
+    "svgBounds": null,
+    "transform": [
+      0.2,
+      0,
+      0.2,
+      0
+    ],
+    "coordinateRotation": 180,
+    "minZoom": 1,
+    "maxZoom": 6,
+    "baseAsset": {
+      "type": "svg",
+      "path": "/maps/svg/Lighthouse.svg",
+      "baseLayer": "Ground_Level"
+    },
+    "baseFloor": {
+      "id": "Ground_Level",
+      "name": "Ground / Main"
+    },
+    "floors": [],
+    "poiPath": "/maps/poi/lighthouse.json",
+    "poiCounts": {
+      "extract-shared": 2,
+      "extract-pmc": 6,
+      "extract-scav": 5,
+      "transit": 3,
+      "switch": 2,
+      "hazard": 344,
+      "spawn-pmc": 71,
+      "spawn-scav": 93,
+      "boss-zone": 10,
+      "locked-door": 26,
+      "loot": 533,
+      "stationary-weapon": 8
+    },
+    "attribution": {
+      "name": "Shebuka",
+      "url": "https://github.com/the-hideout/tarkov-dev-svg-maps/"
+    }
+  },
+  {
+    "id": "reserve",
+    "displayName": "Reserve",
+    "logAliases": [
+      "rezervbase"
+    ],
+    "bounds": [
+      [
+        289,
+        -293
+      ],
+      [
+        -303,
+        244
+      ]
+    ],
+    "svgBounds": [
+      [
+        289,
+        -274
+      ],
+      [
+        -303,
+        272
+      ]
+    ],
+    "transform": [
+      0.395,
+      122,
+      0.395,
+      137.65
+    ],
+    "coordinateRotation": 180,
+    "minZoom": 2,
+    "maxZoom": 6,
+    "baseAsset": {
+      "type": "svg",
+      "path": "/maps/svg/Reserve.svg",
+      "baseLayer": "Ground_Level"
+    },
+    "baseFloor": {
+      "id": "Ground_Level",
+      "name": "Ground / Main"
+    },
+    "floors": [
+      {
+        "id": "2nd-floor",
+        "name": "2nd Floor",
+        "svgLayer": null,
+        "extents": [
+          {
+            "height": [
+              22.1,
+              25.7
+            ],
+            "bounds": [
+              [
+                [
+                  1,
+                  164
+                ],
+                [
+                  -17,
+                  199
+                ],
+                "dome"
+              ]
+            ]
+          },
+          {
+            "height": [
+              -3.5,
+              -0.64
+            ],
+            "bounds": [
+              [
+                [
+                  -77,
+                  26
+                ],
+                [
+                  -177,
+                  106
+                ],
+                "pawns"
+              ],
+              [
+                [
+                  62,
+                  59
+                ],
+                [
+                  51,
+                  108
+                ],
+                "checkpoint fence tower"
+              ]
+            ]
+          },
+          {
+            "height": [
+              -3.5,
+              -0.64
+            ],
+            "bounds": [
+              [
+                [
+                  -104,
+                  -37
+                ],
+                [
+                  -177,
+                  5
+                ],
+                "black bishop"
+              ]
+            ]
+          },
+          {
+            "height": [
+              -3.9,
+              -0.6
+            ],
+            "bounds": [
+              [
+                [
+                  -47,
+                  -47
+                ],
+                [
+                  -85,
+                  -18
+                ],
+                "white bishop"
+              ]
+            ]
+          },
+          {
+            "height": [
+              -4.3,
+              -2.2
+            ],
+            "bounds": [
+              [
+                [
+                  -19.91,
+                  -13
+                ],
+                [
+                  -78,
+                  39
+                ],
+                "white king"
+              ]
+            ]
+          },
+          {
+            "height": [
+              -3.8,
+              -1.1
+            ],
+            "bounds": [
+              [
+                [
+                  99,
+                  -50
+                ],
+                [
+                  -2,
+                  7
+                ],
+                "knights"
+              ]
+            ]
+          },
+          {
+            "height": [
+              -1.9,
+              11.3
+            ],
+            "bounds": [
+              [
+                [
+                  191,
+                  -175
+                ],
+                [
+                  137,
+                  -120
+                ],
+                "train depot"
+              ]
+            ]
+          },
+          {
+            "height": [
+              1,
+              8
+            ],
+            "bounds": [
+              [
+                [
+                  -109,
+                  -156
+                ],
+                [
+                  -119,
+                  -147
+                ],
+                "towers"
+              ],
+              [
+                [
+                  289,
+                  -92
+                ],
+                [
+                  299,
+                  -82
+                ],
+                "towers"
+              ],
+              [
+                [
+                  3,
+                  -210
+                ],
+                [
+                  -7,
+                  -200
+                ],
+                "towers"
+              ],
+              [
+                [
+                  195,
+                  -260
+                ],
+                [
+                  185,
+                  -250
+                ],
+                "towers"
+              ],
+              [
+                [
+                  276,
+                  17
+                ],
+                [
+                  266,
+                  27
+                ],
+                "towers"
+              ]
+            ]
+          },
+          {
+            "height": [
+              -4.1,
+              -1.2
+            ],
+            "bounds": [
+              [
+                [
+                  -128,
+                  -139
+                ],
+                [
+                  -146,
+                  -120
+                ],
+                "scav lands"
+              ]
+            ]
+          }
+        ],
+        "asset": null
+      },
+      {
+        "id": "3rd-floor",
+        "name": "3rd Floor",
+        "svgLayer": null,
+        "extents": [
+          {
+            "height": [
+              25.7,
+              29.3
+            ],
+            "bounds": [
+              [
+                [
+                  1,
+                  164
+                ],
+                [
+                  -17,
+                  199
+                ],
+                "dome"
+              ]
+            ]
+          },
+          {
+            "height": [
+              -0.64,
+              2.23
+            ],
+            "bounds": [
+              [
+                [
+                  -77,
+                  26
+                ],
+                [
+                  -177,
+                  106
+                ],
+                "pawns"
+              ]
+            ]
+          },
+          {
+            "height": [
+              -0.64,
+              2.23
+            ],
+            "bounds": [
+              [
+                [
+                  -104,
+                  -37
+                ],
+                [
+                  -177,
+                  5
+                ],
+                "black bishop"
+              ]
+            ]
+          },
+          {
+            "height": [
+              -0.6,
+              10
+            ],
+            "bounds": [
+              [
+                [
+                  -47,
+                  -47
+                ],
+                [
+                  -85,
+                  -18
+                ],
+                "white bishop"
+              ]
+            ]
+          },
+          {
+            "height": [
+              -2.2,
+              2.14
+            ],
+            "bounds": [
+              [
+                [
+                  -19.91,
+                  -13
+                ],
+                [
+                  -78,
+                  39
+                ],
+                "white king"
+              ]
+            ]
+          },
+          {
+            "height": [
+              -1.1,
+              1.6
+            ],
+            "bounds": [
+              [
+                [
+                  99,
+                  -50
+                ],
+                [
+                  -2,
+                  7
+                ],
+                "knights"
+              ]
+            ]
+          }
+        ],
+        "asset": null
+      },
+      {
+        "id": "4th-floor",
+        "name": "4th Floor",
+        "svgLayer": null,
+        "extents": [
+          {
+            "height": [
+              29.3,
+              36
+            ],
+            "bounds": [
+              [
+                [
+                  1,
+                  164
+                ],
+                [
+                  -17,
+                  199
+                ],
+                "dome"
+              ]
+            ]
+          },
+          {
+            "height": [
+              2.23,
+              5
+            ],
+            "bounds": [
+              [
+                [
+                  -77,
+                  26
+                ],
+                [
+                  -177,
+                  106
+                ],
+                "pawns"
+              ]
+            ]
+          },
+          {
+            "height": [
+              2.15,
+              6.6
+            ],
+            "bounds": [
+              [
+                [
+                  -19.91,
+                  -13
+                ],
+                [
+                  -78,
+                  39
+                ],
+                "white king"
+              ]
+            ]
+          },
+          {
+            "height": [
+              1.6,
+              4.7
+            ],
+            "bounds": [
+              [
+                [
+                  99,
+                  -50
+                ],
+                [
+                  -2,
+                  7
+                ],
+                "knights"
+              ]
+            ]
+          }
+        ],
+        "asset": null
+      },
+      {
+        "id": "5th-floor",
+        "name": "5th Floor",
+        "svgLayer": null,
+        "extents": [
+          {
+            "height": [
+              5,
+              9.5
+            ],
+            "bounds": [
+              [
+                [
+                  -77,
+                  26
+                ],
+                [
+                  -177,
+                  106
+                ],
+                "pawns"
+              ]
+            ]
+          }
+        ],
+        "asset": null
+      },
+      {
+        "id": "Bunkers",
+        "name": "Bunkers",
+        "svgLayer": "Bunkers",
+        "extents": [
+          {
+            "height": [
+              -10000,
+              -7.27
+            ],
+            "bounds": [
+              [
+                [
+                  128,
+                  -208
+                ],
+                [
+                  18,
+                  -33
+                ],
+                "storage bunker"
+              ],
+              [
+                [
+                  -46,
+                  -42
+                ],
+                [
+                  -176,
+                  127
+                ],
+                "command bunkers"
+              ]
+            ]
+          },
+          {
+            "height": [
+              -10000,
+              -12
+            ],
+            "bounds": [
+              [
+                [
+                  -40,
+                  124
+                ],
+                [
+                  -124,
+                  189
+                ],
+                "D2"
+              ]
+            ]
+          },
+          {
+            "height": [
+              -10000,
+              18
+            ],
+            "bounds": [
+              [
+                [
+                  23,
+                  173
+                ],
+                [
+                  -65,
+                  189
+                ],
+                "dome tunnels"
+              ]
+            ]
+          },
+          {
+            "height": [
+              -7.27,
+              -3.2
+            ],
+            "bounds": [
+              [
+                [
+                  74,
+                  -196
+                ],
+                [
+                  19,
+                  -149
+                ],
+                "bunker hermetic door bunkers"
+              ]
+            ]
+          },
+          {
+            "height": [
+              -11,
+              -4.6
+            ],
+            "bounds": [
+              [
+                [
+                  -246,
+                  -79
+                ],
+                [
+                  -274,
+                  -53
+                ],
+                "E1 bunkers"
+              ],
+              [
+                [
+                  238,
+                  -26
+                ],
+                [
+                  126,
+                  45
+                ],
+                "bunkers"
+              ]
+            ]
+          }
+        ],
+        "asset": null
+      }
+    ],
+    "poiPath": "/maps/poi/reserve.json",
+    "poiCounts": {
+      "extract-shared": 4,
+      "extract-pmc": 3,
+      "extract-scav": 4,
+      "transit": 3,
+      "switch": 3,
+      "hazard": 6,
+      "spawn-scav": 70,
+      "spawn-pmc": 79,
+      "boss-zone": 8,
+      "locked-door": 33,
+      "loot": 991,
+      "stationary-weapon": 8
+    },
+    "attribution": {
+      "name": "Shebuka",
+      "url": "https://github.com/the-hideout/tarkov-dev-svg-maps/"
+    }
+  },
+  {
+    "id": "shoreline",
+    "displayName": "Shoreline",
+    "logAliases": [
+      "shoreline"
+    ],
+    "bounds": [
+      [
+        504,
+        -415
+      ],
+      [
+        -1056,
+        618
+      ]
+    ],
+    "svgBounds": null,
+    "transform": [
+      0.16,
+      83.2,
+      0.16,
+      111.1
+    ],
+    "coordinateRotation": 180,
+    "minZoom": 2,
+    "maxZoom": 6,
+    "baseAsset": {
+      "type": "svg",
+      "path": "/maps/svg/Shoreline.svg",
+      "baseLayer": "Ground_Level"
+    },
+    "baseFloor": {
+      "id": "Ground_Level",
+      "name": "Ground / Main"
+    },
+    "floors": [
+      {
+        "id": "Second_Floor",
+        "name": "2nd Floor",
+        "svgLayer": "Second_Floor",
+        "extents": [
+          {
+            "height": [
+              -1,
+              2
+            ]
+          }
+        ],
+        "asset": null
+      },
+      {
+        "id": "Third_Floor",
+        "name": "3rd Floor",
+        "svgLayer": "Third_Floor",
+        "extents": [
+          {
+            "height": [
+              2,
+              1000
+            ]
+          }
+        ],
+        "asset": null
+      },
+      {
+        "id": "Underground_Level",
+        "name": "Underground",
+        "svgLayer": "Underground_Level",
+        "extents": [
+          {
+            "height": [
+              -1000,
+              -5
+            ],
+            "bounds": [
+              [
+                [
+                  -137,
+                  -68
+                ],
+                [
+                  -237,
+                  -104
+                ],
+                "west wing"
+              ],
+              [
+                [
+                  -234,
+                  -134
+                ],
+                [
+                  -268,
+                  -163
+                ],
+                "admin"
+              ]
+            ]
+          }
+        ],
+        "asset": null
+      }
+    ],
+    "poiPath": "/maps/poi/shoreline.json",
+    "poiCounts": {
+      "extract-pmc": 8,
+      "extract-scav": 5,
+      "extract-shared": 1,
+      "transit": 3,
+      "hazard": 25,
+      "spawn-pmc": 130,
+      "spawn-scav": 110,
+      "boss-zone": 8,
+      "locked-door": 38,
+      "loot": 756,
+      "stationary-weapon": 1
+    },
+    "attribution": {
+      "name": "Shebuka",
+      "url": "https://github.com/the-hideout/tarkov-dev-svg-maps/"
+    }
+  },
+  {
+    "id": "terminal",
+    "displayName": "Terminal",
+    "logAliases": [
+      "terminal"
+    ],
+    "bounds": [
+      [
+        463,
+        -580
+      ],
+      [
+        -433,
+        475
+      ]
+    ],
+    "svgBounds": null,
+    "transform": [
+      0.2,
+      0,
+      0.2,
+      0
+    ],
+    "coordinateRotation": 180,
+    "minZoom": 2,
+    "maxZoom": 6,
+    "baseAsset": {
+      "type": "svg",
+      "path": "/maps/svg/Terminal.svg",
+      "baseLayer": "Ground_Level"
+    },
+    "baseFloor": {
+      "id": "Ground_Level",
+      "name": "Ground / Main"
+    },
+    "floors": [],
+    "poiPath": "/maps/poi/terminal.json",
+    "poiCounts": {
+      "hazard": 10,
+      "spawn-pmc": 5,
+      "boss-zone": 28
+    },
+    "attribution": {
+      "name": "Shebuka",
+      "url": "https://github.com/the-hideout/tarkov-dev-svg-maps/"
+    }
+  },
+  {
+    "id": "woods",
+    "displayName": "Woods",
+    "logAliases": [
+      "woods"
+    ],
+    "bounds": [
+      [
+        646,
+        -914
+      ],
+      [
+        -761,
+        442
+      ]
+    ],
+    "svgBounds": null,
+    "transform": [
+      0.1855,
+      112.95,
+      0.1855,
+      167.85
+    ],
+    "coordinateRotation": 180,
+    "minZoom": 2,
+    "maxZoom": 6,
+    "baseAsset": {
+      "type": "svg",
+      "path": "/maps/svg/Woods.svg",
+      "baseLayer": "Ground_Level"
+    },
+    "baseFloor": {
+      "id": "Ground_Level",
+      "name": "Ground / Main"
+    },
+    "floors": [],
+    "poiPath": "/maps/poi/woods.json",
+    "poiCounts": {
+      "extract-shared": 1,
+      "extract-pmc": 9,
+      "extract-scav": 10,
+      "transit": 4,
+      "hazard": 66,
+      "btr": 8,
+      "spawn-scav": 119,
+      "spawn-pmc": 140,
+      "boss-zone": 4,
+      "locked-door": 4,
+      "loot": 428,
+      "stationary-weapon": 2
+    },
+    "attribution": {
+      "name": "Shebuka",
+      "url": "https://github.com/the-hideout/tarkov-dev-svg-maps/"
+    }
+  }
+]

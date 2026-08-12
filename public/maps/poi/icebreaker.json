@@ -1,0 +1,1011 @@
+{
+  "schemaVersion": 2,
+  "mapId": "icebreaker",
+  "generatedAt": "2026-08-12T14:38:14.341Z",
+  "sources": [
+    "https://json.tarkov.dev/regular/maps",
+    "https://json.tarkov.dev/regular/maps_en"
+  ],
+  "pois": [
+    {
+      "id": "spawn-2",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 3.41,
+        "y": 23.77125,
+        "z": 37.047
+      },
+      "zoneName": "BotZoneRoomsThird",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-7",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -1.86,
+        "y": 23.77125,
+        "z": 43.09
+      },
+      "zoneName": "BotZoneRoomsThird",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-15",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 5.53,
+        "y": 10.321249,
+        "z": -6.05
+      },
+      "zoneName": "BotZoneEngineCenter",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-16",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -8.340362,
+        "y": 18.4212513,
+        "z": 5.175802
+      },
+      "zoneName": "BotZoneKorr_t2",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-17",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 2.018,
+        "y": 23.77125,
+        "z": 43.387
+      },
+      "zoneName": "BotZoneRoomsThird",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-18",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -2.02,
+        "y": 23.77125,
+        "z": 42.95
+      },
+      "zoneName": "BotZoneRoomsThird",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-22",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 6.092072,
+        "y": 15.9712505,
+        "z": -72.37866
+      },
+      "zoneName": "BotZoneBack",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-25",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -1.3544693,
+        "y": 19.4779987,
+        "z": 81.6578
+      },
+      "zoneName": "698b0cea-682d-44e8-9e5e-35bbcb29acb9",
+      "sides": [
+        "pmc"
+      ]
+    },
+    {
+      "id": "spawn-26",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 0.68,
+        "y": 16.0901375,
+        "z": -78.33
+      },
+      "zoneName": "BotZoneBack",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-27",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 6.27,
+        "y": 34.57125,
+        "z": 29.836
+      },
+      "zoneName": "BotZoneRooms",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-36",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -6.99,
+        "y": 10.27125,
+        "z": -16.65
+      },
+      "zoneName": "BotZoneEngineCenter",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-38",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -2.695,
+        "y": 23.7754154,
+        "z": 26.93
+      },
+      "zoneName": "BotZoneRoomsThird",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-43",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -2.695,
+        "y": 23.77125,
+        "z": 37.047
+      },
+      "zoneName": "BotZoneRoomsThird",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-49",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": 3.44462061,
+        "y": 34.57125,
+        "z": 36.76255
+      },
+      "zoneName": "BotZoneRooms",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-54",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -0.354278564,
+        "y": 19.4779987,
+        "z": 82.33914
+      },
+      "zoneName": "deb43977-c795-4dc1-8f5a-d96a0adf133f",
+      "sides": [
+        "pmc"
+      ]
+    },
+    {
+      "id": "spawn-55",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -5.6,
+        "y": 10.3191309,
+        "z": -6.05
+      },
+      "zoneName": "BotZoneEngineCenter",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "boss-bossKnight-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Knight · Mash_t1",
+      "aliases": [
+        "bossKnight",
+        "BotZoneMash_t1"
+      ],
+      "position": {
+        "x": -0.5974999999999999,
+        "y": 15.6712513,
+        "z": 26.6025
+      },
+      "bossId": "bossKnight",
+      "bossName": "Knight",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-ExUsec-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Rogue · Front",
+      "aliases": [
+        "ExUsec",
+        "BotZoneFront"
+      ],
+      "position": {
+        "x": 1.0845,
+        "y": 15.6712513,
+        "z": 38.0675
+      },
+      "bossId": "ExUsec",
+      "bossName": "Rogue",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-ExUsec-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Rogue · Kitchen",
+      "aliases": [
+        "ExUsec",
+        "BotZoneKitchen"
+      ],
+      "position": {
+        "x": -0.4285000000000001,
+        "y": 15.723085399999999,
+        "z": 45.5665
+      },
+      "bossId": "ExUsec",
+      "bossName": "Rogue",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossBullyBlackDiv-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. Boss · EngineHide",
+      "aliases": [
+        "bossBullyBlackDiv",
+        "BotZoneEngineHide"
+      ],
+      "position": {
+        "x": -1.0317,
+        "y": 16.93321932,
+        "z": -20.641799999999996
+      },
+      "bossId": "bossBullyBlackDiv",
+      "bossName": "Black Div. Boss",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossBullyBlackDiv-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. Boss · EngineHide",
+      "aliases": [
+        "bossBullyBlackDiv",
+        "BotZoneEngineHide"
+      ],
+      "position": {
+        "x": -1.0317,
+        "y": 16.93321932,
+        "z": -20.641799999999996
+      },
+      "bossId": "bossBullyBlackDiv",
+      "bossName": "Black Div. Boss",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossBullyBlackDiv-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. Boss · EngineHide",
+      "aliases": [
+        "bossBullyBlackDiv",
+        "BotZoneEngineHide"
+      ],
+      "position": {
+        "x": -1.0317,
+        "y": 16.93321932,
+        "z": -20.641799999999996
+      },
+      "bossId": "bossBullyBlackDiv",
+      "bossName": "Black Div. Boss",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossBullyBlackDiv-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. Boss · EngineHide",
+      "aliases": [
+        "bossBullyBlackDiv",
+        "BotZoneEngineHide"
+      ],
+      "position": {
+        "x": -1.0317,
+        "y": 16.93321932,
+        "z": -20.641799999999996
+      },
+      "bossId": "bossBullyBlackDiv",
+      "bossName": "Black Div. Boss",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossBullyBlackDiv-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. Boss · EngineHide",
+      "aliases": [
+        "bossBullyBlackDiv",
+        "BotZoneEngineHide"
+      ],
+      "position": {
+        "x": -1.0317,
+        "y": 16.93321932,
+        "z": -20.641799999999996
+      },
+      "bossId": "bossBullyBlackDiv",
+      "bossName": "Black Div. Boss",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-pmcBotBlackDiv-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. Raider · SternTop",
+      "aliases": [
+        "pmcBotBlackDiv",
+        "BotZoneSternTop"
+      ],
+      "position": {
+        "x": 1.9800000000000004,
+        "y": 21.102832749999997,
+        "z": -66.87
+      },
+      "bossId": "pmcBotBlackDiv",
+      "bossName": "Black Div. Raider",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-pmcBotBlackDiv-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. Raider · SternTop",
+      "aliases": [
+        "pmcBotBlackDiv",
+        "BotZoneSternTop"
+      ],
+      "position": {
+        "x": 1.9800000000000004,
+        "y": 21.102832749999997,
+        "z": -66.87
+      },
+      "bossId": "pmcBotBlackDiv",
+      "bossName": "Black Div. Raider",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-pmcBotBlackDiv-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. Raider · SternTop",
+      "aliases": [
+        "pmcBotBlackDiv",
+        "BotZoneSternTop"
+      ],
+      "position": {
+        "x": 1.9800000000000004,
+        "y": 21.102832749999997,
+        "z": -66.87
+      },
+      "bossId": "pmcBotBlackDiv",
+      "bossName": "Black Div. Raider",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-pmcBotBlackDiv-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. Raider · Stern",
+      "aliases": [
+        "pmcBotBlackDiv",
+        "BotZoneStern"
+      ],
+      "position": {
+        "x": 0.22333333333333327,
+        "y": 16.033254266666667,
+        "z": -71.20666666666666
+      },
+      "bossId": "pmcBotBlackDiv",
+      "bossName": "Black Div. Raider",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-pmcBotBlackDiv-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. Raider · Stern",
+      "aliases": [
+        "pmcBotBlackDiv",
+        "BotZoneStern"
+      ],
+      "position": {
+        "x": 0.22333333333333327,
+        "y": 16.033254266666667,
+        "z": -71.20666666666666
+      },
+      "bossId": "pmcBotBlackDiv",
+      "bossName": "Black Div. Raider",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-pmcBotBlackDiv-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. Raider · Stern",
+      "aliases": [
+        "pmcBotBlackDiv",
+        "BotZoneStern"
+      ],
+      "position": {
+        "x": 0.22333333333333327,
+        "y": 16.033254266666667,
+        "z": -71.20666666666666
+      },
+      "bossId": "pmcBotBlackDiv",
+      "bossName": "Black Div. Raider",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossBullyBlackDiv-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. Boss · Stern",
+      "aliases": [
+        "bossBullyBlackDiv",
+        "BotZoneStern"
+      ],
+      "position": {
+        "x": 0.22333333333333327,
+        "y": 16.033254266666667,
+        "z": -71.20666666666666
+      },
+      "bossId": "bossBullyBlackDiv",
+      "bossName": "Black Div. Boss",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossBullyBlackDiv-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. Boss · Stern",
+      "aliases": [
+        "bossBullyBlackDiv",
+        "BotZoneStern"
+      ],
+      "position": {
+        "x": 0.22333333333333327,
+        "y": 16.033254266666667,
+        "z": -71.20666666666666
+      },
+      "bossId": "bossBullyBlackDiv",
+      "bossName": "Black Div. Boss",
+      "spawnChance": 0.7,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossBullyBlackDiv-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. Boss · Stern",
+      "aliases": [
+        "bossBullyBlackDiv",
+        "BotZoneStern"
+      ],
+      "position": {
+        "x": 0.22333333333333327,
+        "y": 16.033254266666667,
+        "z": -71.20666666666666
+      },
+      "bossId": "bossBullyBlackDiv",
+      "bossName": "Black Div. Boss",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossBullyBlackDiv-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. Boss · Stern",
+      "aliases": [
+        "bossBullyBlackDiv",
+        "BotZoneStern"
+      ],
+      "position": {
+        "x": 0.22333333333333327,
+        "y": 16.033254266666667,
+        "z": -71.20666666666666
+      },
+      "bossId": "bossBullyBlackDiv",
+      "bossName": "Black Div. Boss",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-pmcBotBlackDiv-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. Raider · Outside_t3",
+      "aliases": [
+        "pmcBotBlackDiv",
+        "BotZoneOutside_t3"
+      ],
+      "position": {
+        "x": -10.86536125,
+        "y": 21.0722923,
+        "z": 15.27230165
+      },
+      "bossId": "pmcBotBlackDiv",
+      "bossName": "Black Div. Raider",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-pmcBotBlackDiv-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. Raider · Inside_t4",
+      "aliases": [
+        "pmcBotBlackDiv",
+        "BotZoneInside_t4"
+      ],
+      "position": {
+        "x": -3.95186162,
+        "y": 34.626625000000004,
+        "z": 36.70830145
+      },
+      "bossId": "pmcBotBlackDiv",
+      "bossName": "Black Div. Raider",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossWedge-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "The Wedge · RoomsFour",
+      "aliases": [
+        "bossWedge",
+        "BotZoneRoomsFour"
+      ],
+      "position": {
+        "x": -2.2423333333333337,
+        "y": 26.492462433333333,
+        "z": 35.160000000000004
+      },
+      "bossId": "bossWedge",
+      "bossName": "The Wedge",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossWedge-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "The Wedge · RoomsThird",
+      "aliases": [
+        "bossWedge",
+        "BotZoneRoomsThird"
+      ],
+      "position": {
+        "x": 3.21,
+        "y": 23.77125,
+        "z": 26.93
+      },
+      "bossId": "bossWedge",
+      "bossName": "The Wedge",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossWedge-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "The Wedge · RoomsThirdKitchen",
+      "aliases": [
+        "bossWedge",
+        "BotZoneRoomsThirdKitchen"
+      ],
+      "position": {
+        "x": 2.9356666666666666,
+        "y": 23.77125,
+        "z": 47.413
+      },
+      "bossId": "bossWedge",
+      "bossName": "The Wedge",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossWedge-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "The Wedge · RoomsFour",
+      "aliases": [
+        "bossWedge",
+        "BotZoneRoomsFour"
+      ],
+      "position": {
+        "x": -2.2423333333333337,
+        "y": 26.492462433333333,
+        "z": 35.160000000000004
+      },
+      "bossId": "bossWedge",
+      "bossName": "The Wedge",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossWedge-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "The Wedge · RoomsThirdKitchen",
+      "aliases": [
+        "bossWedge",
+        "BotZoneRoomsThirdKitchen"
+      ],
+      "position": {
+        "x": 2.9356666666666666,
+        "y": 23.77125,
+        "z": 47.413
+      },
+      "bossId": "bossWedge",
+      "bossName": "The Wedge",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossWedge-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "The Wedge · RoomsThird",
+      "aliases": [
+        "bossWedge",
+        "BotZoneRoomsThird"
+      ],
+      "position": {
+        "x": 3.21,
+        "y": 23.77125,
+        "z": 26.93
+      },
+      "bossId": "bossWedge",
+      "bossName": "The Wedge",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossWedge-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "The Wedge · RoomsFour",
+      "aliases": [
+        "bossWedge",
+        "BotZoneRoomsFour"
+      ],
+      "position": {
+        "x": -2.2423333333333337,
+        "y": 26.492462433333333,
+        "z": 35.160000000000004
+      },
+      "bossId": "bossWedge",
+      "bossName": "The Wedge",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossWedge-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "The Wedge · RoomsThirdKitchen",
+      "aliases": [
+        "bossWedge",
+        "BotZoneRoomsThirdKitchen"
+      ],
+      "position": {
+        "x": 2.9356666666666666,
+        "y": 23.77125,
+        "z": 47.413
+      },
+      "bossId": "bossWedge",
+      "bossName": "The Wedge",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossWedge-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "The Wedge · RoomsThird",
+      "aliases": [
+        "bossWedge",
+        "BotZoneRoomsThird"
+      ],
+      "position": {
+        "x": 3.21,
+        "y": 23.77125,
+        "z": 26.93
+      },
+      "bossId": "bossWedge",
+      "bossName": "The Wedge",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossWedge-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "The Wedge · RoomsFour",
+      "aliases": [
+        "bossWedge",
+        "BotZoneRoomsFour"
+      ],
+      "position": {
+        "x": -2.2423333333333337,
+        "y": 26.492462433333333,
+        "z": 35.160000000000004
+      },
+      "bossId": "bossWedge",
+      "bossName": "The Wedge",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossWedge-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "The Wedge · RoomsThirdKitchen",
+      "aliases": [
+        "bossWedge",
+        "BotZoneRoomsThirdKitchen"
+      ],
+      "position": {
+        "x": 2.9356666666666666,
+        "y": 23.77125,
+        "z": 47.413
+      },
+      "bossId": "bossWedge",
+      "bossName": "The Wedge",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossWedge-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "The Wedge · RoomsThird",
+      "aliases": [
+        "bossWedge",
+        "BotZoneRoomsThird"
+      ],
+      "position": {
+        "x": 3.21,
+        "y": 23.77125,
+        "z": 26.93
+      },
+      "bossId": "bossWedge",
+      "bossName": "The Wedge",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-pmcBotBlackDiv-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. Raider · Stern",
+      "aliases": [
+        "pmcBotBlackDiv",
+        "BotZoneStern"
+      ],
+      "position": {
+        "x": 0.22333333333333327,
+        "y": 16.033254266666667,
+        "z": -71.20666666666666
+      },
+      "bossId": "pmcBotBlackDiv",
+      "bossName": "Black Div. Raider",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-pmcBotBlackDiv-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. Raider · SternTop",
+      "aliases": [
+        "pmcBotBlackDiv",
+        "BotZoneSternTop"
+      ],
+      "position": {
+        "x": 1.9800000000000004,
+        "y": 21.102832749999997,
+        "z": -66.87
+      },
+      "bossId": "pmcBotBlackDiv",
+      "bossName": "Black Div. Raider",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossBullyBlackDiv-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. Boss · EngineHide",
+      "aliases": [
+        "bossBullyBlackDiv",
+        "BotZoneEngineHide"
+      ],
+      "position": {
+        "x": -1.0317,
+        "y": 16.93321932,
+        "z": -20.641799999999996
+      },
+      "bossId": "bossBullyBlackDiv",
+      "bossName": "Black Div. Boss",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-bossBullyBlackDiv-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Black Div. Boss · EngineHide",
+      "aliases": [
+        "bossBullyBlackDiv",
+        "BotZoneEngineHide"
+      ],
+      "position": {
+        "x": -1.0317,
+        "y": 16.93321932,
+        "z": -20.641799999999996
+      },
+      "bossId": "bossBullyBlackDiv",
+      "bossName": "Black Div. Boss",
+      "spawnChance": 1,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-ExUsec-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Rogue · KorrDown1",
+      "aliases": [
+        "ExUsec",
+        "BotZoneKorrDown1"
+      ],
+      "position": {
+        "x": -11.654,
+        "y": 15.7212505,
+        "z": 44.009
+      },
+      "bossId": "ExUsec",
+      "bossName": "Rogue",
+      "spawnChance": 0.5,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-ExUsec-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Rogue · Room_Eng",
+      "aliases": [
+        "ExUsec",
+        "BotZoneRoom_Eng"
+      ],
+      "position": {
+        "x": 0.3715,
+        "y": 18.3777771,
+        "z": 28.184
+      },
+      "bossId": "ExUsec",
+      "bossName": "Rogue",
+      "spawnChance": 0.5,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-ExUsec-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Rogue · Room_Eng2",
+      "aliases": [
+        "ExUsec",
+        "BotZoneRoom_Eng2"
+      ],
+      "position": {
+        "x": 7.6455,
+        "y": 18.4212513,
+        "z": 32.104
+      },
+      "bossId": "ExUsec",
+      "bossName": "Rogue",
+      "spawnChance": 0.5,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-ExUsec-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Rogue · Front2",
+      "aliases": [
+        "ExUsec",
+        "BotZoneFront2"
+      ],
+      "position": {
+        "x": -3.497,
+        "y": 18.3712482,
+        "z": 37.9135
+      },
+      "bossId": "ExUsec",
+      "bossName": "Rogue",
+      "spawnChance": 0.5,
+      "zoneChance": 1
+    }
+  ]
+}

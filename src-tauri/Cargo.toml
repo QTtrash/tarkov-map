@@ -1,0 +1,40 @@
+[package]
+name = "tarkov-map-locator"
+version = "0.3.0"
+description = "Passive Escape from Tarkov screenshot position locator"
+authors = ["Tarkov Map Locator"]
+edition = "2021"
+
+[lib]
+name = "tarkov_map_locator_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+dirs = "6"
+notify = "8"
+regex = "1"
+rfd = "0.15"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+rusqlite = { version = "0.37", features = ["bundled"] }
+axum = { version = "0.8", features = ["ws"] }
+tokio = { version = "1", features = ["net", "sync"] }
+tauri = { version = "2", features = [] }
+tauri-plugin-window-state = "2"
+tauri-plugin-global-shortcut = "2"
+
+[target.'cfg(windows)'.dependencies]
+winreg = "0.55"
+windows = { version = "0.61", features = [
+  "Foundation",
+  "Graphics_Imaging",
+  "Media_Ocr",
+  "Storage",
+  "Storage_Streams"
+] }
+
+[dev-dependencies]
+tempfile = "3"

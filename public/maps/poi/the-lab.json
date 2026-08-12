@@ -1,0 +1,6979 @@
+{
+  "schemaVersion": 2,
+  "mapId": "the-lab",
+  "generatedAt": "2026-08-12T14:38:14.548Z",
+  "sources": [
+    "https://json.tarkov.dev/regular/maps",
+    "https://json.tarkov.dev/regular/maps_en"
+  ],
+  "pois": [
+    {
+      "id": "ed029f26c9d60bf00d926b4d7e7876b0591b411a",
+      "kind": "extract",
+      "category": "extract-shared",
+      "name": "Medical Block Elevator",
+      "aliases": [
+        "lab_Elevator_Med",
+        "Medical Block Elevator"
+      ],
+      "position": {
+        "x": -112.423,
+        "y": -3.10999966,
+        "z": -343.986
+      },
+      "outline": [
+        {
+          "x": -113.650734,
+          "y": -3.10999966,
+          "z": -345.950836
+        },
+        {
+          "x": -110.949921,
+          "y": -3.10999966,
+          "z": -345.950836
+        },
+        {
+          "x": -110.949921,
+          "y": -3.10999966,
+          "z": -342.120941
+        },
+        {
+          "x": -113.650734,
+          "y": -3.10999966,
+          "z": -342.120941
+        }
+      ],
+      "top": -1.60999942,
+      "bottom": -4.61,
+      "faction": "shared",
+      "switchIds": [
+        "5077fd224eb1bb588b65e4d3c0b4b5719bdebb66",
+        "d1d16f043cea7be35b2729c5e1e1dd648c6dee13",
+        "014e9122e0fad99bcff6f93161712c3c6e1a2a75"
+      ],
+      "transferItem": null
+    },
+    {
+      "id": "4cfc8fb5003e428d6cb9f8492690068afba50c71",
+      "kind": "extract",
+      "category": "extract-shared",
+      "name": "Cargo Elevator",
+      "aliases": [
+        "lab_Elevator_Cargo",
+        "Cargo Elevator"
+      ],
+      "position": {
+        "x": -112.152,
+        "y": 5.376,
+        "z": -408.64
+      },
+      "outline": [
+        {
+          "x": -113.652,
+          "y": 5.376,
+          "z": -411.5738
+        },
+        {
+          "x": -109.922768,
+          "y": 5.376,
+          "z": -411.5738
+        },
+        {
+          "x": -109.922768,
+          "y": 5.376,
+          "z": -405.521362
+        },
+        {
+          "x": -113.652,
+          "y": 5.376,
+          "z": -405.521362
+        }
+      ],
+      "top": 6.87600136,
+      "bottom": 3.87599874,
+      "faction": "shared",
+      "switchIds": [
+        "558a518a272f611d2e6879b917adb407f428977f",
+        "8e6aa12e37d1b09a56e1ae19ab203832b0e78df9",
+        "c39cf1e7caac3b830c00b539ee12dfddeb061e2b"
+      ],
+      "transferItem": null
+    },
+    {
+      "id": "1a5ae89d5401d277f8b317c18951dfe0e1bfd695",
+      "kind": "extract",
+      "category": "extract-shared",
+      "name": "Main Elevator",
+      "aliases": [
+        "lab_Elevator_Main",
+        "Main Elevator"
+      ],
+      "position": {
+        "x": -282.304016,
+        "y": -3.631999,
+        "z": -334.896
+      },
+      "outline": [
+        {
+          "x": -284.0349,
+          "y": -2.8088522,
+          "z": -336.76886
+        },
+        {
+          "x": -281.348083,
+          "y": -2.8088522,
+          "z": -336.76886
+        },
+        {
+          "x": -281.348083,
+          "y": -2.8088522,
+          "z": -332.690826
+        },
+        {
+          "x": -284.0349,
+          "y": -2.8088522,
+          "z": -332.690826
+        }
+      ],
+      "top": -1.37074661,
+      "bottom": -4.246957,
+      "faction": "shared",
+      "switchIds": [
+        "89170f110a27deb607f63b2382f28c25ba75e861",
+        "72848c177c54e2913e7d0259f23fba929d14ebf5",
+        "911ef57b76415c1d42fdba3b5c8fdb587dd229a7"
+      ],
+      "transferItem": null
+    },
+    {
+      "id": "761dedf3fefaf3526e0ce19c7d7b1a3d494fce8a",
+      "kind": "extract",
+      "category": "extract-pmc",
+      "name": "Ventilation Shaft",
+      "aliases": [
+        "lab_Vent",
+        "Ventilation Shaft"
+      ],
+      "position": {
+        "x": -144.94,
+        "y": -2.37,
+        "z": -396.826
+      },
+      "outline": [
+        {
+          "x": -146.490692,
+          "y": -2.460924,
+          "z": -401.336
+        },
+        {
+          "x": -143.620682,
+          "y": -2.460924,
+          "z": -401.336
+        },
+        {
+          "x": -143.620682,
+          "y": -2.460924,
+          "z": -392.315979
+        },
+        {
+          "x": -146.490692,
+          "y": -2.460924,
+          "z": -392.315979
+        }
+      ],
+      "top": -0.8859234,
+      "bottom": -4.035925,
+      "faction": "pmc",
+      "switchIds": [],
+      "transferItem": null
+    },
+    {
+      "id": "c846e13f4bf7afe28c0cf214bd9e7b4685ba592f",
+      "kind": "extract",
+      "category": "extract-pmc",
+      "name": "Sewage Conduit",
+      "aliases": [
+        "lab_Under_Storage_Collector",
+        "Sewage Conduit"
+      ],
+      "position": {
+        "x": -122.889992,
+        "y": -3.65600014,
+        "z": -258.3245
+      },
+      "outline": [
+        {
+          "x": -125.09,
+          "y": -3.65600014,
+          "z": -262.3245
+        },
+        {
+          "x": -120.689995,
+          "y": -3.65600014,
+          "z": -262.3245
+        },
+        {
+          "x": -120.689995,
+          "y": -3.65600014,
+          "z": -254.324509
+        },
+        {
+          "x": -125.09,
+          "y": -3.65600014,
+          "z": -254.324509
+        }
+      ],
+      "top": -2.40599918,
+      "bottom": -4.906001,
+      "faction": "pmc",
+      "switchIds": [
+        "e7096cec97efb58f59f78f048792235f89318a94",
+        "a948c3ba250ffcaaa508230d0b3392bf09cb6964"
+      ],
+      "transferItem": null
+    },
+    {
+      "id": "c5c6f818755ac844b4723b1a2cf057569da410ee",
+      "kind": "extract",
+      "category": "extract-pmc",
+      "name": "Parking Gate",
+      "aliases": [
+        "lab_Parking_Gate",
+        "Parking Gate"
+      ],
+      "position": {
+        "x": -231.73,
+        "y": 0.77356863,
+        "z": -434.816376
+      },
+      "outline": [
+        {
+          "x": -251.893616,
+          "y": 6.19181,
+          "z": -477.702057
+        },
+        {
+          "x": -251.893616,
+          "y": 6.19181,
+          "z": -478.57373
+        },
+        {
+          "x": -211.0718,
+          "y": 6.19181,
+          "z": -478.573761
+        },
+        {
+          "x": -211.0718,
+          "y": 6.19181,
+          "z": -477.702057
+        },
+        {
+          "x": -211.071777,
+          "y": 6.19181,
+          "z": -437.846863
+        },
+        {
+          "x": -211.071777,
+          "y": 6.19181,
+          "z": -436.9752
+        },
+        {
+          "x": -251.8936,
+          "y": 6.19181,
+          "z": -436.975159
+        },
+        {
+          "x": -251.8936,
+          "y": 6.19181,
+          "z": -437.846863
+        }
+      ],
+      "top": 12.3637676,
+      "bottom": 0.0198526382,
+      "faction": "pmc",
+      "switchIds": [
+        "07fe694c3915c1363b5fa1faa604c68fe5849aba"
+      ],
+      "transferItem": null
+    },
+    {
+      "id": "6499ac7374cd238366b977944e305a08afd2e9e3",
+      "kind": "extract",
+      "category": "extract-pmc",
+      "name": "Hangar Gate",
+      "aliases": [
+        "lab_Hangar_Gate",
+        "Hangar Gate"
+      ],
+      "position": {
+        "x": -170.66,
+        "y": 1.54,
+        "z": -245.94
+      },
+      "outline": [
+        {
+          "x": -190.554718,
+          "y": 5.53984356,
+          "z": -239.217484
+        },
+        {
+          "x": -190.554718,
+          "y": 5.53984356,
+          "z": -240.05896
+        },
+        {
+          "x": -150.423187,
+          "y": 5.53984356,
+          "z": -240.059174
+        },
+        {
+          "x": -150.423172,
+          "y": 5.53984356,
+          "z": -239.2177
+        },
+        {
+          "x": -150.422958,
+          "y": 5.53984356,
+          "z": -198.51651
+        },
+        {
+          "x": -150.422943,
+          "y": 5.53984356,
+          "z": -197.675034
+        },
+        {
+          "x": -190.554489,
+          "y": 5.53984356,
+          "z": -197.67482
+        },
+        {
+          "x": -190.5545,
+          "y": 5.53984356,
+          "z": -198.5163
+        }
+      ],
+      "top": 11.7320433,
+      "bottom": -0.652356148,
+      "faction": "pmc",
+      "switchIds": [
+        "40ec0101fbf68e6d1b762a72080b9b9b9c91f6f1"
+      ],
+      "transferItem": null
+    },
+    {
+      "id": "014e9122e0fad99bcff6f93161712c3c6e1a2a75",
+      "kind": "switch",
+      "category": "switch",
+      "name": "Med Elevator Power Button",
+      "position": {
+        "x": -124.758,
+        "y": -2.31599617,
+        "z": -313.806
+      },
+      "outline": [
+        {
+          "x": -125.258,
+          "y": -2.31599617,
+          "z": -314.306
+        },
+        {
+          "x": -124.258,
+          "y": -2.31599617,
+          "z": -314.306
+        },
+        {
+          "x": -124.258,
+          "y": -2.31599617,
+          "z": -313.306
+        },
+        {
+          "x": -125.258,
+          "y": -2.31599617,
+          "z": -313.306
+        }
+      ],
+      "top": -1.81599617,
+      "bottom": -2.81599617,
+      "activates": [
+        {
+          "operation": "Unlock",
+          "targetId": "d1d16f043cea7be35b2729c5e1e1dd648c6dee13",
+          "targetKind": "switch"
+        }
+      ]
+    },
+    {
+      "id": "72848c177c54e2913e7d0259f23fba929d14ebf5",
+      "kind": "switch",
+      "category": "switch",
+      "name": "Main Elevator Call Button",
+      "position": {
+        "x": -281.022,
+        "y": -2.83799934,
+        "z": -335.477
+      },
+      "outline": [
+        {
+          "x": -281.222,
+          "y": -2.83799934,
+          "z": -335.626984
+        },
+        {
+          "x": -280.822,
+          "y": -2.83799934,
+          "z": -335.626984
+        },
+        {
+          "x": -280.822,
+          "y": -2.83799934,
+          "z": -335.327
+        },
+        {
+          "x": -281.222,
+          "y": -2.83799934,
+          "z": -335.327
+        }
+      ],
+      "top": -2.53799915,
+      "bottom": -3.13799858,
+      "activates": []
+    },
+    {
+      "id": "d1d16f043cea7be35b2729c5e1e1dd648c6dee13",
+      "kind": "switch",
+      "category": "switch",
+      "name": "Med Elevator Call Button",
+      "position": {
+        "x": -114.112,
+        "y": -2.84599972,
+        "z": -343.2
+      },
+      "outline": [
+        {
+          "x": -114.312,
+          "y": -2.84599972,
+          "z": -343.35
+        },
+        {
+          "x": -113.912,
+          "y": -2.84599972,
+          "z": -343.35
+        },
+        {
+          "x": -113.912,
+          "y": -2.84599972,
+          "z": -343.050018
+        },
+        {
+          "x": -114.312,
+          "y": -2.84599972,
+          "z": -343.050018
+        }
+      ],
+      "top": -2.54599953,
+      "bottom": -3.146,
+      "activates": []
+    },
+    {
+      "id": "40ec0101fbf68e6d1b762a72080b9b9b9c91f6f1",
+      "kind": "switch",
+      "category": "switch",
+      "name": "Hangar Gate Switch",
+      "position": {
+        "x": -170.18,
+        "y": 5.185,
+        "z": -281.508
+      },
+      "outline": [
+        {
+          "x": -170.43396,
+          "y": 5.185,
+          "z": -281.622864
+        },
+        {
+          "x": -169.885,
+          "y": 5.185,
+          "z": -281.622864
+        },
+        {
+          "x": -169.885,
+          "y": 5.185,
+          "z": -281.260925
+        },
+        {
+          "x": -170.43396,
+          "y": 5.185,
+          "z": -281.260925
+        }
+      ],
+      "top": 5.335,
+      "bottom": 5.035,
+      "activates": [
+        {
+          "operation": "Unlock",
+          "targetId": "6499ac7374cd238366b977944e305a08afd2e9e3",
+          "targetKind": "extract"
+        }
+      ]
+    },
+    {
+      "id": "8e6aa12e37d1b09a56e1ae19ab203832b0e78df9",
+      "kind": "switch",
+      "category": "switch",
+      "name": "Cargo Elevator Call Button",
+      "position": {
+        "x": -114.037,
+        "y": 5.31399727,
+        "z": -406.427979
+      },
+      "outline": [
+        {
+          "x": -114.237,
+          "y": 5.31399727,
+          "z": -406.577972
+        },
+        {
+          "x": -113.837006,
+          "y": 5.31399727,
+          "z": -406.577972
+        },
+        {
+          "x": -113.837006,
+          "y": 5.31399727,
+          "z": -406.277985
+        },
+        {
+          "x": -114.237,
+          "y": 5.31399727,
+          "z": -406.277985
+        }
+      ],
+      "top": 5.61399746,
+      "bottom": 5.013997,
+      "activates": []
+    },
+    {
+      "id": "558a518a272f611d2e6879b917adb407f428977f",
+      "kind": "switch",
+      "category": "switch",
+      "name": "Cargo Elevator Extract Button",
+      "position": {
+        "x": -112.378006,
+        "y": 5.353998,
+        "z": -406.806
+      },
+      "outline": [
+        {
+          "x": -112.578,
+          "y": 5.353998,
+          "z": -406.956
+        },
+        {
+          "x": -112.178009,
+          "y": 5.353998,
+          "z": -406.956
+        },
+        {
+          "x": -112.178009,
+          "y": 5.353998,
+          "z": -406.656
+        },
+        {
+          "x": -112.578,
+          "y": 5.353998,
+          "z": -406.656
+        }
+      ],
+      "top": 5.65399837,
+      "bottom": 5.053998,
+      "activates": [
+        {
+          "operation": "Lock",
+          "targetId": "8e6aa12e37d1b09a56e1ae19ab203832b0e78df9",
+          "targetKind": "switch"
+        },
+        {
+          "operation": "Unlock",
+          "targetId": "4cfc8fb5003e428d6cb9f8492690068afba50c71",
+          "targetKind": "extract"
+        }
+      ]
+    },
+    {
+      "id": "911ef57b76415c1d42fdba3b5c8fdb587dd229a7",
+      "kind": "switch",
+      "category": "switch",
+      "name": "Main Elevator Power Button",
+      "position": {
+        "x": -271.439,
+        "y": -2.380001,
+        "z": -366.10498
+      },
+      "outline": [
+        {
+          "x": -271.939,
+          "y": -2.380001,
+          "z": -366.60498
+        },
+        {
+          "x": -270.939,
+          "y": -2.380001,
+          "z": -366.60498
+        },
+        {
+          "x": -270.939,
+          "y": -2.380001,
+          "z": -365.60498
+        },
+        {
+          "x": -271.939,
+          "y": -2.380001,
+          "z": -365.60498
+        }
+      ],
+      "top": -1.88000107,
+      "bottom": -2.880001,
+      "activates": [
+        {
+          "operation": "Unlock",
+          "targetId": "72848c177c54e2913e7d0259f23fba929d14ebf5",
+          "targetKind": "switch"
+        }
+      ]
+    },
+    {
+      "id": "e7096cec97efb58f59f78f048792235f89318a94",
+      "kind": "switch",
+      "category": "switch",
+      "name": "Water Level Switch",
+      "position": {
+        "x": -129.519989,
+        "y": -6.7559967,
+        "z": -244.764511
+      },
+      "outline": [
+        {
+          "x": -135.51,
+          "y": -6.7559967,
+          "z": -263.0895
+        },
+        {
+          "x": -123.53,
+          "y": -6.7559967,
+          "z": -263.0895
+        },
+        {
+          "x": -123.529991,
+          "y": -6.7559967,
+          "z": -226.439514
+        },
+        {
+          "x": -135.51,
+          "y": -6.7559967,
+          "z": -226.4395
+        }
+      ],
+      "top": -6.755993,
+      "bottom": -6.75600147,
+      "activates": [
+        {
+          "operation": "Unlock",
+          "targetId": "c846e13f4bf7afe28c0cf214bd9e7b4685ba592f",
+          "targetKind": "extract"
+        }
+      ]
+    },
+    {
+      "id": "89170f110a27deb607f63b2382f28c25ba75e861",
+      "kind": "switch",
+      "category": "switch",
+      "name": "Main Elevator Extract Button",
+      "position": {
+        "x": -282.361,
+        "y": -2.91199875,
+        "z": -335.86
+      },
+      "outline": [
+        {
+          "x": -282.561,
+          "y": -2.91199875,
+          "z": -336.009979
+        },
+        {
+          "x": -282.161,
+          "y": -2.91199875,
+          "z": -336.009979
+        },
+        {
+          "x": -282.161,
+          "y": -2.91199875,
+          "z": -335.71
+        },
+        {
+          "x": -282.561,
+          "y": -2.91199875,
+          "z": -335.71
+        }
+      ],
+      "top": -2.61199856,
+      "bottom": -3.21199942,
+      "activates": [
+        {
+          "operation": "Unlock",
+          "targetId": "1a5ae89d5401d277f8b317c18951dfe0e1bfd695",
+          "targetKind": "extract"
+        }
+      ]
+    },
+    {
+      "id": "07fe694c3915c1363b5fa1faa604c68fe5849aba",
+      "kind": "switch",
+      "category": "switch",
+      "name": "Parking Gate Switch",
+      "position": {
+        "x": -243.443,
+        "y": 5.076,
+        "z": -382.513
+      },
+      "outline": [
+        {
+          "x": -243.737991,
+          "y": 5.11356544,
+          "z": -382.7771
+        },
+        {
+          "x": -243.18483,
+          "y": 5.11356544,
+          "z": -382.7771
+        },
+        {
+          "x": -243.18483,
+          "y": 5.11356544,
+          "z": -382.386871
+        },
+        {
+          "x": -243.737991,
+          "y": 5.11356544,
+          "z": -382.386871
+        }
+      ],
+      "top": 5.22600031,
+      "bottom": 5.001131,
+      "activates": [
+        {
+          "operation": "Lock",
+          "targetId": "d5f297a1f5aee9dc19f1e4f54946850b99dca5e9",
+          "targetKind": "switch"
+        },
+        {
+          "operation": "Unlock",
+          "targetId": "c5c6f818755ac844b4723b1a2cf057569da410ee",
+          "targetKind": "extract"
+        }
+      ]
+    },
+    {
+      "id": "a948c3ba250ffcaaa508230d0b3392bf09cb6964",
+      "kind": "switch",
+      "category": "switch",
+      "name": "Sewage Conduit Pump Button",
+      "position": {
+        "x": -136.76,
+        "y": -2.82599926,
+        "z": -254.510513
+      },
+      "outline": [
+        {
+          "x": -136.909988,
+          "y": -2.82599926,
+          "z": -254.6605
+        },
+        {
+          "x": -136.61,
+          "y": -2.82599926,
+          "z": -254.6605
+        },
+        {
+          "x": -136.61,
+          "y": -2.82599926,
+          "z": -254.3605
+        },
+        {
+          "x": -136.909988,
+          "y": -2.82599926,
+          "z": -254.3605
+        }
+      ],
+      "top": -2.67599916,
+      "bottom": -2.97599936,
+      "activates": [
+        {
+          "operation": "Open",
+          "targetId": "e7096cec97efb58f59f78f048792235f89318a94",
+          "targetKind": "switch"
+        }
+      ]
+    },
+    {
+      "id": "c39cf1e7caac3b830c00b539ee12dfddeb061e2b",
+      "kind": "switch",
+      "category": "switch",
+      "name": "Cargo Elevator Power Button",
+      "position": {
+        "x": -121.007996,
+        "y": -2.83698225,
+        "z": -353.548
+      },
+      "outline": [
+        {
+          "x": -121.507996,
+          "y": -2.83698225,
+          "z": -354.048
+        },
+        {
+          "x": -120.507996,
+          "y": -2.83698225,
+          "z": -354.048
+        },
+        {
+          "x": -120.507996,
+          "y": -2.83698225,
+          "z": -353.048
+        },
+        {
+          "x": -121.507996,
+          "y": -2.83698225,
+          "z": -353.048
+        }
+      ],
+      "top": -2.33698225,
+      "bottom": -3.33698225,
+      "activates": [
+        {
+          "operation": "Unlock",
+          "targetId": "8e6aa12e37d1b09a56e1ae19ab203832b0e78df9",
+          "targetKind": "switch"
+        }
+      ]
+    },
+    {
+      "id": "5077fd224eb1bb588b65e4d3c0b4b5719bdebb66",
+      "kind": "switch",
+      "category": "switch",
+      "name": "Med Elevator Extract Button",
+      "position": {
+        "x": -112.802,
+        "y": -2.84599972,
+        "z": -342.762
+      },
+      "outline": [
+        {
+          "x": -113.002007,
+          "y": -2.84599972,
+          "z": -342.912
+        },
+        {
+          "x": -112.602005,
+          "y": -2.84599972,
+          "z": -342.912
+        },
+        {
+          "x": -112.602005,
+          "y": -2.84599972,
+          "z": -342.612
+        },
+        {
+          "x": -113.002007,
+          "y": -2.84599972,
+          "z": -342.612
+        }
+      ],
+      "top": -2.54599953,
+      "bottom": -3.146,
+      "activates": [
+        {
+          "operation": "Unlock",
+          "targetId": "ed029f26c9d60bf00d926b4d7e7876b0591b411a",
+          "targetKind": "extract"
+        }
+      ]
+    },
+    {
+      "id": "d5f297a1f5aee9dc19f1e4f54946850b99dca5e9",
+      "kind": "switch",
+      "category": "switch",
+      "name": "Alarm Switch",
+      "position": {
+        "x": -220.756,
+        "y": 5.249,
+        "z": -381.263
+      },
+      "outline": [
+        {
+          "x": -220.809433,
+          "y": 5.03222036,
+          "z": -381.526428
+        },
+        {
+          "x": -220.6519,
+          "y": 5.03222036,
+          "z": -381.504
+        },
+        {
+          "x": -220.714111,
+          "y": 5.03222036,
+          "z": -381.067169
+        },
+        {
+          "x": -220.871643,
+          "y": 5.03222036,
+          "z": -381.0896
+        }
+      ],
+      "top": 5.07245636,
+      "bottom": 4.99198437,
+      "activates": []
+    },
+    {
+      "id": "5e017c1cab122d7b6dcccf32f6d7fdb152aa7027",
+      "kind": "switch",
+      "category": "switch",
+      "name": "Containment Block Power Switch",
+      "position": {
+        "x": -112.411,
+        "y": 1.06300008,
+        "z": -435.429016
+      },
+      "outline": [
+        {
+          "x": -112.602531,
+          "y": 1.37062,
+          "z": -436.112976
+        },
+        {
+          "x": -112.328117,
+          "y": 1.37062,
+          "z": -436.112976
+        },
+        {
+          "x": -112.328117,
+          "y": 1.37062,
+          "z": -435.219757
+        },
+        {
+          "x": -112.602531,
+          "y": 1.37062,
+          "z": -435.219757
+        }
+      ],
+      "top": 1.74251366,
+      "bottom": 0.998726249,
+      "activates": []
+    },
+    {
+      "id": "spawn-0",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -118.336,
+        "y": -4.025,
+        "z": -403.071
+      },
+      "zoneName": "00a92ab8-28d7-4c1c-87a5-ef1c480e9900",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-1",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -264.171,
+        "y": 0.039,
+        "z": -321.665
+      },
+      "zoneName": "01d14f42-45de-45fb-be52-bfff19f3a470",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-2",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -115.37,
+        "y": -4.015,
+        "z": -321.759
+      },
+      "zoneName": "037af7bf-1a89-454d-af5c-83df829fbde0",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-3",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -116.55,
+        "y": 0.01,
+        "z": -253.94
+      },
+      "zoneName": "037b1766-b66b-4c3e-adf1-390f67dc70bb",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-4",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -276.03,
+        "y": -3.99,
+        "z": -358.44
+      },
+      "zoneName": "0483afba-89af-43a9-b2d3-47e2905440c5",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-5",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -120.64,
+        "y": 0.01,
+        "z": -256.73
+      },
+      "zoneName": "08633a18-3bbd-4a4b-934a-b51e049817b1",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-6",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -254.79,
+        "y": -4.03,
+        "z": -298.46
+      },
+      "zoneName": "0d7728c8-59c8-493a-8849-fa22a1346fcd",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-8",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -275.92,
+        "y": -4,
+        "z": -355.32
+      },
+      "zoneName": "0f8dedb9-f5f2-4c18-af92-968b0b22e54b",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-10",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -250.87,
+        "y": 4.14,
+        "z": -281.79
+      },
+      "zoneName": "12055345-4522-4b48-b08a-6a517bbf7c61",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-11",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -276.29,
+        "y": -3.99,
+        "z": -362.3
+      },
+      "zoneName": "13ea441c-75e5-48a2-9d87-396590d9bc98",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-13",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -263.359,
+        "y": 0.0624314249,
+        "z": -392.009979
+      },
+      "zoneName": "BotZoneFloor1",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-14",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -118.109,
+        "y": -4.025,
+        "z": -401.386
+      },
+      "zoneName": "16f8ebd0-39b4-4fe2-8128-ed2bc82008a1",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-15",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -170.74,
+        "y": -3.99,
+        "z": -344.55
+      },
+      "zoneName": "1780c396-0394-48cf-8871-a6feae1bc4b7",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-16",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -115.504,
+        "y": -4.039,
+        "z": -319.677
+      },
+      "zoneName": "1d3d7178-c84f-47b2-9ea6-4cd11449dbfa",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-17",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -216.856,
+        "y": -3.997,
+        "z": -386.666
+      },
+      "zoneName": "1d66c992-d022-490d-a451-18d19c284988",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-18",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -206.699,
+        "y": 4.16135359,
+        "z": -291.862
+      },
+      "zoneName": "223b6e4d-2ead-45eb-ad5f-35abd028d2c3",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-19",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -118.503,
+        "y": -4.025,
+        "z": -399.522
+      },
+      "zoneName": "242085cb-6ffa-4aa5-8268-dc8b138c7b74",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-20",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -126.86,
+        "y": -4.97,
+        "z": -266.17
+      },
+      "zoneName": "24453a69-8df7-47cf-8449-b56ef868be5c",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-23",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -118.224,
+        "y": -4.015,
+        "z": -326.516
+      },
+      "zoneName": "293e014a-512d-4fe3-a3fd-1a40611e90da",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-24",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -110.12,
+        "y": 4.2,
+        "z": -413.71
+      },
+      "zoneName": "29b9975d-3abf-4478-affb-cd0d29b4f3a5",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-25",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -279.44,
+        "y": -3.99,
+        "z": -348.87
+      },
+      "zoneName": "2f66dafc-a2f1-4283-a383-aa64c84f6da7",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-29",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -170.86,
+        "y": -3.99,
+        "z": -340.1
+      },
+      "zoneName": "32e05b2a-9847-45b8-b04b-36bafe5879f1",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-30",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -168.21,
+        "y": 0.06,
+        "z": -417.04
+      },
+      "zoneName": "3d6df899-9a65-48d3-9e55-2664c6c6c4c0",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-32",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -264.74,
+        "y": -3.99,
+        "z": -390.32
+      },
+      "zoneName": "40b7da99-8f93-4ca6-bb33-c94b8a7c92a7",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-35",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -219.157,
+        "y": -3.997,
+        "z": -385.369
+      },
+      "zoneName": "4654cec6-f2e9-4118-830e-d633b39375f4",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-38",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -122.74,
+        "y": 8.16,
+        "z": -333.35
+      },
+      "zoneName": "49367d3d-95f6-4b3f-9406-693ab39259bd",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-40",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -140.56,
+        "y": -4.05,
+        "z": -416.755981
+      },
+      "zoneName": "BotZoneBasement",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-47",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -156.94,
+        "y": 0.05000019,
+        "z": -418.27
+      },
+      "zoneName": "BotZoneFloor1",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-48",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -170.58,
+        "y": 0.06,
+        "z": -416.83
+      },
+      "zoneName": "5aed643f-3714-49fc-bdf8-00168189da61",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-51",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -167.87,
+        "y": 0.06,
+        "z": -419.56
+      },
+      "zoneName": "5efaabad-3df0-451c-ae8c-df707c90d24f",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-52",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -278.54,
+        "y": -4.03,
+        "z": -352
+      },
+      "zoneName": "5f97a1fc-1cc0-4cb6-85dc-ab20c9d90fea",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-53",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -125.38,
+        "y": -4.97,
+        "z": -264.91
+      },
+      "zoneName": "5f9d0c13-d935-48f5-9112-0852d8e8d9e0",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-54",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -257.348,
+        "y": 0.031,
+        "z": -319.486
+      },
+      "zoneName": "604f6db8-2519-42b8-8d45-7b1b1290e97d",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-55",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -253.22,
+        "y": 4.14,
+        "z": -282.73
+      },
+      "zoneName": "616552c2-e458-4b8c-b39b-4e26083cd722",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-58",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -260.981,
+        "y": 0.071,
+        "z": -321.761
+      },
+      "zoneName": "63a12c08-6718-4344-b9c4-d9c2b0550faa",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-62",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -115.122,
+        "y": -4.015,
+        "z": -328.625
+      },
+      "zoneName": "666a2681-4a93-4b9c-b96d-a1419149069d",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-63",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -219.433,
+        "y": -3.997,
+        "z": -383.072
+      },
+      "zoneName": "666b38f8-c232-4b2e-994e-ead3b121990c",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-64",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -115.164,
+        "y": -4.015,
+        "z": -327.156
+      },
+      "zoneName": "66ea0d24-890a-4a5b-a0d1-2e13629f26b7",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-65",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -263,
+        "y": 0.06,
+        "z": -388.23
+      },
+      "zoneName": "6715c896-cb94-4e04-8cea-06d8dd685f83",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-66",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -253.24,
+        "y": 4.14,
+        "z": -279.92
+      },
+      "zoneName": "6ac4a2e0-f06e-4098-908f-c04ebfeada8c",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-67",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -122.48,
+        "y": 8.2,
+        "z": -338.15
+      },
+      "zoneName": "6b542eec-7db1-48e5-81ff-32af5b120663",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-68",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -115.67,
+        "y": 0.01,
+        "z": -256.94
+      },
+      "zoneName": "6e2cf61e-85a6-4cfa-b232-ae4cd892e4e0",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-70",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -266.107,
+        "y": 0.027,
+        "z": -321.662
+      },
+      "zoneName": "707edb2a-0cbb-4c12-9fc5-49a34af4779d",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-71",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -256.67,
+        "y": -3.97,
+        "z": -295.16
+      },
+      "zoneName": "70a6af86-3b7a-4687-8128-ff324774cf6f",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-74",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -269.34,
+        "y": -2.06,
+        "z": -387.7
+      },
+      "zoneName": "75febbcd-6f56-495e-a74a-e93f0f8b7827",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-75",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -122.3,
+        "y": 8.19,
+        "z": -336.07
+      },
+      "zoneName": "7a9b1874-adec-4a4a-bcab-04265a114afa",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-77",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -256.56,
+        "y": 4.14,
+        "z": -282.41
+      },
+      "zoneName": "7b8911d0-dc36-43f1-9058-451f4cc6f362",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-78",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -216.98,
+        "y": -3.997,
+        "z": -385.218
+      },
+      "zoneName": "7c978d56-01bd-4010-bf0c-80d4b52aba4a",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-79",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -116.241,
+        "y": -4.05,
+        "z": -402.393982
+      },
+      "zoneName": "BotZoneBasement",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-83",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -275.792,
+        "y": 0.138635114,
+        "z": -350.328
+      },
+      "zoneName": "BotZoneFloor1",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-84",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -113.01,
+        "y": 4.2,
+        "z": -416.83
+      },
+      "zoneName": "9174a2bb-e647-40d2-9f27-b02bb4256e5a",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-87",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -125.79,
+        "y": -4.97,
+        "z": -263.38
+      },
+      "zoneName": "93e73b75-40f6-48ec-9c41-a722c79b36df",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-88",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -115.16,
+        "y": -4.05,
+        "z": -318.039
+      },
+      "zoneName": "BotZoneBasement",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-89",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -134.75,
+        "y": -4.97,
+        "z": -263.9
+      },
+      "zoneName": "98f72004-624d-4a11-a551-9b5150456369",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-90",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -168.02,
+        "y": -3.99,
+        "z": -337.48
+      },
+      "zoneName": "994bc745-d017-41fe-a2cb-f26d13e016e6",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-91",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -120.62,
+        "y": 0.01,
+        "z": -253.47
+      },
+      "zoneName": "9ad6d872-4797-47a9-a5a6-b4675b478913",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-92",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -112.04,
+        "y": 4.2,
+        "z": -413.63
+      },
+      "zoneName": "9c1654a5-3808-4d52-becd-066428ec0660",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-94",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -125.39,
+        "y": 4.13,
+        "z": -338.41
+      },
+      "zoneName": "a0fdcb82-40f8-4996-83e5-39389c6b846a",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-96",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -269.88,
+        "y": -2.06,
+        "z": -390.79
+      },
+      "zoneName": "a55e3167-efff-4d96-807b-1e5de515bcca",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-98",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -205.847,
+        "y": 4.16135359,
+        "z": -289.085
+      },
+      "zoneName": "a98ef4db-61cc-4588-a8e8-52e59ce8bace",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-99",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -252.58,
+        "y": -4.02,
+        "z": -293.91
+      },
+      "zoneName": "ab9fb40e-790c-40f2-aae0-f191aaecbf7e",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-101",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -118.55,
+        "y": 0.01,
+        "z": -252.22
+      },
+      "zoneName": "ad74c165-363f-4706-999c-2d33396865e4",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-103",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -170.49,
+        "y": 0.06,
+        "z": -419.39
+      },
+      "zoneName": "b71e139d-c363-4b9a-b87e-1a6bef552641",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-104",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -205.86,
+        "y": 4.16135359,
+        "z": -293.588
+      },
+      "zoneName": "b89c86e5-5e60-4f09-96a9-8831685d807c",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-106",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -169.698,
+        "y": -4.041413,
+        "z": -295.891
+      },
+      "zoneName": "BotZoneBasement",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-107",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -257.18,
+        "y": 4.14,
+        "z": -280.05
+      },
+      "zoneName": "bcf0ec7f-9673-4fa1-aede-fdc6d6dd616b",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-110",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -258.094,
+        "y": 0.027,
+        "z": -321.203
+      },
+      "zoneName": "bf1d14c2-2c9b-4921-8534-76c1ae9430dc",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-111",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -117.229,
+        "y": 4.10000038,
+        "z": -335.658
+      },
+      "zoneName": "BotZoneFloor2",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-114",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -217.284,
+        "y": -3.997,
+        "z": -383.273
+      },
+      "zoneName": "c3a0e266-3318-4db6-9c31-b7b780686ea8",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-115",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -269.9,
+        "y": -2.06,
+        "z": -392.32
+      },
+      "zoneName": "c40614b7-e0bc-4a8a-944d-bcaca72a32fb",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-118",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -118.061,
+        "y": 0.0110781724,
+        "z": -258.189
+      },
+      "zoneName": "BotZoneFloor1",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-119",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -170.8,
+        "y": -3.99,
+        "z": -342.4
+      },
+      "zoneName": "c7d01076-c9a0-4162-923e-bb2f51248500",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-120",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -119.386,
+        "y": 4.15,
+        "z": -363.961
+      },
+      "zoneName": "BotZoneFloor2",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-122",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -171.01,
+        "y": -3.99,
+        "z": -337.56
+      },
+      "zoneName": "c9cb436b-9821-44ef-8ac8-fbef720f45d8",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-124",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -209.891,
+        "y": 4.14999962,
+        "z": -297.27
+      },
+      "zoneName": "BotZoneFloor2",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-125",
+      "kind": "spawn",
+      "category": "spawn-scav",
+      "name": "Scav spawn",
+      "position": {
+        "x": -248.415009,
+        "y": 4.16275024,
+        "z": -281.794983
+      },
+      "zoneName": "BotZoneFloor2",
+      "sides": [
+        "scav"
+      ]
+    },
+    {
+      "id": "spawn-126",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -251.1,
+        "y": -3.98,
+        "z": -296.64
+      },
+      "zoneName": "cf866867-a4ba-4355-bfac-198ca52e755c",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-127",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -127.46,
+        "y": 6.18,
+        "z": -333.57
+      },
+      "zoneName": "cfd895b4-b565-4c8a-a10b-ac2058b019af",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-129",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -250.03,
+        "y": -4.01,
+        "z": -293.72
+      },
+      "zoneName": "d188e22c-8216-4371-b9af-8e900e372ea3",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-130",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -207.754,
+        "y": 4.16135359,
+        "z": -295.225
+      },
+      "zoneName": "d7eb2d80-10a1-48e1-b214-d7cac5eff13a",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-131",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -206.7,
+        "y": 4.16135359,
+        "z": -290.493
+      },
+      "zoneName": "db3d7424-1f39-4e33-b4d2-26821477c010",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "spawn-133",
+      "kind": "spawn",
+      "category": "spawn-pmc",
+      "name": "PMC spawn",
+      "position": {
+        "x": -166.67,
+        "y": 0.06,
+        "z": -416.11
+      },
+      "zoneName": "dd19a5a1-b24b-4b4c-b0ff-12567bc35c48",
+      "sides": [
+        "all"
+      ]
+    },
+    {
+      "id": "boss-PmcBot-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Raider · First Floor",
+      "aliases": [
+        "PmcBot",
+        "BotZoneFloor1"
+      ],
+      "position": {
+        "x": -217.11650094444443,
+        "y": 0.1350001210388889,
+        "z": -354.1541023333334
+      },
+      "bossId": "PmcBot",
+      "bossName": "Raider",
+      "spawnChance": 0.6,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-PmcBot-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Raider · Second Floor",
+      "aliases": [
+        "PmcBot",
+        "BotZoneFloor2"
+      ],
+      "position": {
+        "x": -197.69400014285716,
+        "y": 4.168146165714287,
+        "z": -337.7965608571428
+      },
+      "bossId": "PmcBot",
+      "bossName": "Raider",
+      "spawnChance": 0.6,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-PmcBot-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Raider · Basement",
+      "aliases": [
+        "PmcBot",
+        "BotZoneBasement"
+      ],
+      "position": {
+        "x": -206.47749999999996,
+        "y": -4.02559214,
+        "z": -402.107494
+      },
+      "bossId": "PmcBot",
+      "bossName": "Raider",
+      "spawnChance": 0.45,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-PmcBot-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Raider · Basement",
+      "aliases": [
+        "PmcBot",
+        "BotZoneBasement"
+      ],
+      "position": {
+        "x": -206.47749999999996,
+        "y": -4.02559214,
+        "z": -402.107494
+      },
+      "bossId": "PmcBot",
+      "bossName": "Raider",
+      "spawnChance": 0.45,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-PmcBot-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Raider · Basement",
+      "aliases": [
+        "PmcBot",
+        "BotZoneBasement"
+      ],
+      "position": {
+        "x": -206.47749999999996,
+        "y": -4.02559214,
+        "z": -402.107494
+      },
+      "bossId": "PmcBot",
+      "bossName": "Raider",
+      "spawnChance": 0.4,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-PmcBot-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Raider · Second Floor",
+      "aliases": [
+        "PmcBot",
+        "BotZoneFloor2"
+      ],
+      "position": {
+        "x": -197.69400014285716,
+        "y": 4.168146165714287,
+        "z": -337.7965608571428
+      },
+      "bossId": "PmcBot",
+      "bossName": "Raider",
+      "spawnChance": 0.45,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-PmcBot-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Raider · First Floor",
+      "aliases": [
+        "PmcBot",
+        "BotZoneFloor1"
+      ],
+      "position": {
+        "x": -217.11650094444443,
+        "y": 0.1350001210388889,
+        "z": -354.1541023333334
+      },
+      "bossId": "PmcBot",
+      "bossName": "Raider",
+      "spawnChance": 0.35,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-PmcBot-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Raider · Second Floor",
+      "aliases": [
+        "PmcBot",
+        "BotZoneFloor2"
+      ],
+      "position": {
+        "x": -197.69400014285716,
+        "y": 4.168146165714287,
+        "z": -337.7965608571428
+      },
+      "bossId": "PmcBot",
+      "bossName": "Raider",
+      "spawnChance": 0.35,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-PmcBot-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Raider · First Floor",
+      "aliases": [
+        "PmcBot",
+        "BotZoneFloor1"
+      ],
+      "position": {
+        "x": -217.11650094444443,
+        "y": 0.1350001210388889,
+        "z": -354.1541023333334
+      },
+      "bossId": "PmcBot",
+      "bossName": "Raider",
+      "spawnChance": 0.35,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-PmcBot-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Raider · Second Floor",
+      "aliases": [
+        "PmcBot",
+        "BotZoneFloor2"
+      ],
+      "position": {
+        "x": -197.69400014285716,
+        "y": 4.168146165714287,
+        "z": -337.7965608571428
+      },
+      "bossId": "PmcBot",
+      "bossName": "Raider",
+      "spawnChance": 0.35,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-PmcBot-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Raider · First Floor",
+      "aliases": [
+        "PmcBot",
+        "BotZoneFloor1"
+      ],
+      "position": {
+        "x": -217.11650094444443,
+        "y": 0.1350001210388889,
+        "z": -354.1541023333334
+      },
+      "bossId": "PmcBot",
+      "bossName": "Raider",
+      "spawnChance": 0.35,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-PmcBot-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Raider · Second Floor",
+      "aliases": [
+        "PmcBot",
+        "BotZoneFloor2"
+      ],
+      "position": {
+        "x": -197.69400014285716,
+        "y": 4.168146165714287,
+        "z": -337.7965608571428
+      },
+      "bossId": "PmcBot",
+      "bossName": "Raider",
+      "spawnChance": 0.35,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-PmcBot-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Raider · First Floor",
+      "aliases": [
+        "PmcBot",
+        "BotZoneFloor1"
+      ],
+      "position": {
+        "x": -217.11650094444443,
+        "y": 0.1350001210388889,
+        "z": -354.1541023333334
+      },
+      "bossId": "PmcBot",
+      "bossName": "Raider",
+      "spawnChance": 0.35,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-PmcBot-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Raider · Second Floor",
+      "aliases": [
+        "PmcBot",
+        "BotZoneFloor2"
+      ],
+      "position": {
+        "x": -197.69400014285716,
+        "y": 4.168146165714287,
+        "z": -337.7965608571428
+      },
+      "bossId": "PmcBot",
+      "bossName": "Raider",
+      "spawnChance": 0.35,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-PmcBot-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Raider · Parking Gate",
+      "aliases": [
+        "PmcBot",
+        "BotZoneGate2"
+      ],
+      "position": {
+        "x": -234.83125,
+        "y": 0.06462960655,
+        "z": -421.3595
+      },
+      "bossId": "PmcBot",
+      "bossName": "Raider",
+      "spawnChance": 0.35,
+      "zoneChance": 1
+    },
+    {
+      "id": "boss-PmcBot-0",
+      "kind": "boss-zone",
+      "category": "boss-zone",
+      "name": "Raider · Hangar Gate",
+      "aliases": [
+        "PmcBot",
+        "BotZoneGate1"
+      ],
+      "position": {
+        "x": -166.77750000000003,
+        "y": 1.1155112525000002,
+        "z": -253.12999449999998
+      },
+      "bossId": "PmcBot",
+      "bossName": "Raider",
+      "spawnChance": 0.45,
+      "zoneChance": 1
+    },
+    {
+      "id": "lock-666354c8ccf1c2d39d23f45910f3aa6756b7d32b",
+      "kind": "locked-door",
+      "category": "locked-door",
+      "name": "Locked access",
+      "aliases": [
+        "door",
+        "5c1e2a1e86f77431ea0ea84c"
+      ],
+      "position": {
+        "x": -165.246277,
+        "y": 5.155924,
+        "z": -349.215729
+      },
+      "outline": [
+        {
+          "x": -165.452271,
+          "y": 5.155924,
+          "z": -348.556519
+        },
+        {
+          "x": -165.040283,
+          "y": 5.155924,
+          "z": -348.556519
+        },
+        {
+          "x": -165.040283,
+          "y": 5.155924,
+          "z": -347.814941
+        },
+        {
+          "x": -165.452271,
+          "y": 5.155924,
+          "z": -347.814941
+        }
+      ],
+      "top": 5.670924,
+      "bottom": 4.640924,
+      "keyIds": [
+        "5c1e2a1e86f77431ea0ea84c"
+      ]
+    },
+    {
+      "id": "lock-a21fe53667f2edbac55b6fb75b4b3a2ccb1d9dcd",
+      "kind": "locked-door",
+      "category": "locked-door",
+      "name": "Locked access",
+      "aliases": [
+        "door",
+        "5c1e2a1e86f77431ea0ea84c"
+      ],
+      "position": {
+        "x": -165.242874,
+        "y": 5.152924,
+        "z": -338.104736
+      },
+      "outline": [
+        {
+          "x": -165.448868,
+          "y": 5.152924,
+          "z": -337.445526
+        },
+        {
+          "x": -165.03688,
+          "y": 5.152924,
+          "z": -337.445526
+        },
+        {
+          "x": -165.036865,
+          "y": 5.152924,
+          "z": -336.703949
+        },
+        {
+          "x": -165.448868,
+          "y": 5.152924,
+          "z": -336.703949
+        }
+      ],
+      "top": 5.6679244,
+      "bottom": 4.63792372,
+      "keyIds": [
+        "5c1e2a1e86f77431ea0ea84c"
+      ]
+    },
+    {
+      "id": "lock-535da6e7b5e3fe15ba479c677ca07a075a6b9f9b",
+      "kind": "locked-door",
+      "category": "locked-door",
+      "name": "Locked access",
+      "aliases": [
+        "door",
+        "5c1e2d1f86f77431e9280bee"
+      ],
+      "position": {
+        "x": -179.8631,
+        "y": 1.38076448,
+        "z": -310.331
+      },
+      "outline": [
+        {
+          "x": -180.0431,
+          "y": 1.380764,
+          "z": -311.246
+        },
+        {
+          "x": -179.6831,
+          "y": 1.380764,
+          "z": -311.246
+        },
+        {
+          "x": -179.6831,
+          "y": 1.380764,
+          "z": -310.736
+        },
+        {
+          "x": -180.0431,
+          "y": 1.380764,
+          "z": -310.736
+        }
+      ],
+      "top": 1.88076448,
+      "bottom": 0.880764,
+      "keyIds": [
+        "5c1e2d1f86f77431e9280bee"
+      ]
+    },
+    {
+      "id": "lock-5dcf784844d159f947fb4e25364e9e1c7c42f914",
+      "kind": "locked-door",
+      "category": "locked-door",
+      "name": "Locked access",
+      "aliases": [
+        "door",
+        "5c1e2d1f86f77431e9280bee"
+      ],
+      "position": {
+        "x": -181.967865,
+        "y": 1.38050318,
+        "z": -318.212524
+      },
+      "outline": [
+        {
+          "x": -182.882858,
+          "y": 1.38050318,
+          "z": -318.392517
+        },
+        {
+          "x": -182.372864,
+          "y": 1.38050318,
+          "z": -318.392517
+        },
+        {
+          "x": -182.372864,
+          "y": 1.38050318,
+          "z": -318.0325
+        },
+        {
+          "x": -182.882858,
+          "y": 1.38050318,
+          "z": -318.0325
+        }
+      ],
+      "top": 1.88050365,
+      "bottom": 0.8805032,
+      "keyIds": [
+        "5c1e2d1f86f77431e9280bee"
+      ]
+    },
+    {
+      "id": "lock-9d0bbe3e03e5e7e0600f4ae61a4ba39700687750",
+      "kind": "locked-door",
+      "category": "locked-door",
+      "name": "Locked access",
+      "aliases": [
+        "door",
+        "5c1d0c5f86f7744bb2683cf0"
+      ],
+      "position": {
+        "x": -123.229034,
+        "y": 1.036344,
+        "z": -406.5244
+      },
+      "outline": [
+        {
+          "x": -124.114037,
+          "y": 1.03634024,
+          "z": -406.6394
+        },
+        {
+          "x": -124.114029,
+          "y": 1.03634024,
+          "z": -406.639435
+        },
+        {
+          "x": -123.564034,
+          "y": 1.03634024,
+          "z": -406.639435
+        },
+        {
+          "x": -123.564041,
+          "y": 1.03634024,
+          "z": -406.6394
+        },
+        {
+          "x": -123.564034,
+          "y": 1.03634024,
+          "z": -406.289429
+        },
+        {
+          "x": -123.564041,
+          "y": 1.03634024,
+          "z": -406.289429
+        },
+        {
+          "x": -124.114029,
+          "y": 1.03634024,
+          "z": -406.289429
+        },
+        {
+          "x": -124.114037,
+          "y": 1.03634024,
+          "z": -406.289429
+        }
+      ],
+      "top": 1.53634262,
+      "bottom": 0.5363383,
+      "keyIds": [
+        "5c1d0c5f86f7744bb2683cf0"
+      ]
+    },
+    {
+      "id": "lock-d1cca2dd840aceb5608ccf7c77095e218ac990ce",
+      "kind": "locked-door",
+      "category": "locked-door",
+      "name": "Locked access",
+      "aliases": [
+        "door",
+        "5efde6b4f5448336730dbd61"
+      ],
+      "position": {
+        "x": -130.2688,
+        "y": 5.155606,
+        "z": -339.9442
+      },
+      "outline": [
+        {
+          "x": -131.148788,
+          "y": 5.155606,
+          "z": -340.0342
+        },
+        {
+          "x": -130.4088,
+          "y": 5.155606,
+          "z": -340.0342
+        },
+        {
+          "x": -130.4088,
+          "y": 5.155606,
+          "z": -339.79422
+        },
+        {
+          "x": -131.148788,
+          "y": 5.155606,
+          "z": -339.79422
+        }
+      ],
+      "top": 5.65560627,
+      "bottom": 4.655606,
+      "keyIds": [
+        "5efde6b4f5448336730dbd61"
+      ]
+    },
+    {
+      "id": "lock-e79c401f2019ece81ce9dbcd2786df9955b86f1c",
+      "kind": "locked-door",
+      "category": "locked-door",
+      "name": "Locked access",
+      "aliases": [
+        "door",
+        "5c1d0dc586f7744baf2e7b79"
+      ],
+      "position": {
+        "x": -135.899185,
+        "y": 5.185731,
+        "z": -346.966156
+      },
+      "outline": [
+        {
+          "x": -137.244186,
+          "y": 5.045731,
+          "z": -347.136169
+        },
+        {
+          "x": -136.5542,
+          "y": 5.045731,
+          "z": -347.136169
+        },
+        {
+          "x": -136.554184,
+          "y": 5.045731,
+          "z": -347.136169
+        },
+        {
+          "x": -136.554184,
+          "y": 5.045731,
+          "z": -346.796173
+        },
+        {
+          "x": -136.5542,
+          "y": 5.045731,
+          "z": -346.796173
+        },
+        {
+          "x": -137.244186,
+          "y": 5.045731,
+          "z": -346.796173
+        }
+      ],
+      "top": 5.545731,
+      "bottom": 4.54573059,
+      "keyIds": [
+        "5c1d0dc586f7744baf2e7b79"
+      ]
+    },
+    {
+      "id": "lock-52cff20acd3ed5cf364e1772f5acaca75bf5702a",
+      "kind": "locked-door",
+      "category": "locked-door",
+      "name": "Locked access",
+      "aliases": [
+        "door",
+        "5c1d0d6d86f7744bb2683e1f"
+      ],
+      "position": {
+        "x": -212.694672,
+        "y": 5.145301,
+        "z": -376.538025
+      },
+      "outline": [
+        {
+          "x": -212.554688,
+          "y": 5.14530039,
+          "z": -376.688019
+        },
+        {
+          "x": -211.814667,
+          "y": 5.14530039,
+          "z": -376.688049
+        },
+        {
+          "x": -211.814667,
+          "y": 5.14530039,
+          "z": -376.688019
+        },
+        {
+          "x": -211.814667,
+          "y": 5.14530039,
+          "z": -376.448029
+        },
+        {
+          "x": -212.554672,
+          "y": 5.14530039,
+          "z": -376.448029
+        }
+      ],
+      "top": 5.645301,
+      "bottom": 4.6453,
+      "keyIds": [
+        "5c1d0d6d86f7744bb2683e1f"
+      ]
+    },
+    {
+      "id": "lock-d38a8f760101cbe5dc132e507be0041322a3387c",
+      "kind": "locked-door",
+      "category": "locked-door",
+      "name": "Locked access",
+      "aliases": [
+        "door",
+        "5c1d0f4986f7744bb01837fa"
+      ],
+      "position": {
+        "x": -128.794,
+        "y": 1.41431475,
+        "z": -349.91507
+      },
+      "outline": [
+        {
+          "x": -128.854,
+          "y": 1.08431482,
+          "z": -349.625061
+        },
+        {
+          "x": -128.674011,
+          "y": 1.08431482,
+          "z": -349.625061
+        },
+        {
+          "x": -128.674,
+          "y": 1.08431482,
+          "z": -348.625061
+        },
+        {
+          "x": -128.854,
+          "y": 1.08431482,
+          "z": -348.625061
+        }
+      ],
+      "top": 1.5843153,
+      "bottom": 0.5843148,
+      "keyIds": [
+        "5c1d0f4986f7744bb01837fa"
+      ]
+    },
+    {
+      "id": "lock-a2e6a851d0b20c25286179decabb638e46460533",
+      "kind": "locked-door",
+      "category": "locked-door",
+      "name": "Locked access",
+      "aliases": [
+        "door",
+        "5c1d0f4986f7744bb01837fa"
+      ],
+      "position": {
+        "x": -132.893,
+        "y": 1.41231537,
+        "z": -348.72
+      },
+      "outline": [
+        {
+          "x": -133.013016,
+          "y": 1.082315,
+          "z": -350.01
+        },
+        {
+          "x": -132.833008,
+          "y": 1.082315,
+          "z": -350.01
+        },
+        {
+          "x": -132.833008,
+          "y": 1.082315,
+          "z": -349.01
+        },
+        {
+          "x": -133.013,
+          "y": 1.082315,
+          "z": -349.01
+        }
+      ],
+      "top": 1.582315,
+      "bottom": 0.582314968,
+      "keyIds": [
+        "5c1d0f4986f7744bb01837fa"
+      ]
+    },
+    {
+      "id": "lock-2bbc3a06aa6367f0ccf43c8df96808913aafedec",
+      "kind": "locked-door",
+      "category": "locked-door",
+      "name": "Locked access",
+      "aliases": [
+        "door",
+        "5c1e495a86f7743109743dfb"
+      ],
+      "position": {
+        "x": -261.993042,
+        "y": 5.147805,
+        "z": -317.240326
+      },
+      "outline": [
+        {
+          "x": -262.143066,
+          "y": 5.147805,
+          "z": -318.120331
+        },
+        {
+          "x": -261.903046,
+          "y": 5.147805,
+          "z": -318.120331
+        },
+        {
+          "x": -261.903046,
+          "y": 5.147805,
+          "z": -317.380341
+        },
+        {
+          "x": -262.143036,
+          "y": 5.147805,
+          "z": -317.380341
+        }
+      ],
+      "top": 5.647805,
+      "bottom": 4.647805,
+      "keyIds": [
+        "5c1e495a86f7743109743dfb"
+      ]
+    },
+    {
+      "id": "lock-ca2f36df21ad6f2163c7d291553a14684a2dbf43",
+      "kind": "locked-door",
+      "category": "locked-door",
+      "name": "Locked access",
+      "aliases": [
+        "door",
+        "5c1d0efb86f7744baf2e7b7b"
+      ],
+      "position": {
+        "x": -257.222015,
+        "y": 5.248032,
+        "z": -322.925018
+      },
+      "outline": [
+        {
+          "x": -257.292023,
+          "y": 5.248032,
+          "z": -322.635
+        },
+        {
+          "x": -257.052,
+          "y": 5.248032,
+          "z": -322.635
+        },
+        {
+          "x": -257.052,
+          "y": 5.248032,
+          "z": -321.89502
+        },
+        {
+          "x": -257.292023,
+          "y": 5.248032,
+          "z": -321.89502
+        }
+      ],
+      "top": 5.74803257,
+      "bottom": 4.748032,
+      "keyIds": [
+        "5c1d0efb86f7744baf2e7b7b"
+      ]
+    },
+    {
+      "id": "lock-78c973d064f8b05037d6e83b1d99b95755b4fb3b",
+      "kind": "locked-door",
+      "category": "locked-door",
+      "name": "Locked access",
+      "aliases": [
+        "door",
+        "5c1f79a086f7746ed066fb8f"
+      ],
+      "position": {
+        "x": -250.839066,
+        "y": 5.097125,
+        "z": -326.758667
+      },
+      "outline": [
+        {
+          "x": -251.759308,
+          "y": 4.97732925,
+          "z": -326.9084
+        },
+        {
+          "x": -251.758942,
+          "y": 4.97732925,
+          "z": -326.908752
+        },
+        {
+          "x": -251.058929,
+          "y": 4.97732925,
+          "z": -326.9088
+        },
+        {
+          "x": -251.0593,
+          "y": 4.97732925,
+          "z": -326.908447
+        },
+        {
+          "x": -251.058929,
+          "y": 4.97732925,
+          "z": -326.6088
+        },
+        {
+          "x": -251.05928,
+          "y": 4.97732925,
+          "z": -326.608459
+        },
+        {
+          "x": -251.759277,
+          "y": 4.97732925,
+          "z": -326.6084
+        },
+        {
+          "x": -251.758911,
+          "y": 4.97732925,
+          "z": -326.608765
+        }
+      ],
+      "top": 5.47750854,
+      "bottom": 4.47715,
+      "keyIds": [
+        "5c1f79a086f7746ed066fb8f"
+      ]
+    },
+    {
+      "id": "lock-b539e936d65d3c0bb0ad6fd6ab39df465c08aae5",
+      "kind": "locked-door",
+      "category": "locked-door",
+      "name": "Locked access",
+      "aliases": [
+        "door",
+        "6711039f9e648049e50b3307"
+      ],
+      "position": {
+        "x": -117.3155,
+        "y": 1.12753034,
+        "z": -439.54068
+      },
+      "outline": [
+        {
+          "x": -118.3905,
+          "y": 1.12753034,
+          "z": -439.6407
+        },
+        {
+          "x": -117.6405,
+          "y": 1.12753034,
+          "z": -439.6407
+        },
+        {
+          "x": -117.6405,
+          "y": 1.12753034,
+          "z": -439.440674
+        },
+        {
+          "x": -118.3905,
+          "y": 1.12753034,
+          "z": -439.440674
+        }
+      ],
+      "top": 1.62753057,
+      "bottom": 0.627530336,
+      "keyIds": [
+        "6711039f9e648049e50b3307"
+      ]
+    },
+    {
+      "id": "loot-0",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -95.00014,
+        "y": 0.30369854,
+        "z": -433.996979
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-1",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -119.822372,
+        "y": 0.290801048,
+        "z": -426.595581
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-2",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Civilian body",
+      "position": {
+        "x": -114.83699,
+        "y": 0.04300022,
+        "z": -430.366
+      },
+      "lootType": "civilian-body"
+    },
+    {
+      "id": "loot-3",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PMC body",
+      "position": {
+        "x": -114.684982,
+        "y": 0.19299984,
+        "z": -422.029
+      },
+      "lootType": "pmc-body"
+    },
+    {
+      "id": "loot-4",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -117.133011,
+        "y": 1.56429958,
+        "z": -443.949
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-5",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -176.724533,
+        "y": 4.564809,
+        "z": -417.1603
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-6",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -194.101,
+        "y": 4.59500027,
+        "z": -370.073
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-7",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -249.247,
+        "y": 0.02380848,
+        "z": -403.008
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-8",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -173.702316,
+        "y": 4.621808,
+        "z": -384.2896
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-9",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -270.673279,
+        "y": 0.004807472,
+        "z": -344.0901
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-10",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -242.575546,
+        "y": 0.63480854,
+        "z": -294.8853
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-11",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -210.758774,
+        "y": 0.5748091,
+        "z": -324.733978
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-12",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -209.827621,
+        "y": 4.086808,
+        "z": -311.7073
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-13",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -137.15654,
+        "y": 4.08980846,
+        "z": -416.6233
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-14",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -149.481522,
+        "y": 4.32280827,
+        "z": -412.795319
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-15",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -146.939072,
+        "y": 4.59280872,
+        "z": -314.533966
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-16",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -257.88324,
+        "y": 0.553809166,
+        "z": -323.368347
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-17",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -146.955521,
+        "y": 0.5128088,
+        "z": -297.161316
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-18",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -225.488541,
+        "y": 0.5258074,
+        "z": -276.6053
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-19",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -170.836777,
+        "y": 4.54480839,
+        "z": -285.685
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-20",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -235.563034,
+        "y": 4.678809,
+        "z": -309.75
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-21",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -173.671,
+        "y": 4.65380764,
+        "z": -303.14328
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-22",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -258.2835,
+        "y": 4.66580868,
+        "z": -316.5873
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-23",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -244.940536,
+        "y": 0.03580761,
+        "z": -280.1933
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-24",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -246.732529,
+        "y": -2.984191,
+        "z": -419.9193
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-25",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -142.022537,
+        "y": 4.09980869,
+        "z": -407.4943
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-26",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -152.359543,
+        "y": 4.668809,
+        "z": -396.7123
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-27",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -182.064743,
+        "y": 4.65780735,
+        "z": -411.0503
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-28",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -188.812546,
+        "y": 4.66280842,
+        "z": -396.7973
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-29",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -268.954529,
+        "y": 4.104808,
+        "z": -363.2883
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-30",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -176.750992,
+        "y": 4.590001,
+        "z": -404.007
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-31",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -186.083,
+        "y": 0.0290002823,
+        "z": -412.331
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-32",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -190.747971,
+        "y": 4.104001,
+        "z": -345.858
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-33",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -191.857986,
+        "y": 4.083001,
+        "z": -328.818
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-34",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -211.463974,
+        "y": 0.0200014114,
+        "z": -386.2
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-35",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -226.601974,
+        "y": 0.013001442,
+        "z": -416.893
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-36",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -154.924,
+        "y": 4.118001,
+        "z": -384.987
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-37",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -138.822,
+        "y": 4.10300159,
+        "z": -379.25
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-38",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -280,
+        "y": 0.3210001,
+        "z": -331.741
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-39",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -250.286972,
+        "y": 0.0150003433,
+        "z": -329.621
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-40",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -225.412979,
+        "y": 0.017001152,
+        "z": -311.122
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-41",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -224.718,
+        "y": 0.013001442,
+        "z": -322.47
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-42",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -247.934,
+        "y": 4.09300137,
+        "z": -315.681
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-43",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -242.315964,
+        "y": 4.094001,
+        "z": -348.091
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-44",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -150.745987,
+        "y": 4.295001,
+        "z": -418.044
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-45",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -119.630966,
+        "y": 4.62,
+        "z": -419.84
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-46",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -121.963974,
+        "y": 4.512002,
+        "z": -409.169
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-47",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -112.55098,
+        "y": 4.087001,
+        "z": -413.315
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-48",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -161.215988,
+        "y": 4.102002,
+        "z": -297.907
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-49",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -139.765,
+        "y": 4.07500172,
+        "z": -328.989
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-50",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -268.31897,
+        "y": 0.00400066376,
+        "z": -316.461
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-51",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -266.935974,
+        "y": 0.490000725,
+        "z": -333.293
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-52",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -140.893967,
+        "y": 0.277001381,
+        "z": -307.431
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-53",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -153.48497,
+        "y": 0.08400059,
+        "z": -329.896
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-54",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -221.895,
+        "y": 1.11500072,
+        "z": -306.37
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-55",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -247.960983,
+        "y": 0.007000923,
+        "z": -327.574
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-56",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -182.091965,
+        "y": 4.104001,
+        "z": -301.781
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-57",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -192.787979,
+        "y": -0.005999565,
+        "z": -318.124
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-58",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -194.140976,
+        "y": 4.56500149,
+        "z": -314.115
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-59",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -176.661,
+        "y": 0.02300167,
+        "z": -306.146
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-60",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -195.986984,
+        "y": 4.099,
+        "z": -294.599
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-61",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -201.75798,
+        "y": 4.094001,
+        "z": -340.907
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-62",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -268.641968,
+        "y": 4.11200047,
+        "z": -328.29
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-63",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -235.560989,
+        "y": 4.09300137,
+        "z": -306.814
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-64",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -258.31897,
+        "y": 0.5270014,
+        "z": -289.855
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-65",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -259.096,
+        "y": 9.536743e-7,
+        "z": -313.264
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-66",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -246.888992,
+        "y": -2.98899937,
+        "z": -401.789
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-67",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -243.184982,
+        "y": -3.466998,
+        "z": -362.832
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-68",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -157.042984,
+        "y": 4.094001,
+        "z": -392.852
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-69",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -162.822983,
+        "y": 4.55600071,
+        "z": -420.049
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-70",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -200.34697,
+        "y": 4.104001,
+        "z": -393.091
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-71",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -204.431992,
+        "y": 4.08400059,
+        "z": -369.488
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-72",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -250.057968,
+        "y": 4.128001,
+        "z": -365.582
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-73",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -120.46199,
+        "y": 0.04600048,
+        "z": -426.166
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-74",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -119.028,
+        "y": 0.04800129,
+        "z": -445.443
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-75",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -120.135971,
+        "y": 0.03700161,
+        "z": -442.881
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-76",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -121.206985,
+        "y": 0.343001366,
+        "z": -445.236
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-77",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -105.487991,
+        "y": 0.07600117,
+        "z": -426.491
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-78",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -82.00398,
+        "y": 0.03600025,
+        "z": -426.926
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-79",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -108.611984,
+        "y": 0.06500149,
+        "z": -438.03
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-80",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Duffle bag",
+      "position": {
+        "x": -88.82698,
+        "y": 0.03800106,
+        "z": -438.078
+      },
+      "lootType": "duffle-bag"
+    },
+    {
+      "id": "loot-81",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -250.389053,
+        "y": 4.9276247,
+        "z": -367.852753
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-82",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -250.389053,
+        "y": 4.9276247,
+        "z": -367.852753
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-83",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -250.389053,
+        "y": 4.9276247,
+        "z": -367.852753
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-84",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -250.389053,
+        "y": 4.9276247,
+        "z": -367.852753
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-85",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -163.313583,
+        "y": 4.95176029,
+        "z": -344.818024
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-86",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -163.313583,
+        "y": 4.95176029,
+        "z": -344.818024
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-87",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -163.313583,
+        "y": 4.95176029,
+        "z": -344.818024
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-88",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -163.313583,
+        "y": 4.95176029,
+        "z": -344.818024
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-89",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -262.0916,
+        "y": 0.8399744,
+        "z": -323.5963
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-90",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -262.0916,
+        "y": 0.8399744,
+        "z": -323.5963
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-91",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -262.0916,
+        "y": 0.8399744,
+        "z": -323.5963
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-92",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -262.0916,
+        "y": 0.8399744,
+        "z": -323.5963
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-93",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -250.254623,
+        "y": 4.92625141,
+        "z": -327.178284
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-94",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -250.254623,
+        "y": 4.92625141,
+        "z": -327.178284
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-95",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -250.254623,
+        "y": 4.92625141,
+        "z": -327.178284
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-96",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -250.254623,
+        "y": 4.92625141,
+        "z": -327.178284
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-97",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -213.4482,
+        "y": 4.924552,
+        "z": -382.5979
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-98",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -213.4482,
+        "y": 4.924552,
+        "z": -382.5979
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-99",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -213.4482,
+        "y": 4.924552,
+        "z": -382.5979
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-100",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -213.4482,
+        "y": 4.924552,
+        "z": -382.5979
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-101",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -248.959152,
+        "y": 4.93110752,
+        "z": -382.571472
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-102",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -248.959152,
+        "y": 4.93110752,
+        "z": -382.571472
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-103",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -248.959152,
+        "y": 4.93110752,
+        "z": -382.571472
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-104",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -248.959152,
+        "y": 4.93110752,
+        "z": -382.571472
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-105",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -141.2802,
+        "y": 4.92064,
+        "z": -399.336121
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-106",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -141.2802,
+        "y": 4.92064,
+        "z": -399.336121
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-107",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -141.2802,
+        "y": 4.92064,
+        "z": -399.336121
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-108",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -141.2802,
+        "y": 4.92064,
+        "z": -399.336121
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-109",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -265.714661,
+        "y": 4.91927433,
+        "z": -316.644653
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-110",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -265.714661,
+        "y": 4.91927433,
+        "z": -316.644653
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-111",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -265.714661,
+        "y": 4.91927433,
+        "z": -316.644653
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-112",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -265.714661,
+        "y": 4.91927433,
+        "z": -316.644653
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-113",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -180.32753,
+        "y": 0.7898073,
+        "z": -313.9297
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-114",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -262.5545,
+        "y": 4.552808,
+        "z": -322.6673
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-115",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -125.96553,
+        "y": 5.46280766,
+        "z": -352.5283
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-116",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -261.40155,
+        "y": 4.769807,
+        "z": -320.5873
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-117",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -265.892517,
+        "y": 4.77380848,
+        "z": -323.3503
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-118",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -267.23053,
+        "y": 4.78280735,
+        "z": -323.3733
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-119",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -162.64653,
+        "y": 4.53580761,
+        "z": -341.972321
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-120",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -185.76622,
+        "y": 0.7358084,
+        "z": -315.1457
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-121",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medbag SMU06",
+      "position": {
+        "x": -127.051254,
+        "y": 0.9914751,
+        "z": -395.279816
+      },
+      "lootType": "medbag-smu06"
+    },
+    {
+      "id": "loot-122",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medcase",
+      "position": {
+        "x": -135.090775,
+        "y": 0.630999565,
+        "z": -395.819763
+      },
+      "lootType": "medcase"
+    },
+    {
+      "id": "loot-123",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medcase",
+      "position": {
+        "x": -137.512711,
+        "y": 5.175,
+        "z": -377.8064
+      },
+      "lootType": "medcase"
+    },
+    {
+      "id": "loot-124",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -180.32753,
+        "y": 0.7890024,
+        "z": -309.774
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-125",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -262.5545,
+        "y": 4.552808,
+        "z": -320.206
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-126",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -123.357986,
+        "y": 4.585,
+        "z": -352.5283
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-127",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -261.40155,
+        "y": 4.769807,
+        "z": -321.912
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-128",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -268.820984,
+        "y": 4.74599934,
+        "z": -317.816
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-129",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -162.64653,
+        "y": 4.533002,
+        "z": -346.754
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-130",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -185.76622,
+        "y": 0.712000847,
+        "z": -311.258362
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-131",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medbag SMU06",
+      "position": {
+        "x": -122.29985,
+        "y": 0.1346693,
+        "z": -398.812836
+      },
+      "lootType": "medbag-smu06"
+    },
+    {
+      "id": "loot-132",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medcase",
+      "position": {
+        "x": -134.812576,
+        "y": 0.18500042,
+        "z": -405.207458
+      },
+      "lootType": "medcase"
+    },
+    {
+      "id": "loot-133",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medcase",
+      "position": {
+        "x": -122.71019,
+        "y": 4.28400135,
+        "z": -371.537476
+      },
+      "lootType": "medcase"
+    },
+    {
+      "id": "loot-134",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medcase",
+      "position": {
+        "x": -139.448227,
+        "y": 4.963002,
+        "z": -362.4479
+      },
+      "lootType": "medcase"
+    },
+    {
+      "id": "loot-135",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medcase",
+      "position": {
+        "x": -108.814133,
+        "y": 0.2300005,
+        "z": -443.5734
+      },
+      "lootType": "medcase"
+    },
+    {
+      "id": "loot-136",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medcase",
+      "position": {
+        "x": -90.4386139,
+        "y": 1.11200047,
+        "z": -428.233154
+      },
+      "lootType": "medcase"
+    },
+    {
+      "id": "loot-137",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medcase",
+      "position": {
+        "x": -84.97653,
+        "y": 0.220000267,
+        "z": -437.854156
+      },
+      "lootType": "medcase"
+    },
+    {
+      "id": "loot-138",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medcase",
+      "position": {
+        "x": -93.98288,
+        "y": 0.216000557,
+        "z": -432.6432
+      },
+      "lootType": "medcase"
+    },
+    {
+      "id": "loot-139",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medbag SMU06",
+      "position": {
+        "x": -97.75499,
+        "y": 0.141669273,
+        "z": -426.764679
+      },
+      "lootType": "medbag-smu06"
+    },
+    {
+      "id": "loot-140",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medbag SMU06",
+      "position": {
+        "x": -100.402969,
+        "y": 0.141669273,
+        "z": -430.7967
+      },
+      "lootType": "medbag-smu06"
+    },
+    {
+      "id": "loot-141",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medbag SMU06",
+      "position": {
+        "x": -103.066971,
+        "y": 0.114668846,
+        "z": -437.083679
+      },
+      "lootType": "medbag-smu06"
+    },
+    {
+      "id": "loot-142",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medbag SMU06",
+      "position": {
+        "x": -89.00754,
+        "y": 1.04266834,
+        "z": -438.0215
+      },
+      "lootType": "medbag-smu06"
+    },
+    {
+      "id": "loot-143",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medbag SMU06",
+      "position": {
+        "x": -82.09297,
+        "y": 1.05166912,
+        "z": -443.378052
+      },
+      "lootType": "medbag-smu06"
+    },
+    {
+      "id": "loot-144",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medcase",
+      "position": {
+        "x": -81.71811,
+        "y": 0.223000526,
+        "z": -437.048767
+      },
+      "lootType": "medcase"
+    },
+    {
+      "id": "loot-145",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medbag SMU06",
+      "position": {
+        "x": -86.01175,
+        "y": 0.143059731,
+        "z": -429.212524
+      },
+      "lootType": "medbag-smu06"
+    },
+    {
+      "id": "loot-146",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medbag SMU06",
+      "position": {
+        "x": -118.066696,
+        "y": 1.053668,
+        "z": -433.809174
+      },
+      "lootType": "medbag-smu06"
+    },
+    {
+      "id": "loot-147",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -173.420914,
+        "y": 5.084672,
+        "z": -284.8106
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-148",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -173.420914,
+        "y": 5.084672,
+        "z": -284.8106
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-149",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -173.420914,
+        "y": 5.084672,
+        "z": -284.8106
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-150",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -173.420914,
+        "y": 5.084672,
+        "z": -284.8106
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-151",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -182.787277,
+        "y": 4.922696,
+        "z": -392.613068
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-152",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -182.787277,
+        "y": 4.922696,
+        "z": -392.613068
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-153",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -182.787277,
+        "y": 4.922696,
+        "z": -392.613068
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-154",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -182.787277,
+        "y": 4.922696,
+        "z": -392.613068
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-155",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -151.552231,
+        "y": 0.8814306,
+        "z": -392.658142
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-156",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -151.552231,
+        "y": 0.8814306,
+        "z": -392.658142
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-157",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -151.552231,
+        "y": 0.8814306,
+        "z": -392.658142
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-158",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -151.552231,
+        "y": 0.8814306,
+        "z": -392.658142
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-159",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -173.9535,
+        "y": 5.084672,
+        "z": -284.8106
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-160",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -173.9535,
+        "y": 5.084672,
+        "z": -284.8106
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-161",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -173.9535,
+        "y": 5.084672,
+        "z": -284.8106
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-162",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Drawer",
+      "position": {
+        "x": -173.9535,
+        "y": 5.084672,
+        "z": -284.8106
+      },
+      "lootType": "drawer"
+    },
+    {
+      "id": "loot-163",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": -133.998581,
+        "y": 5.61286449,
+        "z": -339.266479
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-164",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": -157.167923,
+        "y": 5.202054,
+        "z": -397.713043
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-165",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": -181.774948,
+        "y": 5.22503,
+        "z": -406.319031
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-166",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": -250.398972,
+        "y": 5.311002,
+        "z": -359.159
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-167",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": -141.509964,
+        "y": 1.44801426,
+        "z": -393.300018
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-168",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": -122.945877,
+        "y": 5.23541546,
+        "z": -285.829529
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-169",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": -244.593979,
+        "y": 1.42000294,
+        "z": -278.313019
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-170",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": -255.973,
+        "y": 1.13300419,
+        "z": -323.086
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-171",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Jacket",
+      "position": {
+        "x": -141.458969,
+        "y": 5.463002,
+        "z": -413.483
+      },
+      "lootType": "jacket"
+    },
+    {
+      "id": "loot-172",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -154.848923,
+        "y": 4.340461,
+        "z": -405.510071
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-173",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -219.110977,
+        "y": 4.349101,
+        "z": -382.2
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-174",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -180.522964,
+        "y": 0.256485939,
+        "z": -326.087463
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-175",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -167.90416,
+        "y": 0.3693552,
+        "z": -358.971
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-176",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -153.369919,
+        "y": 4.340461,
+        "z": -406.884064
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-177",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -162.076828,
+        "y": 4.371999,
+        "z": -347.418976
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-178",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -181.790665,
+        "y": 0.256485939,
+        "z": -325.9387
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-179",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -244.481979,
+        "y": 4.349101,
+        "z": -382.377
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-180",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -156.022934,
+        "y": 4.345065,
+        "z": -410.877075
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-181",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -172.98967,
+        "y": 4.503989,
+        "z": -281.831635
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-182",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -186.724808,
+        "y": 0.256485939,
+        "z": -327.720978
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-183",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -162.669449,
+        "y": 4.371999,
+        "z": -344.320679
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-184",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -186.585922,
+        "y": 0.256485939,
+        "z": -326.589233
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-185",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -147.301926,
+        "y": 4.345065,
+        "z": -410.941071
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-186",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -182.663559,
+        "y": 0.366002083,
+        "z": -357.012878
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-187",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -147.03093,
+        "y": 4.3450613,
+        "z": -405.427063
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-188",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -148.5399,
+        "y": 4.34505,
+        "z": -396.970062
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-189",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -180.703568,
+        "y": 0.366002083,
+        "z": -356.6679
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-190",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -129.799881,
+        "y": 4.352416,
+        "z": -286.847534
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-191",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -154.509933,
+        "y": 4.34505,
+        "z": -397.032074
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-192",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -146.969925,
+        "y": 4.3450346,
+        "z": -393.179016
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-193",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -132.174881,
+        "y": 4.352416,
+        "z": -286.844543
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-194",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -125.022873,
+        "y": 4.352416,
+        "z": -286.847534
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-195",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -186.342941,
+        "y": 4.340415,
+        "z": -396.372
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-196",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -186.671982,
+        "y": 4.340415,
+        "z": -395.001038
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-197",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -193.997482,
+        "y": 4.340415,
+        "z": -396.618652
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-198",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -200.121964,
+        "y": 4.340415,
+        "z": -394.112976
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-199",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -251.05217,
+        "y": 4.3740015,
+        "z": -369.785217
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-200",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -194.1512,
+        "y": 4.34043026,
+        "z": -400.766571
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-201",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -258.367981,
+        "y": 4.37100124,
+        "z": -363.948669
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-202",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -258.108215,
+        "y": 4.37100124,
+        "z": -362.392242
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-203",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -158.204941,
+        "y": 0.26541996,
+        "z": -393.218475
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-204",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -147.278366,
+        "y": 0.2704172,
+        "z": -399.710236
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-205",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -265.898926,
+        "y": 4.37099934,
+        "z": -363.937683
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-206",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -145.653946,
+        "y": 0.270401955,
+        "z": -398.279968
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-207",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -264.449158,
+        "y": 4.37099934,
+        "z": -364.091217
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-208",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -141.808945,
+        "y": 0.268408775,
+        "z": -398.569031
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-209",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -147.229263,
+        "y": 0.270512581,
+        "z": -404.812378
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-210",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -141.870956,
+        "y": 0.270430565,
+        "z": -403.533051
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-211",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -259.904236,
+        "y": 4.345107,
+        "z": -328.029358
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-212",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -263.983215,
+        "y": 4.345107,
+        "z": -328.029358
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-213",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -266.016235,
+        "y": 4.345107,
+        "z": -328.029358
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-214",
+      "kind": "loot",
+      "category": "loot",
+      "name": "PC block",
+      "position": {
+        "x": -268.605774,
+        "y": 4.34310627,
+        "z": -326.509125
+      },
+      "lootType": "pc-block"
+    },
+    {
+      "id": "loot-215",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -165.962326,
+        "y": 0.7026644,
+        "z": -268.1346
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-216",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -248.691544,
+        "y": 0.473790169,
+        "z": -311.560364
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-217",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -200.519547,
+        "y": 4.55880833,
+        "z": -402.7493
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-218",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -171.404526,
+        "y": 0.566807747,
+        "z": -358.342316
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-219",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -244.193985,
+        "y": 0.710000038,
+        "z": -266.702
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-220",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -236.31752,
+        "y": 4.5658083,
+        "z": -340.4153
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-221",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -247.841537,
+        "y": -2.56119061,
+        "z": -341.605316
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-222",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -217.377548,
+        "y": -2.53719234,
+        "z": -377.8763
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-223",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -138.460526,
+        "y": 2.88480854,
+        "z": -288.838318
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-224",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -228.886642,
+        "y": 0.893277168,
+        "z": -409.687164
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-225",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -278.490723,
+        "y": 1.19940853,
+        "z": -367.264771
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-226",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -149.289658,
+        "y": 4.77380848,
+        "z": -407.270752
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-227",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -141.552536,
+        "y": 0.128808022,
+        "z": -401.0552
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-228",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -272.759521,
+        "y": 0.167609215,
+        "z": -280.423828
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-229",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -201.656235,
+        "y": -2.87019062,
+        "z": -371.124
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-230",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -158.041611,
+        "y": 0.952809334,
+        "z": -354.932739
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-231",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -213.812973,
+        "y": 0.419260979,
+        "z": -400.56076
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-232",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -134.490524,
+        "y": 4.520808,
+        "z": -287.6003
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-233",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -183.631546,
+        "y": -3.633191,
+        "z": -372.3399
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-234",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -249.403488,
+        "y": -3.64519215,
+        "z": -407.126068
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-235",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Grenade box",
+      "position": {
+        "x": -175.8383,
+        "y": 4.77640629,
+        "z": -282.648651
+      },
+      "lootType": "grenade-box"
+    },
+    {
+      "id": "loot-236",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Grenade box",
+      "position": {
+        "x": -145.615891,
+        "y": 0.9539137,
+        "z": -383.21524
+      },
+      "lootType": "grenade-box"
+    },
+    {
+      "id": "loot-237",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Grenade box",
+      "position": {
+        "x": -262.298218,
+        "y": 1.204915,
+        "z": -378.745728
+      },
+      "lootType": "grenade-box"
+    },
+    {
+      "id": "loot-238",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medbag SMU06",
+      "position": {
+        "x": -254.6345,
+        "y": 5.09647655,
+        "z": -313.720947
+      },
+      "lootType": "medbag-smu06"
+    },
+    {
+      "id": "loot-239",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medcase",
+      "position": {
+        "x": -134.119247,
+        "y": 5.14899731,
+        "z": -394.249481
+      },
+      "lootType": "medcase"
+    },
+    {
+      "id": "loot-240",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medcase",
+      "position": {
+        "x": -129.084763,
+        "y": 5.25480747,
+        "z": -398.441772
+      },
+      "lootType": "medcase"
+    },
+    {
+      "id": "loot-241",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Plastic suitcase",
+      "position": {
+        "x": -257.819519,
+        "y": 4.80268,
+        "z": -368.886749
+      },
+      "lootType": "plastic-suitcase"
+    },
+    {
+      "id": "loot-242",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -143.2488,
+        "y": 1.853858,
+        "z": -249.601318
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-243",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -248.880051,
+        "y": 0.457982063,
+        "z": -294.822144
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-244",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -184.102982,
+        "y": 4.554002,
+        "z": -411.05
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-245",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -166.885,
+        "y": 1.54900074,
+        "z": -370.484
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-246",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -238.973984,
+        "y": 0.710000038,
+        "z": -269.577
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-247",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -215.128983,
+        "y": 4.53200245,
+        "z": -330.207
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-248",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -250.85997,
+        "y": -3.612998,
+        "z": -310.192
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-249",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -202.124985,
+        "y": -3.59299755,
+        "z": -352.155
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-250",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -117.332993,
+        "y": 1.81800175,
+        "z": -288.352
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-251",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -243.354111,
+        "y": 1.52746868,
+        "z": -381.941864
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-252",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -260.570984,
+        "y": 1.54160213,
+        "z": -382.913055
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-253",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -141.5901,
+        "y": 4.776002,
+        "z": -395.384369
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-254",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -157.417984,
+        "y": 0.8570013,
+        "z": -403.4659
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-255",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -251.237564,
+        "y": 0.161002159,
+        "z": -295.18
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-256",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -221.420334,
+        "y": -3.546998,
+        "z": -344.7179
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-257",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -192.906479,
+        "y": 1.71200085,
+        "z": -353.115265
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-258",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -207.8441,
+        "y": 0.383454323,
+        "z": -355.945251
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-259",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -133.226,
+        "y": 1.75899982,
+        "z": -304.001
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-260",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -216.91124,
+        "y": -3.67299938,
+        "z": -396.509979
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-261",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -227.093857,
+        "y": -3.659999,
+        "z": -390.169067
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-262",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Grenade box",
+      "position": {
+        "x": -178.500839,
+        "y": 0.5607977,
+        "z": -250.635162
+      },
+      "lootType": "grenade-box"
+    },
+    {
+      "id": "loot-263",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Grenade box",
+      "position": {
+        "x": -173.118454,
+        "y": 0.9861078,
+        "z": -382.955475
+      },
+      "lootType": "grenade-box"
+    },
+    {
+      "id": "loot-264",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Grenade box",
+      "position": {
+        "x": -275.110718,
+        "y": 1.208108,
+        "z": -335.5624
+      },
+      "lootType": "grenade-box"
+    },
+    {
+      "id": "loot-265",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medbag SMU06",
+      "position": {
+        "x": -243.610153,
+        "y": 4.989669,
+        "z": -301.520172
+      },
+      "lootType": "medbag-smu06"
+    },
+    {
+      "id": "loot-266",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medcase",
+      "position": {
+        "x": -115.474716,
+        "y": 5.359191,
+        "z": -410.623169
+      },
+      "lootType": "medcase"
+    },
+    {
+      "id": "loot-267",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medcase",
+      "position": {
+        "x": -107.501846,
+        "y": 6.29800129,
+        "z": -419.434448
+      },
+      "lootType": "medcase"
+    },
+    {
+      "id": "loot-268",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Plastic suitcase",
+      "position": {
+        "x": -249.7874,
+        "y": 4.22287464,
+        "z": -359.648346
+      },
+      "lootType": "plastic-suitcase"
+    },
+    {
+      "id": "loot-269",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Weapon box",
+      "position": {
+        "x": -118.648972,
+        "y": 0.500000954,
+        "z": -421.572
+      },
+      "lootType": "weapon-box"
+    },
+    {
+      "id": "loot-270",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -160.696487,
+        "y": 0.324307442,
+        "z": -318.366943
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-271",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -189.0645,
+        "y": -2.66789722,
+        "z": -323.926727
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-272",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -193.456772,
+        "y": 2.13250065,
+        "z": -276.22403
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-273",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Plastic suitcase",
+      "position": {
+        "x": -233.670517,
+        "y": 0.613682747,
+        "z": -323.211151
+      },
+      "lootType": "plastic-suitcase"
+    },
+    {
+      "id": "loot-274",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -175.86763,
+        "y": 0.6413069,
+        "z": -356.324982
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-275",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -150.442917,
+        "y": -3.79369259,
+        "z": -319.593658
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-276",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -123.470535,
+        "y": -2.73169231,
+        "z": -384.1119
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-277",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -119.895126,
+        "y": -2.739293,
+        "z": -326.3692
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-278",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -137.843246,
+        "y": -4.537692,
+        "z": -349.000153
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-279",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -215.015579,
+        "y": -3.78969288,
+        "z": -386.755035
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-280",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -251.65947,
+        "y": 0.241307259,
+        "z": -358.587982
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-281",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -277.465027,
+        "y": -3.79569149,
+        "z": -330.038116
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-282",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -180.6567,
+        "y": -3.45776272,
+        "z": -347.671875
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-283",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -171.869522,
+        "y": 1.17030811,
+        "z": -320.3049
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-284",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -230.721085,
+        "y": 4.9523077,
+        "z": -283.6814
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-285",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -167.558121,
+        "y": 1.11930752,
+        "z": -283.831055
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-286",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -146.285477,
+        "y": 2.11267948,
+        "z": -256.08432
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-287",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -125.405624,
+        "y": 5.44249058,
+        "z": -419.899841
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-288",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -177.595932,
+        "y": 1.73660374,
+        "z": -256.826355
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-289",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -149.345444,
+        "y": 0.314499855,
+        "z": -313.327148
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-290",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -200.034348,
+        "y": -2.680499,
+        "z": -315.9634
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-291",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -161.000229,
+        "y": 0.3086939,
+        "z": -280.996735
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-292",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Plastic suitcase",
+      "position": {
+        "x": -231.065781,
+        "y": 0.6068754,
+        "z": -355.796448
+      },
+      "lootType": "plastic-suitcase"
+    },
+    {
+      "id": "loot-293",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -170.198471,
+        "y": 0.2965002,
+        "z": -308.530975
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-294",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -127.094284,
+        "y": -3.77049923,
+        "z": -323.720032
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-295",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -140.777328,
+        "y": -3.753499,
+        "z": -375.4822
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-296",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -125.432388,
+        "y": -3.7925005,
+        "z": -307.536041
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-297",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -121.971756,
+        "y": -3.8005,
+        "z": -365.023
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-298",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -217.998764,
+        "y": -3.781499,
+        "z": -372.269043
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-299",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -249.142929,
+        "y": 0.287499428,
+        "z": -377.754669
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-300",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -249.324448,
+        "y": -3.73649883,
+        "z": -320.5118
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-301",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -238.739853,
+        "y": -4.76957035,
+        "z": -343.721283
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-302",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -160.739975,
+        "y": 0.6204996,
+        "z": -363.5796
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-303",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -200.867538,
+        "y": 4.378501,
+        "z": -300.6291
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-304",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -198.840836,
+        "y": 1.67949963,
+        "z": -248.913361
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-305",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -185.883713,
+        "y": 0.2508726,
+        "z": -300.113281
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-306",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -113.179581,
+        "y": 0.840682,
+        "z": -413.136261
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-307",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -166.060776,
+        "y": 0.283097267,
+        "z": -302.9708
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-308",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -113.989,
+        "y": 0.308501244,
+        "z": -436.7546
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-309",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -90.0120239,
+        "y": 0.321499825,
+        "z": -426.3247
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-310",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Toolbox",
+      "position": {
+        "x": -120.09227,
+        "y": 0.3114996,
+        "z": -437.5435
+      },
+      "lootType": "toolbox"
+    },
+    {
+      "id": "loot-311",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Cash register",
+      "position": {
+        "x": -227.689133,
+        "y": 5.14745235,
+        "z": -299.214661
+      },
+      "lootType": "cash-register"
+    },
+    {
+      "id": "loot-312",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Cash register",
+      "position": {
+        "x": -234.353134,
+        "y": 5.144454,
+        "z": -299.214661
+      },
+      "lootType": "cash-register"
+    },
+    {
+      "id": "loot-313",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Safe",
+      "position": {
+        "x": -189.436661,
+        "y": 4.577897,
+        "z": -411.024
+      },
+      "lootType": "safe"
+    },
+    {
+      "id": "loot-314",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Safe",
+      "position": {
+        "x": -163.068192,
+        "y": 4.5147543,
+        "z": -347.5723
+      },
+      "lootType": "safe"
+    },
+    {
+      "id": "loot-315",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Safe",
+      "position": {
+        "x": -256.9547,
+        "y": 0.479455,
+        "z": -323.228
+      },
+      "lootType": "safe"
+    },
+    {
+      "id": "loot-316",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Safe",
+      "position": {
+        "x": -141.486984,
+        "y": 4.55936527,
+        "z": -400.214722
+      },
+      "lootType": "safe"
+    },
+    {
+      "id": "loot-317",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medcase",
+      "position": {
+        "x": -112.709,
+        "y": 4.949067,
+        "z": -409.591278
+      },
+      "lootType": "medcase"
+    },
+    {
+      "id": "loot-318",
+      "kind": "loot",
+      "category": "loot",
+      "name": "Medcase",
+      "position": {
+        "x": -139.548233,
+        "y": 0.177807808,
+        "z": -361.0752
+      },
+      "lootType": "medcase"
+    }
+  ]
+}
