@@ -68,12 +68,26 @@ toggle?.addEventListener("click", () => { sound.setEnabled(!sound.enabled); sync
 syncSound();
 initializeRelease();
 
-const sequence = document.querySelector<HTMLElement>("[data-signal-sequence]");
-if (sequence && !matchMedia("(prefers-reduced-motion: reduce), (max-width: 680px)").matches) {
+const modeButtons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-signal-mode]"));
+const readout = document.querySelector<HTMLElement>("[data-stage-readout]");
+const labels = ["LOCAL FIX", "SEALED RELAY", "SQUAD VIEW"];
+modeButtons.forEach((button, index) => button.addEventListener("click", () => {
+  modeButtons.forEach((item, itemIndex) => {
+    const active = itemIndex === index;
+    item.classList.toggle("is-active", active);
+    item.setAttribute("aria-pressed", String(active));
+  });
+  if (readout) readout.textContent = labels[index] ?? labels[0];
+  sound.cue(index === 1 ? "relay" : index === 2 ? "resolve" : "acquire");
+  document.dispatchEvent(new CustomEvent("raid-signal:mode", { detail: index }));
+}));
+
+const atlas = document.querySelector<HTMLElement>("[data-signal-atlas]");
+if (atlas && !matchMedia("(prefers-reduced-motion: reduce), (max-width: 680px)").matches) {
   const observer = new IntersectionObserver(([entry]) => {
     if (!entry.isIntersecting) return;
     observer.disconnect();
-    void import("./signal-scene").then(({ initializeSignalScene }) => initializeSignalScene(sound));
-  }, { rootMargin: "220px" });
-  observer.observe(sequence);
+    void import("./signal-scene").then(({ initializeSignalScene }) => initializeSignalScene());
+  }, { rootMargin: "180px" });
+  observer.observe(atlas);
 }

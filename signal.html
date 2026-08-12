@@ -21,77 +21,71 @@
     </header>
 
     <main id="main">
-      <section class="signal-sequence" data-signal-sequence aria-label="How Raid Signal works">
+      <section class="signal-hero" data-signal-atlas aria-labelledby="signal-title">
         <div class="signal-stage" aria-hidden="true">
           <canvas data-signal-canvas></canvas>
-          <div class="signal-fallback"><span></span><i></i><i></i><i></i><b>ENCRYPTED FIELD</b></div>
-          <div class="stage-frame"><span>RS / FIELD-01</span><span data-stage-readout>ACQUIRE</span></div>
+          <img class="signal-map-fallback" src="/maps/svg/Customs.svg" alt="" />
+          <svg class="signal-fallback" viewBox="0 0 900 680" preserveAspectRatio="xMidYMid slice">
+            <g class="signal-fallback__terrain" fill="none">
+              <path d="M29 532c119-88 159-7 262-91s163-135 265-66 165 14 314-126" />
+              <path d="M5 578c127-98 180-18 289-108s171-147 280-72 173 9 326-139" />
+              <path d="M0 628c142-108 201-27 316-123s179-154 295-75 174 4 302-131" />
+              <path d="M102 391c91-84 154-56 232-109s131-84 220-37 137 42 224-28" />
+              <path d="M145 340c79-66 132-39 199-85s112-73 187-34 117 31 194-23" />
+            </g>
+            <g class="signal-fallback__routes" fill="none">
+              <path d="M177 493 377 390 491 343 691 269" />
+              <path d="M491 343 664 427" /><path d="M491 343 748 341" />
+              <circle cx="177" cy="493" r="8" /><circle cx="491" cy="343" r="10" /><circle cx="691" cy="269" r="8" /><circle cx="664" cy="427" r="8" /><circle cx="748" cy="341" r="8" />
+            </g>
+          </svg>
+          <div class="signal-stage__shade"></div>
+          <div class="stage-frame"><span>RS / CUSTOMS / LIVE FIELD</span><span data-stage-readout>LOCAL FIX</span></div>
           <div class="stage-scale"><i></i><i></i><i></i><i></i><i></i></div>
         </div>
 
-        <div class="signal-chapters">
-          <article class="signal-chapter signal-hero" data-signal-chapter="0">
-            <div class="chapter-copy">
-              <p class="eyebrow">END-TO-END ENCRYPTED SQUAD COORDINATION</p>
-              <h1>Your squad.<br /><em>On the map.</em></h1>
-              <p class="lede">Raid Signal turns ordinary Escape from Tarkov screenshot coordinates into a private live map across Wi-Fi, mobile data, or different homes.</p>
-              <div class="actions">
-                <a id="download" class="button" aria-disabled="true">WINDOWS DOWNLOAD UNAVAILABLE</a>
-                <a class="text-link" href="https://discord.gg/pz4QHAu9WN">DISCORD ↗</a>
-                <a class="text-link" href="https://ko-fi.com/eternalqt">SUPPORT ↗</a>
-              </div>
-              <p id="release-note" class="release-note">The stable Windows release appears after local coordinate verification. The first installer is unsigned, so Windows may show an unknown-publisher warning.</p>
-            </div>
-            <span class="chapter-index">00 / ACQUIRE</span>
-          </article>
+        <div class="signal-hero__content">
+          <p class="eyebrow">END-TO-END ENCRYPTED SQUAD COORDINATION</p>
+          <h1 id="signal-title">Your squad.<br /><em>On the map.</em></h1>
+          <p class="lede">Raid Signal turns ordinary Escape from Tarkov screenshot coordinates into a private live map across Wi-Fi, mobile data, or different homes.</p>
+          <div class="actions">
+            <a id="download" class="button" aria-disabled="true">WINDOWS DOWNLOAD UNAVAILABLE</a>
+            <a class="text-link" href="https://discord.gg/pz4QHAu9WN">DISCORD ↗</a>
+            <a class="text-link" href="https://ko-fi.com/eternalqt">SUPPORT ↗</a>
+          </div>
+          <p id="release-note" class="release-note">The stable Windows release appears after local coordinate verification. The first installer is unsigned, so Windows may show an unknown-publisher warning.</p>
+        </div>
 
-          <article class="signal-chapter" data-signal-chapter="1">
-            <div class="chapter-copy chapter-copy--card">
-              <p class="eyebrow">01 / FIX</p>
-              <h2>A position becomes a signal.</h2>
-              <p>The desktop reads a screenshot coordinate locally, resolves the active map and heading, then prepares only the current squad fix.</p>
-              <dl><div><dt>SOURCE</dt><dd>LOCAL SCREENSHOT</dd></div><div><dt>PAYLOAD</dt><dd>MAP · XYZ · HEADING</dd></div></dl>
-            </div>
-          </article>
-
-          <article class="signal-chapter signal-chapter--right" data-signal-chapter="2">
-            <div class="chapter-copy chapter-copy--card">
-              <p class="eyebrow">02 / SEAL</p>
-              <h2>The relay sees a sealed object.</h2>
-              <p>AES-256-GCM encryption happens before transmission. The invitation key stays after the URL fragment and never reaches the relay.</p>
-              <dl><div><dt>RELAY INPUT</dt><dd>CIPHERTEXT ONLY</dd></div><div><dt>RETENTION</dt><dd>NONE</dd></div></dl>
-            </div>
-          </article>
-
-          <article class="signal-chapter" data-signal-chapter="3">
-            <div class="chapter-copy chapter-copy--card">
-              <p class="eyebrow">03 / RESOLVE</p>
-              <h2>Your phone rebuilds the picture.</h2>
-              <p>The hosted companion decrypts locally and plots live squad markers alongside maps, POIs, quests, and waypoints.</p>
-              <dl><div><dt>ROOM</dt><dd>8 CLIENTS / 3 HOURS</dd></div><div><dt>STALE SIGNAL</dt><dd>60S DIM / 120S EVICT</dd></div></dl>
-            </div>
-          </article>
+        <div class="signal-modes" aria-label="How Raid Signal works">
+          <button class="is-active" type="button" data-signal-mode="0" aria-pressed="true"><span>01</span><strong>LOCAL FIX</strong><small>Screenshot coordinates stay on the desktop.</small></button>
+          <button type="button" data-signal-mode="1" aria-pressed="false"><span>02</span><strong>SEALED RELAY</strong><small>The relay forwards ciphertext without history.</small></button>
+          <button type="button" data-signal-mode="2" aria-pressed="false"><span>03</span><strong>SQUAD VIEW</strong><small>Authorized phones rebuild the live picture.</small></button>
         </div>
       </section>
 
       <section class="system-section" id="system">
-        <header class="section-heading"><p class="eyebrow">SYSTEM / REAL PRODUCT</p><h2>A field instrument, not a browser dashboard.</h2><span>Three verified capture plates will replace these calibration frames after the Windows test pass.</span></header>
-        <div class="capture-grid">
-          <article class="capture capture--wide"><header><span>DESKTOP MAP</span><b>CAPTURE PENDING</b></header><div class="capture-schematic"><i></i><i></i><i></i><span>LOCAL CALIBRATION REQUIRED</span></div><p>Offline maps, current coordinates, squad markers, POIs, quests, and custom waypoints.</p></article>
-          <article class="capture"><header><span>NATIVE OVERLAY</span><b>CAPTURE PENDING</b></header><div class="capture-schematic capture-schematic--overlay"><i></i><i></i><span>WINDOW / RECOVERABLE</span></div><p>A compact always-on-top map with explicit mouse-interaction recovery.</p></article>
-          <article class="capture"><header><span>PHONE COMPANION</span><b>CAPTURE PENDING</b></header><div class="capture-schematic capture-schematic--phone"><i></i><i></i><span>LOCAL DECRYPTION</span></div><p>The same live room over Wi-Fi, mobile data, or another home connection.</p></article>
+        <header class="section-heading">
+          <div><p class="eyebrow">SYSTEM / REAL PRODUCT</p><h2>A field instrument, not a browser dashboard.</h2></div>
+          <p>Offline maps, raid context, quests, POIs, waypoints, native overlay, and encrypted squad coordination in one focused tool.</p>
+        </header>
+        <div class="product-captures">
+          <figure class="product-capture product-capture--desktop">
+            <figcaption><span>WINDOWS DESKTOP</span><b>LOCAL MAP / LIVE FIX</b></figcaption>
+            <picture><img src="/images/raid-signal-desktop.webp" alt="Raid Signal Windows desktop showing the Customs map, extraction points, and position telemetry" width="1440" height="900" /></picture>
+          </figure>
+          <figure class="product-capture product-capture--overlay">
+            <figcaption><span>NATIVE OVERLAY</span><b>ALWAYS ON TOP</b></figcaption>
+            <picture><img src="/images/raid-signal-overlay.webp" alt="Compact Raid Signal native map overlay" width="780" height="560" loading="lazy" /></picture>
+          </figure>
+          <figure class="product-capture product-capture--phone">
+            <figcaption><span>PHONE COMPANION</span><b>LOCAL DECRYPTION</b></figcaption>
+            <picture><img src="/images/raid-signal-phone.webp" alt="Raid Signal encrypted squad companion on a phone" width="390" height="844" loading="lazy" /></picture>
+          </figure>
         </div>
       </section>
 
-      <section class="capability-strip" aria-label="Product capabilities">
-        <article><span>01</span><h3>Offline first</h3><p>Maps and raid tools remain on the desktop.</p></article>
-        <article><span>02</span><h3>Relay blind</h3><p>The server forwards ciphertext without position history.</p></article>
-        <article><span>03</span><h3>Invitation bound</h3><p>A random room and 256-bit key expire after three hours.</p></article>
-        <article><span>04</span><h3>Phone ready</h3><p>No app installation is required for squad viewers.</p></article>
-      </section>
-
       <section class="privacy-section" id="privacy">
-        <div><p class="eyebrow">PRIVACY / THREAT MODEL</p><h2>The relay carries ciphertext, not your raid.</h2></div>
+        <div class="privacy-heading"><p class="eyebrow">PRIVACY / THREAT MODEL</p><h2>The relay carries ciphertext, not your raid.</h2></div>
         <div class="privacy-copy">
           <p>Raid Signal sends only encrypted map ID, coordinates, heading, callsign, sequence, and timestamp.</p>
           <ul><li>No screenshots or Tarkov logs</li><li>No account information</li><li>No quests or custom pins</li><li>No historical positions</li></ul>
@@ -100,7 +94,7 @@
       </section>
 
       <section class="final-cta">
-        <p class="eyebrow">RAID SIGNAL / 1.0</p><h2>Keep the room private.<br />Keep the squad visible.</h2>
+        <div><p class="eyebrow">RAID SIGNAL / 1.0</p><h2>Keep the room private.<br />Keep the squad visible.</h2></div>
         <a class="button" href="#main" data-download-mirror aria-disabled="true">WINDOWS DOWNLOAD UNAVAILABLE</a>
       </section>
     </main>

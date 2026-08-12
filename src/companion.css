@@ -25,25 +25,24 @@ body.companion-body { min-width: 0; }
 .companion-roster button b { font-size: 10px; }
 .companion-roster button small { color: var(--muted); font: 400 8px/1.4 "IBM Plex Mono", monospace; }
 .companion-gate { min-height: 100%; display: grid; grid-template-columns: minmax(280px, 520px) minmax(300px, 620px); place-content: center; gap: clamp(40px, 8vw, 120px); padding: clamp(24px, 6vw, 90px); color: #e8e0d0; background: #070706; }
-.companion-gate__field { position: relative; display: grid; width: min(70vw, 520px); aspect-ratio: 1; place-items: center; border: 1px solid #34312c; transform: perspective(850px) rotateX(58deg) rotateZ(-12deg); }
-.companion-gate__field::before, .companion-gate__field::after { content: ""; position: absolute; width: 70%; aspect-ratio: 1.5; border: 1px solid #4b463d; border-radius: 50%; }
-.companion-gate__field::after { width: 42%; border-color: #ff5a2a; }
-.companion-gate__field > span { position: absolute; inset: 9%; border: 1px solid #22211d; }
-.companion-gate__field i { position: absolute; width: 9px; height: 9px; border: 2px solid #ff5a2a; border-radius: 50%; }
-.companion-gate__field i:nth-of-type(1) { left: 28%; top: 61%; }
-.companion-gate__field i:nth-of-type(2) { left: 59%; top: 34%; }
-.companion-gate__field i:nth-of-type(3) { left: 68%; top: 67%; }
-.companion-gate__field b { color: #ff5a2a; font: 500 13px/1 "IBM Plex Mono", monospace; letter-spacing: .15em; }
+.companion-gate__field { position: relative; width: min(70vw, 560px); aspect-ratio: 1.18; overflow: hidden; border: 1px solid #34312c; background: #0a0a08; transform: perspective(900px) rotateX(54deg) rotateZ(-10deg); }
+.companion-gate__field::after { content: ""; position: absolute; inset: 8%; border: 1px solid #22211d; }
+.companion-gate__field svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.companion-gate__field .gate-terrain { stroke: #49443c; }
+.companion-gate__field .gate-route { stroke: #ff5a2a; }
+.companion-gate__field .gate-route circle { fill: #0a0a08; stroke: #ff5a2a; }
+.companion-gate__field > span { position: absolute; right: 18px; bottom: 15px; color: #6f685e; font: 500 7px/1 "IBM Plex Mono", monospace; letter-spacing: .12em; }
+.companion-gate__field b { position: absolute; top: 15px; left: 18px; color: #ff5a2a; font: 500 13px/1 "IBM Plex Mono", monospace; letter-spacing: .15em; }
 .companion-gate section { align-self: center; }
 .companion-gate section > p { margin: 0 0 18px; color: #ff5a2a; font: 500 9px/1.4 "IBM Plex Mono", monospace; letter-spacing: .15em; }
 .companion-gate h1 { max-width: 580px; margin: 0 0 24px; font: 600 clamp(42px, 7vw, 84px)/.9 "IBM Plex Sans Condensed", sans-serif; letter-spacing: -.05em; }
 .companion-gate section > span { display: block; max-width: 520px; color: #8d887f; }
 .companion-gate a { display: inline-flex; margin-top: 30px; padding: 12px 16px; border: 1px solid #ff5a2a; color: #ff5a2a; font: 500 9px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-decoration: none; }
-.companion-gate.connecting .companion-gate__field::after { animation: companion-acquire 1.8s steps(6, end) infinite; }
-@keyframes companion-acquire { 50% { width: 58%; border-color: #e8e0d0; } }
+.companion-gate.connecting .companion-gate__field .gate-route { animation: companion-acquire 1.8s steps(6,end) infinite; }
+@keyframes companion-acquire { 50% { opacity: .35; stroke: #e8e0d0; } }
 @media (max-width: 640px) {
   .companion-gate { grid-template-columns: 1fr; align-content: center; gap: 30px; }
-  .companion-gate__field { width: min(70vw, 310px); margin: auto; }
+  .companion-gate__field { width: min(78vw, 340px); margin: auto; }
   .companion-shell { grid-template-rows: 50px 54px 1fr; }
   .companion-brand small { display: none; }
   .companion-header { gap: 5px; }

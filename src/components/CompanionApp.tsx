@@ -15,7 +15,18 @@ function CompanionGate({ state, error }: { state: "connecting" | "offline" | "in
   const invalid = state === "invalid";
   const title = invalid ? "Invitation cannot be opened" : state === "offline" ? "Relay is out of range" : "Acquiring encrypted room";
   return <main className={`companion-gate ${state}`}>
-    <div className="companion-gate__field" aria-hidden="true"><span /><i /><i /><i /><b>RS</b></div>
+    <div className="companion-gate__field" aria-hidden="true">
+      <svg viewBox="0 0 620 500" preserveAspectRatio="xMidYMid slice">
+        <g className="gate-terrain" fill="none">
+          <path d="M3 430c95-80 137-28 213-91s133-95 210-50 114 22 190-55" />
+          <path d="M0 467c105-88 156-33 237-101s142-104 225-55 118 15 164-38" />
+          <path d="M45 357c70-61 116-50 177-88s106-65 172-29 97 24 154-26" />
+          <path d="M86 306c59-47 98-38 148-70s88-53 143-24 81 20 128-18" />
+        </g>
+        <g className="gate-route" fill="none"><path d="M104 376 263 304 359 245 506 196" /><path d="M359 245 498 330" /><circle cx="104" cy="376" r="7" /><circle cx="359" cy="245" r="10" /><circle cx="506" cy="196" r="7" /><circle cx="498" cy="330" r="7" /></g>
+      </svg>
+      <span>ROOM / KEY LOCAL</span><b>RS</b>
+    </div>
     <section><p>RAID SIGNAL / {invalid ? "INVITATION REJECTED" : state === "offline" ? "CONNECTION LOST" : "LOCAL DECRYPTION"}</p><h1>{title}</h1><span>{error ?? (state === "connecting" ? "The key remains on this device while a secure WebSocket is established." : "The relay did not accept the connection. Check your network or request a fresh invitation.")}</span>{state !== "connecting" && <a href="/">RETURN TO RAID SIGNAL</a>}</section>
   </main>;
 }

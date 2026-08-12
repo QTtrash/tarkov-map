@@ -1,131 +1,151 @@
 import * as THREE from "three";
-import type { SignalSound } from "./signal-main";
-import { SIGNAL_CHAPTERS, signalStoryState } from "./signal-story";
 
-function setOpacity(object: THREE.Object3D, opacity: number) {
-  object.traverse((child) => {
-    if (!(child instanceof THREE.Mesh || child instanceof THREE.Line || child instanceof THREE.LineLoop)) return;
-    const materials = Array.isArray(child.material) ? child.material : [child.material];
-    for (const material of materials) { material.transparent = true; material.opacity = opacity; }
-  });
+function makeRoute(points: THREE.Vector3[], color = 0xff5a2a, opacity = .8) {
+  const curve = new THREE.CatmullRomCurve3(points, false, "catmullrom", .28);
+  const material = new THREE.LineBasicMaterial({ color, transparent: true, opacity });
+  const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getPoints(100)), material);
+  return { curve, line, material };
 }
 
-function createContours() {
-  const group = new THREE.Group();
-  const material = new THREE.LineBasicMaterial({ color: 0x8b8478, transparent: true, opacity: .46 });
-  for (let level = 0; level < 19; level += 1) {
-    const points: THREE.Vector3[] = [];
-    const inset = level * .075;
-    for (let index = 0; index < 96; index += 1) {
-      const angle = index / 96 * Math.PI * 2;
-      const noise = Math.sin(angle * 3 + level * .71) * .22 + Math.cos(angle * 7 - level * .43) * .1;
-      const radius = 1 + noise * (1 - level / 24);
-      points.push(new THREE.Vector3(Math.cos(angle) * (4.6 - inset) * radius, level * .055 + Math.sin(angle * 2 + level) * .025, Math.sin(angle) * (3.25 - inset * .62) * radius));
-    }
-    group.add(new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(points), material));
-  }
-  const slab = new THREE.Mesh(new THREE.BoxGeometry(9.6, .16, 7), new THREE.ShaderMaterial({
-    vertexShader: `varying vec3 vNormal; void main(){ vNormal = normalize(normalMatrix * normal); gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
-    fragmentShader: `varying vec3 vNormal; void main(){ vec2 cell=mod(floor(gl_FragCoord.xy),4.0); float order=mod(cell.x*2.0+cell.y*3.0,5.0)/5.0; float light=dot(normalize(vNormal),normalize(vec3(-0.35,0.82,0.44)))*0.5+0.5; gl_FragColor=vec4(mix(vec3(0.045,0.043,0.035),vec3(0.18,0.095,0.055),step(order,light*0.72)),1.0); }`,
-  }));
-  slab.position.y = -.12;
-  group.add(slab);
-  return group;
-}
-
-function createBeacon(x: number, z: number) {
-  const group = new THREE.Group();
-  const material = new THREE.MeshBasicMaterial({ color: 0xff5a2a });
-  const ring = new THREE.Mesh(new THREE.TorusGeometry(.2, .018, 8, 48), material);
-  ring.rotation.x = Math.PI / 2;
-  const core = new THREE.Mesh(new THREE.CylinderGeometry(.035, .035, .6, 8), material);
-  core.position.y = .3;
-  group.add(ring, core);
-  group.position.set(x, .98, z);
-  return group;
-}
-
-function createDevice(width: number, height: number, depth: number) {
-  const group = new THREE.Group();
-  const shell = new THREE.Mesh(new THREE.BoxGeometry(width, height, depth), new THREE.MeshStandardMaterial({ color: 0x181713, roughness: .72, metalness: .35 }));
-  const screen = new THREE.Mesh(new THREE.PlaneGeometry(width * .78, height * .68), new THREE.MeshBasicMaterial({ color: 0x2b160f }));
-  screen.position.z = depth / 2 + .006;
-  group.add(shell, screen);
-  return group;
-}
-
-export function initializeSignalScene(sound: SignalSound) {
-  const sequence = document.querySelector<HTMLElement>("[data-signal-sequence]");
+export function initializeSignalScene() {
+  const host = document.querySelector<HTMLElement>("[data-signal-atlas]");
   const canvas = document.querySelector<HTMLCanvasElement>("[data-signal-canvas]");
-  const readout = document.querySelector<HTMLElement>("[data-stage-readout]");
-  if (!sequence || !canvas) return;
+  if (!host || !canvas) return;
 
   let renderer: THREE.WebGLRenderer;
-  try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, powerPreference: "high-performance" }); } catch { return; }
+  try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "high-performance" }); } catch { return; }
   renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.setClearColor(0x090908, 1);
+  renderer.setClearColor(0x090908, 0);
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(38, 1, .1, 100);
-  camera.position.set(8.7, 7.2, 10.8);
-  camera.lookAt(0, .2, 0);
-  scene.add(new THREE.HemisphereLight(0xe8e0d0, 0x080807, 1.6));
-  const keyLight = new THREE.DirectionalLight(0xff754d, 3.2);
-  keyLight.position.set(-4, 8, 5);
-  scene.add(keyLight);
+  scene.fog = new THREE.FogExp2(0x090908, .032);
+  const camera = new THREE.PerspectiveCamera(34, 1, .1, 100);
+  camera.position.set(5.8, 6.5, 10.7);
 
-  const terrain = createContours(); terrain.rotation.y = -.16; scene.add(terrain);
-  const beaconA = createBeacon(-2.2, .7); const beaconB = createBeacon(.9, -1.25); scene.add(beaconA, beaconB);
-  const desktop = createDevice(2.5, 1.55, .16); desktop.position.set(-4.7, 2.25, .3); desktop.rotation.y = .46; scene.add(desktop);
-  const relay = new THREE.Mesh(new THREE.BoxGeometry(1.25, 2.8, 1.25), new THREE.MeshStandardMaterial({ color: 0x080807, roughness: .45, metalness: .65 }));
-  relay.position.set(.2, 2.05, -.15);
-  relay.add(new THREE.LineSegments(new THREE.EdgesGeometry(relay.geometry), new THREE.LineBasicMaterial({ color: 0x817b70, transparent: true, opacity: .5 })));
-  scene.add(relay);
-  const phone = createDevice(1.18, 2.25, .13); phone.position.set(4.3, 2.15, -.25); phone.rotation.y = -.38; scene.add(phone);
+  const field = new THREE.Group();
+  field.position.set(2.2, -.65, -.4);
+  field.rotation.set(-.96, 0, -.11);
+  scene.add(field);
+
+  const texture = new THREE.TextureLoader().load("/maps/svg/Customs.svg", () => canvas.classList.add("is-ready"));
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.anisotropy = Math.min(renderer.capabilities.getMaxAnisotropy(), 8);
+  const mapGeometry = new THREE.PlaneGeometry(10.4, 6.2, 72, 48);
+  const positions = mapGeometry.attributes.position as THREE.BufferAttribute;
+  for (let index = 0; index < positions.count; index += 1) {
+    const x = positions.getX(index), y = positions.getY(index);
+    positions.setZ(index, Math.sin(x * .8) * .065 + Math.cos(y * 1.2) * .05 + Math.sin((x + y) * 1.65) * .025);
+  }
+  mapGeometry.computeVertexNormals();
+  const mapMaterial = new THREE.ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    uniforms: { uMap: { value: texture }, uSignal: { value: new THREE.Color(0xff5a2a) } },
+    vertexShader: `varying vec2 vUv; varying vec3 vNormalView; varying vec3 vLocal; void main(){vUv=uv;vLocal=position;vNormalView=normalize(normalMatrix*normal);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
+    fragmentShader: `uniform sampler2D uMap; uniform vec3 uSignal; varying vec2 vUv; varying vec3 vNormalView; varying vec3 vLocal; void main(){vec4 tex=texture2D(uMap,vUv);float luma=dot(tex.rgb,vec3(.299,.587,.114));float light=clamp(dot(vNormalView,normalize(vec3(-.25,.75,.58)))*.4+.58,0.,1.);vec3 mapTone=mix(vec3(luma),tex.rgb,.42)*.72+vec3(.018);float gridX=1.-smoothstep(.0,.018,abs(fract((vLocal.x+5.2)*.46)-.5));float gridY=1.-smoothstep(.0,.018,abs(fract((vLocal.y+3.1)*.46)-.5));vec3 color=mapTone*light+uSignal*(gridX+gridY)*.025;gl_FragColor=vec4(color,.24);}`,
+  });
+  const map = new THREE.Mesh(mapGeometry, mapMaterial);
+  field.add(map);
+
+  const local = new THREE.Vector3(-3.35, -1.25, .13);
+  const relay = new THREE.Vector3(.15, .35, .16);
+  const squad = [new THREE.Vector3(3.05, 1.35, .15), new THREE.Vector3(3.75, -.45, .15), new THREE.Vector3(2.15, -1.8, .15)];
+  const inbound = makeRoute([local, new THREE.Vector3(-2.25,-.88,.15), new THREE.Vector3(-1.05,-.15,.16), relay]);
+  field.add(inbound.line);
+  const outbound = squad.map((point, index) => {
+    const route = makeRoute([relay, new THREE.Vector3(1.05 + index * .18, .2 - index * .45, .17), point], index === 1 ? 0xe8e0d0 : 0xff5a2a, .55);
+    field.add(route.line);
+    return route;
+  });
+
+  const beaconMaterial = new THREE.MeshBasicMaterial({ color: 0xff5a2a });
+  const markerPoints = [local, relay, ...squad];
+  const beacons = markerPoints.map((point, index) => {
+    const group = new THREE.Group();
+    const diamond = new THREE.Mesh(new THREE.OctahedronGeometry(index === 1 ? .16 : .105, 0), beaconMaterial.clone());
+    const halo = new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(Array.from({ length: 36 }, (_, step) => {
+      const angle = step / 36 * Math.PI * 2;
+      return new THREE.Vector3(Math.cos(angle) * (index === 1 ? .34 : .23), Math.sin(angle) * (index === 1 ? .34 : .23), 0);
+    })), new THREE.LineBasicMaterial({ color: index === 1 ? 0xe8e0d0 : 0xff5a2a, transparent: true, opacity: .5 }));
+    group.add(diamond, halo);
+    group.position.copy(point);
+    field.add(group);
+    return group;
+  });
+
   const packetMaterial = new THREE.MeshBasicMaterial({ color: 0xff5a2a });
-  const packets = Array.from({ length: 11 }, (_, index) => { const packet = new THREE.Mesh(new THREE.BoxGeometry(.075, .075, .075), packetMaterial); packet.userData.offset = index / 11; scene.add(packet); return packet; });
+  const packets = Array.from({ length: 9 }, (_, index) => {
+    const packet = new THREE.Mesh(new THREE.OctahedronGeometry(.055, 0), packetMaterial);
+    packet.userData.offset = index / 9;
+    field.add(packet);
+    return packet;
+  });
+
+  let mode = 0;
+  let visible = true;
+  let frameId = 0;
+  let pointerX = 0;
+  let pointerY = 0;
+  const onMode = (event: Event) => { mode = Number((event as CustomEvent<number>).detail) || 0; };
+  const onPointer = (event: PointerEvent) => { pointerX = event.clientX / innerWidth - .5; pointerY = event.clientY / innerHeight - .5; };
+  document.addEventListener("raid-signal:mode", onMode);
+  addEventListener("pointermove", onPointer, { passive: true });
+
+  const resize = () => {
+    const bounds = canvas.getBoundingClientRect();
+    renderer.setSize(bounds.width, bounds.height, false);
+    camera.aspect = bounds.width / Math.max(bounds.height, 1);
+    camera.updateProjectionMatrix();
+  };
+  const resizeObserver = new ResizeObserver(resize);
+  resizeObserver.observe(canvas);
+  const observer = new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting;
+    if (visible && !frameId) frameId = requestAnimationFrame(render);
+  }, { threshold: .01 });
+  observer.observe(host);
 
   const clock = new THREE.Clock();
-  let progress = 0, frame = 0, pointerX = 0, pointerY = 0, previousChapter = 0;
-  let visible = true;
-  const resize = () => { renderer.setSize(innerWidth, innerHeight, false); camera.aspect = innerWidth / Math.max(innerHeight, 1); camera.updateProjectionMatrix(); };
-  const updateProgress = () => { const bounds = sequence.getBoundingClientRect(); progress = Math.min(1, Math.max(0, -bounds.top / Math.max(1, bounds.height - innerHeight))); };
-  const onPointer = (event: PointerEvent) => { pointerX = event.clientX / innerWidth - .5; pointerY = event.clientY / innerHeight - .5; };
-  const render = () => {
-    if (!visible || document.hidden) { frame = 0; return; }
+  const desiredCamera = new THREE.Vector3();
+  function render() {
+    if (!visible || document.hidden) { frameId = 0; return; }
     const elapsed = clock.getElapsedTime();
-    const state = signalStoryState(progress);
-    if (state.chapter !== previousChapter) { sound.cue(state.chapter === 2 ? "relay" : state.chapter === 3 ? "resolve" : "acquire"); previousChapter = state.chapter; }
-    if (readout) readout.textContent = SIGNAL_CHAPTERS[state.chapter];
-    terrain.scale.y = Math.max(.015, state.terrain); terrain.rotation.y = -.16 + Math.sin(elapsed * .13) * .025;
-    beaconA.scale.setScalar(.72 + Math.sin(elapsed * 2.2) * .08); beaconB.scale.setScalar(.72 + Math.sin(elapsed * 2.2 + 1.1) * .08);
-    setOpacity(beaconA, state.terrain); setOpacity(beaconB, state.terrain);
-    desktop.scale.setScalar(Math.max(.001, state.devices)); relay.scale.setScalar(Math.max(.001, state.relay)); phone.scale.setScalar(Math.max(.001, state.delivery));
-    const packetTravel = Math.max(0, Math.min(1, (progress - .28) / .62));
-    for (const packet of packets) {
-      const travel = (packetTravel * 1.45 - packet.userData.offset + 1) % 1;
-      if (travel < .5) packet.position.lerpVectors(desktop.position, relay.position, Math.min(1, travel * 2)); else packet.position.lerpVectors(relay.position, phone.position, Math.max(0, travel * 2 - 1));
-      packet.position.y += Math.sin(elapsed * 3 + packet.userData.offset * 12) * .08;
-      packet.visible = progress > .29 && progress < .98;
-    }
-    camera.position.x = THREE.MathUtils.lerp(8.7, state.chapter === 2 ? 6.6 : 7.5, state.relay) + pointerX * .34;
-    camera.position.y = THREE.MathUtils.lerp(7.2, 5.6, state.delivery) - pointerY * .22;
-    camera.lookAt(THREE.MathUtils.lerp(-.45, .35, state.delivery), 1, 0);
+    inbound.material.opacity = THREE.MathUtils.lerp(inbound.material.opacity, mode === 0 ? .94 : .48, .07);
+    outbound.forEach((route) => { route.material.opacity = THREE.MathUtils.lerp(route.material.opacity, mode === 2 ? .86 : .14, .07); });
+    beacons.forEach((beacon, index) => {
+      const target = mode === 0 ? (index === 0 ? 1 : .45) : mode === 1 ? (index < 2 ? 1 : .38) : 1;
+      const scale = THREE.MathUtils.lerp(beacon.scale.x, target, .08);
+      beacon.scale.setScalar(scale * (1 + Math.sin(elapsed * 2.1 + index) * .025));
+    });
+    packets.forEach((packet) => {
+      const progress = (elapsed * .12 + packet.userData.offset) % 1;
+      const route = mode === 2 ? outbound[Math.floor(packet.userData.offset * outbound.length) % outbound.length] : inbound;
+      packet.position.copy(route.curve.getPointAt(progress));
+      packet.visible = mode > 0;
+      packet.rotation.z += .04;
+    });
+    desiredCamera.set(5.8 + pointerX * .3 + mode * .16, 6.5 - pointerY * .22 - mode * .2, 10.7 - mode * .35);
+    camera.position.lerp(desiredCamera, .035);
+    camera.lookAt(1.25 + mode * .2, -.15, 0);
     renderer.render(scene, camera);
-    frame = requestAnimationFrame(render);
-  };
+    frameId = requestAnimationFrame(render);
+  }
 
-  const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; if (visible && !frame) frame = requestAnimationFrame(render); });
-  observer.observe(sequence);
-  const resizeObserver = new ResizeObserver(resize); resizeObserver.observe(document.documentElement);
-  addEventListener("scroll", updateProgress, { passive: true }); addEventListener("pointermove", onPointer, { passive: true });
-  canvas.addEventListener("webglcontextlost", (event) => { event.preventDefault(); canvas.classList.remove("is-ready"); });
-  canvas.addEventListener("webglcontextrestored", () => canvas.classList.add("is-ready"));
-  resize(); updateProgress(); canvas.classList.add("is-ready"); frame = requestAnimationFrame(render);
+  resize();
+  frameId = requestAnimationFrame(render);
   addEventListener("pagehide", () => {
-    cancelAnimationFrame(frame); observer.disconnect(); resizeObserver.disconnect(); removeEventListener("scroll", updateProgress); removeEventListener("pointermove", onPointer);
-    scene.traverse((child) => { if (!(child instanceof THREE.Mesh || child instanceof THREE.Line || child instanceof THREE.LineLoop || child instanceof THREE.LineSegments)) return; child.geometry.dispose(); (Array.isArray(child.material) ? child.material : [child.material]).forEach((material) => material.dispose()); });
+    cancelAnimationFrame(frameId);
+    observer.disconnect();
+    resizeObserver.disconnect();
+    document.removeEventListener("raid-signal:mode", onMode);
+    removeEventListener("pointermove", onPointer);
+    scene.traverse((child) => {
+      if (!(child instanceof THREE.Mesh || child instanceof THREE.Line || child instanceof THREE.LineLoop)) return;
+      child.geometry.dispose();
+      (Array.isArray(child.material) ? child.material : [child.material]).forEach((material) => material.dispose());
+    });
+    texture.dispose();
     renderer.dispose();
   }, { once: true });
 }
