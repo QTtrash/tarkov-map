@@ -1,8 +1,9 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Tarkov Map Locator",
-  "version": "0.4.0",
-  "identifier": "com.tarkovmap.locator",
+  "productName": "Raid Signal",
+  "mainBinaryName": "raid-signal",
+  "version": "1.0.0",
+  "identifier": "com.mouchsiadis.raidsignal",
   "build": {
     "beforeDevCommand": "npm run dev",
     "devUrl": "http://localhost:1420",
@@ -11,13 +12,13 @@
   },
   "app": {
     "security": {
-      "csp": "default-src 'self'; img-src 'self' asset: data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' ipc: http://ipc.localhost ws://127.0.0.1:* ws://localhost:*",
+      "csp": "default-src 'self'; img-src 'self' asset: data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' ipc: http://ipc.localhost ws://127.0.0.1:* ws://localhost:* wss://signal.mouchsiadis-solutions.com",
       "devCsp": "default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' ipc: http://ipc.localhost http://localhost:1420 ws://localhost:1420"
     },
     "windows": [
       {
         "label": "main",
-        "title": "Tarkov Map Locator",
+        "title": "Raid Signal",
         "width": 1280,
         "height": 800,
         "minWidth": 900,
@@ -32,8 +33,8 @@
     "active": true,
     "targets": ["nsis"],
     "category": "Utility",
-    "shortDescription": "Local-first Tarkov raid navigator",
-    "longDescription": "Displays screenshot coordinates on offline interactive maps with active-extract OCR, quests, overlay, and encrypted phone sharing.",
+    "shortDescription": "Local-first encrypted raid navigator",
+    "longDescription": "Displays screenshot coordinates on offline interactive maps with active-extract OCR, quests, overlay, and end-to-end encrypted squad sharing.",
     "copyright": "Not affiliated with Battlestate Games"
   }
 }

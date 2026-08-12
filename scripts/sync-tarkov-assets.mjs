@@ -18,7 +18,20 @@ const itemUrls = ["https://json.tarkov.dev/regular/items", "https://json.tarkov.
 const traderUrls = ["https://json.tarkov.dev/regular/traders", "https://json.tarkov.dev/regular/traders_en"];
 const svgBase = "https://raw.githubusercontent.com/the-hideout/tarkov-dev-svg-maps/main";
 const licenseUrl = `${svgBase}/LICENSE.md`;
-const rasterNativeZoom = { icebreaker: 2, "the-labyrinth": 4 };
+const communityRasterMaps = {
+  icebreaker: {
+    url: "https://reemr.se/maps/Icebreaker/re3mrIcebreaker.png",
+    filename: "Icebreaker-re3mr.png",
+    author: "RE3MR",
+    authorLink: "https://reemr.se/",
+  },
+  "the-labyrinth": {
+    url: "https://www.re3mr.com/maps/Labyrinth/re3mrLabyrinthPNG.png",
+    filename: "Labyrinth-re3mr.png",
+    author: "RE3MR",
+    authorLink: "https://reemr.se/",
+  },
+};
 const displayNames = {
   "streets-of-tarkov": "Streets of Tarkov",
   "ground-zero": "Ground Zero",
@@ -492,6 +505,12 @@ async function main() {
         if (map.key === "the-lab") svgLayer = layer.name === "Second Level" ? "Second_Level" : "Technical_Level";
         return normalizeFloor({ ...layer, svgLayer }, index, null);
       });
+    } else if (communityRasterMaps[map.key]) {
+      const source = communityRasterMaps[map.key];
+      const relative = `image/${source.filename}`;
+      checksums[relative] = await writeResponse(source.url, path.join(stagingPublicMaps, relative));
+      baseAsset = { type: "image", path: `/maps/${relative}`, bounds: map.bounds };
+      floors = (map.layers || []).map((layer, index) => normalizeFloor(layer, index, baseAsset));
     } else {
       const baseLayerId = safeLayerId(map.tilePath?.split("/").at(-4) || "base");
       baseAsset = { type: "tiles", ...(await downloadTileSet(map, map.tilePath, baseLayerId, checksums)) };
@@ -521,7 +540,10 @@ async function main() {
       floors,
       poiPath: `/maps/${poiRelative}`,
       poiCounts: countCategories(poiBundle.pois),
-      attribution: {
+      attribution: communityRasterMaps[map.key] ? {
+        name: communityRasterMaps[map.key].author,
+        url: communityRasterMaps[map.key].authorLink,
+      } : {
         name: map.author || "Tarkov.dev contributors",
         url: map.authorLink || "https://tarkov.dev",
       },
@@ -541,7 +563,7 @@ async function main() {
   await writeJson({
     schemaVersion: 1,
     generatedAt: new Date().toISOString(),
-    sources: [mapsUrl, poiUrl, poiTranslationsUrl, ...Object.values(questUrls).flat(), ...itemUrls, ...traderUrls, svgBase],
+    sources: [mapsUrl, poiUrl, poiTranslationsUrl, ...Object.values(questUrls).flat(), ...itemUrls, ...traderUrls, svgBase, ...Object.values(communityRasterMaps).map((source) => source.url), "https://reemr.se/"],
     assetCount: Object.keys(checksums).length,
   }, path.join(stagingPublicMaps, "data-manifest.json"));
   await writeJson(checksums, path.join(stagingPublicMaps, "asset-checksums.json"));

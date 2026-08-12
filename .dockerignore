@@ -1,0 +1,7 @@
+.git
+node_modules
+relay/node_modules
+dist
+relay/dist
+src-tauri/target
+*.log

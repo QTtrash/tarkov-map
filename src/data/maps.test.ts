@@ -14,6 +14,13 @@ function verifyAsset(asset: MapAsset) {
     return;
   }
 
+  if (asset.type === "image") {
+    const file = path.join(process.cwd(), "public", asset.path.replace(/^\//, ""));
+    expect(existsSync(file), asset.path).toBe(true);
+    expect(readFileSync(file).byteLength, asset.path).toBeGreaterThan(100_000);
+    return;
+  }
+
   const relative = asset.template
     .replace(/^\/maps\//, "")
     .replace("{z}", String(asset.nativeZoom))

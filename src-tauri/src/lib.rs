@@ -225,7 +225,7 @@ fn create_overlay(app: &tauri::AppHandle) -> Result<(), String> {
         "overlay",
         tauri::WebviewUrl::App("overlay.html".into()),
     )
-    .title("Tarkov Locator Overlay")
+    .title("Raid Signal Overlay")
     .inner_size(430.0, 430.0)
     .min_inner_size(300.0, 300.0)
     .resizable(true)
@@ -536,7 +536,7 @@ pub fn run() {
             }
         })
         .run(tauri::generate_context!())
-        .expect("error while running Tarkov Map Locator");
+        .expect("error while running Raid Signal");
 }
 
 #[cfg(test)]

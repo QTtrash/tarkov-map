@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-12T15:59:05.217Z",
+  "generatedAt": "2026-08-12T18:24:11.249Z",
   "sources": [
     "https://raw.githubusercontent.com/the-hideout/tarkov-dev/main/src/data/maps.json",
     "https://json.tarkov.dev/regular/maps",
@@ -13,7 +13,10 @@
     "https://json.tarkov.dev/regular/items_en",
     "https://json.tarkov.dev/regular/traders",
     "https://json.tarkov.dev/regular/traders_en",
-    "https://raw.githubusercontent.com/the-hideout/tarkov-dev-svg-maps/main"
+    "https://raw.githubusercontent.com/the-hideout/tarkov-dev-svg-maps/main",
+    "https://reemr.se/maps/Icebreaker/re3mrIcebreaker.png",
+    "https://www.re3mr.com/maps/Labyrinth/re3mrLabyrinthPNG.png",
+    "https://reemr.se/"
   ],
-  "assetCount": 538
+  "assetCount": 45
 }

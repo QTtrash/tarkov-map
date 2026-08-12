@@ -1,12 +1,12 @@
 [package]
-name = "tarkov-map-locator"
-version = "0.4.0"
+name = "raid-signal"
+version = "1.0.0"
 description = "Passive Escape from Tarkov screenshot position locator"
-authors = ["Tarkov Map Locator"]
+authors = ["Mouchsiadis Solutions"]
 edition = "2021"
 
 [lib]
-name = "tarkov_map_locator_lib"
+name = "raid_signal_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]

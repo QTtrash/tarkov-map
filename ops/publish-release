@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+[[ $# -eq 3 ]] || { echo "Usage: $0 <installer.exe> <version> <user@vps>" >&2; exit 2; }
+artifact="$(realpath "$1")"
+version="$2"
+remote="$3"
+[[ -f "$artifact" ]] || { echo "Installer not found: $artifact" >&2; exit 2; }
+filename="Raid-Signal-Setup-${version}.exe"
+size="$(stat -c %s "$artifact")"
+sha256="$(sha256sum "$artifact" | cut -d' ' -f1)"
+stage="/home/truegrind/state/raid-signal/releases/.upload-${filename}"
+scp "$artifact" "$remote:$stage"
+ssh "$remote" "set -e; test \"\$(stat -c %s '$stage')\" = '$size'; test \"\$(sha256sum '$stage' | cut -d' ' -f1)\" = '$sha256'; mv '$stage' '/home/truegrind/state/raid-signal/releases/$filename'"
+manifest="$(mktemp)"
+trap 'rm -f "$manifest"' EXIT
+printf '{\n  "version": "%s",\n  "filename": "%s",\n  "sha256": "%s",\n  "size": %s,\n  "publishedAt": "%s"\n}\n' "$version" "$filename" "$sha256" "$size" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$manifest"
+scp "$manifest" "$remote:/home/truegrind/state/raid-signal/releases/.release.json"
+ssh "$remote" "mv /home/truegrind/state/raid-signal/releases/.release.json /home/truegrind/state/raid-signal/releases/release.json"
+echo "Published $filename ($sha256)"

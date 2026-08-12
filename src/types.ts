@@ -38,6 +38,17 @@ export interface PlayerFix {
   floorId: string | null;
 }
 
+export interface SquadPosition {
+  senderId: string;
+  sequence: number;
+  nickname: string;
+  mapId: string;
+  position: Vec3;
+  heading: number | null;
+  observedAt: number;
+  receivedAt: number;
+}
+
 export interface LocatorStatus {
   level: "info" | "success" | "warning" | "error";
   message: string;
@@ -95,13 +106,19 @@ export interface RasterAsset {
   tileSize: number;
 }
 
+export interface ImageAsset {
+  type: "image";
+  path: string;
+  bounds: [[number, number], [number, number]];
+}
+
 export interface SvgAsset {
   type: "svg";
   path: string;
   baseLayer: string | null;
 }
 
-export type MapAsset = RasterAsset | SvgAsset;
+export type MapAsset = RasterAsset | SvgAsset | ImageAsset;
 
 export interface FloorDefinition {
   id: string;

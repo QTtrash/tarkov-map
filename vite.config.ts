@@ -17,11 +17,14 @@ export default defineConfig({
       input: {
         main: new URL("index.html", import.meta.url).pathname,
         overlay: new URL("overlay.html", import.meta.url).pathname,
+        companion: new URL("companion.html", import.meta.url).pathname,
+        signal: new URL("signal.html", import.meta.url).pathname,
       },
     },
   },
   test: {
     environment: "jsdom",
     setupFiles: "./src/test/setup.ts",
+    include: ["src/**/*.test.{ts,tsx}"],
   },
 });

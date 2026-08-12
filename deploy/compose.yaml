@@ -1,0 +1,27 @@
+name: ${RAID_SIGNAL_PROJECT_NAME:-raid-signal}
+services:
+  web:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    init: true
+    ports:
+      - 127.0.0.1:${APP_PORT:-3117}:3000
+    environment:
+      PORT: 3000
+      STATIC_ROOT: /app/web
+      RELEASE_ROOT: /app/releases
+    volumes:
+      - ${RELEASE_DIR:-/home/truegrind/state/raid-signal/releases}:/app/releases:ro
+    mem_limit: 128m
+    cpus: 0.5
+    networks:
+      default:
+      shared-proxy:
+        aliases:
+          - ${PROXY_UPSTREAM_ALIAS:-raid-signal-web}
+networks:
+  shared-proxy:
+    name: shared-proxy
+    external: true

@@ -886,10 +886,18 @@
     "minZoom": 1,
     "maxZoom": 6,
     "baseAsset": {
-      "type": "tiles",
-      "template": "/maps/tiles/icebreaker/06-infirmary/{z}/{x}/{y}.png",
-      "nativeZoom": 2,
-      "tileSize": 256
+      "type": "image",
+      "path": "/maps/image/icebreaker/infirmary.png",
+      "bounds": [
+        [
+          77,
+          -64.5
+        ],
+        [
+          -65.5,
+          67.4
+        ]
+      ]
     },
     "baseFloor": {
       "id": "base",
@@ -909,10 +917,18 @@
           }
         ],
         "asset": {
-          "type": "tiles",
-          "template": "/maps/tiles/icebreaker/infirmary/{z}/{x}/{y}.png",
-          "nativeZoom": 2,
-          "tileSize": 256
+          "type": "image",
+          "path": "/maps/image/icebreaker/infirmary.png",
+          "bounds": [
+            [
+              77,
+              -64.5
+            ],
+            [
+              -65.5,
+              67.4
+            ]
+          ]
         }
       },
       {
@@ -928,10 +944,18 @@
           }
         ],
         "asset": {
-          "type": "tiles",
-          "template": "/maps/tiles/icebreaker/helipad/{z}/{x}/{y}.png",
-          "nativeZoom": 2,
-          "tileSize": 256
+          "type": "image",
+          "path": "/maps/image/icebreaker/helipad.png",
+          "bounds": [
+            [
+              77,
+              -64.5
+            ],
+            [
+              -65.5,
+              67.4
+            ]
+          ]
         }
       },
       {
@@ -947,10 +971,18 @@
           }
         ],
         "asset": {
-          "type": "tiles",
-          "template": "/maps/tiles/icebreaker/gym-canteen/{z}/{x}/{y}.png",
-          "nativeZoom": 2,
-          "tileSize": 256
+          "type": "image",
+          "path": "/maps/image/icebreaker/gym-canteen.png",
+          "bounds": [
+            [
+              77,
+              -64.5
+            ],
+            [
+              -65.5,
+              67.4
+            ]
+          ]
         }
       },
       {
@@ -966,10 +998,18 @@
           }
         ],
         "asset": {
-          "type": "tiles",
-          "template": "/maps/tiles/icebreaker/accommodation-lower/{z}/{x}/{y}.png",
-          "nativeZoom": 2,
-          "tileSize": 256
+          "type": "image",
+          "path": "/maps/image/icebreaker/accommodation-lower.png",
+          "bounds": [
+            [
+              77,
+              -64.5
+            ],
+            [
+              -65.5,
+              67.4
+            ]
+          ]
         }
       },
       {
@@ -985,10 +1025,18 @@
           }
         ],
         "asset": {
-          "type": "tiles",
-          "template": "/maps/tiles/icebreaker/accommodation-mid/{z}/{x}/{y}.png",
-          "nativeZoom": 2,
-          "tileSize": 256
+          "type": "image",
+          "path": "/maps/image/icebreaker/accommodation-mid.png",
+          "bounds": [
+            [
+              77,
+              -64.5
+            ],
+            [
+              -65.5,
+              67.4
+            ]
+          ]
         }
       },
       {
@@ -1004,10 +1052,18 @@
           }
         ],
         "asset": {
-          "type": "tiles",
-          "template": "/maps/tiles/icebreaker/accommodation-upper/{z}/{x}/{y}.png",
-          "nativeZoom": 2,
-          "tileSize": 256
+          "type": "image",
+          "path": "/maps/image/icebreaker/accommodation-upper.png",
+          "bounds": [
+            [
+              77,
+              -64.5
+            ],
+            [
+              -65.5,
+              67.4
+            ]
+          ]
         }
       },
       {
@@ -1023,10 +1079,18 @@
           }
         ],
         "asset": {
-          "type": "tiles",
-          "template": "/maps/tiles/icebreaker/officers-deck/{z}/{x}/{y}.png",
-          "nativeZoom": 2,
-          "tileSize": 256
+          "type": "image",
+          "path": "/maps/image/icebreaker/officers-deck.png",
+          "bounds": [
+            [
+              77,
+              -64.5
+            ],
+            [
+              -65.5,
+              67.4
+            ]
+          ]
         }
       },
       {
@@ -1042,10 +1106,18 @@
           }
         ],
         "asset": {
-          "type": "tiles",
-          "template": "/maps/tiles/icebreaker/stairs-blocked/{z}/{x}/{y}.png",
-          "nativeZoom": 2,
-          "tileSize": 256
+          "type": "image",
+          "path": "/maps/image/icebreaker/stairs-blocked.png",
+          "bounds": [
+            [
+              77,
+              -64.5
+            ],
+            [
+              -65.5,
+              67.4
+            ]
+          ]
         }
       },
       {
@@ -1061,10 +1133,18 @@
           }
         ],
         "asset": {
-          "type": "tiles",
-          "template": "/maps/tiles/icebreaker/bridge/{z}/{x}/{y}.png",
-          "nativeZoom": 2,
-          "tileSize": 256
+          "type": "image",
+          "path": "/maps/image/icebreaker/bridge.png",
+          "bounds": [
+            [
+              77,
+              -64.5
+            ],
+            [
+              -65.5,
+              67.4
+            ]
+          ]
         }
       },
       {
@@ -1080,10 +1160,18 @@
           }
         ],
         "asset": {
-          "type": "tiles",
-          "template": "/maps/tiles/icebreaker/bridge-roof/{z}/{x}/{y}.png",
-          "nativeZoom": 2,
-          "tileSize": 256
+          "type": "image",
+          "path": "/maps/image/icebreaker/bridge-roof.png",
+          "bounds": [
+            [
+              77,
+              -64.5
+            ],
+            [
+              -65.5,
+              67.4
+            ]
+          ]
         }
       },
       {
@@ -1099,10 +1187,18 @@
           }
         ],
         "asset": {
-          "type": "tiles",
-          "template": "/maps/tiles/icebreaker/control-room/{z}/{x}/{y}.png",
-          "nativeZoom": 2,
-          "tileSize": 256
+          "type": "image",
+          "path": "/maps/image/icebreaker/control-room.png",
+          "bounds": [
+            [
+              77,
+              -64.5
+            ],
+            [
+              -65.5,
+              67.4
+            ]
+          ]
         }
       },
       {
@@ -1118,10 +1214,18 @@
           }
         ],
         "asset": {
-          "type": "tiles",
-          "template": "/maps/tiles/icebreaker/engine-room/{z}/{x}/{y}.png",
-          "nativeZoom": 2,
-          "tileSize": 256
+          "type": "image",
+          "path": "/maps/image/icebreaker/engine-room.png",
+          "bounds": [
+            [
+              77,
+              -64.5
+            ],
+            [
+              -65.5,
+              67.4
+            ]
+          ]
         }
       },
       {
@@ -1137,10 +1241,18 @@
           }
         ],
         "asset": {
-          "type": "tiles",
-          "template": "/maps/tiles/icebreaker/engine-room-upper/{z}/{x}/{y}.png",
-          "nativeZoom": 2,
-          "tileSize": 256
+          "type": "image",
+          "path": "/maps/image/icebreaker/engine-room-upper.png",
+          "bounds": [
+            [
+              77,
+              -64.5
+            ],
+            [
+              -65.5,
+              67.4
+            ]
+          ]
         }
       },
       {
@@ -1156,10 +1268,18 @@
           }
         ],
         "asset": {
-          "type": "tiles",
-          "template": "/maps/tiles/icebreaker/fuel-pumps-lower/{z}/{x}/{y}.png",
-          "nativeZoom": 2,
-          "tileSize": 256
+          "type": "image",
+          "path": "/maps/image/icebreaker/fuel-pumps-lower.png",
+          "bounds": [
+            [
+              77,
+              -64.5
+            ],
+            [
+              -65.5,
+              67.4
+            ]
+          ]
         }
       },
       {
@@ -1175,10 +1295,18 @@
           }
         ],
         "asset": {
-          "type": "tiles",
-          "template": "/maps/tiles/icebreaker/fuel-pumps/{z}/{x}/{y}.png",
-          "nativeZoom": 2,
-          "tileSize": 256
+          "type": "image",
+          "path": "/maps/image/icebreaker/fuel-pumps.png",
+          "bounds": [
+            [
+              77,
+              -64.5
+            ],
+            [
+              -65.5,
+              67.4
+            ]
+          ]
         }
       },
       {
@@ -1194,10 +1322,18 @@
           }
         ],
         "asset": {
-          "type": "tiles",
-          "template": "/maps/tiles/icebreaker/storage-security/{z}/{x}/{y}.png",
-          "nativeZoom": 2,
-          "tileSize": 256
+          "type": "image",
+          "path": "/maps/image/icebreaker/storage-security.png",
+          "bounds": [
+            [
+              77,
+              -64.5
+            ],
+            [
+              -65.5,
+              67.4
+            ]
+          ]
         }
       }
     ],
@@ -1208,8 +1344,8 @@
       "boss-zone": 40
     },
     "attribution": {
-      "name": "TarkovBOT.eu",
-      "url": "https://tarkovbot.eu/"
+      "name": "RE3MR",
+      "url": "https://reemr.se/"
     }
   },
   {
@@ -1441,10 +1577,18 @@
     "minZoom": 1,
     "maxZoom": 6,
     "baseAsset": {
-      "type": "tiles",
-      "template": "/maps/tiles/the-labyrinth/main/{z}/{x}/{y}.png",
-      "nativeZoom": 4,
-      "tileSize": 256
+      "type": "image",
+      "path": "/maps/image/labyrinth/calibrated.png",
+      "bounds": [
+        [
+          -52,
+          -37
+        ],
+        [
+          53,
+          76
+        ]
+      ]
     },
     "baseFloor": {
       "id": "base",
@@ -1461,8 +1605,8 @@
       "loot": 35
     },
     "attribution": {
-      "name": "Tarkov.dev",
-      "url": "https://tarkov.dev"
+      "name": "RE3MR",
+      "url": "https://reemr.se/"
     }
   },
   {

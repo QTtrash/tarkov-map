@@ -26,7 +26,7 @@ import {
 import { applyDetectedContext, returnToDetectedMap, selectViewedMap, type MapSessionState } from "./map-session";
 import { defaultVisiblePoiCategories, loadPoiBundle } from "./poi";
 import { recognizeRaidExtracts } from "./raid";
-import type { CustomPinPoi, LocatorSettings, LocatorStatus, MapAssetState, MapPoiBundle, OcrTextCapture, OverlayState, PlayerFix, PoiCategory, QuestObjectivePoi, RaidExtractState } from "./types";
+import type { CustomPinPoi, LocatorSettings, LocatorStatus, MapAssetState, MapPoiBundle, OcrTextCapture, OverlayState, PlayerFix, PoiCategory, QuestObjectivePoi, RaidExtractState, SquadPosition } from "./types";
 
 const initialStatus: LocatorStatus = {
   level: "info",
@@ -65,6 +65,7 @@ export function App() {
   const [settings, setSettings] = useState<LocatorSettings>(defaultSettings);
   const [status, setStatus] = useState<LocatorStatus>(initialStatus);
   const [fix, setFix] = useState<PlayerFix | null>(null);
+  const [squadPositions, setSquadPositions] = useState<SquadPosition[]>([]);
   const [mapSession, setMapSession] = useState<MapSessionState>({ viewedMapId: defaultSettings.selectedMap, detectedMapId: null, inRaid: false, source: "manual", browsingAway: false });
   const [floorMode, setFloorMode] = useState("auto");
   const [poiBundle, setPoiBundle] = useState<MapPoiBundle | null>(null);
@@ -78,7 +79,7 @@ export function App() {
   const [showSharing, setShowSharing] = useState(false);
   const [questPoi, setQuestPoi] = useState<QuestObjectivePoi | null>(null);
   const [customPins, setCustomPins] = useState<CustomPinPoi[]>(() => {
-    try { return JSON.parse(localStorage.getItem("tml-custom-pins") ?? "[]") as CustomPinPoi[]; } catch { return []; }
+    try { return JSON.parse(localStorage.getItem("raid-signal-custom-pins") ?? "[]") as CustomPinPoi[]; } catch { return []; }
   });
   const [now, setNow] = useState(Date.now());
   const [lastOcr, setLastOcr] = useState<OcrTextCapture | null>(null);
@@ -146,7 +147,16 @@ export function App() {
     return () => { disposed = true; cleanup?.(); };
   }, []);
 
-  useEffect(() => localStorage.setItem("tml-custom-pins", JSON.stringify(customPins)), [customPins]);
+  useEffect(() => localStorage.setItem("raid-signal-custom-pins", JSON.stringify(customPins)), [customPins]);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setSquadPositions((current) => current.filter((position) => Date.now() - position.receivedAt < 120_000)), 5_000);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const receiveSquadPosition = useCallback((position: SquadPosition) => {
+    setSquadPositions((current) => [...current.filter((entry) => entry.senderId !== position.senderId), position]);
+  }, []);
 
   useEffect(() => {
     void fetch("/maps/data-manifest.json")
@@ -321,8 +331,8 @@ export function App() {
     <main className={settings.highContrast ? "app-shell high-contrast" : "app-shell"}>
       <header className="command-bar">
         <div className="brand-lockup">
-          <span className="brand-sigil">TML</span>
-          <div><strong>TARKOV MAP LOCATOR</strong><span>FIELD POSITION SYSTEM</span></div>
+          <span className="brand-sigil">RS</span>
+          <div><strong>RAID SIGNAL</strong><span>FIELD POSITION SYSTEM</span></div>
         </div>
 
         <div className="command-selects">
@@ -390,6 +400,7 @@ export function App() {
             definition={definition}
             activeFloor={activeFloor}
             fix={visibleFix}
+            squadPositions={squadPositions}
             follow={settings.followPlayer}
             poiBundle={renderedPoiBundle}
             visiblePoiCategories={renderedCategories}
@@ -424,12 +435,12 @@ export function App() {
       </section>
 
       <QuestPanel open={showQuests} mapId={definition.id} onClose={() => setShowQuests(false)} onFocusObjective={focusQuestObjective} />
-      <SharePanel open={showSharing} fix={fix} mapId={definition.id} onClose={() => setShowSharing(false)} />
+      <SharePanel open={showSharing} fix={fix} mapId={definition.id} onClose={() => setShowSharing(false)} onSquadPosition={receiveSquadPosition} onSessionEnd={() => setSquadPositions([])} />
 
       {showSettings && (
         <div className="dialog-backdrop" role="presentation" onMouseDown={() => setShowSettings(false)}>
           <section className="dialog settings-dialog" role="dialog" aria-modal="true" aria-labelledby="settings-title" onMouseDown={(event) => event.stopPropagation()}>
-            <header><div><span className="kicker">SYSTEM CONFIGURATION</span><h2 id="settings-title">Locator settings</h2></div><button className="bare-icon" onClick={() => setShowSettings(false)} aria-label="Close"><UiIcon name="close" /></button></header>
+            <header><div><span className="kicker">SYSTEM CONFIGURATION</span><h2 id="settings-title">Raid Signal settings</h2></div><button className="bare-icon" onClick={() => setShowSettings(false)} aria-label="Close"><UiIcon name="close" /></button></header>
             <div className="dialog-section"><h3>DATA SOURCES</h3><p>The locator reads files created by Tarkov. No game memory or network connection is used.</p>
               <button className="folder-row" onClick={() => void browse("screenshots")}><UiIcon name="folder" /><span><b>SCREENSHOTS</b><small>{status.screenshotsDir ?? "Folder not detected"}</small></span><strong>BROWSE</strong></button>
               {status.screenshotsDir && <button className="inline-action" onClick={() => void openDirectory("screenshots")}>OPEN SCREENSHOTS FOLDER</button>}
@@ -447,9 +458,9 @@ export function App() {
       {showAbout && (
         <div className="dialog-backdrop" role="presentation" onMouseDown={() => setShowAbout(false)}>
           <section className="dialog about-dialog" role="dialog" aria-modal="true" aria-labelledby="about-title" onMouseDown={(event) => event.stopPropagation()}>
-            <header><div><span className="kicker">ABOUT</span><h2 id="about-title">Tarkov Map Locator</h2></div><button className="bare-icon" onClick={() => setShowAbout(false)} aria-label="Close"><UiIcon name="close" /></button></header>
+            <header><div><span className="kicker">ABOUT</span><h2 id="about-title">Raid Signal</h2></div><button className="bare-icon" onClick={() => setShowAbout(false)} aria-label="Close"><UiIcon name="close" /></button></header>
             <p>This app reads filenames and logs written by Escape from Tarkov. It never reads game memory, injects input, or modifies game files. No official approval or anti-cheat guarantee is implied.</p>
-            <h3>MAP AND INTELLIGENCE DATA</h3><p>Map metadata, coordinates, extracts, and points of interest are based on the MIT-licensed Tarkov.dev project. SVG artwork is provided by community contributors under CC BY-NC-SA 4.0.</p>
+            <h3>MAP AND INTELLIGENCE DATA</h3><p>Map metadata, coordinates, extracts, and points of interest are based on the MIT-licensed Tarkov.dev project. Community map artwork is provided under CC BY-NC-SA 4.0. Raid Signal is free and noncommercial.</p>
             <div className="license-links"><a href="https://github.com/the-hideout/tarkov-dev" target="_blank" rel="noreferrer">TARKOV.DEV SOURCE</a><a href="https://github.com/the-hideout/tarkov-dev-svg-maps" target="_blank" rel="noreferrer">MAP ARTWORK</a><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noreferrer">CC BY-NC-SA 4.0</a></div>
           </section>
         </div>

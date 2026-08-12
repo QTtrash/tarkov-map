@@ -2,12 +2,13 @@ import { useEffect, useRef } from "react";
 import L from "leaflet";
 import "leaflet.markercluster";
 import { poiMatchesFloor } from "../poi";
-import type { MapAsset, MapAssetState, MapDefinition, MapPoi, MapPoiBundle, PlayerFix, PoiCategory } from "../types";
+import type { MapAsset, MapAssetState, MapDefinition, MapPoi, MapPoiBundle, PlayerFix, PoiCategory, SquadPosition } from "../types";
 
 interface MapViewProps {
   definition: MapDefinition;
   activeFloor: string;
   fix: PlayerFix | null;
+  squadPositions?: SquadPosition[];
   follow: boolean;
   poiBundle: MapPoiBundle | null;
   visiblePoiCategories: Set<PoiCategory>;
@@ -62,6 +63,23 @@ function markerIcon(angle: number, stale: boolean) {
     iconSize: [36, 36],
     iconAnchor: [18, 18],
     html: `<div class="player-marker${stale ? " stale" : ""}"><span class="player-arrow" style="transform: rotate(${angle}deg)"></span><span class="player-dot"></span></div>`,
+  });
+}
+
+function squadColor(senderId: string) {
+  const palette = ["#61c7b5", "#d8a45d", "#7fa9e8", "#d67883", "#a891db", "#86bd68", "#d58ccc"];
+  let hash = 0;
+  for (const character of senderId) hash = (hash * 31 + character.charCodeAt(0)) >>> 0;
+  return palette[hash % palette.length];
+}
+
+function squadMarkerIcon(position: SquadPosition, angle: number, stale: boolean) {
+  const color = squadColor(position.senderId);
+  return L.divIcon({
+    className: "squad-marker-shell",
+    iconSize: [120, 44],
+    iconAnchor: [22, 22],
+    html: `<div class="squad-marker${stale ? " stale" : ""}" style="--squad-color:${color}"><span class="squad-arrow" style="transform:rotate(${angle}deg)"></span><span class="squad-dot"></span><b>${escapeHtml(position.nickname)}</b></div>`,
   });
 }
 
@@ -195,6 +213,7 @@ export function MapView({
   definition,
   activeFloor,
   fix,
+  squadPositions = [],
   follow,
   poiBundle,
   visiblePoiCategories,
@@ -210,6 +229,7 @@ export function MapView({
   const mapRef = useRef<L.Map | null>(null);
   const baseLayerRef = useRef<L.Layer | null>(null);
   const markerRef = useRef<L.Marker | null>(null);
+  const squadMarkersRef = useRef(new Map<string, L.Marker>());
   const poiMarkersRef = useRef(new Map<string, L.Marker>());
   const poiParentsRef = useRef(new Map<string, L.MarkerClusterGroup>());
   const poiOutlinesRef = useRef(new Map<string, L.Polygon>());
@@ -253,6 +273,7 @@ export function MapView({
       mapRef.current = null;
       baseLayerRef.current = null;
       markerRef.current = null;
+      squadMarkersRef.current.clear();
       poiMarkersRef.current.clear();
       poiParentsRef.current.clear();
       poiOutlinesRef.current.clear();
@@ -292,6 +313,16 @@ export function MapView({
         layer.off("tileerror", onError);
         layer.removeFrom(map);
       };
+    }
+
+    if (asset.type === "image") {
+      const bounds = L.latLngBounds([asset.bounds[0][1], asset.bounds[0][0]], [asset.bounds[1][1], asset.bounds[1][0]]);
+      const layer = L.imageOverlay(asset.path, bounds, { className: "tarkov-raster-layer" });
+      layer.once("load", () => onAssetStateChange?.({ status: "ready", asset: assetName, message: null }));
+      layer.once("error", () => onAssetStateChange?.({ status: "error", asset: assetName, message: `Unable to load ${assetName}` }));
+      layer.addTo(map).bringToBack();
+      baseLayerRef.current = layer;
+      return () => layer.removeFrom(map);
     }
 
     void fetch(asset.path)
@@ -449,6 +480,30 @@ export function MapView({
       markerRef.current = null;
     };
   }, [definition.id, fix, follow]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const visible = squadPositions.filter((position) => position.mapId === definition.id && Date.now() - position.receivedAt < 120_000);
+    const visibleIds = new Set(visible.map((position) => position.senderId));
+    for (const [senderId, marker] of squadMarkersRef.current) {
+      if (!visibleIds.has(senderId)) {
+        marker.removeFrom(map);
+        squadMarkersRef.current.delete(senderId);
+      }
+    }
+    for (const position of visible) {
+      const location = worldPoint(position.position);
+      const radians = (position.heading ?? 0) * Math.PI / 180;
+      const from = map.latLngToLayerPoint(location);
+      const to = map.latLngToLayerPoint(worldPoint({ x: position.position.x + Math.sin(radians) * 8, z: position.position.z + Math.cos(radians) * 8 }));
+      const angle = position.heading === null ? 0 : Math.atan2(to.y - from.y, to.x - from.x) * 180 / Math.PI + 90;
+      const icon = squadMarkerIcon(position, angle, Date.now() - position.receivedAt >= 60_000);
+      const existing = squadMarkersRef.current.get(position.senderId);
+      if (existing) existing.setLatLng(location).setIcon(icon);
+      else squadMarkersRef.current.set(position.senderId, L.marker(location, { icon, zIndexOffset: 900 }).addTo(map));
+    }
+  }, [definition.id, squadPositions]);
 
   return <div className="map-canvas" ref={containerRef} aria-label={`${definition.displayName} map`} />;
 }

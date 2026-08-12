@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+env_file="${RAID_SIGNAL_ENV_FILE:-/home/truegrind/envs/raid-signal.env}"
+[[ -f "$env_file" ]] || { echo "Missing env file: $env_file" >&2; exit 1; }
+mkdir -p /home/truegrind/state/raid-signal/releases
+docker compose --project-name raid-signal --env-file "$env_file" -f "$repo_root/deploy/compose.yaml" up -d --build --remove-orphans

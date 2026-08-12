@@ -1,44 +1,53 @@
-# Tarkov Map Locator
+# Raid Signal
 
-A local-first Windows raid companion that reads the coordinates embedded in Escape from Tarkov screenshot filenames and displays the latest position on an offline map. Version 0.4 adds a recoverable native overlay, deliberate raid-map browsing, and a complete offline quest navigator.
+Raid Signal is a free, noncommercial Windows raid navigator for Escape from Tarkov. It reads ordinary screenshot filenames and application logs written by the game, plots the latest coordinates on bundled offline maps, and can share live squad positions through an end-to-end encrypted LAN or Internet room.
 
-## Use
+It never reads game memory, injects input, modifies game files, or sends screenshots, logs, account information, quests, custom pins, or historical positions. Raid Signal is not affiliated with or endorsed by Battlestate Games.
 
-1. Start **Tarkov Map Locator** before entering a raid.
-2. If automatic discovery does not find Tarkov, use **Browse** to select the game's `Screenshots` and `Logs` folders.
-3. Take a screenshot with Tarkov's native screenshot key. The newest coordinates and heading appear on the selected map.
-4. To detect raid-specific exits, press **O** so the extraction panel is visible, then take the screenshot. Confirmed exits are highlighted; otherwise the app continues to label exits as static possibilities.
+## Desktop use
 
-The current raid map is detected from the application log when available. Map and floor can always be selected manually. While a raid is active, a manual map choice enters browsing mode and is not overwritten by telemetry; use **Return to raid** to restore the detected map. All 13 current interactive maps, artwork, and map intelligence are bundled for offline use. Screenshot deletion is optional and disabled by default.
+1. Start **Raid Signal** before entering a raid.
+2. If automatic discovery does not find the game, select its `Screenshots` and `Logs` folders in Settings.
+3. Take a native in-game screenshot. The latest coordinates and heading appear on the selected map.
+4. To detect raid-specific exits, press **O**, leave the extraction panel visible, and take a screenshot.
 
-Open the **Intel** rail to search and toggle extracts, transits, switches, hazards, named boss zones, locked access, BTR stops, spawns, loot containers, and weapons. Double-click the map to place a persistent custom waypoint.
+All 13 current interactive maps, POIs, PvP/PvE quests, and map artwork are bundled for offline desktop use. The native overlay can be toggled with `Ctrl+Shift+M`; `Ctrl+Shift+X` restores mouse interaction.
 
-The **Quest Navigator** stores separate PvP and PvE progress locally. Quests are ordered with active and available work first, and include trader, map, prerequisites, objectives, useful constraints, and reward summaries without opening a website. Map badges and positioned objectives can move the main view to the relevant map.
+## Encrypted squad sharing
 
-The **Overlay** button or `Ctrl+Shift+M` opens and closes a separate always-on-top map. Its close control and `Escape` hide it. Click-through requires a visible countdown; `Ctrl+Shift+X` always restores mouse interaction. If the window is off-screen or otherwise unusable, choose **Reset & show overlay** in Settings to restore its size, center it, and make it interactive. **Phone / Squad Link** creates an encrypted QR invitation for devices on the same LAN.
+Open **Phone / Squad Link** and choose:
 
-Use **Read latest screenshot** in Settings after launching late or recovering from a folder/watch problem. `Ctrl+K` opens and focuses map intelligence search.
+- **Internet:** creates a three-hour invitation at `https://signal.mouchsiadis-solutions.com/room/<ROOM_ID>#<KEY>`. Other Raid Signal desktops can paste it and publish; the hosted phone companion is view-only.
+- **Same Wi-Fi / LAN:** runs the existing companion directly from the desktop's private address.
+
+Internet messages use AES-256-GCM with a fresh 96-bit nonce and room-bound authenticated data. The key is stored in the URL fragment, which is not sent to the relay. The relay forwards ciphertext only and keeps no message history. It can still observe IP addresses, connection timing, and room activity. Anyone with the invitation can join, and a modified client with the key could forge a position, so invitations must remain private.
+
+Room limits are 8 connected clients, 3 hours, 4 KB per message, and 10 messages per second per connection.
 
 ## Development
 
+Desktop development and packaging must be done on Windows:
+
 ```powershell
-npm install
-npm run assets:sync
+npm ci
+npm test
 npm run tauri:dev
 ```
 
-Build the unsigned Windows installer with:
+Build the stable unsigned NSIS installer locally with `npm run tauri:build`. The result is under `src-tauri/target/release/bundle/nsis/`. See [RELEASE.md](RELEASE.md) for clean-machine verification and publishing.
 
-```powershell
-npm run tauri:build
+The VPS-hosted companion and relay are packaged separately:
+
+```bash
+npm ci
+npm test
+npm --prefix relay ci
+npm --prefix relay test
+./ops/deploy
 ```
 
-The installer is written under `src-tauri/target/release/bundle/nsis/`.
+The Node relay and optional Cloudflare Durable Object adapter live in `relay/`. Both are deliberately unable to interpret encrypted position payloads.
 
-Public releases require an Authenticode certificate, Tauri updater key, HTTPS release metadata, and resolution of the raster-map redistribution gate documented in `RELEASE.md`. The LAN companion is usable without any hosted service. The optional Internet relay source is under `relay/` and is not enabled in the app until a production endpoint is configured.
+## Map data and licensing
 
-The application never reads game memory, injects input, or modifies game files. It watches ordinary screenshot filenames and log files written by the game. This project is not affiliated with or endorsed by Battlestate Games.
-
-## Offline map data
-
-Run `npm run assets:sync` only when deliberately refreshing the bundled snapshot from Tarkov.dev. This regenerates checksums, source metadata, map intelligence, and the PvP/PvE quest bundles. The installed application performs no network requests for maps, POIs, OCR, or quests. See `THIRD_PARTY_NOTICES.md`, `public/maps/data-manifest.json`, and `public/maps/LICENSE.md` for attribution and provenance.
+Run `npm run assets:sync` only when deliberately refreshing the bundled Tarkov.dev snapshot. Eleven map artworks come from `the-hideout/tarkov-dev-svg-maps`; Icebreaker and Labyrinth use pinned RE3MR images. These artworks are distributed under CC BY-NC-SA 4.0, so Raid Signal remains free and noncommercial. Sources, checksums, attribution, and adaptations are documented in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), `public/maps/data-manifest.json`, `public/maps/asset-checksums.json`, and `public/maps/LICENSE.md`.
