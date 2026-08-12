@@ -110,6 +110,7 @@ export interface ImageAsset {
   type: "image";
   path: string;
   bounds: [[number, number], [number, number]];
+  calibrationStatus: "verified" | "needs-local-verification";
 }
 
 export interface SvgAsset {

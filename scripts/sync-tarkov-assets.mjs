@@ -509,7 +509,7 @@ async function main() {
       const source = communityRasterMaps[map.key];
       const relative = `image/${source.filename}`;
       checksums[relative] = await writeResponse(source.url, path.join(stagingPublicMaps, relative));
-      baseAsset = { type: "image", path: `/maps/${relative}`, bounds: map.bounds };
+      baseAsset = { type: "image", path: `/maps/${relative}`, bounds: map.bounds, calibrationStatus: "needs-local-verification" };
       floors = (map.layers || []).map((layer, index) => normalizeFloor(layer, index, baseAsset));
     } else {
       const baseLayerId = safeLayerId(map.tilePath?.split("/").at(-4) || "base");

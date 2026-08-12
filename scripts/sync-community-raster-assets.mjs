@@ -63,7 +63,7 @@ for (const [mapId, source] of Object.entries(sources)) {
       await writeFile(path.join(root, "public/maps", relative), derived);
       checksums[relative] = createHash("sha256").update(derived).digest("hex");
     }
-    const assetFor = (floorId) => ({ type: "image", path: `/maps/image/icebreaker/${floorId}.png`, bounds: map.bounds });
+    const assetFor = (floorId) => ({ type: "image", path: `/maps/image/icebreaker/${floorId}.png`, bounds: map.bounds, calibrationStatus: "needs-local-verification" });
     map.baseAsset = assetFor("infirmary");
     map.floors = map.floors.map((floor) => ({ ...floor, asset: assetFor(floor.id) }));
   } else {
@@ -72,7 +72,7 @@ for (const [mapId, source] of Object.entries(sources)) {
     await mkdir(path.dirname(path.join(root, "public/maps", relative)), { recursive: true });
     await writeFile(path.join(root, "public/maps", relative), derived);
     checksums[relative] = createHash("sha256").update(derived).digest("hex");
-    map.baseAsset = { type: "image", path: `/maps/${relative}`, bounds: map.bounds };
+    map.baseAsset = { type: "image", path: `/maps/${relative}`, bounds: map.bounds, calibrationStatus: "needs-local-verification" };
   }
   map.attribution = { name: "RE3MR", url: "https://reemr.se/" };
 }

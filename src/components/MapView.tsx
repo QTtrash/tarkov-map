@@ -321,6 +321,9 @@ export function MapView({
       layer.once("load", () => onAssetStateChange?.({ status: "ready", asset: assetName, message: null }));
       layer.once("error", () => onAssetStateChange?.({ status: "error", asset: assetName, message: `Unable to load ${assetName}` }));
       layer.addTo(map).bringToBack();
+      if (asset.calibrationStatus === "needs-local-verification") {
+        onAssetStateChange?.({ status: "ready", asset: assetName, message: "Community artwork loaded; verify live coordinate alignment locally before publishing the Windows installer." });
+      }
       baseLayerRef.current = layer;
       return () => layer.removeFrom(map);
     }

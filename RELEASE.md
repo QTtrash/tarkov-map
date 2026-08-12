@@ -22,7 +22,9 @@ Then:
 3. Confirm the fresh `com.mouchsiadis.raidsignal` identity, settings, screenshot/log discovery, OCR, overlay recovery, quests, and custom pins.
 4. Test a LAN phone invitation and an Internet invitation between separate networks, including a second publishing desktop.
 5. Confirm wrong, tampered, leaked, and expired invitation behavior; stale markers must dim at 60 seconds and disappear at 120 seconds.
-6. Generate and independently compare the installer SHA-256.
+6. On Icebreaker and Labyrinth, compare multiple known screenshot fixes and POIs across opposite map edges. Adjust the derived crop/bounds until markers land correctly; do not publish while either `calibrationStatus` remains `needs-local-verification`.
+7. After local coordinate verification, change both derived asset declarations to `calibrationStatus: "verified"`, regenerate/check their hashes, commit, and rerun the full suite.
+8. Generate and independently compare the installer SHA-256.
 
 Do not perform the Tauri, Cargo, NSIS, or executable checks on the VPS.
 
