@@ -11,18 +11,22 @@ import {
   clearPlayerPosition,
   defaultSettings,
   isTauriRuntime,
+  getOverlayState,
   loadSettings,
   openDirectory,
   readLatestScreenshot,
   registerGlobalShortcuts,
+  resetOverlayWindow,
   rescanDirectories,
   saveSettings,
   subscribeLocator,
+  subscribeOverlayState,
   toggleOverlay,
 } from "./locator";
+import { applyDetectedContext, returnToDetectedMap, selectViewedMap, type MapSessionState } from "./map-session";
 import { defaultVisiblePoiCategories, loadPoiBundle } from "./poi";
 import { recognizeRaidExtracts } from "./raid";
-import type { CustomPinPoi, LocatorSettings, LocatorStatus, MapContext, MapPoiBundle, OcrTextCapture, PlayerFix, PoiCategory, QuestObjectivePoi, RaidExtractState } from "./types";
+import type { CustomPinPoi, LocatorSettings, LocatorStatus, MapAssetState, MapPoiBundle, OcrTextCapture, OverlayState, PlayerFix, PoiCategory, QuestObjectivePoi, RaidExtractState } from "./types";
 
 const initialStatus: LocatorStatus = {
   level: "info",
@@ -61,7 +65,7 @@ export function App() {
   const [settings, setSettings] = useState<LocatorSettings>(defaultSettings);
   const [status, setStatus] = useState<LocatorStatus>(initialStatus);
   const [fix, setFix] = useState<PlayerFix | null>(null);
-  const [mapContext, setMapContext] = useState<MapContext>({ mapId: null, inRaid: false, source: "manual" });
+  const [mapSession, setMapSession] = useState<MapSessionState>({ viewedMapId: defaultSettings.selectedMap, detectedMapId: null, inRaid: false, source: "manual", browsingAway: false });
   const [floorMode, setFloorMode] = useState("auto");
   const [poiBundle, setPoiBundle] = useState<MapPoiBundle | null>(null);
   const [poiLoading, setPoiLoading] = useState(true);
@@ -80,6 +84,9 @@ export function App() {
   const [lastOcr, setLastOcr] = useState<OcrTextCapture | null>(null);
   const [raidExtracts, setRaidExtracts] = useState<RaidExtractState | null>(null);
   const [dataGeneratedAt, setDataGeneratedAt] = useState<string | null>(null);
+  const [overlayState, setOverlayState] = useState<OverlayState>({ visible: false, ready: false, clickThrough: false });
+  const [mapAssetState, setMapAssetState] = useState<MapAssetState>({ status: "idle", asset: null, message: null });
+  const [mapRetry, setMapRetry] = useState(0);
 
   useEffect(() => {
     void registerGlobalShortcuts().catch((error) => {
@@ -91,6 +98,9 @@ export function App() {
         visibleMapLayers: normalizedVisibleLayers(loaded.visibleMapLayers ?? defaultVisiblePoiCategories),
         legendOpen: loaded.legendOpen ?? false,
       });
+      if (getMapDefinition(loaded.selectedMap)) {
+        setMapSession((current) => current.inRaid ? current : selectViewedMap(current, loaded.selectedMap));
+      }
       if (!loaded.autoFloor) setFloorMode(getMapDefinition(loaded.selectedMap)?.baseFloor.id ?? "auto");
     }).catch((error) => {
       setStatus((current) => ({ ...current, level: "error", message: "Could not load settings", lastError: String(error) }));
@@ -101,16 +111,11 @@ export function App() {
       onFix: (nextFix) => {
         setFix(nextFix);
         setNow(Date.now());
-        if (nextFix.mapId && getMapDefinition(nextFix.mapId)) {
-          setSettings((current) => ({ ...current, selectedMap: nextFix.mapId! }));
-        }
       },
       onStatus: setStatus,
       onMapContext: (context) => {
-        setMapContext(context);
-        if (context.mapId && getMapDefinition(context.mapId)) {
-          setSettings((current) => ({ ...current, selectedMap: context.mapId! }));
-        }
+        const safeContext = { ...context, mapId: getMapDefinition(context.mapId) ? context.mapId : null };
+        setMapSession((current) => applyDetectedContext(current, safeContext));
         if (!context.inRaid) setRaidExtracts(null);
       },
       onClear: () => setFix(null),
@@ -126,6 +131,19 @@ export function App() {
       disposed = true;
       cleanup?.();
     };
+  }, []);
+
+  useEffect(() => {
+    let cleanup: (() => void) | undefined;
+    let disposed = false;
+    void Promise.all([
+      getOverlayState().then(setOverlayState),
+      subscribeOverlayState(setOverlayState).then((unlisten) => {
+        if (disposed) unlisten();
+        else cleanup = unlisten;
+      }),
+    ]).catch(() => undefined);
+    return () => { disposed = true; cleanup?.(); };
   }, []);
 
   useEffect(() => localStorage.setItem("tml-custom-pins", JSON.stringify(customPins)), [customPins]);
@@ -160,10 +178,12 @@ export function App() {
     return () => window.clearInterval(timer);
   }, []);
 
-  const definition = getMapDefinition(settings.selectedMap) ?? maps[0];
+  const definition = getMapDefinition(mapSession.viewedMapId) ?? maps[0];
+  const detectedDefinition = getMapDefinition(mapSession.detectedMapId);
+  const visibleFix = fix && (!fix.mapId || fix.mapId === definition.id) ? fix : null;
   const activeFloor = useMemo(
-    () => definition ? getActiveFloor(definition, fix?.position ?? null, floorMode) : "base",
-    [definition, fix?.position, floorMode],
+    () => definition ? getActiveFloor(definition, visibleFix?.position ?? null, floorMode) : "base",
+    [definition, visibleFix?.position, floorMode],
   );
   const visiblePoiCategories = useMemo(
     () => new Set(normalizedVisibleLayers(settings.visibleMapLayers ?? defaultVisiblePoiCategories)),
@@ -216,6 +236,24 @@ export function App() {
     });
   }, []);
 
+  const viewMap = useCallback((mapId: string) => {
+    if (!getMapDefinition(mapId)) return;
+    setMapSession((current) => selectViewedMap(current, mapId));
+    updateSettings({ selectedMap: mapId, autoFloor: true });
+    setQuestPoi(null);
+    setFloorMode("auto");
+  }, [updateSettings]);
+
+  const returnToRaid = useCallback(() => {
+    setMapSession((current) => {
+      const next = returnToDetectedMap(current);
+      if (next.viewedMapId !== current.viewedMapId) updateSettings({ selectedMap: next.viewedMapId, autoFloor: true });
+      return next;
+    });
+    setQuestPoi(null);
+    setFloorMode("auto");
+  }, [updateSettings]);
+
   const setFollow = useCallback((followPlayer: boolean) => updateSettings({ followPlayer }), [updateSettings]);
   const selectPoi = useCallback((id: string | null) => setSelectedPoiId(id), []);
 
@@ -245,12 +283,13 @@ export function App() {
     setFocusPoiId(id);
   }, [renderedPoiBundle, setVisiblePoiCategories, visiblePoiCategories]);
 
-  const focusQuestObjective = useCallback((poi: QuestObjectivePoi) => {
+  const focusQuestObjective = useCallback((mapId: string, poi: QuestObjectivePoi | null) => {
+    viewMap(mapId);
     setQuestPoi(poi);
     setShowQuests(false);
-    setSelectedPoiId(poi.id);
-    setFocusPoiId(poi.id);
-  }, []);
+    setSelectedPoiId(poi?.id ?? null);
+    setFocusPoiId(poi?.id ?? null);
+  }, [viewMap]);
 
   const createWaypoint = useCallback((position: { x: number; z: number }) => {
     const pin: CustomPinPoi = { id: `pin-${definition.id}-${crypto.randomUUID()}`, kind: "custom-pin", category: "custom-pin", name: "Custom waypoint", note: "Double-clicked map waypoint", position: { x: position.x, y: 0, z: position.z } };
@@ -288,11 +327,7 @@ export function App() {
 
         <div className="command-selects">
           <label className="command-field"><span>LOCATION</span><select value={definition.id} onChange={(event) => {
-            updateSettings({ selectedMap: event.target.value, autoFloor: true });
-            setMapContext({ mapId: null, inRaid: false, source: "manual" });
-            setRaidExtracts(null);
-            setFix(null);
-            setFloorMode("auto");
+            viewMap(event.target.value);
           }}>{maps.map((map) => <option value={map.id} key={map.id}>{map.displayName}</option>)}</select></label>
           <label className="command-field"><span>LEVEL</span><select value={floorMode} onChange={(event) => {
             setFloorMode(event.target.value);
@@ -303,7 +338,7 @@ export function App() {
         <div className="command-actions">
           <span className={status.screenshotWatcherReady ? "system-chip online" : "system-chip"}><i />{status.screenshotWatcherReady ? "LOCATOR ONLINE" : "LOCATOR OFFLINE"}</span>
           <button className={settings.followPlayer ? "command-button active" : "command-button"} onClick={() => setFollow(!settings.followPlayer)}><UiIcon name="target" />{settings.followPlayer ? "FOLLOWING" : "FOLLOW"}</button>
-          <button className="command-button" onClick={() => void toggleOverlay()} title="Toggle compact overlay (Ctrl+Shift+M)">OVERLAY</button>
+          <button className={overlayState.visible ? "command-button active" : "command-button"} onClick={() => void toggleOverlay()} title="Toggle compact overlay (Ctrl+Shift+M)">{overlayState.visible ? "HIDE OVERLAY" : "OVERLAY"}</button>
           <button className={settings.alwaysOnTop ? "icon-command active" : "icon-command"} onClick={() => updateSettings({ alwaysOnTop: !settings.alwaysOnTop })} aria-label="Pin window" title="Pin window"><UiIcon name="pin" /></button>
           <button className="icon-command" onClick={() => setShowSettings(true)} aria-label="Settings"><UiIcon name="settings" /></button>
           <button className="icon-command" onClick={() => setShowAbout(true)} aria-label="About"><UiIcon name="info" /></button>
@@ -321,7 +356,7 @@ export function App() {
                 <div><span>Z / NORTH</span><strong>{coordinate(fix.position.z)}</strong></div>
               </div>
               <dl className="telemetry-list">
-                <div><dt>LOCATION</dt><dd>{definition.displayName}</dd></div>
+                <div><dt>RAID LOCATION</dt><dd>{getMapDefinition(fix.mapId)?.displayName ?? detectedDefinition?.displayName ?? "UNCONFIRMED"}</dd></div>
                 <div><dt>LEVEL</dt><dd>{floors.find((floor) => floor.id === activeFloor)?.name ?? activeFloor}</dd></div>
                 <div><dt>VECTOR</dt><dd>{fix.forward ? "HEADING LOCK" : "POSITION ONLY"}</dd></div>
                 {fix.gameTime !== null && <div><dt>LOCAL TIME</dt><dd>{fix.gameTime.toFixed(2)}</dd></div>}
@@ -351,9 +386,10 @@ export function App() {
 
         <div className="map-region">
           <MapView
+            key={`${definition.id}-${mapRetry}`}
             definition={definition}
             activeFloor={activeFloor}
-            fix={fix}
+            fix={visibleFix}
             follow={settings.followPlayer}
             poiBundle={renderedPoiBundle}
             visiblePoiCategories={renderedCategories}
@@ -363,9 +399,12 @@ export function App() {
             onFollowChange={setFollow}
             onSelectPoi={selectPoi}
             onCreateWaypoint={createWaypoint}
+            onAssetStateChange={setMapAssetState}
           />
-          <div className="map-title-plate"><span>ACTIVE MAP</span><strong>{definition.displayName}</strong><small>{floors.find((floor) => floor.id === activeFloor)?.name} / {mapContext.inRaid ? "RAID DETECTED" : "MANUAL CONTEXT"}</small></div>
-          {!settings.followPlayer && fix && <button className="floating-follow" onClick={() => setFollow(true)}><UiIcon name="center" />CENTER ON PLAYER</button>}
+          <div className="map-title-plate"><span>{mapSession.browsingAway ? "BROWSING MAP" : "ACTIVE MAP"}</span><strong>{definition.displayName}</strong><small>{floors.find((floor) => floor.id === activeFloor)?.name} / {mapSession.inRaid ? "RAID DETECTED" : "MANUAL CONTEXT"}</small></div>
+          {mapSession.browsingAway && detectedDefinition && <div className="raid-map-banner"><span>Raid telemetry remains on <b>{detectedDefinition.displayName}</b></span><button onClick={returnToRaid}>RETURN TO RAID</button></div>}
+          {mapAssetState.status === "error" && <div className="map-asset-error"><strong>MAP COULD NOT LOAD</strong><span>{mapAssetState.message}</span><button onClick={() => setMapRetry((value) => value + 1)}>RETRY MAP</button></div>}
+          {!settings.followPlayer && visibleFix && <button className="floating-follow" onClick={() => setFollow(true)}><UiIcon name="center" />CENTER ON PLAYER</button>}
           {customPins.some((pin) => pin.id.startsWith(`pin-${definition.id}-`)) && <button className="clear-waypoints" onClick={() => setCustomPins((current) => current.filter((pin) => !pin.id.startsWith(`pin-${definition.id}-`)))}>CLEAR WAYPOINTS</button>}
           <IntelDrawer
             definition={definition}
@@ -374,7 +413,7 @@ export function App() {
             error={poiError}
             open={settings.legendOpen}
             visible={visiblePoiCategories}
-            fix={fix}
+            fix={visibleFix}
             raidExtracts={raidExtracts}
             onOpenChange={(legendOpen) => updateSettings({ legendOpen })}
             onToggle={togglePoiCategory}
@@ -399,8 +438,8 @@ export function App() {
               <button className="dialog-button" onClick={() => void rescanDirectories()}>RESCAN FOLDERS</button>
               <button className="dialog-button secondary" onClick={() => void readLatestScreenshot()}>READ LATEST SCREENSHOT</button>
             </div>
-            <div className="dialog-section"><h3>FILE HANDLING & DISPLAY</h3><label className="switch-row"><span><b>Delete parsed screenshots</b><small>Disabled by default. Invalid and older files are never removed.</small></span><input type="checkbox" checked={settings.deleteParsedScreenshots} onChange={(event) => updateSettings({ deleteParsedScreenshots: event.target.checked })} /></label><label className="switch-row"><span><b>High contrast</b><small>Improves text and control contrast without changing map data.</small></span><input type="checkbox" checked={settings.highContrast} onChange={(event) => updateSettings({ highContrast: event.target.checked })} /></label><label className="range-row"><span><b>Overlay opacity</b><small>Ctrl+Shift+M toggles the overlay; Ctrl+Shift+X restores clicks.</small></span><input type="range" min="0.35" max="1" step="0.05" value={settings.overlayOpacity} onChange={(event) => updateSettings({ overlayOpacity: Number(event.target.value) })} /><output>{Math.round(settings.overlayOpacity * 100)}%</output></label></div>
-            <div className="dialog-section diagnostics"><h3>DIAGNOSTICS</h3><dl className="telemetry-list"><div><dt>RUNTIME</dt><dd>{isTauriRuntime() ? "TAURI DESKTOP" : "BROWSER PREVIEW"}</dd></div><div><dt>RAID STATE</dt><dd>{mapContext.inRaid ? "IN RAID" : "NOT DETECTED"}</dd></div><div><dt>MAP SOURCE</dt><dd>{mapContext.source.toUpperCase()}</dd></div><div><dt>LAST FILE</dt><dd title={status.lastFilename ?? ""}>{status.lastFilename ?? "-"}</dd></div><div><dt>INTEL BUILD</dt><dd>{dataGeneratedAt ? new Date(dataGeneratedAt).toLocaleDateString() : "UNKNOWN"}</dd></div><div><dt>EXTRACT OCR</dt><dd>{raidExtracts?.status.toUpperCase() ?? "UNKNOWN"}</dd></div></dl><p className={`diagnostic-status ${status.level}`}>{status.message}</p>{status.lastError && <p className="error-box">{status.lastError}</p>}</div>
+            <div className="dialog-section"><h3>FILE HANDLING & DISPLAY</h3><label className="switch-row"><span><b>Delete parsed screenshots</b><small>Disabled by default. Invalid and older files are never removed.</small></span><input type="checkbox" checked={settings.deleteParsedScreenshots} onChange={(event) => updateSettings({ deleteParsedScreenshots: event.target.checked })} /></label><label className="switch-row"><span><b>High contrast</b><small>Improves text and control contrast without changing map data.</small></span><input type="checkbox" checked={settings.highContrast} onChange={(event) => updateSettings({ highContrast: event.target.checked })} /></label><label className="range-row"><span><b>Overlay opacity</b><small>Ctrl+Shift+M toggles the overlay; Ctrl+Shift+X restores clicks.</small></span><input type="range" min="0.35" max="1" step="0.05" value={settings.overlayOpacity} onChange={(event) => updateSettings({ overlayOpacity: Number(event.target.value) })} /><output>{Math.round(settings.overlayOpacity * 100)}%</output></label><button className="dialog-button secondary" onClick={() => void resetOverlayWindow()}>RESET & SHOW OVERLAY</button></div>
+            <div className="dialog-section diagnostics"><h3>DIAGNOSTICS</h3><dl className="telemetry-list"><div><dt>RUNTIME</dt><dd>{isTauriRuntime() ? "TAURI DESKTOP" : "BROWSER PREVIEW"}</dd></div><div><dt>RAID STATE</dt><dd>{mapSession.inRaid ? "IN RAID" : "NOT DETECTED"}</dd></div><div><dt>MAP SOURCE</dt><dd>{mapSession.source.toUpperCase()}</dd></div><div><dt>VIEW MODE</dt><dd>{mapSession.browsingAway ? "BROWSING AWAY" : "FOLLOWING RAID"}</dd></div><div><dt>OVERLAY</dt><dd>{overlayState.visible ? overlayState.clickThrough ? "CLICK-THROUGH" : "INTERACTIVE" : "HIDDEN"}</dd></div><div><dt>LAST FILE</dt><dd title={status.lastFilename ?? ""}>{status.lastFilename ?? "-"}</dd></div><div><dt>INTEL BUILD</dt><dd>{dataGeneratedAt ? new Date(dataGeneratedAt).toLocaleDateString() : "UNKNOWN"}</dd></div><div><dt>EXTRACT OCR</dt><dd>{raidExtracts?.status.toUpperCase() ?? "UNKNOWN"}</dd></div></dl><p className={`diagnostic-status ${status.level}`}>{status.message}</p>{status.lastError && <p className="error-box">{status.lastError}</p>}</div>
           </section>
         </div>
       )}

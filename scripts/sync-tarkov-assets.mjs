@@ -14,6 +14,8 @@ const questUrls = {
   regular: ["https://json.tarkov.dev/regular/tasks", "https://json.tarkov.dev/regular/tasks_en"],
   pve: ["https://json.tarkov.dev/pve/tasks", "https://json.tarkov.dev/pve/tasks_en"],
 };
+const itemUrls = ["https://json.tarkov.dev/regular/items", "https://json.tarkov.dev/regular/items_en"];
+const traderUrls = ["https://json.tarkov.dev/regular/traders", "https://json.tarkov.dev/regular/traders_en"];
 const svgBase = "https://raw.githubusercontent.com/the-hideout/tarkov-dev-svg-maps/main";
 const licenseUrl = `${svgBase}/LICENSE.md`;
 const rasterNativeZoom = { icebreaker: 2, "the-labyrinth": 4 };
@@ -150,6 +152,19 @@ function vector(value) {
 
 function translated(value, dictionary, fallback) {
   return dictionary[value] || fallback || value || "Unknown";
+}
+
+function canonicalMapId(mapId) {
+  return ({
+    "ground-zero-21": "ground-zero",
+    "ground-zero-tutorial": "ground-zero",
+    "night-factory": "factory",
+    "the-lab-dark": "the-lab",
+  })[mapId] || mapId;
+}
+
+function unique(values) {
+  return [...new Set(values.filter(Boolean))];
 }
 
 function spawnCategory(spawn) {
@@ -334,31 +349,71 @@ function normalizePois(mapId, apiMap, apiData, dictionary) {
   return { schemaVersion: 2, mapId, generatedAt, sources: [poiUrl, poiTranslationsUrl], pois };
 }
 
-function normalizeQuestBundle(gameMode, raw, translations, mapIds) {
+function normalizeQuestBundle(gameMode, raw, translations, mapIds, itemData, itemTranslations, traderData, traderTranslations) {
   const dictionary = translations.data || {};
   const tasks = Object.values(raw.data?.tasks || {});
+  const items = itemData.data?.items || {};
+  const itemDictionary = itemTranslations.data || {};
+  const traders = traderData.data || {};
+  const traderDictionary = traderTranslations.data || {};
+  const mapName = (id) => canonicalMapId(mapIds.get(id) || id || "");
+  const itemName = (id) => translated(items[id]?.name, itemDictionary, items[id]?.normalizedName?.replaceAll("-", " ") || id);
+  const traderName = (id) => translated(traders[id]?.name, traderDictionary, traders[id]?.normalizedName || "Unknown trader");
   const quests = tasks.map((task) => {
-    const objectives = (task.objectives || []).map((objective) => ({
-      id: objective.id,
-      description: translated(objective.description, dictionary, "Objective"),
-      type: objective.type || "unknown",
-      optional: Boolean(objective.optional),
-      zones: (objective.zones || []).map((zone) => ({
-        mapId: mapIds.get(zone.map) || "",
+    const objectives = (task.objectives || []).map((objective) => {
+      const zones = (objective.zones || []).map((zone) => ({
+        mapId: mapName(zone.map),
         position: vector(zone.position),
         outline: (zone.outline || []).map(vector),
         top: zone.top ?? null,
         bottom: zone.bottom ?? null,
-      })).filter((zone) => zone.mapId),
-    }));
-    const objectiveMaps = objectives.flatMap((objective) => objective.zones.map((zone) => zone.mapId));
-    const declaredMaps = (task.objectives || []).flatMap((objective) => objective.maps || []).map((id) => mapIds.get(id)).filter(Boolean);
+      })).filter((zone) => zone.mapId);
+      const objectiveMapIds = unique([...(objective.maps || []).map(mapName), ...zones.map((zone) => zone.mapId)]);
+      const objectiveItems = (objective.items || []).map(itemName);
+      const details = [];
+      if (Number(objective.count || 0) > 1) details.push(`Required count: ${Number(objective.count)}`);
+      if (objective.foundInRaid) details.push("Items must have Found in Raid status");
+      if (objectiveItems.length === 1) details.push(`Required item: ${objectiveItems[0]}`);
+      else if (objectiveItems.length > 1 && objectiveItems.length <= 4) details.push(`Accepted items: ${objectiveItems.join(", ")}`);
+      else if (objectiveItems.length > 4) details.push(`${objectiveItems.length} accepted item types`);
+      if (objective.targetNames?.length) details.push(`Targets: ${objective.targetNames.map((name) => translated(name, dictionary, name)).join(", ")}`);
+      if (Number(objective.distance?.value || 0) > 0) details.push(`Distance: ${objective.distance.compareMethod || ">="} ${objective.distance.value} m`);
+      if (objective.optional) details.push("Optional objective");
+      return {
+        id: objective.id,
+        description: translated(objective.description, dictionary, "Objective"),
+        type: objective.type || "unknown",
+        optional: Boolean(objective.optional),
+        mapIds: objectiveMapIds,
+        details,
+        zones,
+      };
+    });
+    const declaredMap = mapName(task.map);
+    const objectiveMaps = objectives.flatMap((objective) => objective.mapIds);
+    const mapIdsForQuest = unique([declaredMap, ...objectiveMaps]);
+    const experience = Number(task.experience || 0);
+    const rewardSummary = [];
+    if (experience > 0) rewardSummary.push(`${experience.toLocaleString("en-US")} XP`);
+    for (const reward of (task.finishRewards?.items || []).slice(0, 4)) {
+      rewardSummary.push(`${Number(reward.count || 1).toLocaleString("en-US")} × ${itemName(reward.item)}`);
+    }
+    for (const reward of (task.finishRewards?.traderStanding || []).slice(0, 2)) {
+      rewardSummary.push(`${reward.standing > 0 ? "+" : ""}${reward.standing} ${traderName(reward.trader)} reputation`);
+    }
+    const requiredObjectives = objectives.filter((objective) => !objective.optional);
     return {
       id: task.id,
       name: translated(task.name, dictionary, task.normalizedName || "Unknown task"),
       traderId: task.trader || "",
+      traderName: traderName(task.trader),
       minPlayerLevel: Number(task.minPlayerLevel || 0),
-      mapIds: [...new Set([...objectiveMaps, ...declaredMaps])],
+      primaryMapId: declaredMap || mapIdsForQuest[0] || null,
+      mapIds: mapIdsForQuest,
+      summary: requiredObjectives.slice(0, 2).map((objective) => objective.description).join(" · ") || "Review the quest objectives.",
+      experience,
+      chainDepth: 0,
+      rewardSummary,
       objectives,
       requirements: (task.taskRequirements || []).map((requirement) => ({
         taskId: requirement.task,
@@ -366,7 +421,22 @@ function normalizeQuestBundle(gameMode, raw, translations, mapIds) {
       })),
     };
   });
-  return { schemaVersion: 1, generatedAt: new Date().toISOString(), gameMode, quests };
+  const byId = new Map(quests.map((quest) => [quest.id, quest]));
+  const depths = new Map();
+  const chainDepth = (quest, visiting = new Set()) => {
+    if (depths.has(quest.id)) return depths.get(quest.id);
+    if (visiting.has(quest.id)) return 0;
+    visiting.add(quest.id);
+    const depth = quest.requirements.reduce((maximum, requirement) => {
+      const required = byId.get(requirement.taskId);
+      return Math.max(maximum, required ? chainDepth(required, visiting) + 1 : 0);
+    }, 0);
+    visiting.delete(quest.id);
+    depths.set(quest.id, depth);
+    return depth;
+  };
+  for (const quest of quests) quest.chainDepth = chainDepth(quest);
+  return { schemaVersion: 2, generatedAt: new Date().toISOString(), gameMode, quests };
 }
 
 function countCategories(pois) {
@@ -459,16 +529,19 @@ async function main() {
   }
 
   await writeJson(checksums, path.join(stagingPublicMaps, "asset-checksums.json"));
+  const [itemData, itemTranslations, traderData, traderTranslations] = await Promise.all([
+    fetchJson(itemUrls[0]), fetchJson(itemUrls[1]), fetchJson(traderUrls[0]), fetchJson(traderUrls[1]),
+  ]);
   for (const [gameMode, [dataUrl, translationUrl]] of Object.entries(questUrls)) {
     const [questData, questTranslations] = await Promise.all([fetchJson(dataUrl), fetchJson(translationUrl)]);
-    const bundle = normalizeQuestBundle(gameMode, questData, questTranslations, mapIds);
+    const bundle = normalizeQuestBundle(gameMode, questData, questTranslations, mapIds, itemData, itemTranslations, traderData, traderTranslations);
     const relative = `quests/${gameMode}.json`;
     checksums[relative] = await writeJson(bundle, path.join(stagingPublicMaps, relative));
   }
   await writeJson({
     schemaVersion: 1,
     generatedAt: new Date().toISOString(),
-    sources: [mapsUrl, poiUrl, poiTranslationsUrl, ...Object.values(questUrls).flat(), svgBase],
+    sources: [mapsUrl, poiUrl, poiTranslationsUrl, ...Object.values(questUrls).flat(), ...itemUrls, ...traderUrls, svgBase],
     assetCount: Object.keys(checksums).length,
   }, path.join(stagingPublicMaps, "data-manifest.json"));
   await writeJson(checksums, path.join(stagingPublicMaps, "asset-checksums.json"));

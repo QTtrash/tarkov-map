@@ -1,6 +1,6 @@
 import { invoke } from "@tauri-apps/api/core";
 import { listen, type UnlistenFn } from "@tauri-apps/api/event";
-import type { LocatorSettings, LocatorStatus, MapContext, OcrTextCapture, PlayerFix, QuestProgress, QuestStatus } from "./types";
+import type { LocatorSettings, LocatorStatus, MapContext, OcrTextCapture, OverlayState, PlayerFix, QuestProgress, QuestStatus } from "./types";
 
 export const defaultSettings: LocatorSettings = {
   schemaVersion: 2,
@@ -60,31 +60,39 @@ export async function toggleOverlay() {
   if (isTauriRuntime()) await invoke("toggle_overlay");
 }
 
+export async function showOverlay() {
+  if (isTauriRuntime()) await invoke("show_overlay");
+}
+
+export async function hideOverlay() {
+  if (isTauriRuntime()) await invoke("hide_overlay");
+}
+
+export async function overlayReady() {
+  if (isTauriRuntime()) await invoke("overlay_ready");
+}
+
+export async function resetOverlayWindow() {
+  if (isTauriRuntime()) await invoke("reset_overlay_window");
+}
+
+export async function getOverlayState(): Promise<OverlayState> {
+  if (!isTauriRuntime()) return { visible: false, ready: false, clickThrough: false };
+  return invoke<OverlayState>("get_overlay_state");
+}
+
+export async function subscribeOverlayState(handler: (state: OverlayState) => void): Promise<UnlistenFn> {
+  if (!isTauriRuntime()) return () => undefined;
+  return listen<OverlayState>("overlay://state-changed", (event) => handler(event.payload));
+}
+
 export async function setOverlayClickThrough(enabled: boolean) {
   if (isTauriRuntime()) await invoke("set_overlay_click_through", { enabled });
 }
 
-let shortcutRegistration: Promise<void> | null = null;
 export function registerGlobalShortcuts() {
-  if (!isTauriRuntime()) return Promise.resolve();
-  if (shortcutRegistration) return shortcutRegistration;
-  shortcutRegistration = (async () => {
-    const { isRegistered, register } = await import("@tauri-apps/plugin-global-shortcut");
-    if (!await isRegistered("Ctrl+Shift+M")) {
-      await register("Ctrl+Shift+M", (event) => {
-        if (event.state === "Pressed") void toggleOverlay();
-      });
-    }
-    if (!await isRegistered("Ctrl+Shift+X")) {
-      await register("Ctrl+Shift+X", (event) => {
-        if (event.state === "Pressed") void setOverlayClickThrough(false);
-      });
-    }
-  })().catch((error) => {
-    shortcutRegistration = null;
-    throw error;
-  });
-  return shortcutRegistration;
+  // Shortcuts are registered natively so recovery does not depend on either webview.
+  return Promise.resolve();
 }
 
 export async function getQuestProgress(gameMode: "regular" | "pve"): Promise<QuestProgress[]> {

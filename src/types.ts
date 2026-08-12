@@ -55,6 +55,16 @@ export interface MapContext {
   source: string;
 }
 
+export interface OverlayState {
+  visible: boolean;
+  ready: boolean;
+  clickThrough: boolean;
+}
+
+export type MapAssetState =
+  | { status: "idle" | "loading" | "ready"; asset: string | null; message: string | null }
+  | { status: "error"; asset: string; message: string };
+
 export interface RaidExtractState {
   mapId: string;
   status: "unknown" | "recognized" | "partial";
@@ -244,6 +254,8 @@ export interface QuestObjective {
   description: string;
   type: string;
   optional: boolean;
+  mapIds: string[];
+  details: string[];
   zones: Array<{ mapId: string; position: Vec3; outline: Vec3[]; top: number | null; bottom: number | null }>;
 }
 
@@ -251,14 +263,20 @@ export interface QuestDefinition {
   id: string;
   name: string;
   traderId: string;
+  traderName: string;
   minPlayerLevel: number;
+  primaryMapId: string | null;
   mapIds: string[];
+  summary: string;
+  experience: number;
+  chainDepth: number;
+  rewardSummary: string[];
   objectives: QuestObjective[];
   requirements: Array<{ taskId: string; statuses: string[] }>;
 }
 
 export interface QuestBundle {
-  schemaVersion: 1;
+  schemaVersion: 2;
   generatedAt: string;
   gameMode: "regular" | "pve";
   quests: QuestDefinition[];

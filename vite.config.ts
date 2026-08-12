@@ -13,6 +13,12 @@ export default defineConfig({
     target: "chrome105",
     minify: "esbuild",
     sourcemap: true,
+    rollupOptions: {
+      input: {
+        main: new URL("index.html", import.meta.url).pathname,
+        overlay: new URL("overlay.html", import.meta.url).pathname,
+      },
+    },
   },
   test: {
     environment: "jsdom",

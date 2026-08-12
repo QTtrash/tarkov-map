@@ -1,7 +1,7 @@
 {
   "name": "tarkov-map-locator",
   "private": true,
-  "version": "0.3.0",
+  "version": "0.4.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -17,12 +17,11 @@
     "@fontsource/ibm-plex-mono": "^5.2.6",
     "@fontsource/ibm-plex-sans-condensed": "^5.2.6",
     "@tauri-apps/api": "^2.8.0",
-    "@tauri-apps/plugin-global-shortcut": "^2.3.0",
     "leaflet": "^1.9.4",
     "leaflet.markercluster": "^1.5.3",
+    "qrcode.react": "^4.2.0",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "qrcode.react": "^4.2.0"
+    "react-dom": "^19.1.1"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2.8.4",

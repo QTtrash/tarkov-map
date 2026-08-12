@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import L from "leaflet";
 import "leaflet.markercluster";
 import { poiMatchesFloor } from "../poi";
-import type { MapAsset, MapDefinition, MapPoi, MapPoiBundle, PlayerFix, PoiCategory } from "../types";
+import type { MapAsset, MapAssetState, MapDefinition, MapPoi, MapPoiBundle, PlayerFix, PoiCategory } from "../types";
 
 interface MapViewProps {
   definition: MapDefinition;
@@ -17,6 +17,7 @@ interface MapViewProps {
   onFollowChange: (follow: boolean) => void;
   onSelectPoi: (id: string | null) => void;
   onCreateWaypoint?: (position: { x: number; z: number }) => void;
+  onAssetStateChange?: (state: MapAssetState) => void;
 }
 
 const noActiveExtracts = new Set<string>();
@@ -203,6 +204,7 @@ export function MapView({
   onFollowChange,
   onSelectPoi,
   onCreateWaypoint,
+  onAssetStateChange,
 }: MapViewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
@@ -243,7 +245,10 @@ export function MapView({
       if ((event as unknown as { originalEvent?: Event }).originalEvent) onFollowChange(false);
     });
     mapRef.current = map;
+    const resizeObserver = new ResizeObserver(() => map.invalidateSize({ animate: false }));
+    resizeObserver.observe(containerRef.current);
     return () => {
+      resizeObserver.disconnect();
       map.remove();
       mapRef.current = null;
       baseLayerRef.current = null;
@@ -263,6 +268,8 @@ export function MapView({
       baseLayerRef.current = null;
     }
     const asset = assetForFloor(definition, activeFloor);
+    const assetName = asset.type === "tiles" ? asset.template : asset.path;
+    onAssetStateChange?.({ status: "loading", asset: assetName, message: null });
     if (asset.type === "tiles") {
       const layer = L.tileLayer(asset.template, {
         tileSize: asset.tileSize,
@@ -273,9 +280,18 @@ export function MapView({
         bounds: mapBounds(definition),
         noWrap: true,
         className: "tarkov-raster-layer",
-      }).addTo(map);
+      });
+      const onLoad = () => onAssetStateChange?.({ status: "ready", asset: assetName, message: null });
+      const onError = () => onAssetStateChange?.({ status: "error", asset: assetName, message: `Unable to load ${assetName}` });
+      layer.once("load", onLoad);
+      layer.once("tileerror", onError);
+      layer.addTo(map);
       baseLayerRef.current = layer;
-      return () => layer.removeFrom(map);
+      return () => {
+        layer.off("load", onLoad);
+        layer.off("tileerror", onError);
+        layer.removeFrom(map);
+      };
     }
 
     void fetch(asset.path)
@@ -294,8 +310,12 @@ export function MapView({
         const layer = L.svgOverlay(wrapper, mapBounds(definition, true), { className: "tarkov-svg-layer" }).addTo(map);
         baseLayerRef.current = layer;
         layer.bringToBack();
+        onAssetStateChange?.({ status: "ready", asset: assetName, message: null });
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        if (!cancelled) onAssetStateChange?.({ status: "error", asset: assetName, message: String(error) });
+      });
     return () => {
       cancelled = true;
       if (baseLayerRef.current) {
@@ -303,7 +323,7 @@ export function MapView({
         baseLayerRef.current = null;
       }
     };
-  }, [activeFloor, definition]);
+  }, [activeFloor, definition, onAssetStateChange]);
 
   useEffect(() => {
     const map = mapRef.current;
