@@ -30,6 +30,11 @@ test("VPS relay fans out opaque frames without echoing to sender", async (contex
   const child = spawn(process.execPath, ["--import", "tsx", "src/server.ts"], { cwd: new URL("..", import.meta.url), env: { ...process.env, PORT: String(port), STATIC_ROOT: "/tmp", RELEASE_ROOT: "/tmp" }, stdio: ["ignore", "pipe", "pipe"] });
   context.after(() => child.kill("SIGTERM"));
   await once(child.stdout, "data");
+  const health = await fetch(`http://127.0.0.1:${port}/healthz`);
+  const policy = health.headers.get("content-security-policy") ?? "";
+  assert.match(policy, /script-src 'self'/);
+  assert.doesNotMatch(policy, /script-src[^;]*unsafe-inline/);
+  assert.match(policy, /style-src 'self' 'unsafe-inline'/);
   const id = roomId(Date.now());
   const first = new WebSocket(`ws://127.0.0.1:${port}/v1/rooms/${id}`);
   const second = new WebSocket(`ws://127.0.0.1:${port}/v1/rooms/${id}`);

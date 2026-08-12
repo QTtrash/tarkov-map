@@ -5,7 +5,7 @@ RUN npm ci
 COPY index.html overlay.html companion.html signal.html tsconfig*.json vite.config.* ./
 COPY src ./src
 COPY public ./public
-RUN npm run build
+RUN npm run build:web
 
 FROM node:22-bookworm-slim AS relay-build
 WORKDIR /app/relay

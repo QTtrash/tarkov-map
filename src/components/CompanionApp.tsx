@@ -11,8 +11,18 @@ function invitationFromLocation() {
   return `${location.origin}${location.pathname}${location.search}${location.hash}`;
 }
 
+function CompanionGate({ state, error }: { state: "connecting" | "offline" | "invalid"; error: string | null }) {
+  const invalid = state === "invalid";
+  const title = invalid ? "Invitation cannot be opened" : state === "offline" ? "Relay is out of range" : "Acquiring encrypted room";
+  return <main className={`companion-gate ${state}`}>
+    <div className="companion-gate__field" aria-hidden="true"><span /><i /><i /><i /><b>RS</b></div>
+    <section><p>RAID SIGNAL / {invalid ? "INVITATION REJECTED" : state === "offline" ? "CONNECTION LOST" : "LOCAL DECRYPTION"}</p><h1>{title}</h1><span>{error ?? (state === "connecting" ? "The key remains on this device while a secure WebSocket is established." : "The relay did not accept the connection. Check your network or request a fresh invitation.")}</span>{state !== "connecting" && <a href="/">RETURN TO RAID SIGNAL</a>}</section>
+  </main>;
+}
+
 export function CompanionApp() {
   const [connection, setConnection] = useState<"connecting" | "online" | "offline" | "invalid">("connecting");
+  const [connectedOnce, setConnectedOnce] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [mapId, setMapId] = useState("customs");
   const [floor, setFloor] = useState("base");
@@ -50,7 +60,7 @@ export function CompanionApp() {
       void importRoomKey(invitation.rawKey, ["decrypt"]).then((key) => {
         socket = new WebSocket(invitation.webSocketUrl);
         socket.binaryType = "arraybuffer";
-        socket.onopen = () => setConnection("online");
+        socket.onopen = () => { setConnectedOnce(true); setConnection("online"); };
         socket.onclose = (event) => { setConnection("offline"); if (event.reason) setError(event.reason); };
         socket.onerror = () => setError("The encrypted relay is unavailable");
         socket.onmessage = (event) => {
@@ -93,7 +103,7 @@ export function CompanionApp() {
   const focusQuest = useCallback((nextMapId: string, poi: QuestObjectivePoi | null) => { selectMap(nextMapId); setQuestPoi(poi); setFocusPoiId(poi?.id ?? null); setQuestsOpen(false); }, [selectMap]);
   const createPin = useCallback((position: { x: number; z: number }) => setPins((current) => [...current, { id: `pin-${definition.id}-${crypto.randomUUID()}`, kind: "custom-pin", category: "custom-pin", name: "Companion waypoint", note: "Saved on this phone", position: { x: position.x, y: 0, z: position.z } }]), [definition.id]);
 
-  if (connection === "invalid") return <main className="companion-error"><span>RAID SIGNAL</span><h1>Invalid or expired invitation</h1><p>{error}</p><a href="/">Return to Raid Signal</a></main>;
+  if (connection === "invalid" || (connection !== "online" && !connectedOnce)) return <CompanionGate state={connection} error={error} />;
 
   return <main className="companion-shell">
     <header className="companion-header"><a href="/" className="companion-brand"><b>RS</b><span><strong>RAID SIGNAL</strong><small>ENCRYPTED SQUAD COMPANION</small></span></a><span className={`companion-state ${connection}`}><i />{connection.toUpperCase()}</span><button onClick={() => setQuestsOpen(true)}>QUESTS</button><button onClick={() => setIntelOpen(!intelOpen)}>INTEL</button></header>

@@ -1,5 +1,111 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><title>Raid Signal — Encrypted squad maps</title><style>
-:root{color:#ece8dc;background:#090b0a;font:16px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;--line:#343832;--muted:#989d94;--signal:#8bc4a0}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 10%,#233229 0,transparent 28rem),#090b0a}main{width:min(1040px,calc(100% - 32px));margin:auto}nav{height:72px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}nav b{letter-spacing:.14em}nav a,footer a{color:var(--muted)}.hero{min-height:65vh;display:grid;grid-template-columns:1.35fr .65fr;align-items:center;gap:60px;padding:80px 0}.kicker{color:var(--signal);font-size:12px;letter-spacing:.16em}h1{max-width:780px;margin:12px 0;font:600 clamp(42px,8vw,90px)/.94 system-ui,sans-serif;letter-spacing:-.055em}p{color:var(--muted)}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}.button{display:inline-flex;padding:12px 18px;border:1px solid var(--signal);color:#07100a;background:var(--signal);text-decoration:none;font-size:13px}.button.secondary{color:#ece8dc;background:transparent}.button[aria-disabled=true]{pointer-events:none;opacity:.42}.instrument{aspect-ratio:1;border:1px solid var(--line);display:grid;place-items:center;transform:rotate(45deg)}.instrument span{width:55%;height:55%;border:1px solid var(--signal);display:grid;place-items:center;transform:rotate(-45deg);color:var(--signal);font-size:12px}.facts{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line)}.facts article{padding:24px;border-right:1px solid var(--line)}.facts article:last-child{border:0}.facts b{display:block;color:#ddd8c9;font-family:system-ui,sans-serif}.privacy{padding:90px 0}.privacy h2{font:600 clamp(28px,5vw,48px)/1 system-ui,sans-serif}.privacy ul{color:var(--muted)}footer{display:flex;justify-content:space-between;gap:20px;padding:26px 0;border-top:1px solid var(--line);font-size:12px}@media(max-width:700px){.hero{grid-template-columns:1fr;padding:55px 0}.instrument{display:none}.facts{grid-template-columns:1fr}.facts article{border:0;border-bottom:1px solid var(--line)}footer{flex-direction:column}}
-</style></head><body><main><nav><b>RAID SIGNAL</b><a href="https://mouchsiadis-solutions.com/en/tooling/">MOUCHSIADIS SOLUTIONS ↗</a></nav><section class="hero"><div><span class="kicker">END-TO-END ENCRYPTED SQUAD COORDINATION</span><h1>Know where your squad is.</h1><p>Raid Signal turns Escape from Tarkov screenshot coordinates into a private live map for your desktop and phone—across Wi-Fi, mobile data, or different homes.</p><div class="actions"><a id="download" class="button" aria-disabled="true">WINDOWS DOWNLOAD UNAVAILABLE</a><a class="button secondary" href="https://discord.gg/pz4QHAu9WN">DISCORD</a><a class="button secondary" href="https://ko-fi.com/eternalqt">KO-FI</a></div><p id="release-note">The stable Windows release will appear here after its local verification and upload. The installer is currently unsigned; Windows may display an unknown-publisher warning.</p></div><div class="instrument" aria-hidden="true"><span>WSS / AES-256-GCM</span></div></section><section class="facts"><article><b>Relay-blind encryption</b><span>The invitation key stays on your devices.</span></article><article><b>No position history</b><span>Messages are forwarded and immediately discarded.</span></article><article><b>Bounded private rooms</b><span>8 devices for up to 3 hours.</span></article></section><section id="privacy" class="privacy"><span class="kicker">PRIVACY MODEL</span><h2>The relay carries ciphertext, not your raid.</h2><p>Raid Signal sends only encrypted map ID, coordinates, heading, callsign and timestamp. It never sends screenshots, Tarkov logs, account information, quests, custom pins or historical positions.</p><ul><li>The VPS and hosting provider can see connection IP addresses, timing and room activity.</li><li>Anyone with an invitation can join. Keep it private and create a new room if it leaks.</li><li>A modified client with the key could forge a position; official phone clients are view-only.</li><li>Map artwork is used under CC BY-NC-SA 4.0. Raid Signal is free and noncommercial.</li></ul></section><footer><span>NOT AFFILIATED WITH BATTLESTATE GAMES</span><span><a href="https://github.com/the-hideout/tarkov-dev-svg-maps">MAP ATTRIBUTION</a> · <a href="#privacy">PRIVACY</a></span></footer></main><script>
-fetch('/release.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(release=>{if(!release.filename||!release.sha256)throw 0;const link=document.querySelector('#download');link.href='/downloads/'+encodeURIComponent(release.filename);link.textContent='DOWNLOAD '+release.version+' FOR WINDOWS';link.removeAttribute('aria-disabled');document.querySelector('#release-note').textContent=`Unsigned stable installer · SHA-256 ${release.sha256}`}).catch(()=>{});
-</script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="theme-color" content="#070706" />
+    <meta name="description" content="Raid Signal is a local-first encrypted squad map for Escape from Tarkov." />
+    <title>Raid Signal — Encrypted squad maps</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="wordmark" href="/" aria-label="Raid Signal home"><i aria-hidden="true"></i><span>RAID SIGNAL</span></a>
+      <div class="site-header__meta"><span>WINDOWS / LOCAL-FIRST</span><span>RELAY / ONLINE</span></div>
+      <nav aria-label="Primary navigation">
+        <a href="#system">SYSTEM</a><a href="#privacy">PRIVACY</a>
+        <button class="sound-toggle" type="button" data-sound-toggle aria-pressed="false">SND OFF</button>
+        <a href="https://mouchsiadis-solutions.com/en/tooling/">TOOLING ↗</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="signal-sequence" data-signal-sequence aria-label="How Raid Signal works">
+        <div class="signal-stage" aria-hidden="true">
+          <canvas data-signal-canvas></canvas>
+          <div class="signal-fallback"><span></span><i></i><i></i><i></i><b>ENCRYPTED FIELD</b></div>
+          <div class="stage-frame"><span>RS / FIELD-01</span><span data-stage-readout>ACQUIRE</span></div>
+          <div class="stage-scale"><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+
+        <div class="signal-chapters">
+          <article class="signal-chapter signal-hero" data-signal-chapter="0">
+            <div class="chapter-copy">
+              <p class="eyebrow">END-TO-END ENCRYPTED SQUAD COORDINATION</p>
+              <h1>Your squad.<br /><em>On the map.</em></h1>
+              <p class="lede">Raid Signal turns ordinary Escape from Tarkov screenshot coordinates into a private live map across Wi-Fi, mobile data, or different homes.</p>
+              <div class="actions">
+                <a id="download" class="button" aria-disabled="true">WINDOWS DOWNLOAD UNAVAILABLE</a>
+                <a class="text-link" href="https://discord.gg/pz4QHAu9WN">DISCORD ↗</a>
+                <a class="text-link" href="https://ko-fi.com/eternalqt">SUPPORT ↗</a>
+              </div>
+              <p id="release-note" class="release-note">The stable Windows release appears after local coordinate verification. The first installer is unsigned, so Windows may show an unknown-publisher warning.</p>
+            </div>
+            <span class="chapter-index">00 / ACQUIRE</span>
+          </article>
+
+          <article class="signal-chapter" data-signal-chapter="1">
+            <div class="chapter-copy chapter-copy--card">
+              <p class="eyebrow">01 / FIX</p>
+              <h2>A position becomes a signal.</h2>
+              <p>The desktop reads a screenshot coordinate locally, resolves the active map and heading, then prepares only the current squad fix.</p>
+              <dl><div><dt>SOURCE</dt><dd>LOCAL SCREENSHOT</dd></div><div><dt>PAYLOAD</dt><dd>MAP · XYZ · HEADING</dd></div></dl>
+            </div>
+          </article>
+
+          <article class="signal-chapter signal-chapter--right" data-signal-chapter="2">
+            <div class="chapter-copy chapter-copy--card">
+              <p class="eyebrow">02 / SEAL</p>
+              <h2>The relay sees a sealed object.</h2>
+              <p>AES-256-GCM encryption happens before transmission. The invitation key stays after the URL fragment and never reaches the relay.</p>
+              <dl><div><dt>RELAY INPUT</dt><dd>CIPHERTEXT ONLY</dd></div><div><dt>RETENTION</dt><dd>NONE</dd></div></dl>
+            </div>
+          </article>
+
+          <article class="signal-chapter" data-signal-chapter="3">
+            <div class="chapter-copy chapter-copy--card">
+              <p class="eyebrow">03 / RESOLVE</p>
+              <h2>Your phone rebuilds the picture.</h2>
+              <p>The hosted companion decrypts locally and plots live squad markers alongside maps, POIs, quests, and waypoints.</p>
+              <dl><div><dt>ROOM</dt><dd>8 CLIENTS / 3 HOURS</dd></div><div><dt>STALE SIGNAL</dt><dd>60S DIM / 120S EVICT</dd></div></dl>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="system-section" id="system">
+        <header class="section-heading"><p class="eyebrow">SYSTEM / REAL PRODUCT</p><h2>A field instrument, not a browser dashboard.</h2><span>Three verified capture plates will replace these calibration frames after the Windows test pass.</span></header>
+        <div class="capture-grid">
+          <article class="capture capture--wide"><header><span>DESKTOP MAP</span><b>CAPTURE PENDING</b></header><div class="capture-schematic"><i></i><i></i><i></i><span>LOCAL CALIBRATION REQUIRED</span></div><p>Offline maps, current coordinates, squad markers, POIs, quests, and custom waypoints.</p></article>
+          <article class="capture"><header><span>NATIVE OVERLAY</span><b>CAPTURE PENDING</b></header><div class="capture-schematic capture-schematic--overlay"><i></i><i></i><span>WINDOW / RECOVERABLE</span></div><p>A compact always-on-top map with explicit mouse-interaction recovery.</p></article>
+          <article class="capture"><header><span>PHONE COMPANION</span><b>CAPTURE PENDING</b></header><div class="capture-schematic capture-schematic--phone"><i></i><i></i><span>LOCAL DECRYPTION</span></div><p>The same live room over Wi-Fi, mobile data, or another home connection.</p></article>
+        </div>
+      </section>
+
+      <section class="capability-strip" aria-label="Product capabilities">
+        <article><span>01</span><h3>Offline first</h3><p>Maps and raid tools remain on the desktop.</p></article>
+        <article><span>02</span><h3>Relay blind</h3><p>The server forwards ciphertext without position history.</p></article>
+        <article><span>03</span><h3>Invitation bound</h3><p>A random room and 256-bit key expire after three hours.</p></article>
+        <article><span>04</span><h3>Phone ready</h3><p>No app installation is required for squad viewers.</p></article>
+      </section>
+
+      <section class="privacy-section" id="privacy">
+        <div><p class="eyebrow">PRIVACY / THREAT MODEL</p><h2>The relay carries ciphertext, not your raid.</h2></div>
+        <div class="privacy-copy">
+          <p>Raid Signal sends only encrypted map ID, coordinates, heading, callsign, sequence, and timestamp.</p>
+          <ul><li>No screenshots or Tarkov logs</li><li>No account information</li><li>No quests or custom pins</li><li>No historical positions</li></ul>
+          <p class="fine-print">The VPS and hosting provider can still see IP addresses, timing, and room activity. Anyone possessing an invitation can join, and a modified client with the key could forge a position. Keep invitations private.</p>
+        </div>
+      </section>
+
+      <section class="final-cta">
+        <p class="eyebrow">RAID SIGNAL / 1.0</p><h2>Keep the room private.<br />Keep the squad visible.</h2>
+        <a class="button" href="#main" data-download-mirror aria-disabled="true">WINDOWS DOWNLOAD UNAVAILABLE</a>
+      </section>
+    </main>
+
+    <footer><span>FREE / NONCOMMERCIAL · NOT AFFILIATED WITH BATTLESTATE GAMES</span><span><a href="https://github.com/the-hideout/tarkov-dev-svg-maps">MAP ATTRIBUTION ↗</a> · <a href="#privacy">PRIVACY</a></span></footer>
+    <script type="module" src="/src/signal-main.ts"></script>
+  </body>
+</html>

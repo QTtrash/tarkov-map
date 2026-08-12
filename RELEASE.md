@@ -15,6 +15,8 @@ cargo clippy --manifest-path src-tauri/Cargo.toml -- -D warnings
 npm run tauri:build
 ```
 
+The current Tauri prerequisites are Node.js LTS, Rust with the stable MSVC toolchain, Microsoft C++ Build Tools with **Desktop development with C++**, and Edge WebView2. Do not run `npm run assets:sync` during coordinate verification; it deliberately refreshes pinned community assets and resets their calibration gate.
+
 Then:
 
 1. Scan the application executable and final NSIS installer with Microsoft Defender.
@@ -25,6 +27,8 @@ Then:
 6. On Icebreaker and Labyrinth, compare multiple known screenshot fixes and POIs across opposite map edges. Adjust the derived crop/bounds until markers land correctly; do not publish while either `calibrationStatus` remains `needs-local-verification`.
 7. After local coordinate verification, change both derived asset declarations to `calibrationStatus: "verified"`, regenerate/check their hashes, commit, and rerun the full suite.
 8. Generate and independently compare the installer SHA-256.
+
+Before replacing the website's calibration frames, capture three sanitized product images: the desktop map with multiple squad markers, the native overlay, and the phone companion viewing the same room. Exclude usernames, filesystem paths, QR codes, room IDs, and invitation keys.
 
 Do not perform the Tauri, Cargo, NSIS, or executable checks on the VPS.
 
