@@ -59,8 +59,12 @@ h1 em { color: transparent; -webkit-text-stroke: 1px var(--bone); font-style: no
 .button { display: inline-flex; min-height: 46px; align-items: center; justify-content: center; padding: 0 18px; border: 1px solid var(--signal); color: #160b07; background: var(--signal); font: 600 10px/1 var(--mono); letter-spacing: .1em; text-decoration: none; }
 .button:hover { color: var(--signal); background: transparent; }
 .button[aria-disabled="true"] { border-color: #554339; color: #887367; background: transparent; pointer-events: none; }
-.text-link { color: #aaa499; font: 500 10px/1 var(--mono); letter-spacing: .1em; text-underline-offset: 5px; }
-.text-link:hover { color: var(--signal); }
+.social-actions { display: inline-flex; flex: 0 0 auto; gap: 10px; }
+.social-link { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; color: var(--bone); background: rgba(5,6,4,.28); border: 1px solid rgba(232,224,208,.3); clip-path: polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px)); transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease, transform 160ms ease; }
+.social-link svg { width: 20px; height: 20px; fill: currentColor; }
+.social-link:hover, .social-link:focus-visible { transform: translateY(-2px); }
+.social-link--discord:hover, .social-link--discord:focus-visible { color: #5865f2; background: rgba(88,101,242,.11); border-color: rgba(88,101,242,.68); }
+.social-link--kofi:hover, .social-link--kofi:focus-visible { color: #ff5e5b; background: rgba(255,94,91,.1); border-color: rgba(255,94,91,.68); }
 .release-note { max-width: 600px; margin-top: 16px; color: #716d65; font: 400 9px/1.6 var(--mono); }
 
 .signal-modes { position: absolute; z-index: 7; left: clamp(28px,6vw,96px); right: clamp(28px,6vw,96px); bottom: 28px; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); width: min(790px,62vw); border-top: 1px solid #403c35; }
@@ -77,10 +81,10 @@ h1 em { color: transparent; -webkit-text-stroke: 1px var(--bone); font-style: no
 .section-heading { display: grid; grid-template-columns: 1.3fr .7fr; align-items: end; gap: 50px; margin-bottom: clamp(44px,6vw,72px); }
 .section-heading h2, .privacy-section h2, .final-cta h2 { max-width: 920px; margin: 0; font: 600 clamp(42px,6.6vw,94px)/.9 "IBM Plex Sans Condensed",sans-serif; letter-spacing: -.055em; }
 .section-heading > p { max-width: 470px; margin: 0; color: #8a857c; font: 400 12px/1.65 var(--mono); }
-.product-captures { display: grid; grid-template-columns: minmax(0,1.65fr) minmax(260px,.65fr); gap: 1px; border: 1px solid var(--line); background: var(--line); }
+.product-captures { display: grid; grid-template-columns: minmax(0,1.65fr) minmax(260px,.65fr); grid-template-rows: repeat(2,minmax(0,1fr)); height: clamp(560px,30.55vw,1173px); gap: 1px; border: 1px solid var(--line); background: var(--line); }
 .product-capture { position: relative; min-width: 0; margin: 0; overflow: hidden; background: #090a08; }
-.product-capture--desktop { grid-row: 1/3; min-height: 560px; }
-.product-capture--overlay, .product-capture--phone { min-height: 279px; }
+.product-capture--desktop { grid-row: 1/3; min-height: 0; }
+.product-capture--overlay, .product-capture--phone { min-height: 0; }
 .product-capture figcaption { position: absolute; z-index: 3; top: 16px; left: 16px; display: grid; gap: 4px; padding: 8px 10px; border: 1px solid #45423b; background: rgba(7,7,6,.9); font: 500 8px/1 var(--mono); letter-spacing: .1em; }
 .product-capture figcaption span { color: var(--bone); }
 .product-capture figcaption b { color: var(--signal); font-size: 7px; font-weight: 500; }
@@ -108,8 +112,23 @@ footer a { text-underline-offset: 4px; }
   .signal-hero__content { width: min(720px,78vw); }
   .signal-modes { width: min(760px,82vw); }
   .section-heading, .privacy-section { grid-template-columns: 1fr; }
+  .product-captures { height: auto; grid-template-rows: none; }
   .product-capture--desktop { min-height: 560px; }
   .product-capture--overlay, .product-capture--phone { min-height: 279px; }
+}
+
+@media (min-width: 981px) and (max-height: 1200px) {
+  .signal-hero__content { padding-top: clamp(118px,15vh,164px); padding-bottom: clamp(92px,12vh,132px); }
+  .lede { margin-top: clamp(20px,3vh,28px); }
+  .actions { margin-top: clamp(18px,2.5vh,26px); }
+  .system-section { padding: clamp(34px,5vh,54px) 0; }
+  .section-heading { margin-bottom: clamp(24px,3.2vh,36px); }
+  .section-heading h2, .privacy-section h2 { font-size: clamp(42px,5vw,72px); }
+  .product-captures { height: min(610px,56svh); }
+  .privacy-section { padding: clamp(52px,7vh,76px) 0; }
+  .privacy-copy { padding-top: 20px; }
+  .privacy-copy ul { margin: 24px 0; }
+  .final-cta { min-height: 240px; padding: 50px 0; }
 }
 
 @media (max-width: 680px) {
