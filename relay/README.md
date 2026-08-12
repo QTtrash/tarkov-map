@@ -9,7 +9,7 @@ Transport limits:
 - 4 KB messages
 - 10 messages per second per client
 - 64 rooms, 512 connections, and 16 connections per source IP per process
-- 30 WebSocket upgrades per source IP per minute
+- 30 WebSocket upgrades per source IP per minute (using Caddy's trusted `X-Forwarded-For` value)
 
 There is no database, room history, or last-message cache. Logs contain startup and process errors only; room IDs, payloads, positions, and client addresses are not logged.
 

@@ -19,7 +19,11 @@ const wss = new WebSocketServer({ noServer: true, maxPayload: MAX_MESSAGE_BYTES,
 interface RoomSocket extends WebSocket { roomContext?: { roomId: string; expiresAt: number; ip: string } }
 
 function clientIp(request: IncomingMessage) {
-  return request.socket.remoteAddress || "unknown";
+  // This service is reachable publicly only through Caddy on shared-proxy;
+  // its localhost port is host-local. Caddy replaces untrusted inbound XFF.
+  const forwarded = request.headers["x-forwarded-for"];
+  const value = Array.isArray(forwarded) ? forwarded.at(-1) : forwarded?.split(",").at(-1);
+  return value?.trim() || request.socket.remoteAddress || "unknown";
 }
 
 function allowUpgrade(ip: string, now = Date.now()) {
