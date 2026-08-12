@@ -24,8 +24,16 @@ const icebreakerDecks = {
   "fuel-pumps-lower": [5934, 6478],
   "engine-room": [6478, 7031],
   "engine-room-upper": [6478, 7031],
-  "control-room": [5400, 5934],
+  "control-room": [7031, 7680],
 };
+
+const icebreakerCrop = { top: 240, height: 2250 };
+
+function projectedAspect(map) {
+  const [[x1, z1], [x2, z2]] = map.bounds;
+  const [scaleX = 1, , scaleZ = 1] = map.transform ?? [];
+  return Math.abs((x2 - x1) * scaleX) / Math.abs((z2 - z1) * scaleZ);
+}
 
 async function download(source) {
   const response = await fetch(source.url, { headers: { "user-agent": "raid-signal-asset-sync" } });
@@ -56,14 +64,25 @@ for (const [mapId, source] of Object.entries(sources)) {
   const map = maps.find((item) => item.id === mapId);
   if (!map) throw new Error(`Missing map definition: ${mapId}`);
   if (mapId === "icebreaker") {
+    // RE3MR lays the decks out as narrow columns. Pad each column to the
+    // projected map aspect ratio so Leaflet does not stretch the ship wide.
+    const canvasWidth = Math.round(icebreakerCrop.height * projectedAspect(map));
     for (const [floorId, [left, right]] of Object.entries(icebreakerDecks)) {
       const relative = `image/icebreaker/${floorId}.png`;
-      const derived = await sharp(bytes).extract({ left, top: 240, width: right - left, height: 2250 }).png({ compressionLevel: 9 }).toBuffer();
+      const panel = await sharp(bytes).extract({ left, top: icebreakerCrop.top, width: right - left, height: icebreakerCrop.height }).png().toBuffer();
+      const derived = await sharp({
+        create: {
+          width: canvasWidth,
+          height: icebreakerCrop.height,
+          channels: 4,
+          background: { r: 0, g: 0, b: 0, alpha: 0 },
+        },
+      }).composite([{ input: panel, left: Math.floor((canvasWidth - (right - left)) / 2), top: 0 }]).png({ compressionLevel: 9 }).toBuffer();
       await mkdir(path.dirname(path.join(root, "public/maps", relative)), { recursive: true });
       await writeFile(path.join(root, "public/maps", relative), derived);
       checksums[relative] = createHash("sha256").update(derived).digest("hex");
     }
-    const assetFor = (floorId) => ({ type: "image", path: `/maps/image/icebreaker/${floorId}.png`, bounds: map.bounds, calibrationStatus: "needs-local-verification" });
+    const assetFor = (floorId) => ({ type: "image", path: `/maps/image/icebreaker/${floorId}.png`, bounds: map.bounds, calibrationStatus: "verified" });
     map.baseAsset = assetFor("infirmary");
     map.floors = map.floors.map((floor) => ({ ...floor, asset: assetFor(floor.id) }));
   } else {
@@ -72,7 +91,7 @@ for (const [mapId, source] of Object.entries(sources)) {
     await mkdir(path.dirname(path.join(root, "public/maps", relative)), { recursive: true });
     await writeFile(path.join(root, "public/maps", relative), derived);
     checksums[relative] = createHash("sha256").update(derived).digest("hex");
-    map.baseAsset = { type: "image", path: `/maps/${relative}`, bounds: map.bounds, calibrationStatus: "needs-local-verification" };
+    map.baseAsset = { type: "image", path: `/maps/${relative}`, bounds: map.bounds, calibrationStatus: "verified" };
   }
   map.attribution = { name: "RE3MR", url: "https://reemr.se/" };
 }

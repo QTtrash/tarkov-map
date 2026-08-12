@@ -17,12 +17,12 @@ export default defineConfig(({ mode }) => ({
   },
   envPrefix: ["VITE_", "TAURI_"],
   build: {
-    target: "chrome105",
+    target: ["chrome105", "safari15"],
     minify: "esbuild",
     sourcemap: true,
     rollupOptions: {
       input: mode === "desktop"
-        ? { main: entries.main, overlay: entries.overlay }
+        ? { main: entries.main, overlay: entries.overlay, companion: entries.companion }
         : mode === "web"
           ? { companion: entries.companion, signal: entries.signal }
           : entries,

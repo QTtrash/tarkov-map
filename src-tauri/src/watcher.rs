@@ -1,5 +1,7 @@
 use crate::log_parser::{parse_log_chunk, LogEvent};
-use crate::model::{LocatorStatusPayload, MapContextPayload, OcrTextPayload, Settings};
+use crate::model::{
+    LocatorSnapshotPayload, LocatorStatusPayload, MapContextPayload, OcrTextPayload, Settings,
+};
 use crate::ocr::read_exfil_text;
 use crate::parser::parse_screenshot_filename;
 use notify::{Event, RecommendedWatcher, RecursiveMode, Watcher};
@@ -60,11 +62,12 @@ impl RuntimeStatus {
 pub fn spawn_locator(
     app: AppHandle,
     settings: Arc<RwLock<Settings>>,
+    snapshot: Arc<RwLock<LocatorSnapshotPayload>>,
 ) -> mpsc::Sender<ControlMessage> {
     let (control_tx, control_rx) = mpsc::channel();
     std::thread::Builder::new()
         .name("tarkov-locator".into())
-        .spawn(move || run_locator(app, settings, control_rx))
+        .spawn(move || run_locator(app, settings, snapshot, control_rx))
         .expect("failed to start locator thread");
     control_tx
 }
@@ -72,6 +75,7 @@ pub fn spawn_locator(
 fn run_locator(
     app: AppHandle,
     settings: Arc<RwLock<Settings>>,
+    snapshot: Arc<RwLock<LocatorSnapshotPayload>>,
     control_rx: mpsc::Receiver<ControlMessage>,
 ) {
     let started_at = SystemTime::now();
@@ -97,12 +101,12 @@ fn run_locator(
             Err(mpsc::TryRecvError::Empty) => {}
         }
 
-        let snapshot = settings
+        let settings_snapshot = settings
             .read()
             .unwrap_or_else(|poisoned| poisoned.into_inner())
             .clone();
         if force_rescan || tick.is_multiple_of(20) {
-            let resolved_shots = resolve_screenshots_dir(&snapshot);
+            let resolved_shots = resolve_screenshots_dir(&settings_snapshot);
             if force_rescan || resolved_shots != watched_dir {
                 watcher = None;
                 watched_dir = resolved_shots.clone();
@@ -139,17 +143,24 @@ fn run_locator(
                     status.screenshot_ready = false;
                 }
                 status.screenshots_dir = resolved_shots;
-                let _ = app.emit(
-                    "locator://status",
+                emit_status(
+                    &app,
+                    &snapshot,
                     status.payload("info", "Locator paths refreshed"),
                 );
             }
 
-            let log_folder = resolve_latest_log_folder(&snapshot);
+            let log_folder = resolve_latest_log_folder(&settings_snapshot);
             if log_folder != status.logs_dir {
                 status.logs_dir = log_folder;
                 status.log_ready = status.logs_dir.is_some();
                 tail = Tail::default();
+                let message = if status.log_ready {
+                    "Raid detection connected"
+                } else {
+                    "Map auto-detection is waiting for Tarkov logs"
+                };
+                emit_status(&app, &snapshot, status.payload("info", message));
             }
             force_rescan = false;
         }
@@ -161,17 +172,21 @@ fn run_locator(
                     match event {
                         LogEvent::MapDetected(map_id) => {
                             current_map = Some(map_id);
-                            emit_map_context(&app, &current_map, in_raid, "logs");
+                            emit_map_context(&app, &snapshot, &current_map, in_raid, "logs");
                         }
                         LogEvent::RaidStarted => {
                             in_raid = true;
-                            emit_map_context(&app, &current_map, in_raid, "logs");
+                            emit_map_context(&app, &snapshot, &current_map, in_raid, "logs");
                         }
                         LogEvent::RaidEnded => {
                             if in_raid {
                                 in_raid = false;
                                 current_map = None;
-                                emit_map_context(&app, &current_map, in_raid, "logs");
+                                emit_map_context(&app, &snapshot, &current_map, in_raid, "logs");
+                                snapshot
+                                    .write()
+                                    .unwrap_or_else(|poisoned| poisoned.into_inner())
+                                    .fix = None;
                                 let _ = app.emit("locator://clear-position", ());
                             }
                         }
@@ -221,15 +236,21 @@ fn run_locator(
                 Ok(fix) => {
                     status.last_filename = Some(filename.clone());
                     status.last_error = None;
+                    snapshot
+                        .write()
+                        .unwrap_or_else(|poisoned| poisoned.into_inner())
+                        .fix = Some(fix.clone());
                     let _ = app.emit("locator://player-fix", &fix);
-                    let _ = app.emit(
-                        "locator://status",
+                    emit_status(
+                        &app,
+                        &snapshot,
                         status.payload("success", "Position updated"),
                     );
                     match read_exfil_text_with_retry(&path) {
                         Ok(raw_text) if !raw_text.trim().is_empty() => {
-                            let _ = app.emit(
-                                "locator://ocr-text",
+                            emit_ocr_text(
+                                &app,
+                                &snapshot,
                                 OcrTextPayload {
                                     observed_at: now_millis(),
                                     map_id: current_map.clone(),
@@ -240,8 +261,9 @@ fn run_locator(
                         }
                         Ok(_) => {}
                         Err(error) => {
-                            let _ = app.emit(
-                                "locator://ocr-text",
+                            emit_ocr_text(
+                                &app,
+                                &snapshot,
                                 OcrTextPayload {
                                     observed_at: now_millis(),
                                     map_id: current_map.clone(),
@@ -251,11 +273,12 @@ fn run_locator(
                             );
                         }
                     }
-                    if snapshot.delete_parsed_screenshots {
+                    if settings_snapshot.delete_parsed_screenshots {
                         if let Err(error) = delete_with_retry(&path) {
                             status.last_error = Some(error);
-                            let _ = app.emit(
-                                "locator://status",
+                            emit_status(
+                                &app,
+                                &snapshot,
                                 status.payload("warning", "Position updated, but cleanup failed"),
                             );
                         }
@@ -263,8 +286,9 @@ fn run_locator(
                 }
                 Err(error) => {
                     status.last_error = Some(format!("{filename}: {error}"));
-                    let _ = app.emit(
-                        "locator://status",
+                    emit_status(
+                        &app,
+                        &snapshot,
                         status.payload("warning", "A new PNG did not contain Tarkov coordinates"),
                     );
                 }
@@ -311,15 +335,47 @@ fn read_exfil_text_with_retry(path: &Path) -> Result<String, String> {
     latest
 }
 
-fn emit_map_context(app: &AppHandle, map_id: &Option<String>, in_raid: bool, source: &str) {
-    let _ = app.emit(
-        "locator://map-context",
-        MapContextPayload {
-            map_id: map_id.clone(),
-            in_raid,
-            source: source.into(),
-        },
-    );
+fn emit_map_context(
+    app: &AppHandle,
+    snapshot: &Arc<RwLock<LocatorSnapshotPayload>>,
+    map_id: &Option<String>,
+    in_raid: bool,
+    source: &str,
+) {
+    let payload = MapContextPayload {
+        map_id: map_id.clone(),
+        in_raid,
+        source: source.into(),
+    };
+    snapshot
+        .write()
+        .unwrap_or_else(|poisoned| poisoned.into_inner())
+        .map_context = payload.clone();
+    let _ = app.emit("locator://map-context", payload);
+}
+
+fn emit_status(
+    app: &AppHandle,
+    snapshot: &Arc<RwLock<LocatorSnapshotPayload>>,
+    payload: LocatorStatusPayload,
+) {
+    snapshot
+        .write()
+        .unwrap_or_else(|poisoned| poisoned.into_inner())
+        .status = Some(payload.clone());
+    let _ = app.emit("locator://status", payload);
+}
+
+fn emit_ocr_text(
+    app: &AppHandle,
+    snapshot: &Arc<RwLock<LocatorSnapshotPayload>>,
+    payload: OcrTextPayload,
+) {
+    snapshot
+        .write()
+        .unwrap_or_else(|poisoned| poisoned.into_inner())
+        .ocr_text = Some(payload.clone());
+    let _ = app.emit("locator://ocr-text", payload);
 }
 
 fn is_png(path: &Path) -> bool {
@@ -390,7 +446,13 @@ fn resolve_latest_log_folder(settings: &Settings) -> Option<PathBuf> {
     }
     automatic_logs_roots()
         .into_iter()
-        .find_map(|root| latest_under_logs_root(&root))
+        .filter_map(|root| latest_under_logs_root(&root))
+        .max_by_key(|folder| {
+            folder
+                .metadata()
+                .and_then(|metadata| metadata.modified())
+                .ok()
+        })
 }
 
 fn latest_under_logs_root(root: &Path) -> Option<PathBuf> {
@@ -431,19 +493,143 @@ fn automatic_logs_roots() -> Vec<PathBuf> {
         );
     }
     for install in registry_install_locations() {
-        roots.push(install.join("Logs"));
-        roots.push(install.join("build").join("Logs"));
-        if let Some(parent) = install.parent() {
-            roots.push(parent.join("Logs"));
-        }
+        add_install_log_roots(&mut roots, &install);
     }
     for install in steam_install_locations() {
-        roots.push(install.join("Logs"));
-        roots.push(install.join("build").join("Logs"));
+        add_install_log_roots(&mut roots, &install);
+    }
+    for install in launcher_install_locations() {
+        add_install_log_roots(&mut roots, &install);
+    }
+    for install in running_tarkov_install_locations() {
+        add_install_log_roots(&mut roots, &install);
     }
     roots.sort();
     roots.dedup();
     roots
+}
+
+fn add_install_log_roots(roots: &mut Vec<PathBuf>, install: &Path) {
+    roots.push(install.join("Logs"));
+    roots.push(install.join("build").join("Logs"));
+    if let Some(parent) = install.parent() {
+        roots.push(parent.join("Logs"));
+    }
+}
+
+fn launcher_install_locations() -> Vec<PathBuf> {
+    let mut settings_files = Vec::new();
+    if let Some(config) = dirs::config_dir() {
+        settings_files.push(
+            config
+                .join("Battlestate Games")
+                .join("BsgLauncher")
+                .join("settings"),
+        );
+    }
+    if let Some(local) = dirs::data_local_dir() {
+        settings_files.push(
+            local
+                .join("Battlestate Games")
+                .join("BsgLauncher")
+                .join("settings"),
+        );
+    }
+    let mut locations = Vec::new();
+    for file in settings_files {
+        let Ok(contents) = std::fs::read_to_string(file) else {
+            continue;
+        };
+        let Ok(value) = serde_json::from_str::<serde_json::Value>(&contents) else {
+            continue;
+        };
+        let Some(root) = value.get("gamesRootDir").and_then(|entry| entry.as_str()) else {
+            continue;
+        };
+        let root = PathBuf::from(root);
+        locations.extend([
+            root.clone(),
+            root.join("Escape From Tarkov"),
+            root.join("Escape from Tarkov"),
+            root.join("EFT"),
+        ]);
+    }
+    locations.sort();
+    locations.dedup();
+    locations
+}
+
+#[cfg(windows)]
+fn running_tarkov_install_locations() -> Vec<PathBuf> {
+    use windows::core::PWSTR;
+    use windows::Win32::Foundation::CloseHandle;
+    use windows::Win32::System::Diagnostics::ToolHelp::{
+        CreateToolhelp32Snapshot, Process32FirstW, Process32NextW, PROCESSENTRY32W,
+        TH32CS_SNAPPROCESS,
+    };
+    use windows::Win32::System::Threading::{
+        OpenProcess, QueryFullProcessImageNameW, PROCESS_NAME_WIN32,
+        PROCESS_QUERY_LIMITED_INFORMATION,
+    };
+
+    let Ok(process_snapshot) = (unsafe { CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0) }) else {
+        return Vec::new();
+    };
+    let mut entry = PROCESSENTRY32W {
+        dwSize: std::mem::size_of::<PROCESSENTRY32W>() as u32,
+        ..Default::default()
+    };
+    let mut locations = Vec::new();
+    let mut has_entry = unsafe { Process32FirstW(process_snapshot, &mut entry) }.is_ok();
+    while has_entry {
+        let length = entry
+            .szExeFile
+            .iter()
+            .position(|character| *character == 0)
+            .unwrap_or(entry.szExeFile.len());
+        let executable = String::from_utf16_lossy(&entry.szExeFile[..length]).to_ascii_lowercase();
+        if matches!(
+            executable.as_str(),
+            "escapefromtarkov.exe" | "escapefromtarkov_be.exe"
+        ) {
+            if let Ok(process) = unsafe {
+                OpenProcess(
+                    PROCESS_QUERY_LIMITED_INFORMATION,
+                    false,
+                    entry.th32ProcessID,
+                )
+            } {
+                let mut path = vec![0_u16; 32_768];
+                let mut size = path.len() as u32;
+                if unsafe {
+                    QueryFullProcessImageNameW(
+                        process,
+                        PROCESS_NAME_WIN32,
+                        PWSTR(path.as_mut_ptr()),
+                        &mut size,
+                    )
+                }
+                .is_ok()
+                {
+                    path.truncate(size as usize);
+                    if let Some(parent) = PathBuf::from(String::from_utf16_lossy(&path)).parent() {
+                        locations.push(parent.to_path_buf());
+                    }
+                }
+                let _ = unsafe { CloseHandle(process) };
+            }
+        }
+        has_entry = unsafe { Process32NextW(process_snapshot, &mut entry) }.is_ok();
+    }
+    let _ = unsafe { CloseHandle(process_snapshot) };
+    locations.sort();
+    locations.dedup();
+    locations
+}
+
+#[cfg(not(windows))]
+fn running_tarkov_install_locations() -> Vec<PathBuf> {
+    Vec::new()
 }
 
 #[cfg(windows)]
@@ -615,5 +801,14 @@ mod tests {
         retarget_application_log(&mut tail, &session);
         assert!(read_new(&mut tail).unwrap().contains("one"));
         assert!(read_new(&mut tail).is_none());
+    }
+
+    #[test]
+    fn derives_supported_log_roots_from_an_install() {
+        let install = Path::new(r"D:\Tarkov");
+        let mut roots = Vec::new();
+        add_install_log_roots(&mut roots, install);
+        assert!(roots.contains(&install.join("Logs")));
+        assert!(roots.contains(&install.join("build").join("Logs")));
     }
 }

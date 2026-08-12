@@ -5,7 +5,7 @@ mod parser;
 mod sharing;
 mod watcher;
 
-use model::Settings;
+use model::{LocatorSnapshotPayload, Settings};
 use std::path::{Path, PathBuf};
 use std::sync::{mpsc, Arc, Mutex, RwLock};
 use tauri::{Emitter, Manager, State};
@@ -20,6 +20,7 @@ pub struct AppState {
     progress: Mutex<rusqlite::Connection>,
     share_server: Mutex<Option<sharing::ShareServer>>,
     overlay: Mutex<OverlayRuntimeState>,
+    locator_snapshot: Arc<RwLock<LocatorSnapshotPayload>>,
 }
 
 #[derive(Debug, Clone, Default, serde::Serialize)]
@@ -28,6 +29,8 @@ struct OverlayRuntimeState {
     visible: bool,
     ready: bool,
     click_through: bool,
+    shortcut_ready: bool,
+    last_error: Option<String>,
 }
 
 #[derive(serde::Serialize)]
@@ -185,17 +188,45 @@ fn open_directory(kind: String, state: State<'_, AppState>) -> Result<(), String
 
 #[tauri::command]
 fn clear_player_position(app: tauri::AppHandle) {
+    if let Some(state) = app.try_state::<AppState>() {
+        state
+            .locator_snapshot
+            .write()
+            .unwrap_or_else(|poisoned| poisoned.into_inner())
+            .fix = None;
+    }
     let _ = app.emit("locator://clear-position", ());
+}
+
+#[tauri::command]
+fn get_locator_snapshot(state: State<'_, AppState>) -> LocatorSnapshotPayload {
+    state
+        .locator_snapshot
+        .read()
+        .unwrap_or_else(|poisoned| poisoned.into_inner())
+        .clone()
 }
 
 fn overlay_state(app: &tauri::AppHandle) -> OverlayRuntimeState {
     app.try_state::<AppState>()
         .map(|state| {
-            state
+            let mut overlay = state
                 .overlay
                 .lock()
                 .unwrap_or_else(|poisoned| poisoned.into_inner())
-                .clone()
+                .clone();
+            if let Some(window) = app.get_webview_window("overlay") {
+                overlay.visible = window.is_visible().unwrap_or(false);
+            } else {
+                overlay.visible = false;
+                overlay.ready = false;
+                overlay.click_through = false;
+            }
+            *state
+                .overlay
+                .lock()
+                .unwrap_or_else(|poisoned| poisoned.into_inner()) = overlay.clone();
+            overlay
         })
         .unwrap_or_default()
 }
@@ -216,55 +247,42 @@ fn set_overlay_state(app: &tauri::AppHandle, update: impl FnOnce(&mut OverlayRun
 }
 
 fn create_overlay(app: &tauri::AppHandle) -> Result<(), String> {
-    if app.get_webview_window("overlay").is_some() {
-        return Ok(());
-    }
-    let app_handle = app.clone();
-    tauri::WebviewWindowBuilder::new(
-        app,
-        "overlay",
-        tauri::WebviewUrl::App("overlay.html".into()),
-    )
-    .title("Raid Signal Overlay")
-    .inner_size(430.0, 430.0)
-    .min_inner_size(300.0, 300.0)
-    .resizable(true)
-    .decorations(false)
-    .always_on_top(true)
-    .skip_taskbar(false)
-    .visible(false)
-    .on_page_load(move |window, payload| {
-        if matches!(payload.event(), tauri::webview::PageLoadEvent::Finished) {
-            let _ = window.show();
-            let _ = window.set_focus();
-            set_overlay_state(&app_handle, |state| state.visible = true);
-        }
-    })
-    .build()
-    .map_err(|error| error.to_string())?;
-    set_overlay_state(app, |state| {
-        state.visible = false;
-        state.ready = false;
-        state.click_through = false;
-    });
-    Ok(())
+    app.get_webview_window("overlay")
+        .map(|_| ())
+        .ok_or_else(|| "The preloaded overlay window is unavailable; restart Raid Signal".into())
 }
 
 fn show_overlay_internal(app: &tauri::AppHandle) -> Result<(), String> {
-    create_overlay(app)?;
-    let window = app
-        .get_webview_window("overlay")
-        .ok_or_else(|| "Overlay window was not created".to_string())?;
-    window
-        .set_ignore_cursor_events(false)
-        .map_err(|error| error.to_string())?;
-    window.show().map_err(|error| error.to_string())?;
-    window.set_focus().map_err(|error| error.to_string())?;
-    set_overlay_state(app, |state| {
-        state.visible = true;
-        state.click_through = false;
-    });
-    Ok(())
+    let result: Result<(), String> = (|| {
+        create_overlay(app)?;
+        let window = app
+            .get_webview_window("overlay")
+            .ok_or_else(|| "Overlay window was not created".to_string())?;
+        window
+            .set_ignore_cursor_events(false)
+            .map_err(|error| error.to_string())?;
+        window
+            .set_always_on_top(true)
+            .map_err(|error| error.to_string())?;
+        window.unminimize().map_err(|error| error.to_string())?;
+        window.show().map_err(|error| error.to_string())?;
+        window.set_focus().map_err(|error| error.to_string())?;
+        Ok(())
+    })();
+    match result {
+        Ok(()) => {
+            set_overlay_state(app, |state| {
+                state.visible = true;
+                state.click_through = false;
+                state.last_error = None;
+            });
+            Ok(())
+        }
+        Err(error) => {
+            set_overlay_state(app, |state| state.last_error = Some(error.clone()));
+            Err(error)
+        }
+    }
 }
 
 fn hide_overlay_internal(app: &tauri::AppHandle) -> Result<(), String> {
@@ -277,6 +295,7 @@ fn hide_overlay_internal(app: &tauri::AppHandle) -> Result<(), String> {
     set_overlay_state(app, |state| {
         state.visible = false;
         state.click_through = false;
+        state.last_error = None;
     });
     Ok(())
 }
@@ -314,10 +333,11 @@ fn overlay_ready(app: tauri::AppHandle) -> Result<(), String> {
     let window = app
         .get_webview_window("overlay")
         .ok_or_else(|| "Overlay is not open".to_string())?;
-    window.show().map_err(|error| error.to_string())?;
+    let visible = window.is_visible().map_err(|error| error.to_string())?;
     set_overlay_state(&app, |state| {
-        state.visible = true;
+        state.visible = visible;
         state.ready = true;
+        state.last_error = None;
     });
     let _ = app.emit("overlay://invalidate-map", ());
     Ok(())
@@ -331,13 +351,14 @@ fn set_overlay_click_through(app: tauri::AppHandle, enabled: bool) -> Result<(),
     window
         .set_ignore_cursor_events(enabled)
         .map_err(|error| error.to_string())?;
-    if !enabled {
-        window.show().map_err(|error| error.to_string())?;
+    let visible = window.is_visible().map_err(|error| error.to_string())?;
+    if !enabled && visible {
         window.set_focus().map_err(|error| error.to_string())?;
     }
     set_overlay_state(&app, |state| {
-        state.visible = true;
+        state.visible = visible;
         state.click_through = enabled;
+        state.last_error = None;
     });
     Ok(())
 }
@@ -360,6 +381,7 @@ fn reset_overlay_window(app: tauri::AppHandle) -> Result<(), String> {
     set_overlay_state(&app, |state| {
         state.visible = true;
         state.click_through = false;
+        state.last_error = None;
     });
     let _ = app.emit("overlay://invalidate-map", ());
     Ok(())
@@ -460,7 +482,12 @@ pub fn run() {
                     .always_on_top;
                 window.set_always_on_top(pin)?;
             }
-            let control = spawn_locator(app.handle().clone(), settings.clone());
+            let locator_snapshot = Arc::new(RwLock::new(LocatorSnapshotPayload::default()));
+            let control = spawn_locator(
+                app.handle().clone(),
+                settings.clone(),
+                locator_snapshot.clone(),
+            );
             app.manage(AppState {
                 settings,
                 settings_path,
@@ -469,37 +496,63 @@ pub fn run() {
                 progress: Mutex::new(progress),
                 share_server: Mutex::new(None),
                 overlay: Mutex::new(OverlayRuntimeState::default()),
+                locator_snapshot,
             });
-            let _ = app
-                .global_shortcut()
-                .on_shortcut("Ctrl+Shift+M", |app, _shortcut, event| {
-                    if event.state() == ShortcutState::Pressed {
-                        let visible = app
-                            .get_webview_window("overlay")
-                            .and_then(|window| window.is_visible().ok())
-                            .unwrap_or(false);
-                        let _ = if visible {
-                            hide_overlay_internal(app)
-                        } else {
-                            show_overlay_internal(app)
-                        };
-                    }
-                });
-            let _ = app
-                .global_shortcut()
-                .on_shortcut("Ctrl+Shift+X", |app, _shortcut, event| {
-                    if event.state() == ShortcutState::Pressed {
-                        if let Some(window) = app.get_webview_window("overlay") {
-                            let _ = window.set_ignore_cursor_events(false);
-                            let _ = window.show();
-                            let _ = window.set_focus();
-                            set_overlay_state(app, |state| {
-                                state.visible = true;
-                                state.click_through = false;
-                            });
+            let toggle_shortcut =
+                app.global_shortcut()
+                    .on_shortcut("Ctrl+Shift+M", |app, _shortcut, event| {
+                        if event.state() == ShortcutState::Pressed {
+                            let visible = app
+                                .get_webview_window("overlay")
+                                .and_then(|window| window.is_visible().ok())
+                                .unwrap_or(false);
+                            if let Err(error) = if visible {
+                                hide_overlay_internal(app)
+                            } else {
+                                show_overlay_internal(app)
+                            } {
+                                set_overlay_state(app, |state| {
+                                    state.last_error =
+                                        Some(format!("Overlay shortcut failed: {error}"));
+                                });
+                            }
                         }
-                    }
-                });
+                    });
+            let recovery_shortcut =
+                app.global_shortcut()
+                    .on_shortcut("Ctrl+Shift+X", |app, _shortcut, event| {
+                        if event.state() == ShortcutState::Pressed {
+                            if let Err(error) = show_overlay_internal(app) {
+                                set_overlay_state(app, |state| {
+                                    state.last_error =
+                                        Some(format!("Overlay recovery shortcut failed: {error}"));
+                                });
+                            }
+                        }
+                    });
+            match (toggle_shortcut, recovery_shortcut) {
+                (Ok(()), Ok(())) => set_overlay_state(app.handle(), |state| {
+                    state.shortcut_ready = true;
+                    state.last_error = None;
+                }),
+                (toggle, recovery) => {
+                    let message = format!(
+                        "Global overlay shortcuts unavailable: toggle={}, recovery={}",
+                        toggle
+                            .err()
+                            .map(|error| error.to_string())
+                            .unwrap_or_else(|| "ok".into()),
+                        recovery
+                            .err()
+                            .map(|error| error.to_string())
+                            .unwrap_or_else(|| "ok".into()),
+                    );
+                    set_overlay_state(app.handle(), |state| {
+                        state.shortcut_ready = false;
+                        state.last_error = Some(message);
+                    });
+                }
+            }
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
@@ -520,7 +573,8 @@ pub fn run() {
             set_overlay_click_through,
             sharing::start_lan_share,
             sharing::stop_lan_share,
-            clear_player_position
+            clear_player_position,
+            get_locator_snapshot
         ])
         .on_window_event(|window, event| {
             if window.label() == "overlay" {
@@ -533,6 +587,7 @@ pub fn run() {
                 if let Some(state) = window.try_state::<AppState>() {
                     let _ = state.control.send(ControlMessage::Stop);
                 }
+                window.app_handle().exit(0);
             }
         })
         .run(tauri::generate_context!())
@@ -547,8 +602,10 @@ mod tests {
     fn settings_write_keeps_a_recoverable_backup() {
         let temp = tempfile::tempdir().unwrap();
         let path = temp.path().join("settings.json");
-        let mut first = Settings::default();
-        first.selected_map = "woods".into();
+        let first = Settings {
+            selected_map: "woods".into(),
+            ..Settings::default()
+        };
         save_settings(&path, &first).unwrap();
         let mut second = first.clone();
         second.selected_map = "customs".into();

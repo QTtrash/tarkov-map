@@ -11,6 +11,8 @@ body.companion-body { min-width: 0; }
 .companion-state { display: flex; align-items: center; gap: 5px; color: var(--scav); font: 500 7px/1 "IBM Plex Mono", monospace; }
 .companion-state i { width: 5px; height: 5px; background: currentColor; }
 .companion-state.online { color: var(--pmc); }
+.companion-state.encrypting, .companion-state.connecting { color: var(--usec); }
+.companion-connection-error { position: absolute; z-index: 1002; top: 12px; left: 50%; width: min(620px, calc(100% - 24px)); margin: 0; padding: 9px 12px; border: 1px solid var(--scav); color: var(--bone); background: color-mix(in srgb, var(--canvas) 94%, transparent); font: 500 10px/1.4 "IBM Plex Mono", monospace; transform: translateX(-50%); }
 .companion-controls { display: flex; align-items: stretch; overflow-x: auto; border-bottom: 1px solid var(--rule); background: var(--raised); }
 .companion-controls label { display: flex; min-width: 150px; flex: 1; flex-direction: column; justify-content: center; padding: 0 12px; border-right: 1px solid var(--rule); }
 .companion-controls label span { color: var(--faint); font: 500 7px/1 "IBM Plex Mono", monospace; letter-spacing: .12em; }

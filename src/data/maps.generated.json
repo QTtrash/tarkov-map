@@ -898,7 +898,7 @@
           67.4
         ]
       ],
-      "calibrationStatus": "needs-local-verification"
+      "calibrationStatus": "verified"
     },
     "baseFloor": {
       "id": "base",
@@ -930,7 +930,7 @@
               67.4
             ]
           ],
-          "calibrationStatus": "needs-local-verification"
+          "calibrationStatus": "verified"
         }
       },
       {
@@ -958,7 +958,7 @@
               67.4
             ]
           ],
-          "calibrationStatus": "needs-local-verification"
+          "calibrationStatus": "verified"
         }
       },
       {
@@ -986,7 +986,7 @@
               67.4
             ]
           ],
-          "calibrationStatus": "needs-local-verification"
+          "calibrationStatus": "verified"
         }
       },
       {
@@ -1014,7 +1014,7 @@
               67.4
             ]
           ],
-          "calibrationStatus": "needs-local-verification"
+          "calibrationStatus": "verified"
         }
       },
       {
@@ -1042,7 +1042,7 @@
               67.4
             ]
           ],
-          "calibrationStatus": "needs-local-verification"
+          "calibrationStatus": "verified"
         }
       },
       {
@@ -1070,7 +1070,7 @@
               67.4
             ]
           ],
-          "calibrationStatus": "needs-local-verification"
+          "calibrationStatus": "verified"
         }
       },
       {
@@ -1098,7 +1098,7 @@
               67.4
             ]
           ],
-          "calibrationStatus": "needs-local-verification"
+          "calibrationStatus": "verified"
         }
       },
       {
@@ -1126,7 +1126,7 @@
               67.4
             ]
           ],
-          "calibrationStatus": "needs-local-verification"
+          "calibrationStatus": "verified"
         }
       },
       {
@@ -1154,7 +1154,7 @@
               67.4
             ]
           ],
-          "calibrationStatus": "needs-local-verification"
+          "calibrationStatus": "verified"
         }
       },
       {
@@ -1182,7 +1182,7 @@
               67.4
             ]
           ],
-          "calibrationStatus": "needs-local-verification"
+          "calibrationStatus": "verified"
         }
       },
       {
@@ -1210,7 +1210,7 @@
               67.4
             ]
           ],
-          "calibrationStatus": "needs-local-verification"
+          "calibrationStatus": "verified"
         }
       },
       {
@@ -1238,7 +1238,7 @@
               67.4
             ]
           ],
-          "calibrationStatus": "needs-local-verification"
+          "calibrationStatus": "verified"
         }
       },
       {
@@ -1266,7 +1266,7 @@
               67.4
             ]
           ],
-          "calibrationStatus": "needs-local-verification"
+          "calibrationStatus": "verified"
         }
       },
       {
@@ -1294,7 +1294,7 @@
               67.4
             ]
           ],
-          "calibrationStatus": "needs-local-verification"
+          "calibrationStatus": "verified"
         }
       },
       {
@@ -1322,7 +1322,7 @@
               67.4
             ]
           ],
-          "calibrationStatus": "needs-local-verification"
+          "calibrationStatus": "verified"
         }
       },
       {
@@ -1350,7 +1350,7 @@
               67.4
             ]
           ],
-          "calibrationStatus": "needs-local-verification"
+          "calibrationStatus": "verified"
         }
       }
     ],
@@ -1606,7 +1606,7 @@
           76
         ]
       ],
-      "calibrationStatus": "needs-local-verification"
+      "calibrationStatus": "verified"
     },
     "baseFloor": {
       "id": "base",

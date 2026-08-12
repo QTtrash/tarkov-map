@@ -1,6 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet.markercluster";
+import { prepareSvgMap, versionedMapAssetPath } from "../map-assets";
 import { poiMatchesFloor } from "../poi";
 import type { MapAsset, MapAssetState, MapDefinition, MapPoi, MapPoiBundle, PlayerFix, PoiCategory, SquadPosition } from "../types";
 
@@ -85,18 +86,6 @@ function squadMarkerIcon(position: SquadPosition, angle: number, stale: boolean)
 
 function assetForFloor(definition: MapDefinition, activeFloor: string): MapAsset {
   return definition.floors.find((floor) => floor.id === activeFloor)?.asset ?? definition.baseAsset;
-}
-
-function configureSvgLayers(svg: SVGSVGElement, definition: MapDefinition, activeFloor: string) {
-  const source = svg.firstElementChild instanceof SVGSVGElement ? svg.firstElementChild : svg;
-  const viewBox = source.getAttribute("viewBox");
-  if (viewBox) svg.setAttribute("viewBox", viewBox);
-  const visible = new Set([definition.baseAsset.type === "svg" ? definition.baseAsset.baseLayer : null, activeFloor]);
-  for (const child of Array.from(source.children)) {
-    if (!(child instanceof SVGGElement) || !child.id) continue;
-    const keepWith = child.dataset.keepWithGroup;
-    child.style.display = visible.has(child.id) || (keepWith ? visible.has(keepWith) : false) ? "" : "none";
-  }
 }
 
 function escapeHtml(value: string) {
@@ -225,11 +214,18 @@ export function MapView({
   onCreateWaypoint,
   onAssetStateChange,
 }: MapViewProps) {
+  const [squadNow, setSquadNow] = useState(() => Date.now());
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
   const baseLayerRef = useRef<L.Layer | null>(null);
   const markerRef = useRef<L.Marker | null>(null);
   const squadMarkersRef = useRef(new Map<string, L.Marker>());
+
+  useEffect(() => {
+    if (squadPositions.length === 0) return;
+    const timer = window.setInterval(() => setSquadNow(Date.now()), 5_000);
+    return () => window.clearInterval(timer);
+  }, [squadPositions.length]);
   const poiMarkersRef = useRef(new Map<string, L.Marker>());
   const poiParentsRef = useRef(new Map<string, L.MarkerClusterGroup>());
   const poiOutlinesRef = useRef(new Map<string, L.Polygon>());
@@ -284,13 +280,29 @@ export function MapView({
     const map = mapRef.current;
     if (!map) return;
     let cancelled = false;
-    if (baseLayerRef.current) {
-      baseLayerRef.current.removeFrom(map);
-      baseLayerRef.current = null;
-    }
+    let candidate: L.Layer | null = null;
+    let committed = false;
     const asset = assetForFloor(definition, activeFloor);
     const assetName = asset.type === "tiles" ? asset.template : asset.path;
     onAssetStateChange?.({ status: "loading", asset: assetName, message: null });
+    const commit = (layer: L.Layer, message: string | null = null) => {
+      if (cancelled) {
+        layer.removeFrom(map);
+        return;
+      }
+      const previous = baseLayerRef.current;
+      baseLayerRef.current = layer;
+      committed = true;
+      if (previous && previous !== layer) previous.removeFrom(map);
+      if ("bringToBack" in layer && typeof layer.bringToBack === "function") layer.bringToBack();
+      onAssetStateChange?.({ status: "ready", asset: assetName, message });
+    };
+    const fail = (error: unknown) => {
+      console.error(error);
+      if (candidate) candidate.removeFrom(map);
+      candidate = null;
+      if (!cancelled) onAssetStateChange?.({ status: "error", asset: assetName, message: String(error) });
+    };
     if (asset.type === "tiles") {
       const layer = L.tileLayer(asset.template, {
         tileSize: asset.tileSize,
@@ -302,60 +314,55 @@ export function MapView({
         noWrap: true,
         className: "tarkov-raster-layer",
       });
-      const onLoad = () => onAssetStateChange?.({ status: "ready", asset: assetName, message: null });
-      const onError = () => onAssetStateChange?.({ status: "error", asset: assetName, message: `Unable to load ${assetName}` });
+      candidate = layer;
+      const onLoad = () => commit(layer);
+      const onError = () => fail(new Error(`Unable to load ${assetName}`));
       layer.once("load", onLoad);
       layer.once("tileerror", onError);
       layer.addTo(map);
-      baseLayerRef.current = layer;
       return () => {
+        cancelled = true;
         layer.off("load", onLoad);
         layer.off("tileerror", onError);
-        layer.removeFrom(map);
+        if (!committed) layer.removeFrom(map);
       };
     }
 
     if (asset.type === "image") {
-      const bounds = L.latLngBounds([asset.bounds[0][1], asset.bounds[0][0]], [asset.bounds[1][1], asset.bounds[1][0]]);
-      const layer = L.imageOverlay(asset.path, bounds, { className: "tarkov-raster-layer" });
-      layer.once("load", () => onAssetStateChange?.({ status: "ready", asset: assetName, message: null }));
-      layer.once("error", () => onAssetStateChange?.({ status: "error", asset: assetName, message: `Unable to load ${assetName}` }));
-      layer.addTo(map).bringToBack();
-      if (asset.calibrationStatus === "needs-local-verification") {
-        onAssetStateChange?.({ status: "ready", asset: assetName, message: "Community artwork loaded; verify live coordinate alignment locally before publishing the Windows installer." });
-      }
-      baseLayerRef.current = layer;
-      return () => layer.removeFrom(map);
+      void versionedMapAssetPath(asset.path).then((path) => {
+        if (cancelled) return;
+        const bounds = L.latLngBounds([asset.bounds[0][1], asset.bounds[0][0]], [asset.bounds[1][1], asset.bounds[1][0]]);
+        const layer = L.imageOverlay(path, bounds, { className: "tarkov-raster-layer" });
+        candidate = layer;
+        layer.once("load", () => commit(layer, asset.calibrationStatus === "needs-local-verification"
+          ? "Community artwork loaded; verify live coordinate alignment locally before publishing the Windows installer."
+          : null));
+        layer.once("error", () => fail(new Error(`Unable to load ${assetName}`)));
+        layer.addTo(map);
+      }).catch(fail);
+      return () => {
+        cancelled = true;
+        if (candidate && !committed) candidate.removeFrom(map);
+      };
     }
 
-    void fetch(asset.path)
+    void versionedMapAssetPath(asset.path)
+      .then((path) => fetch(path, { cache: "no-store" }))
       .then((response) => {
         if (!response.ok) throw new Error(`Unable to load ${asset.path}`);
         return response.text();
       })
       .then((source) => {
         if (cancelled) return;
-        const parsed = new DOMParser().parseFromString(source, "image/svg+xml").documentElement;
-        if (parsed.localName !== "svg") throw new Error("Map asset is not an SVG");
-        const wrapper = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        wrapper.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-        wrapper.append(parsed);
-        configureSvgLayers(wrapper, definition, activeFloor);
-        const layer = L.svgOverlay(wrapper, mapBounds(definition, true), { className: "tarkov-svg-layer" }).addTo(map);
-        baseLayerRef.current = layer;
-        layer.bringToBack();
-        onAssetStateChange?.({ status: "ready", asset: assetName, message: null });
+        const svg = prepareSvgMap(source, definition, activeFloor);
+        const layer = L.svgOverlay(svg, mapBounds(definition, true), { className: "tarkov-svg-layer" }).addTo(map);
+        candidate = layer;
+        commit(layer);
       })
-      .catch((error) => {
-        console.error(error);
-        if (!cancelled) onAssetStateChange?.({ status: "error", asset: assetName, message: String(error) });
-      });
+      .catch(fail);
     return () => {
       cancelled = true;
-      if (baseLayerRef.current) {
-        baseLayerRef.current.removeFrom(map);
-        baseLayerRef.current = null;
-      }
+      if (candidate && !committed) candidate.removeFrom(map);
     };
   }, [activeFloor, definition, onAssetStateChange]);
 
@@ -487,7 +494,7 @@ export function MapView({
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
-    const visible = squadPositions.filter((position) => position.mapId === definition.id && Date.now() - position.receivedAt < 120_000);
+    const visible = squadPositions.filter((position) => position.mapId === definition.id && squadNow - position.receivedAt < 120_000);
     const visibleIds = new Set(visible.map((position) => position.senderId));
     for (const [senderId, marker] of squadMarkersRef.current) {
       if (!visibleIds.has(senderId)) {
@@ -501,12 +508,12 @@ export function MapView({
       const from = map.latLngToLayerPoint(location);
       const to = map.latLngToLayerPoint(worldPoint({ x: position.position.x + Math.sin(radians) * 8, z: position.position.z + Math.cos(radians) * 8 }));
       const angle = position.heading === null ? 0 : Math.atan2(to.y - from.y, to.x - from.x) * 180 / Math.PI + 90;
-      const icon = squadMarkerIcon(position, angle, Date.now() - position.receivedAt >= 60_000);
+      const icon = squadMarkerIcon(position, angle, squadNow - position.receivedAt >= 60_000);
       const existing = squadMarkersRef.current.get(position.senderId);
       if (existing) existing.setLatLng(location).setIcon(icon);
       else squadMarkersRef.current.set(position.senderId, L.marker(location, { icon, zIndexOffset: 900 }).addTo(map));
     }
-  }, [definition.id, squadPositions]);
+  }, [definition.id, squadNow, squadPositions]);
 
   return <div className="map-canvas" ref={containerRef} aria-label={`${definition.displayName} map`} />;
 }

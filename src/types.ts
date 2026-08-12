@@ -70,6 +70,15 @@ export interface OverlayState {
   visible: boolean;
   ready: boolean;
   clickThrough: boolean;
+  shortcutReady: boolean;
+  lastError: string | null;
+}
+
+export interface LocatorSnapshot {
+  fix: PlayerFix | null;
+  mapContext: MapContext;
+  status: LocatorStatus | null;
+  ocrText: OcrTextCapture | null;
 }
 
 export type MapAssetState =

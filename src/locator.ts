@@ -1,6 +1,6 @@
 import { invoke } from "@tauri-apps/api/core";
 import { listen, type UnlistenFn } from "@tauri-apps/api/event";
-import type { LocatorSettings, LocatorStatus, MapContext, OcrTextCapture, OverlayState, PlayerFix, QuestProgress, QuestStatus } from "./types";
+import type { LocatorSettings, LocatorSnapshot, LocatorStatus, MapContext, OcrTextCapture, OverlayState, PlayerFix, QuestProgress, QuestStatus } from "./types";
 
 export const defaultSettings: LocatorSettings = {
   schemaVersion: 2,
@@ -77,8 +77,18 @@ export async function resetOverlayWindow() {
 }
 
 export async function getOverlayState(): Promise<OverlayState> {
-  if (!isTauriRuntime()) return { visible: false, ready: false, clickThrough: false };
+  if (!isTauriRuntime()) return { visible: false, ready: false, clickThrough: false, shortcutReady: false, lastError: null };
   return invoke<OverlayState>("get_overlay_state");
+}
+
+export async function getLocatorSnapshot(): Promise<LocatorSnapshot> {
+  if (!isTauriRuntime()) return {
+    fix: null,
+    mapContext: { mapId: null, inRaid: false, source: "manual" },
+    status: null,
+    ocrText: null,
+  };
+  return invoke<LocatorSnapshot>("get_locator_snapshot");
 }
 
 export async function subscribeOverlayState(handler: (state: OverlayState) => void): Promise<UnlistenFn> {
@@ -90,9 +100,11 @@ export async function setOverlayClickThrough(enabled: boolean) {
   if (isTauriRuntime()) await invoke("set_overlay_click_through", { enabled });
 }
 
-export function registerGlobalShortcuts() {
+export async function registerGlobalShortcuts() {
   // Shortcuts are registered natively so recovery does not depend on either webview.
-  return Promise.resolve();
+  if (!isTauriRuntime()) return;
+  const state = await getOverlayState();
+  if (!state.shortcutReady && state.lastError) throw new Error(state.lastError);
 }
 
 export async function getQuestProgress(gameMode: "regular" | "pve"): Promise<QuestProgress[]> {

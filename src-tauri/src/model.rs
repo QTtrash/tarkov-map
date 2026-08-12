@@ -107,6 +107,30 @@ pub struct OcrTextPayload {
     pub message: String,
 }
 
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct LocatorSnapshotPayload {
+    pub fix: Option<PlayerFixPayload>,
+    pub map_context: MapContextPayload,
+    pub status: Option<LocatorStatusPayload>,
+    pub ocr_text: Option<OcrTextPayload>,
+}
+
+impl Default for LocatorSnapshotPayload {
+    fn default() -> Self {
+        Self {
+            fix: None,
+            map_context: MapContextPayload {
+                map_id: None,
+                in_raid: false,
+                source: "manual".into(),
+            },
+            status: None,
+            ocr_text: None,
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::Settings;

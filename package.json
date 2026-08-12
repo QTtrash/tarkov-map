@@ -18,6 +18,7 @@
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^5.2.6",
     "@fontsource/ibm-plex-sans-condensed": "^5.2.6",
+    "@noble/ciphers": "^2.3.0",
     "@tauri-apps/api": "^2.8.0",
     "leaflet": "^1.9.4",
     "leaflet.markercluster": "^1.5.3",

@@ -11,6 +11,7 @@ import {
   clearPlayerPosition,
   defaultSettings,
   isTauriRuntime,
+  getLocatorSnapshot,
   getOverlayState,
   loadSettings,
   openDirectory,
@@ -85,7 +86,7 @@ export function App() {
   const [lastOcr, setLastOcr] = useState<OcrTextCapture | null>(null);
   const [raidExtracts, setRaidExtracts] = useState<RaidExtractState | null>(null);
   const [dataGeneratedAt, setDataGeneratedAt] = useState<string | null>(null);
-  const [overlayState, setOverlayState] = useState<OverlayState>({ visible: false, ready: false, clickThrough: false });
+  const [overlayState, setOverlayState] = useState<OverlayState>({ visible: false, ready: false, clickThrough: false, shortcutReady: false, lastError: null });
   const [mapAssetState, setMapAssetState] = useState<MapAssetState>({ status: "idle", asset: null, message: null });
   const [mapRetry, setMapRetry] = useState(0);
 
@@ -108,24 +109,35 @@ export function App() {
     });
     let cleanup: (() => void) | undefined;
     let disposed = false;
+    const applyContext = (context: Parameters<typeof applyDetectedContext>[1]) => {
+      const safeContext = { ...context, mapId: getMapDefinition(context.mapId) ? context.mapId : null };
+      setMapSession((current) => applyDetectedContext(current, safeContext));
+      if (!context.inRaid) setRaidExtracts(null);
+    };
     void subscribeLocator({
       onFix: (nextFix) => {
         setFix(nextFix);
         setNow(Date.now());
       },
       onStatus: setStatus,
-      onMapContext: (context) => {
-        const safeContext = { ...context, mapId: getMapDefinition(context.mapId) ? context.mapId : null };
-        setMapSession((current) => applyDetectedContext(current, safeContext));
-        if (!context.inRaid) setRaidExtracts(null);
-      },
+      onMapContext: applyContext,
       onClear: () => setFix(null),
       onOcrText: setLastOcr,
     }).then((unlisten) => {
       if (disposed) unlisten();
       else {
         cleanup = unlisten;
-        void rescanDirectories();
+        void getLocatorSnapshot()
+          .then((snapshot) => {
+            setFix(snapshot.fix);
+            applyContext(snapshot.mapContext);
+            if (snapshot.status) setStatus(snapshot.status);
+            setLastOcr(snapshot.ocrText);
+          })
+          .catch((error) => {
+            setStatus((current) => ({ ...current, level: "warning", message: "Could not restore locator state", lastError: String(error) }));
+          })
+          .finally(() => void rescanDirectories());
       }
     });
     return () => {
@@ -316,6 +328,16 @@ export function App() {
     }
   }
 
+  async function runOverlayAction(action: () => Promise<void>, failureMessage: string) {
+    try {
+      await action();
+      setOverlayState(await getOverlayState());
+    } catch (error) {
+      setStatus((current) => ({ ...current, level: "error", message: failureMessage, lastError: String(error) }));
+      setOverlayState((current) => ({ ...current, lastError: String(error) }));
+    }
+  }
+
   if (!definition) {
     return (
       <main className="empty-state"><div className="spinner" /><h1>Map assets are unavailable</h1><p>Run <code>npm run assets:sync</code>, then restart.</p></main>
@@ -348,7 +370,7 @@ export function App() {
         <div className="command-actions">
           <span className={status.screenshotWatcherReady ? "system-chip online" : "system-chip"}><i />{status.screenshotWatcherReady ? "LOCATOR ONLINE" : "LOCATOR OFFLINE"}</span>
           <button className={settings.followPlayer ? "command-button active" : "command-button"} onClick={() => setFollow(!settings.followPlayer)}><UiIcon name="target" />{settings.followPlayer ? "FOLLOWING" : "FOLLOW"}</button>
-          <button className={overlayState.visible ? "command-button active" : "command-button"} onClick={() => void toggleOverlay()} title="Toggle compact overlay (Ctrl+Shift+M)">{overlayState.visible ? "HIDE OVERLAY" : "OVERLAY"}</button>
+          <button className={overlayState.visible ? "command-button active" : "command-button"} onClick={() => void runOverlayAction(toggleOverlay, "Overlay could not be toggled")} title="Toggle compact overlay (Ctrl+Shift+M)">{overlayState.visible ? "HIDE OVERLAY" : "OVERLAY"}</button>
           <button className={settings.alwaysOnTop ? "icon-command active" : "icon-command"} onClick={() => updateSettings({ alwaysOnTop: !settings.alwaysOnTop })} aria-label="Pin window" title="Pin window"><UiIcon name="pin" /></button>
           <button className="icon-command" onClick={() => setShowSettings(true)} aria-label="Settings"><UiIcon name="settings" /></button>
           <button className="icon-command" onClick={() => setShowAbout(true)} aria-label="About"><UiIcon name="info" /></button>
@@ -449,8 +471,8 @@ export function App() {
               <button className="dialog-button" onClick={() => void rescanDirectories()}>RESCAN FOLDERS</button>
               <button className="dialog-button secondary" onClick={() => void readLatestScreenshot()}>READ LATEST SCREENSHOT</button>
             </div>
-            <div className="dialog-section"><h3>FILE HANDLING & DISPLAY</h3><label className="switch-row"><span><b>Delete parsed screenshots</b><small>Disabled by default. Invalid and older files are never removed.</small></span><input type="checkbox" checked={settings.deleteParsedScreenshots} onChange={(event) => updateSettings({ deleteParsedScreenshots: event.target.checked })} /></label><label className="switch-row"><span><b>High contrast</b><small>Improves text and control contrast without changing map data.</small></span><input type="checkbox" checked={settings.highContrast} onChange={(event) => updateSettings({ highContrast: event.target.checked })} /></label><label className="range-row"><span><b>Overlay opacity</b><small>Ctrl+Shift+M toggles the overlay; Ctrl+Shift+X restores clicks.</small></span><input type="range" min="0.35" max="1" step="0.05" value={settings.overlayOpacity} onChange={(event) => updateSettings({ overlayOpacity: Number(event.target.value) })} /><output>{Math.round(settings.overlayOpacity * 100)}%</output></label><button className="dialog-button secondary" onClick={() => void resetOverlayWindow()}>RESET & SHOW OVERLAY</button></div>
-            <div className="dialog-section diagnostics"><h3>DIAGNOSTICS</h3><dl className="telemetry-list"><div><dt>RUNTIME</dt><dd>{isTauriRuntime() ? "TAURI DESKTOP" : "BROWSER PREVIEW"}</dd></div><div><dt>RAID STATE</dt><dd>{mapSession.inRaid ? "IN RAID" : "NOT DETECTED"}</dd></div><div><dt>MAP SOURCE</dt><dd>{mapSession.source.toUpperCase()}</dd></div><div><dt>VIEW MODE</dt><dd>{mapSession.browsingAway ? "BROWSING AWAY" : "FOLLOWING RAID"}</dd></div><div><dt>OVERLAY</dt><dd>{overlayState.visible ? overlayState.clickThrough ? "CLICK-THROUGH" : "INTERACTIVE" : "HIDDEN"}</dd></div><div><dt>LAST FILE</dt><dd title={status.lastFilename ?? ""}>{status.lastFilename ?? "-"}</dd></div><div><dt>INTEL BUILD</dt><dd>{dataGeneratedAt ? new Date(dataGeneratedAt).toLocaleDateString() : "UNKNOWN"}</dd></div><div><dt>EXTRACT OCR</dt><dd>{raidExtracts?.status.toUpperCase() ?? "UNKNOWN"}</dd></div></dl><p className={`diagnostic-status ${status.level}`}>{status.message}</p>{status.lastError && <p className="error-box">{status.lastError}</p>}</div>
+            <div className="dialog-section"><h3>FILE HANDLING & DISPLAY</h3><label className="switch-row"><span><b>Delete parsed screenshots</b><small>Disabled by default. Invalid and older files are never removed.</small></span><input type="checkbox" checked={settings.deleteParsedScreenshots} onChange={(event) => updateSettings({ deleteParsedScreenshots: event.target.checked })} /></label><label className="switch-row"><span><b>High contrast</b><small>Improves text and control contrast without changing map data.</small></span><input type="checkbox" checked={settings.highContrast} onChange={(event) => updateSettings({ highContrast: event.target.checked })} /></label><label className="range-row"><span><b>Overlay opacity</b><small>Ctrl+Shift+M toggles the overlay; Ctrl+Shift+X restores clicks.</small></span><input type="range" min="0.35" max="1" step="0.05" value={settings.overlayOpacity} onChange={(event) => updateSettings({ overlayOpacity: Number(event.target.value) })} /><output>{Math.round(settings.overlayOpacity * 100)}%</output></label><button className="dialog-button secondary" onClick={() => void runOverlayAction(resetOverlayWindow, "Overlay could not be reset")}>RESET & SHOW OVERLAY</button></div>
+            <div className="dialog-section diagnostics"><h3>DIAGNOSTICS</h3><dl className="telemetry-list"><div><dt>RUNTIME</dt><dd>{isTauriRuntime() ? "TAURI DESKTOP" : "BROWSER PREVIEW"}</dd></div><div><dt>RAID STATE</dt><dd>{mapSession.inRaid ? "IN RAID" : "NOT DETECTED"}</dd></div><div><dt>MAP SOURCE</dt><dd>{mapSession.source.toUpperCase()}</dd></div><div><dt>VIEW MODE</dt><dd>{mapSession.browsingAway ? "BROWSING AWAY" : "FOLLOWING RAID"}</dd></div><div><dt>OVERLAY</dt><dd>{overlayState.visible ? overlayState.clickThrough ? "CLICK-THROUGH" : "INTERACTIVE" : "HIDDEN"}</dd></div><div><dt>SHORTCUTS</dt><dd>{overlayState.shortcutReady ? "READY" : "UNAVAILABLE"}</dd></div><div><dt>LAST FILE</dt><dd title={status.lastFilename ?? ""}>{status.lastFilename ?? "-"}</dd></div><div><dt>INTEL BUILD</dt><dd>{dataGeneratedAt ? new Date(dataGeneratedAt).toLocaleDateString() : "UNKNOWN"}</dd></div><div><dt>EXTRACT OCR</dt><dd>{raidExtracts?.status.toUpperCase() ?? "UNKNOWN"}</dd></div></dl><p className={`diagnostic-status ${status.level}`}>{status.message}</p>{(overlayState.lastError || status.lastError) && <p className="error-box">{overlayState.lastError ?? status.lastError}</p>}</div>
           </section>
         </div>
       )}

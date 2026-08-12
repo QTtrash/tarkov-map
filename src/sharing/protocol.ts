@@ -1,3 +1,4 @@
+import { gcm } from "@noble/ciphers/aes.js";
 import type { PlayerFix, SquadPosition } from "../types";
 
 export const SIGNAL_ORIGIN = "https://signal.mouchsiadis-solutions.com";
@@ -20,7 +21,23 @@ interface WirePosition {
   observedAt: number;
 }
 
-export interface RoomInvitation { roomId: string; rawKey: Uint8Array; url: string; webSocketUrl: string }
+export type RoomTransport = "internet" | "lan";
+
+export interface RoomInvitation {
+  transport: RoomTransport;
+  roomId: string;
+  rawKey: Uint8Array;
+  url: string;
+  webSocketUrl: string;
+}
+
+export type CipherBackend = "webcrypto" | "javascript";
+
+export interface RoomCipher {
+  backend: CipherBackend;
+  encrypt: (nonce: Uint8Array, plaintext: Uint8Array, additionalData: Uint8Array) => Promise<Uint8Array>;
+  decrypt: (nonce: Uint8Array, ciphertext: Uint8Array, additionalData: Uint8Array) => Promise<Uint8Array>;
+}
 
 export function base64Url(bytes: Uint8Array) {
   let binary = "";
@@ -34,8 +51,21 @@ export function decodeBase64Url(value: string) {
   return Uint8Array.from(atob(normalized), (character) => character.charCodeAt(0));
 }
 
+function secureRandom(length: number) {
+  if (!globalThis.crypto?.getRandomValues) throw new Error("Secure randomness is unavailable in this browser");
+  return crypto.getRandomValues(new Uint8Array(length));
+}
+
+export function createSenderId() {
+  const bytes = secureRandom(16);
+  bytes[6] = (bytes[6] & 0x0f) | 0x40;
+  bytes[8] = (bytes[8] & 0x3f) | 0x80;
+  const hex = Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("");
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+}
+
 export function createRoomId(now = Date.now()) {
-  const bytes = crypto.getRandomValues(new Uint8Array(20));
+  const bytes = secureRandom(20);
   new DataView(bytes.buffer).setUint32(0, Math.floor(now / 1000), false);
   return base64Url(bytes);
 }
@@ -53,30 +83,48 @@ export function validateRoomId(roomId: string, now = Date.now()) {
   return createdAt;
 }
 
-export function createInvitation(origin = SIGNAL_ORIGIN, now = Date.now()): RoomInvitation {
+function invitation(origin: string, transport: RoomTransport, now: number): RoomInvitation {
   const roomId = createRoomId(now);
-  const rawKey = crypto.getRandomValues(new Uint8Array(32));
+  const rawKey = secureRandom(32);
   const base = new URL(origin);
-  const httpProtocol = base.protocol === "http:" ? "http:" : "https:";
+  if (!/^https?:$/.test(base.protocol)) throw new Error("Invitation origin must use HTTP or HTTPS");
+  const httpProtocol = base.protocol === "https:" ? "https:" : "http:";
   const wsProtocol = httpProtocol === "https:" ? "wss:" : "ws:";
-  const url = `${httpProtocol}//${base.host}/room/${roomId}#${base64Url(rawKey)}`;
-  return { roomId, rawKey, url, webSocketUrl: `${wsProtocol}//${base.host}/v1/rooms/${roomId}` };
+  const roomPath = transport === "internet" ? "room" : "lan";
+  const wsPath = transport === "internet" ? `/v1/rooms/${roomId}` : "/ws";
+  const url = `${httpProtocol}//${base.host}/${roomPath}/${roomId}#${base64Url(rawKey)}`;
+  return { transport, roomId, rawKey, url, webSocketUrl: `${wsProtocol}//${base.host}${wsPath}` };
+}
+
+export function createInvitation(origin = SIGNAL_ORIGIN, now = Date.now()) {
+  return invitation(origin, "internet", now);
+}
+
+export function createLanInvitation(origin: string, now = Date.now()) {
+  return invitation(origin, "lan", now);
 }
 
 export function parseInvitation(value: string): RoomInvitation {
-  const invitation = new URL(value.trim());
-  if (!/^https?:$/.test(invitation.protocol)) throw new Error("Invitation must use HTTPS");
-  const match = invitation.pathname.match(/^\/room\/([A-Za-z0-9_-]{27})\/?$/);
+  const parsed = new URL(value.trim());
+  if (!/^https?:$/.test(parsed.protocol)) throw new Error("Invitation must use HTTP or HTTPS");
+  const match = parsed.pathname.match(/^\/(room|lan)\/([A-Za-z0-9_-]{27})\/?$/);
   if (!match) throw new Error("Invalid room invitation");
-  const roomId = match[1];
-  validateRoomId(roomId);
-  const rawKey = decodeBase64Url(invitation.hash.slice(1));
+  const transport: RoomTransport = match[1] === "lan" ? "lan" : "internet";
+  if (transport === "internet" && parsed.protocol !== "https:") throw new Error("Internet invitations must use HTTPS");
+  const roomId = match[2];
+  if (transport === "internet") validateRoomId(roomId);
+  else if (roomCreatedAt(roomId) > Date.now() + 5 * 60_000) throw new Error("LAN invitation is not active yet");
+  const rawKey = decodeBase64Url(parsed.hash.slice(1));
   if (rawKey.length !== 32) throw new Error("Invitation key must be 256 bits");
+  const wsProtocol = parsed.protocol === "https:" ? "wss:" : "ws:";
   return {
+    transport,
     roomId,
     rawKey,
-    url: invitation.toString(),
-    webSocketUrl: `${invitation.protocol === "https:" ? "wss:" : "ws:"}//${invitation.host}/v1/rooms/${roomId}`,
+    url: parsed.toString(),
+    webSocketUrl: transport === "internet"
+      ? `${wsProtocol}//${parsed.host}/v1/rooms/${roomId}`
+      : `${wsProtocol}//${parsed.host}/ws`,
   };
 }
 
@@ -84,8 +132,42 @@ function aad(roomId: string) {
   return new TextEncoder().encode(`raid-signal:v${PROTOCOL_VERSION}:${roomId}`);
 }
 
-export async function importRoomKey(rawKey: Uint8Array, usage: KeyUsage[] = ["encrypt", "decrypt"]) {
-  return crypto.subtle.importKey("raw", Uint8Array.from(rawKey).buffer, "AES-GCM", false, usage);
+export async function importRoomKey(
+  rawKey: Uint8Array,
+  usage: KeyUsage[] = ["encrypt", "decrypt"],
+  forceBackend?: CipherBackend,
+): Promise<RoomCipher> {
+  if (rawKey.length !== 32) throw new Error("Room key must be 256 bits");
+  const keyBytes = Uint8Array.from(rawKey);
+  const subtle = globalThis.crypto?.subtle;
+  if (subtle && forceBackend !== "javascript") {
+    const key = await subtle.importKey("raw", keyBytes.buffer, "AES-GCM", false, usage);
+    return {
+      backend: "webcrypto",
+      encrypt: async (nonce, plaintext, additionalData) => {
+        if (!usage.includes("encrypt")) throw new Error("Room key cannot encrypt");
+        const ciphertext = await subtle.encrypt({ name: "AES-GCM", iv: Uint8Array.from(nonce).buffer, additionalData: Uint8Array.from(additionalData).buffer, tagLength: 128 }, key, Uint8Array.from(plaintext).buffer);
+        return new Uint8Array(ciphertext);
+      },
+      decrypt: async (nonce, ciphertext, additionalData) => {
+        if (!usage.includes("decrypt")) throw new Error("Room key cannot decrypt");
+        const plaintext = await subtle.decrypt({ name: "AES-GCM", iv: Uint8Array.from(nonce).buffer, additionalData: Uint8Array.from(additionalData).buffer, tagLength: 128 }, key, Uint8Array.from(ciphertext).buffer);
+        return new Uint8Array(plaintext);
+      },
+    };
+  }
+  if (forceBackend === "webcrypto") throw new Error("Web Crypto is unavailable in this browser");
+  return {
+    backend: "javascript",
+    encrypt: async (nonce, plaintext, additionalData) => {
+      if (!usage.includes("encrypt")) throw new Error("Room key cannot encrypt");
+      return gcm(keyBytes, nonce, additionalData).encrypt(plaintext);
+    },
+    decrypt: async (nonce, ciphertext, additionalData) => {
+      if (!usage.includes("decrypt")) throw new Error("Room key cannot decrypt");
+      return gcm(keyBytes, nonce, additionalData).decrypt(ciphertext);
+    },
+  };
 }
 
 export function positionPayload(senderId: string, sequence: number, nickname: string, mapId: string, fix: PlayerFix): WirePosition {
@@ -104,11 +186,11 @@ export function positionPayload(senderId: string, sequence: number, nickname: st
   };
 }
 
-export async function encryptPosition(key: CryptoKey, roomId: string, payload: WirePosition) {
-  const nonce = crypto.getRandomValues(new Uint8Array(12));
+export async function encryptPosition(key: RoomCipher, roomId: string, payload: WirePosition) {
+  const nonce = secureRandom(12);
   const plaintext = new TextEncoder().encode(JSON.stringify(payload));
-  const ciphertext = await crypto.subtle.encrypt({ name: "AES-GCM", iv: nonce, additionalData: aad(roomId), tagLength: 128 }, key, plaintext);
-  return JSON.stringify({ v: 1, nonce: base64Url(nonce), ciphertext: base64Url(new Uint8Array(ciphertext)) } satisfies Envelope);
+  const ciphertext = await key.encrypt(nonce, plaintext, aad(roomId));
+  return JSON.stringify({ v: 1, nonce: base64Url(nonce), ciphertext: base64Url(ciphertext) } satisfies Envelope);
 }
 
 function validWirePosition(value: unknown): value is WirePosition {
@@ -123,13 +205,13 @@ function validWirePosition(value: unknown): value is WirePosition {
     && (item.heading === null || (typeof item.heading === "number" && Number.isFinite(item.heading) && item.heading >= 0 && item.heading < 360));
 }
 
-export async function decryptPosition(key: CryptoKey, roomId: string, message: string | ArrayBuffer, now = Date.now()): Promise<SquadPosition> {
+export async function decryptPosition(key: RoomCipher, roomId: string, message: string | ArrayBuffer, now = Date.now()): Promise<SquadPosition> {
   const source = typeof message === "string" ? message : new TextDecoder().decode(message);
   const envelope = JSON.parse(source) as Partial<Envelope>;
   if (envelope.v !== 1 || typeof envelope.nonce !== "string" || typeof envelope.ciphertext !== "string") throw new Error("Invalid encrypted envelope");
   const nonce = decodeBase64Url(envelope.nonce);
   if (nonce.length !== 12) throw new Error("Invalid AES-GCM nonce");
-  const plaintext = await crypto.subtle.decrypt({ name: "AES-GCM", iv: nonce, additionalData: aad(roomId), tagLength: 128 }, key, decodeBase64Url(envelope.ciphertext));
+  const plaintext = await key.decrypt(nonce, decodeBase64Url(envelope.ciphertext), aad(roomId));
   const payload: unknown = JSON.parse(new TextDecoder().decode(plaintext));
   if (!validWirePosition(payload)) throw new Error("Invalid position payload");
   if (payload.observedAt > now + 30_000 || payload.observedAt < now - ROOM_LIFETIME_MS) throw new Error("Position timestamp is outside the room window");

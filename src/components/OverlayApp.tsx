@@ -2,7 +2,7 @@ import { listen } from "@tauri-apps/api/event";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { getMapDefinition, maps } from "../data/maps";
 import { getActiveFloor } from "../floor";
-import { defaultSettings, hideOverlay, loadSettings, overlayReady, setOverlayClickThrough, subscribeLocator } from "../locator";
+import { defaultSettings, getLocatorSnapshot, hideOverlay, loadSettings, overlayReady, setOverlayClickThrough, subscribeLocator } from "../locator";
 import { defaultVisiblePoiCategories, loadPoiBundle } from "../poi";
 import { recognizeRaidExtracts } from "../raid";
 import type { LocatorSettings, MapAssetState, MapContext, MapPoiBundle, OcrTextCapture, PlayerFix, PoiCategory, RaidExtractState } from "../types";
@@ -25,26 +25,44 @@ export function OverlayApp() {
   const [clickThroughCountdown, setClickThroughCountdown] = useState<number | null>(null);
 
   useEffect(() => {
-    void setOverlayClickThrough(false);
-    void loadSettings().then(setSettings);
+    let disposed = false;
     let cleanup: (() => void) | undefined;
     let cleanupInvalidate: (() => void) | undefined;
-    void subscribeLocator({
+    const applyContext = (next: MapContext) => {
+      setContext(next);
+      if (!next.inRaid) setRaidExtracts(null);
+    };
+    const initialize = async () => {
+      cleanup = await subscribeLocator({
       onFix: setFix,
       onStatus: noop,
-      onMapContext: (next) => { setContext(next); if (!next.inRaid) setRaidExtracts(null); },
+      onMapContext: applyContext,
       onClear: () => setFix(null),
       onOcrText: setCapture,
       onSettings: setSettings,
-    }).then((unlisten) => { cleanup = unlisten; });
-    void listen("overlay://invalidate-map", () => setRetryKey((current) => current + 1)).then((unlisten) => { cleanupInvalidate = unlisten; });
-    const readyFrame = window.requestAnimationFrame(() => void overlayReady());
+      });
+      if (disposed) {
+        cleanup();
+        return;
+      }
+      cleanupInvalidate = await listen("overlay://invalidate-map", () => setRetryKey((current) => current + 1));
+      const [loaded, snapshot] = await Promise.all([loadSettings(), getLocatorSnapshot()]);
+      if (disposed) return;
+      setSettings(loaded);
+      setFix(snapshot.fix);
+      applyContext(snapshot.mapContext);
+      setCapture(snapshot.ocrText);
+      await overlayReady();
+    };
+    void initialize().catch((error) => {
+      if (!disposed) setBundleError(`Overlay initialization failed: ${String(error)}`);
+    });
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") void hideOverlay();
     };
     window.addEventListener("keydown", onKeyDown);
     return () => {
-      window.cancelAnimationFrame(readyFrame);
+      disposed = true;
       window.removeEventListener("keydown", onKeyDown);
       cleanup?.();
       cleanupInvalidate?.();

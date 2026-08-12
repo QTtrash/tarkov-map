@@ -37,7 +37,7 @@ Do not perform the Tauri, Cargo, NSIS, or executable checks on the VPS.
 From a local shell with SSH access to the VPS:
 
 ```bash
-./ops/publish-release ./src-tauri/target/release/bundle/nsis/Raid-Signal_1.0.0_x64-setup.exe 1.0.0 truegrind@YOUR_VPS
+./ops/publish-release "./src-tauri/target/release/bundle/nsis/Raid Signal_1.0.0_x64-setup.exe" 1.0.0 truegrind@YOUR_VPS
 ```
 
 The publisher uploads to a staging name, verifies size and SHA-256 remotely, then atomically publishes `Raid-Signal-Setup-1.0.0.exe` and `release.json`. The landing page enables its download only when the manifest and artifact agree.

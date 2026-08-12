@@ -2,7 +2,7 @@ use regex::Regex;
 use std::sync::LazyLock;
 
 static SCENE_PATTERN: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r"(?i)scene preset path:\s*maps/(?P<bundle>[a-z0-9_\-]+)\.bundle")
+    Regex::new(r"(?i)scene preset path:\s*maps/(?P<bundle>[a-z0-9_\-]+)\.bundle(?:.*?\brcid:(?P<rcid>[a-z0-9_\-]+)(?:\.scenespreset)?\.asset)?")
         .expect("valid scene regex")
 });
 static LOCATION_PATTERN: LazyLock<Regex> = LazyLock::new(|| {
@@ -17,10 +17,18 @@ pub enum LogEvent {
 }
 
 pub fn canonical_map_id(value: &str) -> Option<&'static str> {
-    let normalized = value
+    let mut normalized = value
         .trim()
         .trim_end_matches(".bundle")
+        .trim_end_matches(".scenespreset.asset")
+        .trim_end_matches(".asset")
         .to_ascii_lowercase();
+    for suffix in ["_preset", "-preset"] {
+        if let Some(stripped) = normalized.strip_suffix(suffix) {
+            normalized = stripped.to_string();
+            break;
+        }
+    }
     match normalized.as_str() {
         "bigmap" | "customs" => Some("customs"),
         "factory4_day" | "factory4_night" | "factory" | "night-factory" => Some("factory"),
@@ -60,7 +68,12 @@ pub fn parse_log_chunk(pending: &mut String, chunk: &str) -> Vec<LogEvent> {
 
     for line in complete.lines() {
         if let Some(captures) = SCENE_PATTERN.captures(line) {
-            if let Some(id) = canonical_map_id(&captures["bundle"]) {
+            let detected = canonical_map_id(&captures["bundle"]).or_else(|| {
+                captures
+                    .name("rcid")
+                    .and_then(|capture| canonical_map_id(capture.as_str()))
+            });
+            if let Some(id) = detected {
                 events.push(LogEvent::MapDetected(id.into()));
             }
         } else if let Some(captures) = LOCATION_PATTERN.captures(line) {
@@ -89,6 +102,8 @@ mod tests {
     fn maps_all_current_locations() {
         let cases = [
             ("bigmap", "customs"),
+            ("customs_preset", "customs"),
+            ("bigmap.scenespreset.asset", "customs"),
             ("factory4_day", "factory"),
             ("sandbox_high", "ground-zero"),
             ("icebreaker", "icebreaker"),
@@ -125,5 +140,25 @@ mod tests {
                 LogEvent::RaidEnded,
             ]
         );
+    }
+
+    #[test]
+    fn parses_current_scene_preset_and_rcid_format() {
+        let mut pending = String::new();
+        let events = parse_log_chunk(
+            &mut pending,
+            "x|application|scene preset path:maps/customs_preset.bundle rcid:bigmap.scenespreset.asset\n",
+        );
+        assert_eq!(events, vec![LogEvent::MapDetected("customs".into())]);
+    }
+
+    #[test]
+    fn falls_back_to_rcid_when_bundle_alias_is_unknown() {
+        let mut pending = String::new();
+        let events = parse_log_chunk(
+            &mut pending,
+            "x|application|scene preset path:maps/future_name.bundle rcid:bigmap.scenespreset.asset\n",
+        );
+        assert_eq!(events, vec![LogEvent::MapDetected("customs".into())]);
     }
 }
