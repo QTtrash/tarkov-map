@@ -60,8 +60,7 @@ describe("offline map bundle", () => {
         if (floor.asset) verifyAsset(floor.asset);
         if (floor.svgLayer && map.baseAsset.type === "svg") {
           const file = path.join(process.cwd(), "public", map.baseAsset.path.replace(/^\//, ""));
-          expect(readFileSync(file, "utf8"), `${map.id}:${floor.svgLayer}`)
-            .toContain(`id="${floor.svgLayer}"`);
+          expect(readFileSync(file, "utf8"), `${map.id}:${floor.svgLayer}`).toContain(`id="${floor.svgLayer}"`);
         }
       }
     }

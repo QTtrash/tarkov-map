@@ -30,11 +30,7 @@ export function chooseAutomaticFloor(map: MapDefinition, position: Vec3): string
   return matches[0]?.floor.id ?? map.baseFloor.id;
 }
 
-export function getActiveFloor(
-  map: MapDefinition,
-  position: Vec3 | null,
-  floorMode: string,
-): string {
+export function getActiveFloor(map: MapDefinition, position: Vec3 | null, floorMode: string): string {
   if (floorMode !== "auto") return floorMode;
   return position ? chooseAutomaticFloor(map, position) : map.baseFloor.id;
 }

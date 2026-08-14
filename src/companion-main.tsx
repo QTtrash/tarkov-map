@@ -12,4 +12,8 @@ import "./styles.css";
 import "./companion.css";
 import { CompanionApp } from "./components/CompanionApp";
 
-createRoot(document.getElementById("root")!).render(<StrictMode><CompanionApp /></StrictMode>);
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <CompanionApp />
+  </StrictMode>,
+);

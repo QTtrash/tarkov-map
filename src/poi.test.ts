@@ -16,7 +16,10 @@ const map: MapDefinition = {
   id: "test",
   displayName: "Test",
   logAliases: [],
-  bounds: [[0, 0], [100, 100]],
+  bounds: [
+    [0, 0],
+    [100, 100],
+  ],
   svgBounds: null,
   transform: [1, 0, 1, 0],
   coordinateRotation: 0,
@@ -24,13 +27,25 @@ const map: MapDefinition = {
   maxZoom: 6,
   baseAsset: { type: "svg", path: "/test.svg", baseLayer: "ground" },
   baseFloor: { id: "ground", name: "Ground" },
-  floors: [{
-    id: "upper",
-    name: "Upper",
-    svgLayer: "upper",
-    asset: null,
-    extents: [{ height: [4, 8], bounds: [[[10, 10], [30, 30]]] }],
-  }],
+  floors: [
+    {
+      id: "upper",
+      name: "Upper",
+      svgLayer: "upper",
+      asset: null,
+      extents: [
+        {
+          height: [4, 8],
+          bounds: [
+            [
+              [10, 10],
+              [30, 30],
+            ],
+          ],
+        },
+      ],
+    },
+  ],
   poiPath: "/test.json",
   poiCounts: {},
   attribution: { name: "Test", url: "https://example.com" },

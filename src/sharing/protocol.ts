@@ -7,7 +7,11 @@ export const ROOM_LIFETIME_MS = 3 * 60 * 60 * 1000;
 export const STALE_AFTER_MS = 60_000;
 export const EVICT_AFTER_MS = 120_000;
 
-interface Envelope { v: 1; nonce: string; ciphertext: string }
+interface Envelope {
+  v: 1;
+  nonce: string;
+  ciphertext: string;
+}
 interface WirePosition {
   v: 1;
   senderId: string;
@@ -41,13 +45,18 @@ export interface RoomCipher {
 
 export function base64Url(bytes: Uint8Array) {
   let binary = "";
-  bytes.forEach((byte) => { binary += String.fromCharCode(byte); });
+  bytes.forEach((byte) => {
+    binary += String.fromCharCode(byte);
+  });
   return btoa(binary).replaceAll("+", "-").replaceAll("/", "_").replace(/=+$/, "");
 }
 
 export function decodeBase64Url(value: string) {
   if (!/^[A-Za-z0-9_-]+$/.test(value)) throw new Error("Invalid invitation encoding");
-  const normalized = value.replaceAll("-", "+").replaceAll("_", "/").padEnd(Math.ceil(value.length / 4) * 4, "=");
+  const normalized = value
+    .replaceAll("-", "+")
+    .replaceAll("_", "/")
+    .padEnd(Math.ceil(value.length / 4) * 4, "=");
   return Uint8Array.from(atob(normalized), (character) => character.charCodeAt(0));
 }
 
@@ -122,9 +131,10 @@ export function parseInvitation(value: string): RoomInvitation {
     roomId,
     rawKey,
     url: parsed.toString(),
-    webSocketUrl: transport === "internet"
-      ? `${wsProtocol}//${parsed.host}/v1/rooms/${roomId}`
-      : `${wsProtocol}//${parsed.host}/ws`,
+    webSocketUrl:
+      transport === "internet"
+        ? `${wsProtocol}//${parsed.host}/v1/rooms/${roomId}`
+        : `${wsProtocol}//${parsed.host}/ws`,
   };
 }
 
@@ -146,12 +156,30 @@ export async function importRoomKey(
       backend: "webcrypto",
       encrypt: async (nonce, plaintext, additionalData) => {
         if (!usage.includes("encrypt")) throw new Error("Room key cannot encrypt");
-        const ciphertext = await subtle.encrypt({ name: "AES-GCM", iv: Uint8Array.from(nonce).buffer, additionalData: Uint8Array.from(additionalData).buffer, tagLength: 128 }, key, Uint8Array.from(plaintext).buffer);
+        const ciphertext = await subtle.encrypt(
+          {
+            name: "AES-GCM",
+            iv: Uint8Array.from(nonce).buffer,
+            additionalData: Uint8Array.from(additionalData).buffer,
+            tagLength: 128,
+          },
+          key,
+          Uint8Array.from(plaintext).buffer,
+        );
         return new Uint8Array(ciphertext);
       },
       decrypt: async (nonce, ciphertext, additionalData) => {
         if (!usage.includes("decrypt")) throw new Error("Room key cannot decrypt");
-        const plaintext = await subtle.decrypt({ name: "AES-GCM", iv: Uint8Array.from(nonce).buffer, additionalData: Uint8Array.from(additionalData).buffer, tagLength: 128 }, key, Uint8Array.from(ciphertext).buffer);
+        const plaintext = await subtle.decrypt(
+          {
+            name: "AES-GCM",
+            iv: Uint8Array.from(nonce).buffer,
+            additionalData: Uint8Array.from(additionalData).buffer,
+            tagLength: 128,
+          },
+          key,
+          Uint8Array.from(ciphertext).buffer,
+        );
         return new Uint8Array(plaintext);
       },
     };
@@ -170,8 +198,14 @@ export async function importRoomKey(
   };
 }
 
-export function positionPayload(senderId: string, sequence: number, nickname: string, mapId: string, fix: PlayerFix): WirePosition {
-  const heading = fix.forward ? (Math.atan2(fix.forward.x, fix.forward.z) * 180 / Math.PI + 360) % 360 : null;
+export function positionPayload(
+  senderId: string,
+  sequence: number,
+  nickname: string,
+  mapId: string,
+  fix: PlayerFix,
+): WirePosition {
+  const heading = fix.forward ? ((Math.atan2(fix.forward.x, fix.forward.z) * 180) / Math.PI + 360) % 360 : null;
   return {
     v: 1,
     senderId,
@@ -196,25 +230,40 @@ export async function encryptPosition(key: RoomCipher, roomId: string, payload: 
 function validWirePosition(value: unknown): value is WirePosition {
   if (!value || typeof value !== "object") return false;
   const item = value as Record<string, unknown>;
-  return item.v === 1
-    && typeof item.senderId === "string" && /^[0-9a-f-]{36}$/i.test(item.senderId)
-    && Number.isSafeInteger(item.sequence) && Number(item.sequence) > 0
-    && typeof item.nickname === "string" && item.nickname.length > 0 && item.nickname.length <= 24
-    && typeof item.mapId === "string" && /^[a-z0-9-]{2,32}$/.test(item.mapId)
-    && [item.x, item.y, item.z, item.observedAt].every((entry) => typeof entry === "number" && Number.isFinite(entry))
-    && (item.heading === null || (typeof item.heading === "number" && Number.isFinite(item.heading) && item.heading >= 0 && item.heading < 360));
+  return (
+    item.v === 1 &&
+    typeof item.senderId === "string" &&
+    /^[0-9a-f-]{36}$/i.test(item.senderId) &&
+    Number.isSafeInteger(item.sequence) &&
+    Number(item.sequence) > 0 &&
+    typeof item.nickname === "string" &&
+    item.nickname.length > 0 &&
+    item.nickname.length <= 24 &&
+    typeof item.mapId === "string" &&
+    /^[a-z0-9-]{2,32}$/.test(item.mapId) &&
+    [item.x, item.y, item.z, item.observedAt].every((entry) => typeof entry === "number" && Number.isFinite(entry)) &&
+    (item.heading === null ||
+      (typeof item.heading === "number" && Number.isFinite(item.heading) && item.heading >= 0 && item.heading < 360))
+  );
 }
 
-export async function decryptPosition(key: RoomCipher, roomId: string, message: string | ArrayBuffer, now = Date.now()): Promise<SquadPosition> {
+export async function decryptPosition(
+  key: RoomCipher,
+  roomId: string,
+  message: string | ArrayBuffer,
+  now = Date.now(),
+): Promise<SquadPosition> {
   const source = typeof message === "string" ? message : new TextDecoder().decode(message);
   const envelope = JSON.parse(source) as Partial<Envelope>;
-  if (envelope.v !== 1 || typeof envelope.nonce !== "string" || typeof envelope.ciphertext !== "string") throw new Error("Invalid encrypted envelope");
+  if (envelope.v !== 1 || typeof envelope.nonce !== "string" || typeof envelope.ciphertext !== "string")
+    throw new Error("Invalid encrypted envelope");
   const nonce = decodeBase64Url(envelope.nonce);
   if (nonce.length !== 12) throw new Error("Invalid AES-GCM nonce");
   const plaintext = await key.decrypt(nonce, decodeBase64Url(envelope.ciphertext), aad(roomId));
   const payload: unknown = JSON.parse(new TextDecoder().decode(plaintext));
   if (!validWirePosition(payload)) throw new Error("Invalid position payload");
-  if (payload.observedAt > now + 30_000 || payload.observedAt < now - ROOM_LIFETIME_MS) throw new Error("Position timestamp is outside the room window");
+  if (payload.observedAt > now + 30_000 || payload.observedAt < now - ROOM_LIFETIME_MS)
+    throw new Error("Position timestamp is outside the room window");
   return {
     senderId: payload.senderId,
     sequence: payload.sequence,

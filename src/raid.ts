@@ -40,18 +40,29 @@ function lineScore(line: string, alias: string) {
 
 export function recognizeRaidExtracts(capture: OcrTextCapture, mapId: string, pois: MapPoi[]): RaidExtractState {
   const extractPois = pois.filter((poi) => poi.kind === "extract" || poi.kind === "transit");
-  const lines = capture.rawText.split(/\r?\n/).map(normalizeOcr).filter((line) => line.length >= 3);
+  const lines = capture.rawText
+    .split(/\r?\n/)
+    .map(normalizeOcr)
+    .filter((line) => line.length >= 3);
   const matches = new Map<string, { name: string; score: number }>();
   for (const line of lines) {
-    const ranked = extractPois.map((poi) => ({
-      poi,
-      score: Math.max(...[poi.name, ...(poi.aliases ?? [])].map(normalizeOcr).filter(Boolean).map((alias) => lineScore(line, alias))),
-    })).sort((left, right) => right.score - left.score);
+    const ranked = extractPois
+      .map((poi) => ({
+        poi,
+        score: Math.max(
+          ...[poi.name, ...(poi.aliases ?? [])]
+            .map(normalizeOcr)
+            .filter(Boolean)
+            .map((alias) => lineScore(line, alias)),
+        ),
+      }))
+      .sort((left, right) => right.score - left.score);
     const winner = ranked[0];
     const runnerUp = ranked[1];
     if (winner && winner.score >= 0.84 && (winner.score === 1 || !runnerUp || winner.score - runnerUp.score >= 0.08)) {
       const existing = matches.get(winner.poi.id);
-      if (!existing || existing.score < winner.score) matches.set(winner.poi.id, { name: winner.poi.name, score: winner.score });
+      if (!existing || existing.score < winner.score)
+        matches.set(winner.poi.id, { name: winner.poi.name, score: winner.score });
     }
   }
   const values = [...matches.values()];
@@ -63,6 +74,8 @@ export function recognizeRaidExtracts(capture: OcrTextCapture, mapId: string, po
     rawText: capture.rawText,
     observedAt: capture.observedAt,
     confidence: values.length ? Math.min(...values.map((value) => value.score)) : 0,
-    message: values.length ? `${values.length} active raid option${values.length === 1 ? "" : "s"} recognized` : capture.message || "Active extracts unknown",
+    message: values.length
+      ? `${values.length} active raid option${values.length === 1 ? "" : "s"} recognized`
+      : capture.message || "Active extracts unknown",
   };
 }

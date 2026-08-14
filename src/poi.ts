@@ -1,4 +1,5 @@
 import type { FloorDefinition, MapDefinition, MapPoi, MapPoiBundle, PoiCategory, Vec3 } from "./types";
+import { parsePoiBundle } from "./validation";
 
 export const defaultVisiblePoiCategories: PoiCategory[] = [
   "extract-pmc",
@@ -68,11 +69,7 @@ export const poiCategoryGroups: Array<{
 export async function loadPoiBundle(path: string, signal?: AbortSignal): Promise<MapPoiBundle> {
   const response = await fetch(path, { signal });
   if (!response.ok) throw new Error(`Unable to load map intelligence (${response.status})`);
-  const bundle = await response.json() as MapPoiBundle;
-  if (bundle.schemaVersion !== 2 || !Array.isArray(bundle.pois) || typeof bundle.generatedAt !== "string") {
-    throw new Error("Unsupported map intelligence format");
-  }
-  return bundle;
+  return parsePoiBundle(await response.json());
 }
 
 export function horizontalDistance(first: Vec3, second: Vec3) {
@@ -89,10 +86,12 @@ export function nearestExtracts(pois: MapPoi[], position: Vec3, limit = 3, activ
 
 function positionInBounds(position: Vec3, bounds: NonNullable<FloorDefinition["extents"][number]["bounds"]>[number]) {
   const [first, second] = bounds;
-  return position.x >= Math.min(first[0], second[0])
-    && position.x <= Math.max(first[0], second[0])
-    && position.z >= Math.min(first[1], second[1])
-    && position.z <= Math.max(first[1], second[1]);
+  return (
+    position.x >= Math.min(first[0], second[0]) &&
+    position.x <= Math.max(first[0], second[0]) &&
+    position.z >= Math.min(first[1], second[1]) &&
+    position.z <= Math.max(first[1], second[1])
+  );
 }
 
 function extentRelation(poi: MapPoi, floor: FloorDefinition): "full" | "partial" | null {
@@ -113,8 +112,8 @@ export function poiMatchesFloor(poi: MapPoi, map: MapDefinition, activeFloor: st
     const floor = map.floors.find((candidate) => candidate.id === activeFloor);
     return floor ? extentRelation(poi, floor) !== null : true;
   }
-  return !map.floors.some((floor) =>
-    floor.extents.some((extent) => Boolean(extent.bounds?.length)) && extentRelation(poi, floor) === "full",
+  return !map.floors.some(
+    (floor) => floor.extents.some((extent) => Boolean(extent.bounds?.length)) && extentRelation(poi, floor) === "full",
   );
 }
 
@@ -122,7 +121,9 @@ export function searchPois(pois: MapPoi[], query: string, limit = 8) {
   const normalized = query.trim().toLocaleLowerCase();
   if (!normalized) return [];
   return pois
-    .filter((poi) => [poi.name, ...(poi.aliases ?? []), poi.category].some((value) => value.toLocaleLowerCase().includes(normalized)))
+    .filter((poi) =>
+      [poi.name, ...(poi.aliases ?? []), poi.category].some((value) => value.toLocaleLowerCase().includes(normalized)),
+    )
     .sort((left, right) => left.name.localeCompare(right.name))
     .slice(0, limit);
 }

@@ -1,57 +1,341 @@
-body.companion-body { min-width: 0; }
-.companion-shell { height: 100%; display: grid; grid-template-rows: 54px 58px 1fr; color: var(--bone); background: var(--canvas); }
-.companion-header { display: flex; align-items: center; gap: 8px; padding: 0 max(12px, env(safe-area-inset-left)); border-bottom: 1px solid var(--rule); background: var(--panel); }
-.companion-brand { display: flex; align-items: center; gap: 9px; margin-right: auto; color: inherit; text-decoration: none; }
-.companion-brand > b { display: grid; width: 29px; height: 29px; place-items: center; border: 1px solid var(--muted); font: 600 8px/1 "IBM Plex Mono", monospace; transform: rotate(45deg); }
-.companion-brand > b::first-letter { transform: rotate(-45deg); }
-.companion-brand span { display: flex; flex-direction: column; }
-.companion-brand strong { font-size: 11px; letter-spacing: .1em; }
-.companion-brand small { color: var(--faint); font: 400 7px/1.3 "IBM Plex Mono", monospace; letter-spacing: .08em; }
-.companion-header button, .companion-controls button { height: 32px; padding: 0 10px; border: 1px solid var(--rule); color: var(--muted); background: transparent; font: 500 8px/1 "IBM Plex Mono", monospace; letter-spacing: .06em; }
-.companion-state { display: flex; align-items: center; gap: 5px; color: var(--scav); font: 500 7px/1 "IBM Plex Mono", monospace; }
-.companion-state i { width: 5px; height: 5px; background: currentColor; }
-.companion-state.online { color: var(--pmc); }
-.companion-state.encrypting, .companion-state.connecting { color: var(--usec); }
-.companion-connection-error { position: absolute; z-index: 1002; top: 12px; left: 50%; width: min(620px, calc(100% - 24px)); margin: 0; padding: 9px 12px; border: 1px solid var(--scav); color: var(--bone); background: color-mix(in srgb, var(--canvas) 94%, transparent); font: 500 10px/1.4 "IBM Plex Mono", monospace; transform: translateX(-50%); }
-.companion-controls { display: flex; align-items: stretch; overflow-x: auto; border-bottom: 1px solid var(--rule); background: var(--raised); }
-.companion-controls label { display: flex; min-width: 150px; flex: 1; flex-direction: column; justify-content: center; padding: 0 12px; border-right: 1px solid var(--rule); }
-.companion-controls label span { color: var(--faint); font: 500 7px/1 "IBM Plex Mono", monospace; letter-spacing: .12em; }
-.companion-controls select { border: 0; padding: 3px 0 0; background: transparent; font-size: 12px; }
-.companion-controls button { align-self: center; margin: 0 8px; white-space: nowrap; }
-.companion-controls button.active { border-color: var(--pmc); color: var(--pmc); }
-.companion-map { position: relative; min-height: 0; }
-.companion-map .map-canvas { height: 100%; }
-.companion-roster { position: absolute; z-index: 750; left: 10px; bottom: 10px; display: flex; width: min(220px, calc(100% - 80px)); max-height: 38%; flex-direction: column; overflow: auto; border: 1px solid var(--rule); background: #0c0f0deb; }
-.companion-roster > span { padding: 7px 9px; color: var(--faint); font: 500 7px/1 "IBM Plex Mono", monospace; letter-spacing: .12em; }
-.companion-roster button { display: flex; align-items: flex-start; flex-direction: column; padding: 7px 9px; border-top: 1px solid var(--rule-soft); color: var(--bone); background: transparent; text-align: left; }
-.companion-roster button b { font-size: 10px; }
-.companion-roster button small { color: var(--muted); font: 400 8px/1.4 "IBM Plex Mono", monospace; }
-.companion-gate { min-height: 100%; display: grid; grid-template-columns: minmax(280px, 520px) minmax(300px, 620px); place-content: center; gap: clamp(40px, 8vw, 120px); padding: clamp(24px, 6vw, 90px); color: #e8e0d0; background: #070706; }
-.companion-gate__field { position: relative; width: min(70vw, 560px); aspect-ratio: 1.18; overflow: hidden; border: 1px solid #34312c; background: #0a0a08; transform: perspective(900px) rotateX(54deg) rotateZ(-10deg); }
-.companion-gate__field::after { content: ""; position: absolute; inset: 8%; border: 1px solid #22211d; }
-.companion-gate__field svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.companion-gate__field .gate-terrain { stroke: #49443c; }
-.companion-gate__field .gate-route { stroke: #ff5a2a; }
-.companion-gate__field .gate-route circle { fill: #0a0a08; stroke: #ff5a2a; }
-.companion-gate__field > span { position: absolute; right: 18px; bottom: 15px; color: #6f685e; font: 500 7px/1 "IBM Plex Mono", monospace; letter-spacing: .12em; }
-.companion-gate__field b { position: absolute; top: 15px; left: 18px; color: #ff5a2a; font: 500 13px/1 "IBM Plex Mono", monospace; letter-spacing: .15em; }
-.companion-gate section { align-self: center; }
-.companion-gate section > p { margin: 0 0 18px; color: #ff5a2a; font: 500 9px/1.4 "IBM Plex Mono", monospace; letter-spacing: .15em; }
-.companion-gate h1 { max-width: 580px; margin: 0 0 24px; font: 600 clamp(42px, 7vw, 84px)/.9 "IBM Plex Sans Condensed", sans-serif; letter-spacing: -.05em; }
-.companion-gate section > span { display: block; max-width: 520px; color: #8d887f; }
-.companion-gate a { display: inline-flex; margin-top: 30px; padding: 12px 16px; border: 1px solid #ff5a2a; color: #ff5a2a; font: 500 9px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-decoration: none; }
-.companion-gate.connecting .companion-gate__field .gate-route { animation: companion-acquire 1.8s steps(6,end) infinite; }
-@keyframes companion-acquire { 50% { opacity: .35; stroke: #e8e0d0; } }
-@media (max-width: 640px) {
-  .companion-gate { grid-template-columns: 1fr; align-content: center; gap: 30px; }
-  .companion-gate__field { width: min(78vw, 340px); margin: auto; }
-  .companion-shell { grid-template-rows: 50px 54px 1fr; }
-  .companion-brand small { display: none; }
-  .companion-header { gap: 5px; }
-  .companion-header button { padding: 0 7px; }
-  .companion-state { position: absolute; top: 42px; left: 13px; z-index: 3; padding: 3px 5px; background: var(--raised); }
-  .companion-controls label { min-width: 120px; }
-  .intel-shell.open .intel-drawer { width: min(90vw, 360px); }
-  .quest-dialog { width: calc(100vw - 12px); height: calc(100vh - 12px); }
+body.companion-body {
+  min-width: 0;
 }
-@media (prefers-reduced-motion: reduce) { .companion-gate.connecting .companion-gate__field::after { animation: none; } }
+.companion-shell {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 54px 58px 1fr;
+  color: var(--bone);
+  background: var(--canvas);
+}
+.companion-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 max(12px, env(safe-area-inset-left));
+  border-bottom: 1px solid var(--rule);
+  background: var(--panel);
+}
+.companion-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-right: auto;
+  color: inherit;
+  text-decoration: none;
+}
+.companion-brand > b {
+  display: grid;
+  width: 29px;
+  height: 29px;
+  place-items: center;
+  border: 1px solid var(--muted);
+  font:
+    600 8px/1 "IBM Plex Mono",
+    monospace;
+  transform: rotate(45deg);
+}
+.companion-brand > b::first-letter {
+  transform: rotate(-45deg);
+}
+.companion-brand span {
+  display: flex;
+  flex-direction: column;
+}
+.companion-brand strong {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+.companion-brand small {
+  color: var(--faint);
+  font:
+    400 7px/1.3 "IBM Plex Mono",
+    monospace;
+  letter-spacing: 0.08em;
+}
+.companion-header button,
+.companion-controls button {
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid var(--rule);
+  color: var(--muted);
+  background: transparent;
+  font:
+    500 8px/1 "IBM Plex Mono",
+    monospace;
+  letter-spacing: 0.06em;
+}
+.companion-state {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--scav);
+  font:
+    500 7px/1 "IBM Plex Mono",
+    monospace;
+}
+.companion-state i {
+  width: 5px;
+  height: 5px;
+  background: currentColor;
+}
+.companion-state.online {
+  color: var(--pmc);
+}
+.companion-state.encrypting,
+.companion-state.connecting {
+  color: var(--usec);
+}
+.companion-connection-error {
+  position: absolute;
+  z-index: 1002;
+  top: 12px;
+  left: 50%;
+  width: min(620px, calc(100% - 24px));
+  margin: 0;
+  padding: 9px 12px;
+  border: 1px solid var(--scav);
+  color: var(--bone);
+  background: color-mix(in srgb, var(--canvas) 94%, transparent);
+  font:
+    500 10px/1.4 "IBM Plex Mono",
+    monospace;
+  transform: translateX(-50%);
+}
+.companion-controls {
+  display: flex;
+  align-items: stretch;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--rule);
+  background: var(--raised);
+}
+.companion-controls label {
+  display: flex;
+  min-width: 150px;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 12px;
+  border-right: 1px solid var(--rule);
+}
+.companion-controls label span {
+  color: var(--faint);
+  font:
+    500 7px/1 "IBM Plex Mono",
+    monospace;
+  letter-spacing: 0.12em;
+}
+.companion-controls select {
+  border: 0;
+  padding: 3px 0 0;
+  background: transparent;
+  font-size: 12px;
+}
+.companion-controls button {
+  align-self: center;
+  margin: 0 8px;
+  white-space: nowrap;
+}
+.companion-controls button.active {
+  border-color: var(--pmc);
+  color: var(--pmc);
+}
+.companion-map {
+  position: relative;
+  min-height: 0;
+}
+.companion-map .map-canvas {
+  height: 100%;
+}
+.companion-roster {
+  position: absolute;
+  z-index: 750;
+  left: 10px;
+  bottom: 10px;
+  display: flex;
+  width: min(220px, calc(100% - 80px));
+  max-height: 38%;
+  flex-direction: column;
+  overflow: auto;
+  border: 1px solid var(--rule);
+  background: #0c0f0deb;
+}
+.companion-roster > span {
+  padding: 7px 9px;
+  color: var(--faint);
+  font:
+    500 7px/1 "IBM Plex Mono",
+    monospace;
+  letter-spacing: 0.12em;
+}
+.companion-roster button {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 7px 9px;
+  border-top: 1px solid var(--rule-soft);
+  color: var(--bone);
+  background: transparent;
+  text-align: left;
+}
+.companion-roster button b {
+  font-size: 10px;
+}
+.companion-roster button small {
+  color: var(--muted);
+  font:
+    400 8px/1.4 "IBM Plex Mono",
+    monospace;
+}
+.companion-gate {
+  min-height: 100%;
+  display: grid;
+  grid-template-columns: minmax(280px, 520px) minmax(300px, 620px);
+  place-content: center;
+  gap: clamp(40px, 8vw, 120px);
+  padding: clamp(24px, 6vw, 90px);
+  color: #e8e0d0;
+  background: #070706;
+}
+.companion-gate__field {
+  position: relative;
+  width: min(70vw, 560px);
+  aspect-ratio: 1.18;
+  overflow: hidden;
+  border: 1px solid #34312c;
+  background: #0a0a08;
+  transform: perspective(900px) rotateX(54deg) rotateZ(-10deg);
+}
+.companion-gate__field::after {
+  content: "";
+  position: absolute;
+  inset: 8%;
+  border: 1px solid #22211d;
+}
+.companion-gate__field svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.companion-gate__field .gate-terrain {
+  stroke: #49443c;
+}
+.companion-gate__field .gate-route {
+  stroke: #ff5a2a;
+}
+.companion-gate__field .gate-route circle {
+  fill: #0a0a08;
+  stroke: #ff5a2a;
+}
+.companion-gate__field > span {
+  position: absolute;
+  right: 18px;
+  bottom: 15px;
+  color: #6f685e;
+  font:
+    500 7px/1 "IBM Plex Mono",
+    monospace;
+  letter-spacing: 0.12em;
+}
+.companion-gate__field b {
+  position: absolute;
+  top: 15px;
+  left: 18px;
+  color: #ff5a2a;
+  font:
+    500 13px/1 "IBM Plex Mono",
+    monospace;
+  letter-spacing: 0.15em;
+}
+.companion-gate section {
+  align-self: center;
+}
+.companion-gate section > p {
+  margin: 0 0 18px;
+  color: #ff5a2a;
+  font:
+    500 9px/1.4 "IBM Plex Mono",
+    monospace;
+  letter-spacing: 0.15em;
+}
+.companion-gate h1 {
+  max-width: 580px;
+  margin: 0 0 24px;
+  font:
+    600 clamp(42px, 7vw, 84px)/0.9 "IBM Plex Sans Condensed",
+    sans-serif;
+  letter-spacing: -0.05em;
+}
+.companion-gate section > span {
+  display: block;
+  max-width: 520px;
+  color: #8d887f;
+}
+.companion-gate a {
+  display: inline-flex;
+  margin-top: 30px;
+  padding: 12px 16px;
+  border: 1px solid #ff5a2a;
+  color: #ff5a2a;
+  font:
+    500 9px/1 "IBM Plex Mono",
+    monospace;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+}
+.companion-gate.connecting .companion-gate__field .gate-route {
+  animation: companion-acquire 1.8s steps(6, end) infinite;
+}
+@keyframes companion-acquire {
+  50% {
+    opacity: 0.35;
+    stroke: #e8e0d0;
+  }
+}
+@media (max-width: 640px) {
+  .companion-gate {
+    grid-template-columns: 1fr;
+    align-content: center;
+    gap: 30px;
+  }
+  .companion-gate__field {
+    width: min(78vw, 340px);
+    margin: auto;
+  }
+  .companion-shell {
+    grid-template-rows: 50px 54px 1fr;
+  }
+  .companion-brand small {
+    display: none;
+  }
+  .companion-header {
+    gap: 5px;
+  }
+  .companion-header button {
+    padding: 0 7px;
+  }
+  .companion-state {
+    position: absolute;
+    top: 42px;
+    left: 13px;
+    z-index: 3;
+    padding: 3px 5px;
+    background: var(--raised);
+  }
+  .companion-controls label {
+    min-width: 120px;
+  }
+  .intel-shell.open .intel-drawer {
+    width: min(90vw, 360px);
+  }
+  .quest-dialog {
+    width: calc(100vw - 12px);
+    height: calc(100vh - 12px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .companion-gate.connecting .companion-gate__field::after {
+    animation: none;
+  }
+}

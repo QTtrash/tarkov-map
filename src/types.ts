@@ -11,7 +11,6 @@ export interface LocatorSettings {
   legendOpen: boolean;
   highContrast: boolean;
   overlayOpacity: number;
-  overlayScale: number;
 }
 
 export interface Vec3 {
@@ -310,4 +309,8 @@ export interface QuestBundle {
 }
 
 export type QuestStatus = "locked" | "available" | "active" | "completed" | "failed";
-export interface QuestProgress { taskId: string; status: QuestStatus; updatedAt: number }
+export interface QuestProgress {
+  taskId: string;
+  status: QuestStatus;
+  updatedAt: number;
+}

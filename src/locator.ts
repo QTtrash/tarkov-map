@@ -1,6 +1,28 @@
 import { invoke } from "@tauri-apps/api/core";
 import { listen, type UnlistenFn } from "@tauri-apps/api/event";
-import type { LocatorSettings, LocatorSnapshot, LocatorStatus, MapContext, OcrTextCapture, OverlayState, PlayerFix, QuestProgress, QuestStatus } from "./types";
+import type {
+  LocatorSettings,
+  LocatorSnapshot,
+  LocatorStatus,
+  MapContext,
+  OcrTextCapture,
+  OverlayState,
+  PlayerFix,
+  QuestProgress,
+  QuestStatus,
+} from "./types";
+import {
+  parseLocatorSnapshot,
+  parseLocatorStatus,
+  parseMapContext,
+  parseOcrText,
+  parseOverlayState,
+  parsePlayerFix,
+  parseQuestProgress,
+  parseQuestProgressEntry,
+  parseSettings,
+  readStoredJson,
+} from "./validation";
 
 export const defaultSettings: LocatorSettings = {
   schemaVersion: 2,
@@ -15,7 +37,6 @@ export const defaultSettings: LocatorSettings = {
   legendOpen: false,
   highContrast: false,
   overlayOpacity: 0.92,
-  overlayScale: 1,
 };
 
 let settingsQueue = Promise.resolve<LocatorSettings>(defaultSettings);
@@ -26,18 +47,21 @@ export function isTauriRuntime() {
 
 export async function loadSettings(): Promise<LocatorSettings> {
   if (!isTauriRuntime()) return defaultSettings;
-  return invoke<LocatorSettings>("get_settings");
+  return parseSettings(await invoke<unknown>("get_settings"));
 }
 
 export async function saveSettings(settings: LocatorSettings): Promise<LocatorSettings> {
   if (!isTauriRuntime()) return settings;
-  settingsQueue = settingsQueue.catch(() => settings).then(() => invoke<LocatorSettings>("update_settings", { settings }));
+  const validated = parseSettings(settings);
+  settingsQueue = settingsQueue
+    .catch(() => validated)
+    .then(async () => parseSettings(await invoke<unknown>("update_settings", { settings: validated })));
   return settingsQueue;
 }
 
 export async function chooseDirectory(kind: "screenshots" | "logs"): Promise<LocatorSettings> {
   if (!isTauriRuntime()) return defaultSettings;
-  return invoke<LocatorSettings>("choose_directory", { kind });
+  return parseSettings(await invoke<unknown>("choose_directory", { kind }));
 }
 
 export async function rescanDirectories() {
@@ -77,18 +101,20 @@ export async function resetOverlayWindow() {
 }
 
 export async function getOverlayState(): Promise<OverlayState> {
-  if (!isTauriRuntime()) return { visible: false, ready: false, clickThrough: false, shortcutReady: false, lastError: null };
-  return invoke<OverlayState>("get_overlay_state");
+  if (!isTauriRuntime())
+    return { visible: false, ready: false, clickThrough: false, shortcutReady: false, lastError: null };
+  return parseOverlayState(await invoke<unknown>("get_overlay_state"));
 }
 
 export async function getLocatorSnapshot(): Promise<LocatorSnapshot> {
-  if (!isTauriRuntime()) return {
-    fix: null,
-    mapContext: { mapId: null, inRaid: false, source: "manual" },
-    status: null,
-    ocrText: null,
-  };
-  return invoke<LocatorSnapshot>("get_locator_snapshot");
+  if (!isTauriRuntime())
+    return {
+      fix: null,
+      mapContext: { mapId: null, inRaid: false, source: "manual" },
+      status: null,
+      ocrText: null,
+    };
+  return parseLocatorSnapshot(await invoke<unknown>("get_locator_snapshot"));
 }
 
 export async function subscribeOverlayState(handler: (state: OverlayState) => void): Promise<UnlistenFn> {
@@ -108,15 +134,23 @@ export async function registerGlobalShortcuts() {
 }
 
 export async function getQuestProgress(gameMode: "regular" | "pve"): Promise<QuestProgress[]> {
-  if (isTauriRuntime()) return invoke<QuestProgress[]>("get_quest_progress", { gameMode });
-  return JSON.parse(localStorage.getItem(`quest-progress:${gameMode}`) ?? "[]") as QuestProgress[];
+  if (isTauriRuntime()) return parseQuestProgress(await invoke<unknown>("get_quest_progress", { gameMode }));
+  return readStoredJson(`quest-progress:${gameMode}`, parseQuestProgress, []);
 }
 
-export async function setQuestProgress(gameMode: "regular" | "pve", taskId: string, status: QuestStatus): Promise<QuestProgress> {
-  if (isTauriRuntime()) return invoke<QuestProgress>("set_quest_progress", { gameMode, taskId, status });
+export async function setQuestProgress(
+  gameMode: "regular" | "pve",
+  taskId: string,
+  status: QuestStatus,
+): Promise<QuestProgress> {
+  if (isTauriRuntime())
+    return parseQuestProgressEntry(await invoke<unknown>("set_quest_progress", { gameMode, taskId, status }));
   const progress = await getQuestProgress(gameMode);
   const next = { taskId, status, updatedAt: Date.now() };
-  localStorage.setItem(`quest-progress:${gameMode}`, JSON.stringify([...progress.filter((entry) => entry.taskId !== taskId), next]));
+  localStorage.setItem(
+    `quest-progress:${gameMode}`,
+    JSON.stringify([...progress.filter((entry) => entry.taskId !== taskId), next]),
+  );
   return next;
 }
 
@@ -129,13 +163,28 @@ export async function subscribeLocator(handlers: {
   onSettings?: (settings: LocatorSettings) => void;
 }): Promise<UnlistenFn> {
   if (!isTauriRuntime()) return () => undefined;
+  const validated =
+    <T>(parse: (value: unknown) => T, handler: (value: T) => void) =>
+    (value: unknown) => {
+      try {
+        handler(parse(value));
+      } catch (error) {
+        console.warn("Ignored invalid native event payload", error);
+      }
+    };
   const unlisteners = await Promise.all([
-    listen<PlayerFix>("locator://player-fix", (event) => handlers.onFix(event.payload)),
-    listen<LocatorStatus>("locator://status", (event) => handlers.onStatus(event.payload)),
-    listen<MapContext>("locator://map-context", (event) => handlers.onMapContext(event.payload)),
+    listen<unknown>("locator://player-fix", (event) => validated(parsePlayerFix, handlers.onFix)(event.payload)),
+    listen<unknown>("locator://status", (event) => validated(parseLocatorStatus, handlers.onStatus)(event.payload)),
+    listen<unknown>("locator://map-context", (event) =>
+      validated(parseMapContext, handlers.onMapContext)(event.payload),
+    ),
     listen("locator://clear-position", handlers.onClear),
-    listen<OcrTextCapture>("locator://ocr-text", (event) => handlers.onOcrText?.(event.payload)),
-    listen<LocatorSettings>("locator://settings-changed", (event) => handlers.onSettings?.(event.payload)),
+    listen<unknown>("locator://ocr-text", (event) => {
+      if (handlers.onOcrText) validated(parseOcrText, handlers.onOcrText)(event.payload);
+    }),
+    listen<unknown>("locator://settings-changed", (event) => {
+      if (handlers.onSettings) validated(parseSettings, handlers.onSettings)(event.payload);
+    }),
   ]);
   return () => unlisteners.forEach((unlisten) => unlisten());
 }

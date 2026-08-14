@@ -4,10 +4,16 @@ import { describe, expect, it } from "vitest";
 import type { QuestBundle } from "./types";
 
 function loadBundle(mode: "regular" | "pve") {
-  return JSON.parse(readFileSync(new URL(`../public/maps/quests/${mode}.json`, import.meta.url), "utf8")) as QuestBundle;
+  return JSON.parse(
+    readFileSync(new URL(`../public/maps/quests/${mode}.json`, import.meta.url), "utf8"),
+  ) as QuestBundle;
 }
 
-const knownMapIds = new Set((JSON.parse(readFileSync(new URL("./data/maps.generated.json", import.meta.url), "utf8")) as Array<{ id: string }>).map((map) => map.id));
+const knownMapIds = new Set(
+  (
+    JSON.parse(readFileSync(new URL("./data/maps.generated.json", import.meta.url), "utf8")) as Array<{ id: string }>
+  ).map((map) => map.id),
+);
 
 describe("offline quest data", () => {
   for (const mode of ["regular", "pve"] as const) {

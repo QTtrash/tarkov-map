@@ -3,7 +3,16 @@ import L from "leaflet";
 import "leaflet.markercluster";
 import { prepareSvgMap, versionedMapAssetPath } from "../map-assets";
 import { poiMatchesFloor } from "../poi";
-import type { MapAsset, MapAssetState, MapDefinition, MapPoi, MapPoiBundle, PlayerFix, PoiCategory, SquadPosition } from "../types";
+import type {
+  MapAsset,
+  MapAssetState,
+  MapDefinition,
+  MapPoi,
+  MapPoiBundle,
+  PlayerFix,
+  PoiCategory,
+  SquadPosition,
+} from "../types";
 
 interface MapViewProps {
   definition: MapDefinition;
@@ -26,7 +35,7 @@ const noActiveExtracts = new Set<string>();
 
 function rotate(latLng: L.LatLng, degrees: number) {
   if (!degrees) return latLng;
-  const radians = degrees * Math.PI / 180;
+  const radians = (degrees * Math.PI) / 180;
   const rotatedX = latLng.lng * Math.cos(radians) - latLng.lat * Math.sin(radians);
   const rotatedY = latLng.lng * Math.sin(radians) + latLng.lat * Math.cos(radians);
   return L.latLng(rotatedY, rotatedX);
@@ -89,13 +98,17 @@ function assetForFloor(definition: MapDefinition, activeFloor: string): MapAsset
 }
 
 function escapeHtml(value: string) {
-  return value.replace(/[&<>'"]/g, (character) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    "'": "&#39;",
-    "\"": "&quot;",
-  })[character]!);
+  return value.replace(
+    /[&<>'"]/g,
+    (character) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "'": "&#39;",
+        '"': "&quot;",
+      })[character]!,
+  );
 }
 
 function glyphMarkup(category: PoiCategory) {
@@ -109,7 +122,8 @@ function glyphMarkup(category: PoiCategory) {
   } else if (category === "hazard") {
     paths = '<path d="m12 3 10 18H2L12 3ZM12 9v5M12 17h.01"/>';
   } else if (category === "btr") {
-    paths = '<path d="M3 8h13l4 4v5H3V8ZM16 8l-2-3H8L6 8"/><circle cx="7" cy="18" r="2"/><circle cx="16" cy="18" r="2"/>';
+    paths =
+      '<path d="M3 8h13l4 4v5H3V8ZM16 8l-2-3H8L6 8"/><circle cx="7" cy="18" r="2"/><circle cx="16" cy="18" r="2"/>';
   } else if (category === "boss-zone") {
     paths = '<path d="M7 9V5l3 2 2-4 2 4 3-2v4M6 10h12v9H6zM9 14h.01M15 14h.01M10 18h4"/>';
   } else if (category === "locked-door") {
@@ -129,9 +143,10 @@ function glyphMarkup(category: PoiCategory) {
 }
 
 function poiIcon(poi: MapPoi, selected: boolean, active = false) {
-  const label = poi.kind === "extract" || poi.kind === "transit"
-    ? `<span class="poi-marker-label">${escapeHtml(poi.name)}</span>`
-    : "";
+  const label =
+    poi.kind === "extract" || poi.kind === "transit"
+      ? `<span class="poi-marker-label">${escapeHtml(poi.name)}</span>`
+      : "";
   return L.divIcon({
     className: "poi-marker-shell",
     iconSize: [26, 26],
@@ -167,11 +182,14 @@ function popupContent(poi: MapPoi, index: Map<string, MapPoi>, onFocus: (id: str
     content.append(key);
   }
 
-  const links = poi.kind === "extract"
-    ? poi.switchIds.map((id) => index.get(id)).filter((value): value is MapPoi => Boolean(value))
-    : poi.kind === "switch"
-      ? poi.activates.map((operation) => index.get(operation.targetId)).filter((value): value is MapPoi => Boolean(value))
-      : [];
+  const links =
+    poi.kind === "extract"
+      ? poi.switchIds.map((id) => index.get(id)).filter((value): value is MapPoi => Boolean(value))
+      : poi.kind === "switch"
+        ? poi.activates
+            .map((operation) => index.get(operation.targetId))
+            .filter((value): value is MapPoi => Boolean(value))
+        : [];
   for (const linked of links) {
     const button = document.createElement("button");
     button.type = "button";
@@ -250,12 +268,15 @@ export function MapView({
     map.setMaxBounds(mapBounds(definition).pad(0.5));
     map.fitBounds(mapBounds(definition), { animate: false, padding: [30, 30] });
     const updateDetail = () => {
-      if (containerRef.current) containerRef.current.dataset.detail = String(map.getZoom() >= definition.minZoom + 1.25);
+      if (containerRef.current)
+        containerRef.current.dataset.detail = String(map.getZoom() >= definition.minZoom + 1.25);
     };
     updateDetail();
     map.on("zoomend", updateDetail);
     map.on("click", () => onSelectPoi(null));
-    map.on("dblclick", (event: L.LeafletMouseEvent) => onCreateWaypoint?.({ x: event.latlng.lng, z: event.latlng.lat }));
+    map.on("dblclick", (event: L.LeafletMouseEvent) =>
+      onCreateWaypoint?.({ x: event.latlng.lng, z: event.latlng.lat }),
+    );
     map.on("dragstart", () => onFollowChange(false));
     map.on("zoomstart", (event) => {
       if ((event as unknown as { originalEvent?: Event }).originalEvent) onFollowChange(false);
@@ -329,17 +350,27 @@ export function MapView({
     }
 
     if (asset.type === "image") {
-      void versionedMapAssetPath(asset.path).then((path) => {
-        if (cancelled) return;
-        const bounds = L.latLngBounds([asset.bounds[0][1], asset.bounds[0][0]], [asset.bounds[1][1], asset.bounds[1][0]]);
-        const layer = L.imageOverlay(path, bounds, { className: "tarkov-raster-layer" });
-        candidate = layer;
-        layer.once("load", () => commit(layer, asset.calibrationStatus === "needs-local-verification"
-          ? "Community artwork loaded; verify live coordinate alignment locally before publishing the Windows installer."
-          : null));
-        layer.once("error", () => fail(new Error(`Unable to load ${assetName}`)));
-        layer.addTo(map);
-      }).catch(fail);
+      void versionedMapAssetPath(asset.path)
+        .then((path) => {
+          if (cancelled) return;
+          const bounds = L.latLngBounds(
+            [asset.bounds[0][1], asset.bounds[0][0]],
+            [asset.bounds[1][1], asset.bounds[1][0]],
+          );
+          const layer = L.imageOverlay(path, bounds, { className: "tarkov-raster-layer" });
+          candidate = layer;
+          layer.once("load", () =>
+            commit(
+              layer,
+              asset.calibrationStatus === "needs-local-verification"
+                ? "Community artwork loaded; verify live coordinate alignment locally before publishing the Windows installer."
+                : null,
+            ),
+          );
+          layer.once("error", () => fail(new Error(`Unable to load ${assetName}`)));
+          layer.addTo(map);
+        })
+        .catch(fail);
       return () => {
         cancelled = true;
         if (candidate && !committed) candidate.removeFrom(map);
@@ -377,15 +408,16 @@ export function MapView({
     for (const category of visiblePoiCategories) {
       const group = isDenseCategory(category)
         ? L.markerClusterGroup({
-          showCoverageOnHover: false,
-          maxClusterRadius: 42,
-          disableClusteringAtZoom: Math.max(definition.minZoom + 3, definition.maxZoom - 1),
-          iconCreateFunction: (cluster) => L.divIcon({
-            className: "poi-cluster-shell",
-            html: `<div class="poi-cluster ${category}">${cluster.getChildCount()}</div>`,
-            iconSize: [34, 34],
-          }),
-        })
+            showCoverageOnHover: false,
+            maxClusterRadius: 42,
+            disableClusteringAtZoom: Math.max(definition.minZoom + 3, definition.maxZoom - 1),
+            iconCreateFunction: (cluster) =>
+              L.divIcon({
+                className: "poi-cluster-shell",
+                html: `<div class="poi-cluster ${category}">${cluster.getChildCount()}</div>`,
+                iconSize: [34, 34],
+              }),
+          })
         : L.layerGroup();
       for (const poi of poiBundle.pois) {
         if (poi.category !== category || !poiMatchesFloor(poi, definition, activeFloor)) continue;
@@ -398,7 +430,11 @@ export function MapView({
           zIndexOffset: poi.kind === "extract" ? 300 : poi.kind === "transit" ? 250 : 100,
         });
         marker.bindTooltip(poi.name, { direction: "top", offset: [0, -12], className: "poi-tooltip" });
-        marker.bindPopup(popupContent(poi, allPois, onSelectPoi), { className: "poi-popup", offset: [0, -8], closeButton: false });
+        marker.bindPopup(popupContent(poi, allPois, onSelectPoi), {
+          className: "poi-popup",
+          offset: [0, -8],
+          closeButton: false,
+        });
         marker.on("mouseover", () => outline?.setStyle({ opacity: 0.9, fillOpacity: 0.1 }));
         marker.on("mouseout", () => {
           if (selectedPoiRef.current !== poi.id) outline?.setStyle({ opacity: 0, fillOpacity: 0 });
@@ -466,11 +502,13 @@ export function MapView({
       let angle = 0;
       if (fix.forward) {
         const from = map.latLngToLayerPoint(location);
-        const to = map.latLngToLayerPoint(worldPoint({
-          x: fix.position.x + fix.forward.x * 8,
-          z: fix.position.z + fix.forward.z * 8,
-        }));
-        angle = Math.atan2(to.y - from.y, to.x - from.x) * 180 / Math.PI + 90;
+        const to = map.latLngToLayerPoint(
+          worldPoint({
+            x: fix.position.x + fix.forward.x * 8,
+            z: fix.position.z + fix.forward.z * 8,
+          }),
+        );
+        angle = (Math.atan2(to.y - from.y, to.x - from.x) * 180) / Math.PI + 90;
       }
       const stale = Date.now() - fix.observedAt >= 60_000;
       if (!markerRef.current) {
@@ -494,7 +532,9 @@ export function MapView({
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
-    const visible = squadPositions.filter((position) => position.mapId === definition.id && squadNow - position.receivedAt < 120_000);
+    const visible = squadPositions.filter(
+      (position) => position.mapId === definition.id && squadNow - position.receivedAt < 120_000,
+    );
     const visibleIds = new Set(visible.map((position) => position.senderId));
     for (const [senderId, marker] of squadMarkersRef.current) {
       if (!visibleIds.has(senderId)) {
@@ -504,10 +544,12 @@ export function MapView({
     }
     for (const position of visible) {
       const location = worldPoint(position.position);
-      const radians = (position.heading ?? 0) * Math.PI / 180;
+      const radians = ((position.heading ?? 0) * Math.PI) / 180;
       const from = map.latLngToLayerPoint(location);
-      const to = map.latLngToLayerPoint(worldPoint({ x: position.position.x + Math.sin(radians) * 8, z: position.position.z + Math.cos(radians) * 8 }));
-      const angle = position.heading === null ? 0 : Math.atan2(to.y - from.y, to.x - from.x) * 180 / Math.PI + 90;
+      const to = map.latLngToLayerPoint(
+        worldPoint({ x: position.position.x + Math.sin(radians) * 8, z: position.position.z + Math.cos(radians) * 8 }),
+      );
+      const angle = position.heading === null ? 0 : (Math.atan2(to.y - from.y, to.x - from.x) * 180) / Math.PI + 90;
       const icon = squadMarkerIcon(position, angle, squadNow - position.receivedAt >= 60_000);
       const existing = squadMarkersRef.current.get(position.senderId);
       if (existing) existing.setLatLng(location).setIcon(icon);
@@ -515,5 +557,21 @@ export function MapView({
     }
   }, [definition.id, squadNow, squadPositions]);
 
-  return <div className="map-canvas" ref={containerRef} aria-label={`${definition.displayName} map`} />;
+  return (
+    <div
+      className="map-canvas"
+      ref={containerRef}
+      role="application"
+      tabIndex={0}
+      aria-label={`${definition.displayName} map`}
+      aria-keyshortcuts={onCreateWaypoint ? "Enter" : undefined}
+      title={onCreateWaypoint ? "Use arrow keys to pan and Enter to create a waypoint at the map center" : undefined}
+      onKeyDown={(event) => {
+        if (event.key !== "Enter" || !onCreateWaypoint || !mapRef.current) return;
+        event.preventDefault();
+        const center = mapRef.current.getCenter();
+        onCreateWaypoint({ x: center.lng, z: center.lat });
+      }}
+    />
+  );
 }

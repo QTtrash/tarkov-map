@@ -1,4 +1,5 @@
 import type { MapDefinition } from "./types";
+import { parseAssetChecksums } from "./validation";
 
 let checksumPromise: Promise<Record<string, string>> | null = null;
 
@@ -15,7 +16,7 @@ export function pathWithAssetRevision(path: string, checksums: Record<string, st
 
 export async function versionedMapAssetPath(path: string) {
   checksumPromise ??= fetch("/maps/asset-checksums.json", { cache: "no-store" })
-    .then((response) => response.ok ? response.json() as Promise<Record<string, string>> : {})
+    .then(async (response) => (response.ok ? parseAssetChecksums(await response.json()) : {}))
     .catch(() => ({}));
   return pathWithAssetRevision(path, await checksumPromise);
 }
@@ -37,7 +38,10 @@ export function prepareSvgMap(source: string, definition: MapDefinition, activeF
     if (child.localName !== "g" || !child.id) continue;
     available.add(child.id);
     const keepWith = child.getAttribute("data-keep-with-group");
-    child.setAttribute("style", visible.has(child.id) || (keepWith ? visible.has(keepWith) : false) ? "" : "display: none;");
+    child.setAttribute(
+      "style",
+      visible.has(child.id) || (keepWith ? visible.has(keepWith) : false) ? "" : "display: none;",
+    );
   }
 
   if (baseLayer && !available.has(baseLayer)) {

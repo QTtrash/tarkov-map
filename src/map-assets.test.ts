@@ -20,13 +20,14 @@ describe("map assets", () => {
   });
 
   it("rejects a floor that is missing from the packaged SVG", () => {
-    expect(() => prepareSvgMap(source, customs, "Underground_Level"))
-      .toThrow("missing floor layer Underground_Level");
+    expect(() => prepareSvgMap(source, customs, "Underground_Level")).toThrow("missing floor layer Underground_Level");
   });
 
   it("uses the packaged checksum as a cache revision", () => {
-    expect(pathWithAssetRevision("/maps/svg/Customs.svg", {
-      "svg/Customs.svg": "ee53a5c0faf185a1a4e7be82c2533cd76e70372ac2cac5e9d75b6f3be226768e",
-    })).toBe("/maps/svg/Customs.svg?v=ee53a5c0faf185a1");
+    expect(
+      pathWithAssetRevision("/maps/svg/Customs.svg", {
+        "svg/Customs.svg": "ee53a5c0faf185a1a4e7be82c2533cd76e70372ac2cac5e9d75b6f3be226768e",
+      }),
+    ).toBe("/maps/svg/Customs.svg?v=ee53a5c0faf185a1");
   });
 });

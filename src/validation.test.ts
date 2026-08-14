@@ -1,0 +1,36 @@
+import { describe, expect, it, vi } from "vitest";
+import { defaultSettings } from "./locator";
+import { parseCustomPins, parseQuestProgress, parseSettings, readStoredJson } from "./validation";
+
+describe("runtime boundary validation", () => {
+  it("accepts current settings and rejects unsupported or unsafe values", () => {
+    expect(parseSettings(defaultSettings)).toEqual(defaultSettings);
+    expect(() => parseSettings({ ...defaultSettings, schemaVersion: 99 })).toThrow();
+    expect(() => parseSettings({ ...defaultSettings, overlayOpacity: Number.NaN })).toThrow();
+    expect(() => parseSettings({ ...defaultSettings, selectedMap: "../escape" })).toThrow();
+  });
+
+  it("rejects malformed persisted pins and progress", () => {
+    expect(() =>
+      parseCustomPins([
+        {
+          id: "pin",
+          kind: "custom-pin",
+          category: "custom-pin",
+          name: "Pin",
+          note: "",
+          position: { x: 0, y: 0, z: Number.POSITIVE_INFINITY },
+        },
+      ]),
+    ).toThrow();
+    expect(() => parseQuestProgress([{ taskId: "task", status: "invented", updatedAt: 1 }])).toThrow();
+  });
+
+  it("falls back without rewriting corrupt local storage", () => {
+    const getItem = vi.spyOn(Storage.prototype, "getItem").mockReturnValue("{broken");
+    const setItem = vi.spyOn(Storage.prototype, "setItem");
+    expect(readStoredJson("pins", parseCustomPins, [])).toEqual([]);
+    expect(getItem).toHaveBeenCalledWith("pins");
+    expect(setItem).not.toHaveBeenCalled();
+  });
+});

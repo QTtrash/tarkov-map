@@ -6,7 +6,10 @@ const map: MapDefinition = {
   id: "test",
   displayName: "Test",
   logAliases: [],
-  bounds: [[100, 100], [-100, -100]],
+  bounds: [
+    [100, 100],
+    [-100, -100],
+  ],
   svgBounds: null,
   transform: [1, 0, 1, 0],
   coordinateRotation: 0,
@@ -24,7 +27,17 @@ const map: MapDefinition = {
       name: "Local basement",
       svgLayer: "local",
       asset: null,
-      extents: [{ height: [-5, 5], bounds: [[[0, 0], [10, 10]]] }],
+      extents: [
+        {
+          height: [-5, 5],
+          bounds: [
+            [
+              [0, 0],
+              [10, 10],
+            ],
+          ],
+        },
+      ],
     },
   ],
 };
