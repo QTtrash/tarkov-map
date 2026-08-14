@@ -114,9 +114,10 @@ secrets and use LAN mode only on a trusted network.
 ## Contributing and support
 
 Read [AGENTS.md](AGENTS.md) for repository navigation and [CONTRIBUTING.md](CONTRIBUTING.md)
-for the development workflow. Use GitHub issues for reproducible defects,
-Discussions for support, and private vulnerability reporting for security issues.
-The [Code of Conduct](CODE_OF_CONDUCT.md) applies to all project spaces.
+for the development workflow. Use GitHub issues for reproducible defects and
+support, the community Discord for informal help, and private vulnerability
+reporting for security issues. The [Code of Conduct](CODE_OF_CONDUCT.md) applies
+to all project spaces.
 Read the [privacy policy](PRIVACY.md) for the desktop, Internet relay, and LAN
 sharing boundaries.
 
