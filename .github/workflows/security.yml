@@ -44,13 +44,9 @@ jobs:
   rust-audit:
     name: Rust advisory audit
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      checks: write
-      issues: write
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: rustsec/audit-check@69366f33c96575abad1ee0dba8212993eecbe998 # v2.0.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          working-directory: src-tauri
+      - name: Install locked cargo-audit
+        run: cargo install cargo-audit --version 0.22.2 --locked
+      - name: Audit Rust lockfile
+        run: cargo audit --file src-tauri/Cargo.lock
