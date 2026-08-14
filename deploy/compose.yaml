@@ -11,9 +11,6 @@ services:
     environment:
       PORT: 3000
       STATIC_ROOT: /app/web
-      RELEASE_ROOT: /app/releases
-    volumes:
-      - ${RELEASE_DIR:-/home/truegrind/state/raid-signal/releases}:/app/releases:ro
     mem_limit: 128m
     cpus: 0.5
     networks:

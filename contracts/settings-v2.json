@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 2,
+  "screenshotsDir": null,
+  "logsDir": null,
+  "alwaysOnTop": false,
+  "followPlayer": true,
+  "autoFloor": true,
+  "deleteParsedScreenshots": false,
+  "selectedMap": "customs",
+  "visibleMapLayers": ["extract-pmc", "extract-scav", "extract-shared", "transit", "switch", "btr"],
+  "legendOpen": false,
+  "highContrast": false,
+  "overlayOpacity": 0.92
+}

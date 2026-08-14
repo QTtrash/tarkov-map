@@ -17,7 +17,6 @@ pub struct Settings {
     pub legend_open: bool,
     pub high_contrast: bool,
     pub overlay_opacity: f64,
-    pub overlay_scale: f64,
 }
 
 impl Default for Settings {
@@ -42,8 +41,42 @@ impl Default for Settings {
             legend_open: false,
             high_contrast: false,
             overlay_opacity: 0.92,
-            overlay_scale: 1.0,
         }
+    }
+}
+
+impl Settings {
+    pub fn validate(&self) -> Result<(), String> {
+        if self.schema_version != 2 {
+            return Err(format!(
+                "Unsupported settings schema {}",
+                self.schema_version
+            ));
+        }
+        if self.selected_map.len() < 2
+            || self.selected_map.len() > 32
+            || !self
+                .selected_map
+                .bytes()
+                .all(|byte| byte.is_ascii_lowercase() || byte.is_ascii_digit() || byte == b'-')
+        {
+            return Err("Invalid selected map".into());
+        }
+        if self.visible_map_layers.len() > 64
+            || self.visible_map_layers.iter().any(|layer| {
+                layer.is_empty()
+                    || layer.len() > 128
+                    || !layer.bytes().all(|byte| {
+                        byte.is_ascii_lowercase() || byte.is_ascii_digit() || byte == b'-'
+                    })
+            })
+        {
+            return Err("Invalid visible map layers".into());
+        }
+        if !self.overlay_opacity.is_finite() || !(0.35..=1.0).contains(&self.overlay_opacity) {
+            return Err("Overlay opacity must be between 0.35 and 1.0".into());
+        }
+        Ok(())
     }
 }
 
@@ -165,5 +198,26 @@ mod tests {
             ]
         );
         assert!(!settings.legend_open);
+    }
+
+    #[test]
+    fn rejects_invalid_settings_but_ignores_removed_legacy_fields() {
+        let legacy: Settings = serde_json::from_str(
+            r#"{"schemaVersion":2,"selectedMap":"customs","visibleMapLayers":[],"overlayOpacity":0.92,"overlayScale":1.5}"#,
+        )
+        .expect("unknown legacy fields remain readable");
+        assert!(legacy.validate().is_ok());
+
+        let mut invalid = Settings::default();
+        invalid.overlay_opacity = f64::NAN;
+        assert!(invalid.validate().is_err());
+    }
+
+    #[test]
+    fn defaults_match_the_cross_runtime_contract() {
+        let contract: Settings =
+            serde_json::from_str(include_str!("../../contracts/settings-v2.json"))
+                .expect("settings contract must deserialize");
+        assert_eq!(contract, Settings::default());
     }
 }

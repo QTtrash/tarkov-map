@@ -16,7 +16,7 @@ COPY relay/src ./src
 RUN npm run build:server
 
 FROM node:22-bookworm-slim
-ENV NODE_ENV=production PORT=3000 STATIC_ROOT=/app/web RELEASE_ROOT=/app/releases
+ENV NODE_ENV=production PORT=3000 STATIC_ROOT=/app/web
 WORKDIR /app
 COPY relay/package.json relay/package-lock.json ./
 RUN npm ci --omit=dev && npm cache clean --force

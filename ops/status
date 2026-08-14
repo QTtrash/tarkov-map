@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-env_file="${RAID_SIGNAL_ENV_FILE:-/home/truegrind/envs/raid-signal.env}"
+env_file="${RAID_SIGNAL_ENV_FILE:-$repo_root/deploy/raid-signal.env}"
+health_url="${RAID_SIGNAL_HEALTH_URL:-http://127.0.0.1:3117/healthz}"
+[[ -f "$env_file" ]] || { echo "Missing env file: $env_file" >&2; exit 1; }
 docker compose --project-name raid-signal --env-file "$env_file" -f "$repo_root/deploy/compose.yaml" ps
-curl --fail --silent --show-error http://127.0.0.1:3117/healthz
+curl --fail --silent --show-error "$health_url"

@@ -1,0 +1,8 @@
+{
+  "protocolVersion": 1,
+  "roomLifetimeMs": 10800000,
+  "futureClockSkewMs": 300000,
+  "maxMessageBytes": 4096,
+  "maxMessagesPerSecond": 10,
+  "maxRoomConnections": 8
+}

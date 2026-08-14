@@ -20,12 +20,14 @@ use std::{
         atomic::{AtomicUsize, Ordering},
         Arc,
     },
+    time::{Duration, Instant},
 };
 use tauri::State;
 use tokio::sync::{broadcast, oneshot};
 
 const MAX_CLIENTS: usize = 8;
 const MAX_MESSAGE_BYTES: usize = 4096;
+const MAX_MESSAGES_PER_SECOND: u32 = 10;
 const LAN_CSP: &str = "default-src 'self'; base-uri 'none'; frame-ancestors 'none'; img-src 'self' data: blob:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' ws: wss:";
 
 #[derive(Debug, Clone, Serialize)]
@@ -48,6 +50,29 @@ struct LanState {
 }
 
 struct ClientGuard(Arc<AtomicUsize>);
+
+struct MessageWindow {
+    started_at: Instant,
+    count: u32,
+}
+
+impl MessageWindow {
+    fn new() -> Self {
+        Self {
+            started_at: Instant::now(),
+            count: 0,
+        }
+    }
+
+    fn allow(&mut self, now: Instant) -> bool {
+        if now.duration_since(self.started_at) >= Duration::from_secs(1) {
+            self.started_at = now;
+            self.count = 0;
+        }
+        self.count += 1;
+        self.count <= MAX_MESSAGES_PER_SECOND
+    }
+}
 
 impl Drop for ClientGuard {
     fn drop(&mut self) {
@@ -74,10 +99,7 @@ fn reserve_client(clients: &Arc<AtomicUsize>) -> Option<ClientGuard> {
         .map(|_| ClientGuard(clients.clone()))
 }
 
-async fn upgrade(
-    ws: WebSocketUpgrade,
-    AxumState(state): AxumState<LanState>,
-) -> Response {
+async fn upgrade(ws: WebSocketUpgrade, AxumState(state): AxumState<LanState>) -> Response {
     let Some(guard) = reserve_client(&state.clients) else {
         return (StatusCode::SERVICE_UNAVAILABLE, "LAN session is full").into_response();
     };
@@ -86,19 +108,16 @@ async fn upgrade(
         .into_response()
 }
 
-async fn relay(
-    mut socket: WebSocket,
-    sender: broadcast::Sender<Vec<u8>>,
-    _guard: ClientGuard,
-) {
+async fn relay(mut socket: WebSocket, sender: broadcast::Sender<Vec<u8>>, _guard: ClientGuard) {
     let mut receiver = sender.subscribe();
+    let mut messages = MessageWindow::new();
     loop {
         tokio::select! {
             incoming = socket.recv() => match incoming {
-                Some(Ok(Message::Binary(bytes))) if bytes.len() <= MAX_MESSAGE_BYTES => { let _ = sender.send(bytes.to_vec()); }
-                Some(Ok(Message::Text(text))) if text.len() <= MAX_MESSAGE_BYTES => { let _ = sender.send(text.as_bytes().to_vec()); }
+                Some(Ok(Message::Binary(bytes))) if bytes.len() <= MAX_MESSAGE_BYTES && messages.allow(Instant::now()) => { let _ = sender.send(bytes.to_vec()); }
+                Some(Ok(Message::Text(text))) if text.len() <= MAX_MESSAGE_BYTES && messages.allow(Instant::now()) => { let _ = sender.send(text.as_bytes().to_vec()); }
                 Some(Ok(Message::Close(_))) | None | Some(Err(_)) => break,
-                _ => {}
+                _ => break,
             },
             outgoing = receiver.recv() => match outgoing {
                 Ok(bytes) => if socket.send(Message::Binary(bytes.into())).await.is_err() { break; },
@@ -125,7 +144,10 @@ fn requested_asset(path: &str) -> Option<String> {
         return Some("companion.html".to_string());
     }
     let segments = trimmed.split('/').collect::<Vec<_>>();
-    if segments.iter().any(|segment| segment.is_empty() || *segment == "." || *segment == "..") {
+    if segments
+        .iter()
+        .any(|segment| segment.is_empty() || *segment == "." || *segment == "..")
+    {
         return None;
     }
     if segments.len() == 2 && segments[0] == "lan" && valid_room_id(segments[1]) {
@@ -227,15 +249,25 @@ pub fn stop_lan_share(state: State<'_, AppState>) {
 
 #[cfg(test)]
 mod tests {
-    use super::{requested_asset, reserve_client, MAX_CLIENTS};
+    use super::{requested_asset, reserve_client, MessageWindow, MAX_CLIENTS, MAX_MESSAGE_BYTES};
     use std::sync::{atomic::AtomicUsize, Arc};
+    use std::time::{Duration, Instant};
 
     #[test]
     fn only_serves_companion_assets() {
         assert_eq!(requested_asset("/"), Some("companion.html".to_string()));
-        assert_eq!(requested_asset("/lan/Abcdefghijklmnopqrstuvwxy_-"), Some("companion.html".to_string()));
-        assert_eq!(requested_asset("/assets/companion.js"), Some("assets/companion.js".to_string()));
-        assert_eq!(requested_asset("/maps/image/customs/base.png"), Some("maps/image/customs/base.png".to_string()));
+        assert_eq!(
+            requested_asset("/lan/Abcdefghijklmnopqrstuvwxy_-"),
+            Some("companion.html".to_string())
+        );
+        assert_eq!(
+            requested_asset("/assets/companion.js"),
+            Some("assets/companion.js".to_string())
+        );
+        assert_eq!(
+            requested_asset("/maps/image/customs/base.png"),
+            Some("maps/image/customs/base.png".to_string())
+        );
         assert_eq!(requested_asset("/index.html"), None);
         assert_eq!(requested_asset("/assets/%2e%2e/index.html"), None);
         assert_eq!(requested_asset("/maps/../index.html"), None);
@@ -250,5 +282,29 @@ mod tests {
         assert!(reserve_client(&clients).is_none());
         drop(guards);
         assert!(reserve_client(&clients).is_some());
+    }
+
+    #[test]
+    fn limits_messages_per_second_and_recovers() {
+        let start = Instant::now();
+        let mut window = MessageWindow {
+            started_at: start,
+            count: 0,
+        };
+        for _ in 0..10 {
+            assert!(window.allow(start));
+        }
+        assert!(!window.allow(start));
+        assert!(window.allow(start + Duration::from_secs(1)));
+    }
+
+    #[test]
+    fn limits_match_the_cross_runtime_contract() {
+        let contract: serde_json::Value =
+            serde_json::from_str(include_str!("../../contracts/protocol-v1.json"))
+                .expect("protocol contract must deserialize");
+        assert_eq!(contract["maxMessageBytes"], MAX_MESSAGE_BYTES);
+        assert_eq!(contract["maxMessagesPerSecond"], 10);
+        assert_eq!(contract["maxRoomConnections"], MAX_CLIENTS);
     }
 }

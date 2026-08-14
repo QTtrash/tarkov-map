@@ -1,6 +1,6 @@
 # Raid Signal opaque relay
 
-The production VPS service serves the Raid Signal landing page, hosted phone companion, verified release downloads, health endpoint, and WebSocket rooms. The relay never receives the invitation fragment/key and never parses encrypted position messages.
+The production VPS service serves the Raid Signal landing page, hosted phone companion, health endpoint, and WebSocket rooms. Installers are distributed only through GitHub Releases. The relay never receives the invitation fragment/key and never parses encrypted position messages.
 
 Transport limits:
 
@@ -13,4 +13,7 @@ Transport limits:
 
 There is no database, room history, or last-message cache. Logs contain startup and process errors only; room IDs, payloads, positions, and client addresses are not logged.
 
-`src/server.ts` is the Node 22 VPS implementation. `src/index.ts` keeps the portable Cloudflare Durable Object adapter. Run `npm test` and `npm run build:server` from this directory.
+`src/server.ts` is the supported Node 22 VPS implementation. Run `npm test` and
+`npm run build` from this directory. The former experimental Cloudflare adapter
+was removed because it did not share the VPS implementation's tests or release
+guarantees.

@@ -2,11 +2,12 @@ mod log_parser;
 mod model;
 mod ocr;
 mod parser;
+mod settings_store;
 mod sharing;
 mod watcher;
 
 use model::{LocatorSnapshotPayload, Settings};
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 use std::sync::{mpsc, Arc, Mutex, RwLock};
 use tauri::{Emitter, Manager, State};
 use tauri_plugin_global_shortcut::{GlobalShortcutExt, ShortcutState};
@@ -41,38 +42,6 @@ struct QuestProgressPayload {
     updated_at: u64,
 }
 
-fn load_settings(path: &Path) -> Settings {
-    let parse = |candidate: &Path| {
-        std::fs::read_to_string(candidate)
-            .ok()
-            .and_then(|json| serde_json::from_str(&json).ok())
-    };
-    parse(path)
-        .or_else(|| parse(&path.with_extension("json.bak")))
-        .unwrap_or_default()
-}
-
-fn save_settings(path: &Path, settings: &Settings) -> Result<(), String> {
-    if let Some(parent) = path.parent() {
-        std::fs::create_dir_all(parent).map_err(|error| error.to_string())?;
-    }
-    let json = serde_json::to_string_pretty(settings).map_err(|error| error.to_string())?;
-    let temporary = path.with_extension("json.tmp");
-    let backup = path.with_extension("json.bak");
-    {
-        use std::io::Write;
-        let mut file = std::fs::File::create(&temporary).map_err(|error| error.to_string())?;
-        file.write_all(json.as_bytes())
-            .map_err(|error| error.to_string())?;
-        file.sync_all().map_err(|error| error.to_string())?;
-    }
-    if path.exists() {
-        std::fs::copy(path, &backup).map_err(|error| error.to_string())?;
-        std::fs::remove_file(path).map_err(|error| error.to_string())?;
-    }
-    std::fs::rename(&temporary, path).map_err(|error| error.to_string())
-}
-
 #[tauri::command]
 fn get_settings(state: State<'_, AppState>) -> Settings {
     state
@@ -88,6 +57,7 @@ fn update_settings(
     state: State<'_, AppState>,
     settings: Settings,
 ) -> Result<Settings, String> {
+    settings.validate()?;
     let _write_guard = state
         .settings_write
         .lock()
@@ -97,7 +67,7 @@ fn update_settings(
         .read()
         .unwrap_or_else(|poisoned| poisoned.into_inner())
         .clone();
-    save_settings(&state.settings_path, &settings)?;
+    settings_store::save(&state.settings_path, &settings)?;
     *state
         .settings
         .write()
@@ -143,7 +113,7 @@ async fn choose_directory(kind: String, state: State<'_, AppState>) -> Result<Se
         .settings_write
         .lock()
         .unwrap_or_else(|poisoned| poisoned.into_inner());
-    save_settings(&state.settings_path, &settings)?;
+    settings_store::save(&state.settings_path, &settings)?;
     *state
         .settings
         .write()
@@ -459,7 +429,7 @@ pub fn run() {
         )
         .setup(|app| {
             let settings_path = app.path().app_config_dir()?.join("settings.json");
-            let settings = Arc::new(RwLock::new(load_settings(&settings_path)));
+            let settings = Arc::new(RwLock::new(settings_store::load(&settings_path)));
             let progress_path = app.path().app_config_dir()?.join("profiles.sqlite3");
             if let Some(parent) = progress_path.parent() {
                 std::fs::create_dir_all(parent)?;
@@ -592,25 +562,4 @@ pub fn run() {
         })
         .run(tauri::generate_context!())
         .expect("error while running Raid Signal");
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn settings_write_keeps_a_recoverable_backup() {
-        let temp = tempfile::tempdir().unwrap();
-        let path = temp.path().join("settings.json");
-        let first = Settings {
-            selected_map: "woods".into(),
-            ..Settings::default()
-        };
-        save_settings(&path, &first).unwrap();
-        let mut second = first.clone();
-        second.selected_map = "customs".into();
-        save_settings(&path, &second).unwrap();
-        std::fs::write(&path, "not json").unwrap();
-        assert_eq!(load_settings(&path).selected_map, "woods");
-    }
 }
