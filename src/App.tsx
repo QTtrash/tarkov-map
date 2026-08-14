@@ -4,21 +4,19 @@ import { UiIcon } from "./components/Icons";
 import { MapView } from "./components/MapView";
 import { QuestPanel } from "./components/QuestPanel";
 import { SharePanel } from "./components/SharePanel";
-import { Dialog } from "./components/Dialog";
+import { SettingsDialog } from "./components/SettingsDialog";
+import { AboutDialog } from "./components/AboutDialog";
 import { getMapDefinition, maps } from "./data/maps";
 import { getActiveFloor } from "./floor";
 import {
   chooseDirectory,
   clearPlayerPosition,
   defaultSettings,
-  isTauriRuntime,
   getLocatorSnapshot,
   getOverlayState,
   loadSettings,
   openDirectory,
-  readLatestScreenshot,
   registerGlobalShortcuts,
-  resetOverlayWindow,
   rescanDirectories,
   saveSettings,
   subscribeLocator,
@@ -748,181 +746,22 @@ export function App() {
       />
 
       {showSettings && (
-        <Dialog className="settings-dialog" titleId="settings-title" onClose={() => setShowSettings(false)}>
-          <header>
-            <div>
-              <span className="kicker">SYSTEM CONFIGURATION</span>
-              <h2 id="settings-title">Raid Signal settings</h2>
-            </div>
-            <button className="bare-icon" onClick={() => setShowSettings(false)} aria-label="Close">
-              <UiIcon name="close" />
-            </button>
-          </header>
-          <div className="dialog-section">
-            <h3>DATA SOURCES</h3>
-            <p>The locator reads files created by Tarkov. No game memory or network connection is used.</p>
-            <button className="folder-row" onClick={() => void browse("screenshots")}>
-              <UiIcon name="folder" />
-              <span>
-                <b>SCREENSHOTS</b>
-                <small>{status.screenshotsDir ?? "Folder not detected"}</small>
-              </span>
-              <strong>BROWSE</strong>
-            </button>
-            {status.screenshotsDir && (
-              <button className="inline-action" onClick={() => void openDirectory("screenshots")}>
-                OPEN SCREENSHOTS FOLDER
-              </button>
-            )}
-            <button className="folder-row" onClick={() => void browse("logs")}>
-              <UiIcon name="folder" />
-              <span>
-                <b>APPLICATION LOGS</b>
-                <small>{status.logsDir ?? "Folder not detected"}</small>
-              </span>
-              <strong>BROWSE</strong>
-            </button>
-            {status.logsDir && (
-              <button className="inline-action" onClick={() => void openDirectory("logs")}>
-                OPEN LOGS FOLDER
-              </button>
-            )}
-            <button className="dialog-button" onClick={() => void rescanDirectories()}>
-              RESCAN FOLDERS
-            </button>
-            <button className="dialog-button secondary" onClick={() => void readLatestScreenshot()}>
-              READ LATEST SCREENSHOT
-            </button>
-          </div>
-          <div className="dialog-section">
-            <h3>FILE HANDLING & DISPLAY</h3>
-            <label className="switch-row">
-              <span>
-                <b>Delete parsed screenshots</b>
-                <small>Disabled by default. Invalid and older files are never removed.</small>
-              </span>
-              <input
-                type="checkbox"
-                checked={settings.deleteParsedScreenshots}
-                onChange={(event) => updateSettings({ deleteParsedScreenshots: event.target.checked })}
-              />
-            </label>
-            <label className="switch-row">
-              <span>
-                <b>High contrast</b>
-                <small>Improves text and control contrast without changing map data.</small>
-              </span>
-              <input
-                type="checkbox"
-                checked={settings.highContrast}
-                onChange={(event) => updateSettings({ highContrast: event.target.checked })}
-              />
-            </label>
-            <label className="range-row">
-              <span>
-                <b>Overlay opacity</b>
-                <small>Ctrl+Shift+M toggles the overlay; Ctrl+Shift+X restores clicks.</small>
-              </span>
-              <input
-                type="range"
-                min="0.35"
-                max="1"
-                step="0.05"
-                value={settings.overlayOpacity}
-                onChange={(event) => updateSettings({ overlayOpacity: Number(event.target.value) })}
-              />
-              <output>{Math.round(settings.overlayOpacity * 100)}%</output>
-            </label>
-            <button
-              className="dialog-button secondary"
-              onClick={() => void runOverlayAction(resetOverlayWindow, "Overlay could not be reset")}
-            >
-              RESET & SHOW OVERLAY
-            </button>
-          </div>
-          <div className="dialog-section diagnostics">
-            <h3>DIAGNOSTICS</h3>
-            <dl className="telemetry-list">
-              <div>
-                <dt>RUNTIME</dt>
-                <dd>{isTauriRuntime() ? "TAURI DESKTOP" : "BROWSER PREVIEW"}</dd>
-              </div>
-              <div>
-                <dt>RAID STATE</dt>
-                <dd>{mapSession.inRaid ? "IN RAID" : "NOT DETECTED"}</dd>
-              </div>
-              <div>
-                <dt>MAP SOURCE</dt>
-                <dd>{mapSession.source.toUpperCase()}</dd>
-              </div>
-              <div>
-                <dt>VIEW MODE</dt>
-                <dd>{mapSession.browsingAway ? "BROWSING AWAY" : "FOLLOWING RAID"}</dd>
-              </div>
-              <div>
-                <dt>OVERLAY</dt>
-                <dd>
-                  {overlayState.visible ? (overlayState.clickThrough ? "CLICK-THROUGH" : "INTERACTIVE") : "HIDDEN"}
-                </dd>
-              </div>
-              <div>
-                <dt>SHORTCUTS</dt>
-                <dd>{overlayState.shortcutReady ? "READY" : "UNAVAILABLE"}</dd>
-              </div>
-              <div>
-                <dt>LAST FILE</dt>
-                <dd title={status.lastFilename ?? ""}>{status.lastFilename ?? "-"}</dd>
-              </div>
-              <div>
-                <dt>INTEL BUILD</dt>
-                <dd>{dataGeneratedAt ? new Date(dataGeneratedAt).toLocaleDateString() : "UNKNOWN"}</dd>
-              </div>
-              <div>
-                <dt>EXTRACT OCR</dt>
-                <dd>{raidExtracts?.status.toUpperCase() ?? "UNKNOWN"}</dd>
-              </div>
-            </dl>
-            <p className={`diagnostic-status ${status.level}`}>{status.message}</p>
-            {(overlayState.lastError || status.lastError) && (
-              <p className="error-box">{overlayState.lastError ?? status.lastError}</p>
-            )}
-          </div>
-        </Dialog>
+        <SettingsDialog
+          settings={settings}
+          status={status}
+          mapSession={mapSession}
+          overlayState={overlayState}
+          dataGeneratedAt={dataGeneratedAt}
+          raidExtracts={raidExtracts}
+          onClose={() => setShowSettings(false)}
+          onBrowse={browse}
+          onOpenDirectory={openDirectory}
+          onUpdateSettings={updateSettings}
+          onOverlayAction={runOverlayAction}
+        />
       )}
 
-      {showAbout && (
-        <Dialog className="about-dialog" titleId="about-title" onClose={() => setShowAbout(false)}>
-          <header>
-            <div>
-              <span className="kicker">ABOUT</span>
-              <h2 id="about-title">Raid Signal</h2>
-            </div>
-            <button className="bare-icon" onClick={() => setShowAbout(false)} aria-label="Close">
-              <UiIcon name="close" />
-            </button>
-          </header>
-          <p>
-            This app reads filenames and logs written by Escape from Tarkov. It never reads game memory, injects input,
-            or modifies game files. No official approval or anti-cheat guarantee is implied.
-          </p>
-          <h3>MAP AND INTELLIGENCE DATA</h3>
-          <p>
-            Map metadata, coordinates, extracts, and points of interest are based on the MIT-licensed Tarkov.dev
-            project. Community map artwork is provided under CC BY-NC-SA 4.0. Raid Signal is free and noncommercial.
-          </p>
-          <div className="license-links">
-            <a href="https://github.com/the-hideout/tarkov-dev" target="_blank" rel="noreferrer">
-              TARKOV.DEV SOURCE
-            </a>
-            <a href="https://github.com/the-hideout/tarkov-dev-svg-maps" target="_blank" rel="noreferrer">
-              MAP ARTWORK
-            </a>
-            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noreferrer">
-              CC BY-NC-SA 4.0
-            </a>
-          </div>
-        </Dialog>
-      )}
+      {showAbout && <AboutDialog onClose={() => setShowAbout(false)} />}
     </main>
   );
 }

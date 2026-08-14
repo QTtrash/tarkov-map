@@ -1,12 +1,20 @@
 mod log_parser;
 mod model;
 mod ocr;
+mod overlay;
 mod parser;
+mod quest_progress;
 mod settings_store;
 mod sharing;
 mod watcher;
 
 use model::{LocatorSnapshotPayload, Settings};
+use overlay::{
+    get_overlay_state, hide_overlay, hide_overlay_internal, overlay_ready, reset_overlay_window,
+    set_overlay_click_through, set_overlay_state, show_overlay, show_overlay_internal,
+    toggle_overlay, OverlayRuntimeState,
+};
+use quest_progress::{get_quest_progress, set_quest_progress};
 use std::path::PathBuf;
 use std::sync::{mpsc, Arc, Mutex, RwLock};
 use tauri::{Emitter, Manager, State};
@@ -22,24 +30,6 @@ pub struct AppState {
     share_server: Mutex<Option<sharing::ShareServer>>,
     overlay: Mutex<OverlayRuntimeState>,
     locator_snapshot: Arc<RwLock<LocatorSnapshotPayload>>,
-}
-
-#[derive(Debug, Clone, Default, serde::Serialize)]
-#[serde(rename_all = "camelCase")]
-struct OverlayRuntimeState {
-    visible: bool,
-    ready: bool,
-    click_through: bool,
-    shortcut_ready: bool,
-    last_error: Option<String>,
-}
-
-#[derive(serde::Serialize)]
-#[serde(rename_all = "camelCase")]
-struct QuestProgressPayload {
-    task_id: String,
-    status: String,
-    updated_at: u64,
 }
 
 #[tauri::command]
@@ -175,245 +165,6 @@ fn get_locator_snapshot(state: State<'_, AppState>) -> LocatorSnapshotPayload {
         .read()
         .unwrap_or_else(|poisoned| poisoned.into_inner())
         .clone()
-}
-
-fn overlay_state(app: &tauri::AppHandle) -> OverlayRuntimeState {
-    app.try_state::<AppState>()
-        .map(|state| {
-            let mut overlay = state
-                .overlay
-                .lock()
-                .unwrap_or_else(|poisoned| poisoned.into_inner())
-                .clone();
-            if let Some(window) = app.get_webview_window("overlay") {
-                overlay.visible = window.is_visible().unwrap_or(false);
-            } else {
-                overlay.visible = false;
-                overlay.ready = false;
-                overlay.click_through = false;
-            }
-            *state
-                .overlay
-                .lock()
-                .unwrap_or_else(|poisoned| poisoned.into_inner()) = overlay.clone();
-            overlay
-        })
-        .unwrap_or_default()
-}
-
-fn set_overlay_state(app: &tauri::AppHandle, update: impl FnOnce(&mut OverlayRuntimeState)) {
-    let Some(state) = app.try_state::<AppState>() else {
-        return;
-    };
-    let next = {
-        let mut overlay = state
-            .overlay
-            .lock()
-            .unwrap_or_else(|poisoned| poisoned.into_inner());
-        update(&mut overlay);
-        overlay.clone()
-    };
-    let _ = app.emit("overlay://state-changed", next);
-}
-
-fn create_overlay(app: &tauri::AppHandle) -> Result<(), String> {
-    app.get_webview_window("overlay")
-        .map(|_| ())
-        .ok_or_else(|| "The preloaded overlay window is unavailable; restart Raid Signal".into())
-}
-
-fn show_overlay_internal(app: &tauri::AppHandle) -> Result<(), String> {
-    let result: Result<(), String> = (|| {
-        create_overlay(app)?;
-        let window = app
-            .get_webview_window("overlay")
-            .ok_or_else(|| "Overlay window was not created".to_string())?;
-        window
-            .set_ignore_cursor_events(false)
-            .map_err(|error| error.to_string())?;
-        window
-            .set_always_on_top(true)
-            .map_err(|error| error.to_string())?;
-        window.unminimize().map_err(|error| error.to_string())?;
-        window.show().map_err(|error| error.to_string())?;
-        window.set_focus().map_err(|error| error.to_string())?;
-        Ok(())
-    })();
-    match result {
-        Ok(()) => {
-            set_overlay_state(app, |state| {
-                state.visible = true;
-                state.click_through = false;
-                state.last_error = None;
-            });
-            Ok(())
-        }
-        Err(error) => {
-            set_overlay_state(app, |state| state.last_error = Some(error.clone()));
-            Err(error)
-        }
-    }
-}
-
-fn hide_overlay_internal(app: &tauri::AppHandle) -> Result<(), String> {
-    if let Some(window) = app.get_webview_window("overlay") {
-        window
-            .set_ignore_cursor_events(false)
-            .map_err(|error| error.to_string())?;
-        window.hide().map_err(|error| error.to_string())?;
-    }
-    set_overlay_state(app, |state| {
-        state.visible = false;
-        state.click_through = false;
-        state.last_error = None;
-    });
-    Ok(())
-}
-
-#[tauri::command]
-fn show_overlay(app: tauri::AppHandle) -> Result<(), String> {
-    show_overlay_internal(&app)
-}
-
-#[tauri::command]
-fn hide_overlay(app: tauri::AppHandle) -> Result<(), String> {
-    hide_overlay_internal(&app)
-}
-
-#[tauri::command]
-fn toggle_overlay(app: tauri::AppHandle) -> Result<(), String> {
-    let visible = app
-        .get_webview_window("overlay")
-        .and_then(|window| window.is_visible().ok())
-        .unwrap_or(false);
-    if visible {
-        hide_overlay_internal(&app)
-    } else {
-        show_overlay_internal(&app)
-    }
-}
-
-#[tauri::command]
-fn get_overlay_state(app: tauri::AppHandle) -> OverlayRuntimeState {
-    overlay_state(&app)
-}
-
-#[tauri::command]
-fn overlay_ready(app: tauri::AppHandle) -> Result<(), String> {
-    let window = app
-        .get_webview_window("overlay")
-        .ok_or_else(|| "Overlay is not open".to_string())?;
-    let visible = window.is_visible().map_err(|error| error.to_string())?;
-    set_overlay_state(&app, |state| {
-        state.visible = visible;
-        state.ready = true;
-        state.last_error = None;
-    });
-    let _ = app.emit("overlay://invalidate-map", ());
-    Ok(())
-}
-
-#[tauri::command]
-fn set_overlay_click_through(app: tauri::AppHandle, enabled: bool) -> Result<(), String> {
-    let window = app
-        .get_webview_window("overlay")
-        .ok_or_else(|| "Overlay is not open".to_string())?;
-    window
-        .set_ignore_cursor_events(enabled)
-        .map_err(|error| error.to_string())?;
-    let visible = window.is_visible().map_err(|error| error.to_string())?;
-    if !enabled && visible {
-        window.set_focus().map_err(|error| error.to_string())?;
-    }
-    set_overlay_state(&app, |state| {
-        state.visible = visible;
-        state.click_through = enabled;
-        state.last_error = None;
-    });
-    Ok(())
-}
-
-#[tauri::command]
-fn reset_overlay_window(app: tauri::AppHandle) -> Result<(), String> {
-    create_overlay(&app)?;
-    let window = app
-        .get_webview_window("overlay")
-        .ok_or_else(|| "Overlay is not open".to_string())?;
-    window
-        .set_ignore_cursor_events(false)
-        .map_err(|error| error.to_string())?;
-    window
-        .set_size(tauri::LogicalSize::new(430.0, 430.0))
-        .map_err(|error| error.to_string())?;
-    window.center().map_err(|error| error.to_string())?;
-    window.show().map_err(|error| error.to_string())?;
-    window.set_focus().map_err(|error| error.to_string())?;
-    set_overlay_state(&app, |state| {
-        state.visible = true;
-        state.click_through = false;
-        state.last_error = None;
-    });
-    let _ = app.emit("overlay://invalidate-map", ());
-    Ok(())
-}
-
-#[tauri::command]
-fn get_quest_progress(
-    game_mode: String,
-    state: State<'_, AppState>,
-) -> Result<Vec<QuestProgressPayload>, String> {
-    let connection = state
-        .progress
-        .lock()
-        .unwrap_or_else(|poisoned| poisoned.into_inner());
-    let mut statement = connection
-        .prepare("SELECT task_id, status, updated_at FROM quest_progress WHERE game_mode = ?1 ORDER BY updated_at DESC")
-        .map_err(|error| error.to_string())?;
-    let rows = statement
-        .query_map([game_mode], |row| {
-            Ok(QuestProgressPayload {
-                task_id: row.get(0)?,
-                status: row.get(1)?,
-                updated_at: row.get::<_, i64>(2)? as u64,
-            })
-        })
-        .map_err(|error| error.to_string())?;
-    rows.collect::<Result<Vec<_>, _>>()
-        .map_err(|error| error.to_string())
-}
-
-#[tauri::command]
-fn set_quest_progress(
-    game_mode: String,
-    task_id: String,
-    status: String,
-    state: State<'_, AppState>,
-) -> Result<QuestProgressPayload, String> {
-    if !matches!(
-        status.as_str(),
-        "locked" | "available" | "active" | "completed" | "failed"
-    ) {
-        return Err("Invalid quest status".into());
-    }
-    let updated_at = std::time::SystemTime::now()
-        .duration_since(std::time::SystemTime::UNIX_EPOCH)
-        .unwrap_or_default()
-        .as_millis() as u64;
-    let connection = state
-        .progress
-        .lock()
-        .unwrap_or_else(|poisoned| poisoned.into_inner());
-    connection
-        .execute(
-            "INSERT INTO quest_progress (game_mode, task_id, status, updated_at) VALUES (?1, ?2, ?3, ?4) ON CONFLICT(game_mode, task_id) DO UPDATE SET status = excluded.status, updated_at = excluded.updated_at",
-            rusqlite::params![game_mode, task_id, status, updated_at as i64],
-        )
-        .map_err(|error| error.to_string())?;
-    Ok(QuestProgressPayload {
-        task_id,
-        status,
-        updated_at,
-    })
 }
 
 pub fn run() {

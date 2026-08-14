@@ -28,7 +28,13 @@ files. The Cloudflare Worker adapter is not a supported runtime.
 - `src/sharing/` owns protocol v1, invitation parsing, encryption, and decrypted
   payload validation.
 - `src/validation.ts` owns untrusted TypeScript runtime schemas.
+- `src/components/map-view-helpers.ts` owns Leaflet rendering primitives;
+  `MapView.tsx` owns their lifecycle and synchronization.
+- `SettingsDialog.tsx` and `AboutDialog.tsx` own modal presentation; `App.tsx`
+  owns application state and orchestration.
 - `src-tauri/src/model.rs` owns native settings and command payload models.
+- `src-tauri/src/overlay.rs` and `quest_progress.rs` own their native command
+  families; `lib.rs` wires commands, plugins, and lifecycle together.
 - `src-tauri/src/watcher.rs` owns filesystem observation and locator orchestration;
   parsing belongs in the dedicated parser/log/OCR modules.
 - `relay/src/server.ts` owns the public HTTP/WebSocket process and must remain
