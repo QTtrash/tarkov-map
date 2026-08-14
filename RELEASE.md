@@ -1,54 +1,17 @@
-# Raid Signal 1.0 release procedure
+# Raid Signal release policy
 
-Raid Signal 1.0 is a stable direct download. The first release is intentionally unsigned; stable status does not imply Authenticode signing. The download page must clearly state that Windows can display an unknown-publisher or SmartScreen warning.
+The executable release procedure is documented in [`docs/RELEASING.md`](docs/RELEASING.md)
+and enforced by `.github/workflows/release.yml`.
 
-## Local Windows verification
+Official installers:
 
-Run on a clean Windows development machine:
+- are built from protected version tags on clean GitHub-hosted Windows runners;
+- pass the complete repository gate and packaged build;
+- are scanned by Microsoft Defender and ClamAV;
+- ship with SHA-256, SPDX SBOM, and provenance attestation;
+- are attached only to immutable GitHub Releases; and
+- are never committed to Git or copied to the VPS relay.
 
-```powershell
-npm ci
-npm test
-npm run build
-cargo test --manifest-path src-tauri/Cargo.toml
-cargo clippy --manifest-path src-tauri/Cargo.toml -- -D warnings
-npm run tauri:build
-```
-
-The current Tauri prerequisites are Node.js LTS, Rust with the stable MSVC toolchain, Microsoft C++ Build Tools with **Desktop development with C++**, and Edge WebView2. Do not run `npm run assets:sync` during coordinate verification; it deliberately refreshes pinned community assets and resets their calibration gate.
-
-Then:
-
-1. Scan the application executable and final NSIS installer with Microsoft Defender.
-2. Install and uninstall under standard-user accounts in clean Windows 10 and Windows 11 VMs.
-3. Confirm the fresh `com.mouchsiadis.raidsignal` identity, settings, screenshot/log discovery, OCR, overlay recovery, quests, and custom pins.
-4. Test a LAN phone invitation and an Internet invitation between separate networks, including a second publishing desktop.
-5. Confirm wrong, tampered, leaked, and expired invitation behavior; stale markers must dim at 60 seconds and disappear at 120 seconds.
-6. On Icebreaker and Labyrinth, compare multiple known screenshot fixes and POIs across opposite map edges. Adjust the derived crop/bounds until markers land correctly; do not publish while either `calibrationStatus` remains `needs-local-verification`.
-7. After local coordinate verification, change both derived asset declarations to `calibrationStatus: "verified"`, regenerate/check their hashes, commit, and rerun the full suite.
-8. Generate and independently compare the installer SHA-256.
-
-Before replacing the website's calibration frames, capture three sanitized product images: the desktop map with multiple squad markers, the native overlay, and the phone companion viewing the same room. Exclude usernames, filesystem paths, QR codes, room IDs, and invitation keys.
-
-Do not perform the Tauri, Cargo, NSIS, or executable checks on the VPS.
-
-## Direct publication
-
-From a local shell with SSH access to the VPS:
-
-```bash
-./ops/publish-release "./src-tauri/target/release/bundle/nsis/Raid Signal_1.0.0_x64-setup.exe" 1.0.0 truegrind@YOUR_VPS
-```
-
-The publisher uploads to a staging name, verifies size and SHA-256 remotely, then atomically publishes `Raid-Signal-Setup-1.0.0.exe` and `release.json`. The landing page enables its download only when the manifest and artifact agree.
-
-## Future code signing
-
-When a validated publisher identity is available, sign the application executable and NSIS installer, timestamp them with an RFC 3161 SHA-256 timestamp, and verify with `signtool verify /pa /all /v`. The release manifest and hosted download path do not need to change.
-
-## Public assertions
-
-- Do not call Raid Signal officially approved, anti-cheat safe, or endorsed by Battlestate Games/BattlEye.
-- Do not claim the relay hides IP addresses or room activity.
-- Do not claim view-only phones are a cryptographic publishing restriction.
-- Keep map attribution and the free noncommercial boundary visible.
+The initial public release is unsigned and must be described as such. Unsigned
+status is not permission to bypass antivirus or SmartScreen warnings. A detection
+blocks publication until a clean rebuild and investigation succeed.

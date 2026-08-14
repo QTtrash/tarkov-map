@@ -1,0 +1,27 @@
+name: Bug report
+description: Report a reproducible Raid Signal defect.
+title: "bug: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Do not include invitation links, keys, private addresses, or sensitive logs. Report security issues privately.
+  - type: input
+    id: version
+    attributes: { label: Raid Signal version, placeholder: "1.0.0" }
+    validations: { required: true }
+  - type: input
+    id: windows
+    attributes: { label: Windows version }
+    validations: { required: true }
+  - type: textarea
+    id: reproduction
+    attributes: { label: Reproduction steps }
+    validations: { required: true }
+  - type: textarea
+    id: expected
+    attributes: { label: Expected and actual behavior }
+    validations: { required: true }
+  - type: textarea
+    id: context
+    attributes: { label: Non-sensitive context }

@@ -1,0 +1,10 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Map layer identifiers are public slugs, not API keys"
+condition = "AND"
+targetRules = ["generic-api-key"]
+regexTarget = "line"
+regexes = ['''^\s*"key": "[a-z0-9-]+",?\s*$''']
+paths = ['''^public/maps/upstream-maps\.json$''']
