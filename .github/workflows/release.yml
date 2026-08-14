@@ -89,7 +89,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install --yes clamav
-          sudo freshclam || true
+          sudo systemctl stop clamav-freshclam.service || true
+          sudo freshclam --stdout
           clamscan --infected --no-summary release/*.exe
 
   publish:
