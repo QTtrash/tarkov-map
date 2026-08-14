@@ -64,6 +64,26 @@ function initializeRelease() {
         link.textContent = `DOWNLOAD ${release.version} FOR WINDOWS`;
         link.removeAttribute("aria-disabled");
       }
+      const releaseUrl = `https://github.com/QTtrash/tarkov-map/releases/tag/v${release.version}`;
+      document.querySelectorAll<HTMLElement>("[data-release-version]").forEach((item) => {
+        item.textContent = `v${release.version}`;
+      });
+      document.querySelectorAll<HTMLElement>("[data-release-sha]").forEach((item) => {
+        item.textContent = release.sha256;
+      });
+      document.querySelectorAll<HTMLAnchorElement>("[data-release-url]").forEach((link) => {
+        link.href = releaseUrl;
+      });
+      document.querySelectorAll<HTMLAnchorElement>("[data-checksum-url]").forEach((link) => {
+        link.href = `${release.downloadUrl}.sha256`;
+      });
+      const published = document.querySelector<HTMLElement>("[data-release-published]");
+      if (published) {
+        const date = new Intl.DateTimeFormat("en", { dateStyle: "medium", timeZone: "UTC" }).format(
+          new Date(release.publishedAt),
+        );
+        published.textContent = `${(release.size / 1_000_000).toFixed(1)} MB · published ${date}`;
+      }
       const note = document.querySelector("#release-note");
       if (note) note.textContent = `Unsigned stable installer · SHA-256 ${release.sha256}`;
     })

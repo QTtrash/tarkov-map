@@ -297,6 +297,14 @@ h1 em {
   color: var(--signal);
   background: transparent;
 }
+.button--secondary {
+  color: var(--bone);
+  background: rgba(5, 6, 4, 0.28);
+  border-color: rgba(232, 224, 208, 0.35);
+}
+.button--secondary:hover {
+  border-color: var(--signal);
+}
 .button[aria-disabled="true"] {
   border-color: #554339;
   color: #887367;
@@ -405,10 +413,76 @@ h1 em {
 }
 
 .system-section,
+.source-section,
 .privacy-section,
 .final-cta {
   width: min(1440px, calc(100% - clamp(32px, 6vw, 96px)));
   margin: auto;
+}
+.source-section {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(40px, 8vw, 120px);
+  padding: clamp(72px, 8vw, 118px) 0;
+  border-top: 1px solid var(--line);
+}
+.source-heading > p:not(.eyebrow) {
+  max-width: 610px;
+  color: #8a857c;
+  font: 400 13px/1.7 var(--mono);
+}
+.source-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+.source-actions .button span {
+  margin-left: 0.35em;
+}
+.source-proof {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+.source-proof article {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(20px, 3vw, 34px);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: rgba(13, 13, 11, 0.64);
+}
+.source-proof span {
+  color: var(--signal);
+  font: 500 9px/1.4 var(--mono);
+  letter-spacing: 0.12em;
+}
+.source-proof strong {
+  margin-top: 30px;
+  color: var(--bone);
+  font-size: 22px;
+}
+.source-proof p,
+.source-proof code {
+  margin: 10px 0 24px;
+  color: #777269;
+  font: 400 10px/1.6 var(--mono);
+}
+.source-proof code {
+  overflow-wrap: anywhere;
+}
+.source-proof a {
+  margin-top: auto;
+  color: #a9a399;
+  font: 500 9px/1.4 var(--mono);
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+.source-proof a:hover {
+  color: var(--signal);
 }
 .system-section {
   padding: clamp(64px, 7vw, 100px) 0;
@@ -421,6 +495,7 @@ h1 em {
   margin-bottom: clamp(44px, 6vw, 72px);
 }
 .section-heading h2,
+.source-section h2,
 .privacy-section h2,
 .final-cta h2 {
   max-width: 920px;
@@ -575,6 +650,7 @@ footer a {
     width: min(760px, 82vw);
   }
   .section-heading,
+  .source-section,
   .privacy-section {
     grid-template-columns: 1fr;
   }
@@ -609,6 +685,7 @@ footer a {
     margin-bottom: clamp(24px, 3.2vh, 36px);
   }
   .section-heading h2,
+  .source-section h2,
   .privacy-section h2 {
     font-size: clamp(42px, 5vw, 72px);
   }
@@ -730,6 +807,9 @@ footer a {
     gap: 10px;
   }
   .privacy-copy ul {
+    grid-template-columns: 1fr;
+  }
+  .source-proof {
     grid-template-columns: 1fr;
   }
   .final-cta {

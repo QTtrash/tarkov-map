@@ -3,7 +3,13 @@
 Local-first Escape from Tarkov map intelligence and end-to-end encrypted squad
 position sharing for Windows.
 
-![Raid Signal desktop map](public/images/raid-signal-desktop.webp)
+[![Release](https://img.shields.io/github/v/release/QTtrash/tarkov-map?display_name=tag&sort=semver)](https://github.com/QTtrash/tarkov-map/releases/latest)
+[![CI](https://github.com/QTtrash/tarkov-map/actions/workflows/ci.yml/badge.svg)](https://github.com/QTtrash/tarkov-map/actions/workflows/ci.yml)
+[![Security](https://github.com/QTtrash/tarkov-map/actions/workflows/security.yml/badge.svg)](https://github.com/QTtrash/tarkov-map/actions/workflows/security.yml)
+[![License](https://img.shields.io/badge/code-Apache--2.0-blue.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-Windows-0078D4.svg)](https://github.com/QTtrash/tarkov-map/releases)
+
+![Raid Signal — local-first, encrypted, and open source](public/images/raid-signal-open-source.png)
 
 > **License boundary:** Raid Signal's original source code is Apache-2.0. Bundled
 > community map artwork and game-data snapshots are separately licensed and
@@ -16,6 +22,8 @@ game files. No official approval or anti-cheat guarantee is implied.
 
 ## Features
 
+![Raid Signal desktop map](public/images/raid-signal-desktop.webp)
+
 - Native Tauri desktop map and compact always-on-top overlay.
 - Screenshot coordinate parsing, raid/map detection, floors, POIs, extracts,
   quests, and local custom waypoints.
@@ -26,11 +34,32 @@ game files. No official approval or anti-cheat guarantee is implied.
 - No telemetry, account integration, relay message history, or cloud quest/pin
   storage.
 
-## Install
+## Install and verify
 
-Download the Windows installer and SHA-256 file from [GitHub Releases](https://github.com/QTtrash/tarkov-map/releases).
+Download the Windows installer and SHA-256 file from the immutable
+[v1.0.0 release](https://github.com/QTtrash/tarkov-map/releases/tag/v1.0.0).
 Installers are unsigned initially, so Windows may display an unknown-publisher
 warning. Do not download installers from repository commits or third-party mirrors.
+
+Verify the checksum in PowerShell from the directory containing both downloads:
+
+```powershell
+$expected = (Get-Content .\Raid-Signal-Setup-1.0.0.exe.sha256).Split()[0]
+$actual = (Get-FileHash .\Raid-Signal-Setup-1.0.0.exe -Algorithm SHA256).Hash.ToLowerInvariant()
+if ($actual -ne $expected) { throw "Raid Signal checksum mismatch" }
+```
+
+With the GitHub CLI installed, verify that GitHub Actions produced the artifact:
+
+```text
+gh attestation verify Raid-Signal-Setup-1.0.0.exe -R QTtrash/tarkov-map
+```
+
+The release also contains `release.json` and an SPDX SBOM. The
+[v1.0.0 release workflow](https://github.com/QTtrash/tarkov-map/actions/runs/31826345419)
+records the successful build, Microsoft Defender scan, independent ClamAV scan,
+and publication gate. These controls provide traceable release evidence; they
+are not a third-party security audit or anti-cheat approval.
 
 ## Build and verify
 
@@ -88,6 +117,8 @@ Read [AGENTS.md](AGENTS.md) for repository navigation and [CONTRIBUTING.md](CONT
 for the development workflow. Use GitHub issues for reproducible defects,
 Discussions for support, and private vulnerability reporting for security issues.
 The [Code of Conduct](CODE_OF_CONDUCT.md) applies to all project spaces.
+Read the [privacy policy](PRIVACY.md) for the desktop, Internet relay, and LAN
+sharing boundaries.
 
 ## Licensing and attribution
 

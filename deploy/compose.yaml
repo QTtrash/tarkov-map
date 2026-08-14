@@ -4,6 +4,8 @@ services:
     build:
       context: ..
       dockerfile: Dockerfile
+      args:
+        RAID_SIGNAL_RELEASE_TAG: ${RAID_SIGNAL_RELEASE_TAG:?Set RAID_SIGNAL_RELEASE_TAG to an immutable release tag}
     restart: unless-stopped
     init: true
     ports:

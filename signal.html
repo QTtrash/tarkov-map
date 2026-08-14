@@ -6,6 +6,17 @@
     <meta name="referrer" content="no-referrer" />
     <meta name="theme-color" content="#070706" />
     <meta name="description" content="Raid Signal is a local-first encrypted squad map for Escape from Tarkov." />
+    <link rel="canonical" href="https://signal.mouchsiadis-solutions.com/" />
+    <meta property="og:title" content="Raid Signal — Local-first, encrypted, open source" />
+    <meta property="og:description" content="Open-source Windows raid navigation with end-to-end encrypted squad coordination." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://signal.mouchsiadis-solutions.com/" />
+    <meta property="og:image" content="https://signal.mouchsiadis-solutions.com/images/raid-signal-open-source.png" />
+    <meta property="og:image:alt" content="Raid Signal — local-first, encrypted, open source" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Raid Signal — Local-first, encrypted, open source" />
+    <meta name="twitter:description" content="Open-source Windows raid navigation with end-to-end encrypted squad coordination." />
+    <meta name="twitter:image" content="https://signal.mouchsiadis-solutions.com/images/raid-signal-open-source.png" />
     <title>Raid Signal — Encrypted squad maps</title>
   </head>
   <body>
@@ -14,7 +25,7 @@
       <a class="wordmark" href="/" aria-label="Raid Signal home"><i aria-hidden="true"></i><span>RAID SIGNAL</span></a>
       <div class="site-header__meta"><span>WINDOWS / LOCAL-FIRST</span><span>RELAY / ONLINE</span></div>
       <nav aria-label="Primary navigation">
-        <a href="#system">SYSTEM</a><a href="#privacy">PRIVACY</a>
+        <a href="#system">SYSTEM</a><a href="#source">SOURCE</a><a href="#privacy">PRIVACY</a>
         <button class="sound-toggle" type="button" data-sound-toggle aria-pressed="false">SND OFF</button>
         <a href="https://mouchsiadis-solutions.com/en/tooling/">TOOLING ↗</a>
       </nav>
@@ -50,6 +61,7 @@
           <p class="lede">Raid Signal turns ordinary Escape from Tarkov screenshot coordinates into a private live map across Wi-Fi, mobile data, or different homes.</p>
           <div class="actions">
             <a id="download" class="button" href="https://github.com/QTtrash/tarkov-map/releases">VIEW WINDOWS RELEASES</a>
+            <a class="button button--secondary" href="https://github.com/QTtrash/tarkov-map" target="_blank" rel="noopener noreferrer">VIEW SOURCE</a>
             <span class="social-actions">
               <a class="social-link social-link--discord" href="https://discord.gg/pz4QHAu9WN" target="_blank" rel="noopener noreferrer" aria-label="Join the Raid Signal Discord">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -63,7 +75,7 @@
               </a>
             </span>
           </div>
-          <p id="release-note" class="release-note">The stable Windows release appears after local coordinate verification. The first installer is unsigned, so Windows may show an unknown-publisher warning.</p>
+          <p id="release-note" class="release-note">Latest Windows installer on GitHub Releases. The current installer is unsigned, so Windows may show an unknown-publisher warning.</p>
         </div>
 
         <div class="signal-modes" aria-label="How Raid Signal works">
@@ -94,6 +106,24 @@
         </div>
       </section>
 
+      <section class="source-section" id="source">
+        <div class="source-heading">
+          <p class="eyebrow">SOURCE / VERIFIABLE RELEASES</p>
+          <h2>Built in public.<br />Checked at release.</h2>
+          <p>Raid Signal is Mouchsiadis Solutions' first open-source code release. The original application code and documentation are Apache-2.0; bundled community maps retain their own noncommercial licenses.</p>
+          <div class="source-actions">
+            <a class="button" href="https://github.com/QTtrash/tarkov-map" target="_blank" rel="noopener noreferrer">BROWSE SOURCE</a>
+            <a class="button button--secondary" href="https://github.com/QTtrash/tarkov-map/releases" data-release-url target="_blank" rel="noopener noreferrer">VIEW <span data-release-version>LATEST RELEASE</span></a>
+          </div>
+        </div>
+        <div class="source-proof" aria-label="Open-source release evidence">
+          <article><span>LICENSE</span><strong>Apache-2.0 code</strong><p>Map artwork and data remain under the terms in the asset ledger.</p><a href="https://github.com/QTtrash/tarkov-map/blob/main/ASSET_LICENSES.md">READ LICENSE BOUNDARY ↗</a></article>
+          <article><span>RELEASE</span><strong data-release-version>Latest release</strong><p data-release-published>Immutable installer, checksum, manifest, SBOM, and provenance.</p><a href="https://github.com/QTtrash/tarkov-map/releases" data-release-url>OPEN RELEASE ↗</a></article>
+          <article class="source-proof__hash"><span>SHA-256</span><code data-release-sha>Published with each GitHub release</code><a href="https://github.com/QTtrash/tarkov-map/releases" data-checksum-url>DOWNLOAD CHECKSUM ↗</a></article>
+          <article><span>RELEASE GATES</span><strong>CI + independent scans</strong><p>v1.0.0 passed the project checks, CodeQL, secret scans, Rust audit, Defender, and ClamAV.</p><a href="https://github.com/QTtrash/tarkov-map/actions/runs/31826345419">VIEW RELEASE RUN ↗</a></article>
+        </div>
+      </section>
+
       <section class="privacy-section" id="privacy">
         <div class="privacy-heading"><p class="eyebrow">PRIVACY / THREAT MODEL</p><h2>The relay carries ciphertext. You carry the loot.</h2></div>
         <div class="privacy-copy">
@@ -109,7 +139,7 @@
       </section>
     </main>
 
-    <footer><span>FREE / NONCOMMERCIAL · NOT AFFILIATED WITH BATTLESTATE GAMES</span><span><a href="https://github.com/the-hideout/tarkov-dev-svg-maps">MAP ATTRIBUTION ↗</a> · <a href="#privacy">PRIVACY</a></span></footer>
+    <footer><span>FREE / NONCOMMERCIAL · NOT AFFILIATED WITH BATTLESTATE GAMES</span><span><a href="https://github.com/QTtrash/tarkov-map">SOURCE ↗</a> · <a href="https://github.com/QTtrash/tarkov-map/blob/main/LICENSE">LICENSE</a> · <a href="https://github.com/the-hideout/tarkov-dev-svg-maps">MAP ATTRIBUTION ↗</a> · <a href="#privacy">PRIVACY</a></span></footer>
     <script type="module" src="/src/signal-main.ts"></script>
   </body>
 </html>

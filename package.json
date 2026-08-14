@@ -24,6 +24,7 @@
     "check:all": "npm run format:check && npm run lint && npm test && npm run build:desktop && npm run build:web && npm run check:relay && npm run check:rust && npm run assets:verify && npm audit --audit-level=high && npm --prefix relay audit --audit-level=high",
     "assets:sync": "node scripts/sync-tarkov-assets.mjs && node scripts/sync-community-raster-assets.mjs",
     "assets:verify": "node scripts/verify-assets.mjs",
+    "release:manifest": "node scripts/fetch-release-manifest.mjs",
     "tauri": "tauri",
     "tauri:dev": "tauri dev",
     "tauri:build": "tauri build"

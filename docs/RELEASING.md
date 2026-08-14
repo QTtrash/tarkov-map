@@ -14,3 +14,8 @@ protected `vMAJOR.MINOR.PATCH` tag whose version matches both package manifests.
 
 Do not upload a locally built replacement to an existing release. If an artifact
 is wrong, publish a new patch version.
+
+The current installer is unsigned. Before integrating SignPath Foundation or
+making code-signing claims, complete the eligibility gate in
+[`SIGNPATH_PREFLIGHT.md`](SIGNPATH_PREFLIGHT.md). A signed installer must be
+published as a new version; immutable release assets are never replaced.

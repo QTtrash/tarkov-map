@@ -3,6 +3,8 @@ export interface SignalRelease {
   sha256: string;
   version: string;
   downloadUrl: string;
+  size: number;
+  publishedAt: string;
 }
 
 export function signalRelease(value: unknown): SignalRelease | null {
@@ -13,6 +15,8 @@ export function signalRelease(value: unknown): SignalRelease | null {
   if (typeof release.version !== "string" || !/^\d+\.\d+\.\d+(?:[-+][A-Za-z0-9.-]+)?$/.test(release.version))
     return null;
   if (typeof release.downloadUrl !== "string") return null;
+  if (typeof release.size !== "number" || !Number.isSafeInteger(release.size) || release.size <= 0) return null;
+  if (typeof release.publishedAt !== "string" || !Number.isFinite(Date.parse(release.publishedAt))) return null;
   let downloadUrl: URL;
   try {
     downloadUrl = new URL(release.downloadUrl);
@@ -31,5 +35,7 @@ export function signalRelease(value: unknown): SignalRelease | null {
     sha256: release.sha256,
     version: release.version,
     downloadUrl: downloadUrl.toString(),
+    size: release.size,
+    publishedAt: release.publishedAt,
   };
 }

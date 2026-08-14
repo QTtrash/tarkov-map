@@ -23,6 +23,15 @@ export function AboutDialog({ onClose }: { onClose: () => void }) {
         Community map artwork is provided under CC BY-NC-SA 4.0. Raid Signal is free and noncommercial.
       </p>
       <div className="license-links">
+        <a href="https://github.com/QTtrash/tarkov-map" target="_blank" rel="noreferrer">
+          RAID SIGNAL SOURCE
+        </a>
+        <a href="https://github.com/QTtrash/tarkov-map/blob/main/LICENSE" target="_blank" rel="noreferrer">
+          APACHE-2.0 CODE
+        </a>
+        <a href="https://github.com/QTtrash/tarkov-map/blob/main/PRIVACY.md" target="_blank" rel="noreferrer">
+          PRIVACY POLICY
+        </a>
         <a href="https://github.com/the-hideout/tarkov-dev" target="_blank" rel="noreferrer">
           TARKOV.DEV SOURCE
         </a>

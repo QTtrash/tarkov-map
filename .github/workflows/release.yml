@@ -114,4 +114,4 @@ jobs:
       - name: Create release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "${{ github.ref_name }}" release/* --verify-tag --generate-notes --title "Raid Signal ${{ github.ref_name }}"
+        run: gh release create "${{ github.ref_name }}" release/* --verify-tag --generate-notes --notes-file .github/RELEASE_NOTES.md --title "Raid Signal ${{ github.ref_name }}"
