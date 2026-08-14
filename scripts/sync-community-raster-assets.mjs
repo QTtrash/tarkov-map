@@ -6,7 +6,10 @@ import sharp from "sharp";
 const root = path.resolve(import.meta.dirname, "..");
 const sources = {
   icebreaker: { url: "https://reemr.se/maps/Icebreaker/re3mrIcebreaker.png", filename: "Icebreaker-re3mr.png" },
-  "the-labyrinth": { url: "https://www.re3mr.com/maps/Labyrinth/re3mrLabyrinthPNG.png", filename: "Labyrinth-re3mr.png" },
+  "the-labyrinth": {
+    url: "https://www.re3mr.com/maps/Labyrinth/re3mrLabyrinthPNG.png",
+    filename: "Labyrinth-re3mr.png",
+  },
 };
 const icebreakerDecks = {
   "bridge-roof": [0, 553],
@@ -39,7 +42,8 @@ async function download(source) {
   const response = await fetch(source.url, { headers: { "user-agent": "raid-signal-asset-sync" } });
   if (!response.ok) throw new Error(`${response.status} ${source.url}`);
   const bytes = new Uint8Array(await response.arrayBuffer());
-  if (bytes.length < 100_000 || !response.headers.get("content-type")?.includes("image")) throw new Error(`Unexpected map response: ${source.url}`);
+  if (bytes.length < 100_000 || !response.headers.get("content-type")?.includes("image"))
+    throw new Error(`Unexpected map response: ${source.url}`);
   return bytes;
 }
 
@@ -52,7 +56,14 @@ const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
 await mkdir(path.join(root, "public/maps/image"), { recursive: true });
 await rm(path.join(root, "public/maps/image/icebreaker"), { recursive: true, force: true });
 await rm(path.join(root, "public/maps/image/labyrinth"), { recursive: true, force: true });
-for (const key of Object.keys(checksums)) if (key.startsWith("tiles/icebreaker/") || key.startsWith("tiles/the-labyrinth/") || key.startsWith("image/icebreaker/") || key.startsWith("image/labyrinth/")) delete checksums[key];
+for (const key of Object.keys(checksums))
+  if (
+    key.startsWith("tiles/icebreaker/") ||
+    key.startsWith("tiles/the-labyrinth/") ||
+    key.startsWith("image/icebreaker/") ||
+    key.startsWith("image/labyrinth/")
+  )
+    delete checksums[key];
 
 for (const [mapId, source] of Object.entries(sources)) {
   const bytes = await download(source);
@@ -69,7 +80,10 @@ for (const [mapId, source] of Object.entries(sources)) {
     const canvasWidth = Math.round(icebreakerCrop.height * projectedAspect(map));
     for (const [floorId, [left, right]] of Object.entries(icebreakerDecks)) {
       const relative = `image/icebreaker/${floorId}.png`;
-      const panel = await sharp(bytes).extract({ left, top: icebreakerCrop.top, width: right - left, height: icebreakerCrop.height }).png().toBuffer();
+      const panel = await sharp(bytes)
+        .extract({ left, top: icebreakerCrop.top, width: right - left, height: icebreakerCrop.height })
+        .png()
+        .toBuffer();
       const derived = await sharp({
         create: {
           width: canvasWidth,
@@ -77,17 +91,28 @@ for (const [mapId, source] of Object.entries(sources)) {
           channels: 4,
           background: { r: 0, g: 0, b: 0, alpha: 0 },
         },
-      }).composite([{ input: panel, left: Math.floor((canvasWidth - (right - left)) / 2), top: 0 }]).png({ compressionLevel: 9 }).toBuffer();
+      })
+        .composite([{ input: panel, left: Math.floor((canvasWidth - (right - left)) / 2), top: 0 }])
+        .png({ compressionLevel: 9 })
+        .toBuffer();
       await mkdir(path.dirname(path.join(root, "public/maps", relative)), { recursive: true });
       await writeFile(path.join(root, "public/maps", relative), derived);
       checksums[relative] = createHash("sha256").update(derived).digest("hex");
     }
-    const assetFor = (floorId) => ({ type: "image", path: `/maps/image/icebreaker/${floorId}.png`, bounds: map.bounds, calibrationStatus: "verified" });
+    const assetFor = (floorId) => ({
+      type: "image",
+      path: `/maps/image/icebreaker/${floorId}.png`,
+      bounds: map.bounds,
+      calibrationStatus: "verified",
+    });
     map.baseAsset = assetFor("infirmary");
     map.floors = map.floors.map((floor) => ({ ...floor, asset: assetFor(floor.id) }));
   } else {
     const relative = "image/labyrinth/calibrated.png";
-    const derived = await sharp(bytes).extract({ left: 980, top: 230, width: 3790, height: 3620 }).png({ compressionLevel: 9 }).toBuffer();
+    const derived = await sharp(bytes)
+      .extract({ left: 980, top: 230, width: 3790, height: 3620 })
+      .png({ compressionLevel: 9 })
+      .toBuffer();
     await mkdir(path.dirname(path.join(root, "public/maps", relative)), { recursive: true });
     await writeFile(path.join(root, "public/maps", relative), derived);
     checksums[relative] = createHash("sha256").update(derived).digest("hex");
@@ -99,7 +124,13 @@ for (const [mapId, source] of Object.entries(sources)) {
 await rm(path.join(root, "public/maps/tiles/icebreaker"), { recursive: true, force: true });
 await rm(path.join(root, "public/maps/tiles/the-labyrinth"), { recursive: true, force: true });
 manifest.generatedAt = new Date().toISOString();
-manifest.sources = [...new Set([...(manifest.sources || []).filter((source) => !String(source).includes("assets.tarkov.dev")), ...Object.values(sources).map((source) => source.url), "https://reemr.se/"])];
+manifest.sources = [
+  ...new Set([
+    ...(manifest.sources || []).filter((source) => !String(source).includes("assets.tarkov.dev")),
+    ...Object.values(sources).map((source) => source.url),
+    "https://reemr.se/",
+  ]),
+];
 manifest.assetCount = Object.keys(checksums).length;
 await writeFile(mapsPath, `${JSON.stringify(maps, null, 2)}\n`);
 await writeFile(checksumsPath, `${JSON.stringify(checksums, null, 2)}\n`);

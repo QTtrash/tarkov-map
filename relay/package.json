@@ -1,10 +1,15 @@
 {
   "name": "raid-signal-relay",
   "private": true,
+  "engines": {
+    "node": "22.18.x",
+    "npm": "11.14.x"
+  },
   "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy",
-    "build:server": "tsc -p tsconfig.server.json",
+    "dev": "tsx watch src/server.ts",
+    "start": "node dist/server.js",
+    "build": "tsc -p tsconfig.server.json",
+    "build:server": "npm run build",
     "test": "node --import tsx --test src/server.test.ts"
   },
   "dependencies": {
@@ -14,7 +19,6 @@
     "@types/node": "^24.3.1",
     "@types/ws": "^8.18.1",
     "tsx": "^4.20.5",
-    "typescript": "^5.9.2",
-    "wrangler": "^4.30.0"
+    "typescript": "^5.9.2"
   }
 }

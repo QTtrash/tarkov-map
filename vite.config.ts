@@ -21,11 +21,12 @@ export default defineConfig(({ mode }) => ({
     minify: "esbuild",
     sourcemap: true,
     rollupOptions: {
-      input: mode === "desktop"
-        ? { main: entries.main, overlay: entries.overlay, companion: entries.companion }
-        : mode === "web"
-          ? { companion: entries.companion, signal: entries.signal }
-          : entries,
+      input:
+        mode === "desktop"
+          ? { main: entries.main, overlay: entries.overlay, companion: entries.companion }
+          : mode === "web"
+            ? { companion: entries.companion, signal: entries.signal }
+            : entries,
     },
   },
   test: {

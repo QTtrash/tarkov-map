@@ -1,0 +1,13 @@
+node_modules/
+dist/
+relay/dist/
+src-tauri/target/
+src-tauri/gen/
+public/maps/
+src/data/maps.generated.json
+package-lock.json
+relay/package-lock.json
+src-tauri/Cargo.lock
+signal.html
+LICENSE
+public/maps/LICENSE.md

@@ -65,7 +65,9 @@ const aliases = {
 const labSvg = { url: `${svgBase}/Labs.svg`, filename: "Labs.svg", baseLayer: "First_Level" };
 
 async function exists(target) {
-  return access(target).then(() => true).catch(() => false);
+  return access(target)
+    .then(() => true)
+    .catch(() => false);
 }
 
 async function fetchRequired(url) {
@@ -93,60 +95,13 @@ async function writeResponse(url, destination) {
   return writeBytes(bytes, destination);
 }
 
-function rotate(lng, lat, degrees) {
-  const angle = (degrees ?? 0) * Math.PI / 180;
-  return {
-    x: lng * Math.cos(angle) - lat * Math.sin(angle),
-    y: lng * Math.sin(angle) + lat * Math.cos(angle),
-  };
-}
-
-function tileRange(map, zoom, tileSize) {
-  const [[x1, z1], [x2, z2]] = map.bounds;
-  const [sx = 1, mx = 0, sz = 1, mz = 0] = map.transform ?? [];
-  const scale = 2 ** zoom;
-  const points = [[x1, z1], [x1, z2], [x2, z1], [x2, z2]].map(([x, z]) => {
-    const point = rotate(x, z, map.coordinateRotation);
-    return { x: (sx * point.x + mx) * scale, y: (-sz * point.y + mz) * scale };
-  });
-  return {
-    minX: Math.floor(Math.min(...points.map((point) => point.x)) / tileSize),
-    maxX: Math.floor((Math.max(...points.map((point) => point.x)) - 0.001) / tileSize),
-    minY: Math.floor(Math.min(...points.map((point) => point.y)) / tileSize),
-    maxY: Math.floor((Math.max(...points.map((point) => point.y)) - 0.001) / tileSize),
-  };
-}
-
-function localTileTemplate(mapId, layerId) {
-  return `/maps/tiles/${mapId}/${layerId}/{z}/{x}/{y}.png`;
-}
-
 function safeLayerId(name) {
-  return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "base";
-}
-
-async function downloadTileSet(map, sourceTemplate, layerId, checksums) {
-  const zoom = rasterNativeZoom[map.key];
-  const tileSize = map.tileSize || 256;
-  const range = tileRange(map, zoom, tileSize);
-  const jobs = [];
-  for (let x = range.minX; x <= range.maxX; x += 1) {
-    for (let y = range.minY; y <= range.maxY; y += 1) jobs.push({ x, y });
-  }
-  let cursor = 0;
-  const workers = Array.from({ length: 12 }, async () => {
-    while (cursor < jobs.length) {
-      const { x, y } = jobs[cursor++];
-      const url = sourceTemplate.replace("{z}", zoom).replace("{x}", x).replace("{y}", y);
-      const response = await fetch(url, { headers: { "user-agent": "tarkov-map-locator-asset-sync" } });
-      if (!response.ok) continue;
-      const bytes = new Uint8Array(await response.arrayBuffer());
-      const relative = `tiles/${map.key}/${layerId}/${zoom}/${x}/${y}.png`;
-      checksums[relative] = await writeBytes(bytes, path.join(stagingPublicMaps, relative));
-    }
-  });
-  await Promise.all(workers);
-  return { template: localTileTemplate(map.key, layerId), nativeZoom: zoom, tileSize };
+  return (
+    name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "") || "base"
+  );
 }
 
 function normalizeFloor(layer, index, asset) {
@@ -168,12 +123,14 @@ function translated(value, dictionary, fallback) {
 }
 
 function canonicalMapId(mapId) {
-  return ({
-    "ground-zero-21": "ground-zero",
-    "ground-zero-tutorial": "ground-zero",
-    "night-factory": "factory",
-    "the-lab-dark": "the-lab",
-  })[mapId] || mapId;
+  return (
+    {
+      "ground-zero-21": "ground-zero",
+      "ground-zero-tutorial": "ground-zero",
+      "night-factory": "factory",
+      "the-lab-dark": "the-lab",
+    }[mapId] || mapId
+  );
 }
 
 function unique(values) {
@@ -209,10 +166,12 @@ function normalizePois(mapId, apiMap, apiData, dictionary) {
       bottom: extract.bottom ?? null,
       faction,
       switchIds: extract.switches || (extract.switch ? [extract.switch] : []),
-      transferItem: extract.transferItem ? {
-        itemId: extract.transferItem.item,
-        count: Number(extract.transferItem.count || 0),
-      } : null,
+      transferItem: extract.transferItem
+        ? {
+            itemId: extract.transferItem.item,
+            count: Number(extract.transferItem.count || 0),
+          }
+        : null,
     });
   }
   for (const transit of apiMap.transits || []) {
@@ -238,11 +197,13 @@ function normalizePois(mapId, apiMap, apiData, dictionary) {
       outline: (sw.outline || []).map(vector),
       top: sw.top ?? null,
       bottom: sw.bottom ?? null,
-      activates: (sw.activates || []).map((operation) => ({
-        operation: operation.operation || "Activates",
-        targetId: operation.extract || operation.switch || null,
-        targetKind: operation.extract ? "extract" : "switch",
-      })).filter((operation) => operation.targetId),
+      activates: (sw.activates || [])
+        .map((operation) => ({
+          operation: operation.operation || "Activates",
+          targetId: operation.extract || operation.switch || null,
+          targetKind: operation.extract ? "extract" : "switch",
+        }))
+        .filter((operation) => operation.targetId),
     });
   }
   for (const hazard of apiMap.hazards || []) {
@@ -305,11 +266,14 @@ function normalizePois(mapId, apiMap, apiData, dictionary) {
     for (const [index, location] of (boss.spawnLocations || []).entries()) {
       const positions = location.positions || [];
       if (!positions.length) continue;
-      const position = positions.reduce((sum, point) => ({
-        x: sum.x + Number(point.x || 0) / positions.length,
-        y: sum.y + Number(point.y || 0) / positions.length,
-        z: sum.z + Number(point.z || 0) / positions.length,
-      }), { x: 0, y: 0, z: 0 });
+      const position = positions.reduce(
+        (sum, point) => ({
+          x: sum.x + Number(point.x || 0) / positions.length,
+          y: sum.y + Number(point.y || 0) / positions.length,
+          z: sum.z + Number(point.z || 0) / positions.length,
+        }),
+        { x: 0, y: 0, z: 0 },
+      );
       pois.push({
         id: `boss-${boss.mob}-${index}`,
         kind: "boss-zone",
@@ -362,7 +326,16 @@ function normalizePois(mapId, apiMap, apiData, dictionary) {
   return { schemaVersion: 2, mapId, generatedAt, sources: [poiUrl, poiTranslationsUrl], pois };
 }
 
-function normalizeQuestBundle(gameMode, raw, translations, mapIds, itemData, itemTranslations, traderData, traderTranslations) {
+function normalizeQuestBundle(
+  gameMode,
+  raw,
+  translations,
+  mapIds,
+  itemData,
+  itemTranslations,
+  traderData,
+  traderTranslations,
+) {
   const dictionary = translations.data || {};
   const tasks = Object.values(raw.data?.tasks || {});
   const items = itemData.data?.items || {};
@@ -370,27 +343,34 @@ function normalizeQuestBundle(gameMode, raw, translations, mapIds, itemData, ite
   const traders = traderData.data || {};
   const traderDictionary = traderTranslations.data || {};
   const mapName = (id) => canonicalMapId(mapIds.get(id) || id || "");
-  const itemName = (id) => translated(items[id]?.name, itemDictionary, items[id]?.normalizedName?.replaceAll("-", " ") || id);
-  const traderName = (id) => translated(traders[id]?.name, traderDictionary, traders[id]?.normalizedName || "Unknown trader");
+  const itemName = (id) =>
+    translated(items[id]?.name, itemDictionary, items[id]?.normalizedName?.replaceAll("-", " ") || id);
+  const traderName = (id) =>
+    translated(traders[id]?.name, traderDictionary, traders[id]?.normalizedName || "Unknown trader");
   const quests = tasks.map((task) => {
     const objectives = (task.objectives || []).map((objective) => {
-      const zones = (objective.zones || []).map((zone) => ({
-        mapId: mapName(zone.map),
-        position: vector(zone.position),
-        outline: (zone.outline || []).map(vector),
-        top: zone.top ?? null,
-        bottom: zone.bottom ?? null,
-      })).filter((zone) => zone.mapId);
+      const zones = (objective.zones || [])
+        .map((zone) => ({
+          mapId: mapName(zone.map),
+          position: vector(zone.position),
+          outline: (zone.outline || []).map(vector),
+          top: zone.top ?? null,
+          bottom: zone.bottom ?? null,
+        }))
+        .filter((zone) => zone.mapId);
       const objectiveMapIds = unique([...(objective.maps || []).map(mapName), ...zones.map((zone) => zone.mapId)]);
       const objectiveItems = (objective.items || []).map(itemName);
       const details = [];
       if (Number(objective.count || 0) > 1) details.push(`Required count: ${Number(objective.count)}`);
       if (objective.foundInRaid) details.push("Items must have Found in Raid status");
       if (objectiveItems.length === 1) details.push(`Required item: ${objectiveItems[0]}`);
-      else if (objectiveItems.length > 1 && objectiveItems.length <= 4) details.push(`Accepted items: ${objectiveItems.join(", ")}`);
+      else if (objectiveItems.length > 1 && objectiveItems.length <= 4)
+        details.push(`Accepted items: ${objectiveItems.join(", ")}`);
       else if (objectiveItems.length > 4) details.push(`${objectiveItems.length} accepted item types`);
-      if (objective.targetNames?.length) details.push(`Targets: ${objective.targetNames.map((name) => translated(name, dictionary, name)).join(", ")}`);
-      if (Number(objective.distance?.value || 0) > 0) details.push(`Distance: ${objective.distance.compareMethod || ">="} ${objective.distance.value} m`);
+      if (objective.targetNames?.length)
+        details.push(`Targets: ${objective.targetNames.map((name) => translated(name, dictionary, name)).join(", ")}`);
+      if (Number(objective.distance?.value || 0) > 0)
+        details.push(`Distance: ${objective.distance.compareMethod || ">="} ${objective.distance.value} m`);
       if (objective.optional) details.push("Optional objective");
       return {
         id: objective.id,
@@ -423,7 +403,11 @@ function normalizeQuestBundle(gameMode, raw, translations, mapIds, itemData, ite
       minPlayerLevel: Number(task.minPlayerLevel || 0),
       primaryMapId: declaredMap || mapIdsForQuest[0] || null,
       mapIds: mapIdsForQuest,
-      summary: requiredObjectives.slice(0, 2).map((objective) => objective.description).join(" · ") || "Review the quest objectives.",
+      summary:
+        requiredObjectives
+          .slice(0, 2)
+          .map((objective) => objective.description)
+          .join(" · ") || "Review the quest objectives.",
       experience,
       chainDepth: 0,
       rewardSummary,
@@ -491,10 +475,12 @@ async function main() {
 
   for (const map of interactive) {
     let baseAsset;
-    let floors = [];
+    let floors;
     const svgSource = map.svgPath
       ? { url: map.svgPath, filename: new URL(map.svgPath).pathname.split("/").pop(), baseLayer: map.svgLayer }
-      : map.key === "the-lab" ? labSvg : null;
+      : map.key === "the-lab"
+        ? labSvg
+        : null;
 
     if (svgSource) {
       const relative = `svg/${svgSource.filename}`;
@@ -509,17 +495,17 @@ async function main() {
       const source = communityRasterMaps[map.key];
       const relative = `image/${source.filename}`;
       checksums[relative] = await writeResponse(source.url, path.join(stagingPublicMaps, relative));
-      baseAsset = { type: "image", path: `/maps/${relative}`, bounds: map.bounds, calibrationStatus: "needs-local-verification" };
+      baseAsset = {
+        type: "image",
+        path: `/maps/${relative}`,
+        bounds: map.bounds,
+        calibrationStatus: "needs-local-verification",
+      };
       floors = (map.layers || []).map((layer, index) => normalizeFloor(layer, index, baseAsset));
     } else {
-      const baseLayerId = safeLayerId(map.tilePath?.split("/").at(-4) || "base");
-      baseAsset = { type: "tiles", ...(await downloadTileSet(map, map.tilePath, baseLayerId, checksums)) };
-      for (const [index, layer] of (map.layers || []).entries()) {
-        if (!layer.tilePath) continue;
-        const layerId = safeLayerId(layer.name);
-        const asset = await downloadTileSet(map, layer.tilePath, layerId, checksums);
-        floors.push(normalizeFloor(layer, index, { type: "tiles", ...asset }));
-      }
+      throw new Error(
+        `Unsupported map asset format for ${map.key}; add an attributed SVG or calibrated community raster source`,
+      );
     }
 
     const poiBundle = normalizePois(map.key, apiMaps.get(map.key), apiData, dictionary);
@@ -540,38 +526,67 @@ async function main() {
       floors,
       poiPath: `/maps/${poiRelative}`,
       poiCounts: countCategories(poiBundle.pois),
-      attribution: communityRasterMaps[map.key] ? {
-        name: communityRasterMaps[map.key].author,
-        url: communityRasterMaps[map.key].authorLink,
-      } : {
-        name: map.author || "Tarkov.dev contributors",
-        url: map.authorLink || "https://tarkov.dev",
-      },
+      attribution: communityRasterMaps[map.key]
+        ? {
+            name: communityRasterMaps[map.key].author,
+            url: communityRasterMaps[map.key].authorLink,
+          }
+        : {
+            name: map.author || "Tarkov.dev contributors",
+            url: map.authorLink || "https://tarkov.dev",
+          },
     });
   }
 
   await writeJson(checksums, path.join(stagingPublicMaps, "asset-checksums.json"));
   const [itemData, itemTranslations, traderData, traderTranslations] = await Promise.all([
-    fetchJson(itemUrls[0]), fetchJson(itemUrls[1]), fetchJson(traderUrls[0]), fetchJson(traderUrls[1]),
+    fetchJson(itemUrls[0]),
+    fetchJson(itemUrls[1]),
+    fetchJson(traderUrls[0]),
+    fetchJson(traderUrls[1]),
   ]);
   for (const [gameMode, [dataUrl, translationUrl]] of Object.entries(questUrls)) {
     const [questData, questTranslations] = await Promise.all([fetchJson(dataUrl), fetchJson(translationUrl)]);
-    const bundle = normalizeQuestBundle(gameMode, questData, questTranslations, mapIds, itemData, itemTranslations, traderData, traderTranslations);
+    const bundle = normalizeQuestBundle(
+      gameMode,
+      questData,
+      questTranslations,
+      mapIds,
+      itemData,
+      itemTranslations,
+      traderData,
+      traderTranslations,
+    );
     const relative = `quests/${gameMode}.json`;
     checksums[relative] = await writeJson(bundle, path.join(stagingPublicMaps, relative));
   }
-  await writeJson({
-    schemaVersion: 1,
-    generatedAt: new Date().toISOString(),
-    sources: [mapsUrl, poiUrl, poiTranslationsUrl, ...Object.values(questUrls).flat(), ...itemUrls, ...traderUrls, svgBase, ...Object.values(communityRasterMaps).map((source) => source.url), "https://reemr.se/"],
-    assetCount: Object.keys(checksums).length,
-  }, path.join(stagingPublicMaps, "data-manifest.json"));
+  await writeJson(
+    {
+      schemaVersion: 1,
+      generatedAt: new Date().toISOString(),
+      sources: [
+        mapsUrl,
+        poiUrl,
+        poiTranslationsUrl,
+        ...Object.values(questUrls).flat(),
+        ...itemUrls,
+        ...traderUrls,
+        svgBase,
+        ...Object.values(communityRasterMaps).map((source) => source.url),
+        "https://reemr.se/",
+      ],
+      assetCount: Object.keys(checksums).length,
+    },
+    path.join(stagingPublicMaps, "data-manifest.json"),
+  );
   await writeJson(checksums, path.join(stagingPublicMaps, "asset-checksums.json"));
   await writeJson(groups, path.join(stagingPublicMaps, "upstream-maps.json"));
   await writeResponse(licenseUrl, path.join(stagingPublicMaps, "LICENSE.md"));
   await replaceAssets();
   await writeFile(generatedPath, `${JSON.stringify(output, null, 2)}\n`);
-  console.log(`Synced ${output.length} maps, ${output.reduce((sum, map) => sum + Object.values(map.poiCounts).reduce((a, b) => a + b, 0), 0)} POIs, and ${Object.keys(checksums).length} asset files.`);
+  console.log(
+    `Synced ${output.length} maps, ${output.reduce((sum, map) => sum + Object.values(map.poiCounts).reduce((a, b) => a + b, 0), 0)} POIs, and ${Object.keys(checksums).length} asset files.`,
+  );
 }
 
 main().catch(async (error) => {
