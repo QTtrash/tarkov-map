@@ -106,6 +106,42 @@
         </div>
       </section>
 
+      <section class="community-section" id="community" aria-labelledby="community-title">
+        <header class="community-heading">
+          <div>
+            <p class="eyebrow">V1.1.0 / COMMUNITY SHIPPED</p>
+            <h2 id="community-title">One quest at a time became the whole route.</h2>
+          </div>
+          <div class="community-intro">
+            <p>Raid Signal's first community feature contribution is live. Active quests can now place all of their relevant objectives on the selected map together.</p>
+            <div class="community-contributor">
+              <span>COMMUNITY CONTRIBUTOR</span>
+              <strong><a href="https://github.com/TedCreator" target="_blank" rel="noopener noreferrer">@TedCreator</a></strong>
+              <p>Contributed the foundation in <a href="https://github.com/QTtrash/tarkov-map/pull/12" target="_blank" rel="noopener noreferrer">PR #12</a>. Maintainer review added compatibility hardening and regression coverage before release.</p>
+            </div>
+          </div>
+        </header>
+
+        <figure class="community-capture">
+          <img src="/images/raid-signal-v1-1-quest-markers.webp" alt="Raid Signal v1.1.0 showing several active quest objective markers on Customs with the Quest markers utility enabled" width="1440" height="900" loading="lazy" />
+          <figcaption><span>V1.1.0 / CUSTOMS</span><b>ACTIVE QUEST OBJECTIVES / MAP-SCOPED</b></figcaption>
+        </figure>
+
+        <div class="community-flow" aria-label="Quest marker workflow">
+          <article><span>01</span><strong>MARK ACTIVE</strong><p>Set several quests to active in the Quest Navigator.</p></article>
+          <article><span>02</span><strong>ENABLE MARKERS</strong><p>Open Map Intel → Utility and enable Quest markers.</p></article>
+          <article><span>03</span><strong>STAY IN CONTEXT</strong><p>Only the selected map is shown. Hide all and map or PvP/PvE changes clear markers that no longer apply.</p></article>
+        </div>
+
+        <footer class="community-footer">
+          <p>Quest markers remain off by default, and the original single-objective “Show point” workflow still works.</p>
+          <div>
+            <a href="https://github.com/QTtrash/tarkov-map/pull/12" target="_blank" rel="noopener noreferrer">VIEW PR #12 ↗</a>
+            <a href="https://github.com/QTtrash/tarkov-map/releases/tag/v1.1.0" target="_blank" rel="noopener noreferrer">OPEN V1.1.0 RELEASE ↗</a>
+          </div>
+        </footer>
+      </section>
+
       <section class="source-section" id="source">
         <div class="source-heading">
           <p class="eyebrow">SOURCE / VERIFIABLE RELEASES</p>
@@ -120,7 +156,7 @@
           <article><span>LICENSE</span><strong>Apache-2.0 code</strong><p>Map artwork and data remain under the terms in the asset ledger.</p><a href="https://github.com/QTtrash/tarkov-map/blob/main/ASSET_LICENSES.md">READ LICENSE BOUNDARY ↗</a></article>
           <article><span>RELEASE</span><strong data-release-version>Latest release</strong><p data-release-published>Immutable installer, checksum, manifest, SBOM, and provenance.</p><a href="https://github.com/QTtrash/tarkov-map/releases" data-release-url>OPEN RELEASE ↗</a></article>
           <article class="source-proof__hash"><span>SHA-256</span><code data-release-sha>Published with each GitHub release</code><a href="https://github.com/QTtrash/tarkov-map/releases" data-checksum-url>DOWNLOAD CHECKSUM ↗</a></article>
-          <article><span>RELEASE GATES</span><strong>CI + independent scans</strong><p>v1.0.0 passed the project checks, CodeQL, secret scans, Rust audit, Defender, and ClamAV.</p><a href="https://github.com/QTtrash/tarkov-map/actions/runs/31826345419">VIEW RELEASE RUN ↗</a></article>
+          <article><span>RELEASE GATES</span><strong>CI + independent scans</strong><p>v1.1.0 passed project tests, four Chromium paths, Defender, ClamAV, SPDX SBOM generation, and GitHub provenance.</p><a href="https://github.com/QTtrash/tarkov-map/actions/runs/32376201098">VIEW V1.1.0 RELEASE RUN ↗</a></article>
         </div>
       </section>
 
@@ -134,7 +170,7 @@
       </section>
 
       <section class="final-cta">
-        <div><p class="eyebrow">RAID SIGNAL / 1.0</p><h2>Keep the room private.<br />Keep the squad visible.</h2></div>
+        <div><p class="eyebrow">RAID SIGNAL / <span data-release-version>CURRENT RELEASE</span></p><h2>Keep the room private.<br />Keep the squad visible.</h2></div>
         <a class="button" href="https://github.com/QTtrash/tarkov-map/releases" data-download-mirror>VIEW WINDOWS RELEASES</a>
       </section>
     </main>
