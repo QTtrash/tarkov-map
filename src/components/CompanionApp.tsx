@@ -85,8 +85,10 @@ export function CompanionApp() {
   const [poiError, setPoiError] = useState<string | null>(null);
   const [selectedPoiId, setSelectedPoiId] = useState<string | null>(null);
   const [focusPoiId, setFocusPoiId] = useState<string | null>(null);
-  const [questPoi, setQuestPoi] = useState<QuestObjectivePoi | null>(null);
+  const [activeQuestPois, setActiveQuestPois] = useState<QuestObjectivePoi[]>([]);
+  const [focusedQuestPoi, setFocusedQuestPoi] = useState<QuestObjectivePoi | null>(null);
   const [visible, setVisible] = useState<Set<PoiCategory>>(() => new Set(defaultVisiblePoiCategories));
+  const [showQuestMarkers, setShowQuestMarkers] = useState(false);
   const [pins, setPins] = useState<CustomPinPoi[]>(() =>
     readStoredJson("raid-signal-companion-pins", parseCustomPins, []),
   );
@@ -228,24 +230,25 @@ export function CompanionApp() {
   }, [definition.poiPath]);
 
   const renderedBundle = useMemo<MapPoiBundle | null>(
-    () => composePoiBundle(poiBundle, definition.id, questPoi, pins),
-    [definition.id, pins, poiBundle, questPoi],
+    () => composePoiBundle(poiBundle, definition.id, activeQuestPois, focusedQuestPoi, pins, showQuestMarkers),
+    [activeQuestPois, definition.id, focusedQuestPoi, pins, poiBundle, showQuestMarkers],
   );
   const renderedVisible = useMemo(
-    () => composeVisibleCategories(visible, definition.id, questPoi, pins),
-    [definition.id, pins, questPoi, visible],
+    () => composeVisibleCategories(visible, definition.id, activeQuestPois, focusedQuestPoi, pins, showQuestMarkers),
+    [activeQuestPois, definition.id, focusedQuestPoi, pins, showQuestMarkers, visible],
   );
 
   const selectMap = useCallback((nextMapId: string) => {
     setFollow(false);
     setMapId(nextMapId);
     setFloor("base");
-    setQuestPoi(null);
+    setFocusedQuestPoi(null);
   }, []);
   const focusQuest = useCallback(
     (nextMapId: string, poi: QuestObjectivePoi | null) => {
       selectMap(nextMapId);
-      setQuestPoi(poi);
+      setFocusedQuestPoi(poi);
+      if (poi) setShowQuestMarkers(true);
       setFocusPoiId(poi?.id ?? null);
       setQuestsOpen(false);
     },
@@ -363,6 +366,8 @@ export function CompanionApp() {
           open={intelOpen}
           visible={visible}
           fix={primaryFix}
+          showQuestMarkers={showQuestMarkers}
+          activeQuestCount={activeQuestPois.filter((poi) => poi.mapId === definition.id).length}
           onOpenChange={setIntelOpen}
           onToggle={(category) =>
             setVisible((current) => {
@@ -372,6 +377,12 @@ export function CompanionApp() {
               return next;
             })
           }
+          onToggleQuestMarkers={() => setShowQuestMarkers((current) => !current)}
+          onHideAll={() => {
+            setVisible(new Set());
+            setFocusedQuestPoi(null);
+            setShowQuestMarkers(false);
+          }}
           onSetVisible={(categories) => setVisible(new Set(categories))}
           onFocusPoi={(id) => {
             setSelectedPoiId(id);
@@ -384,6 +395,7 @@ export function CompanionApp() {
         mapId={definition.id}
         onClose={() => setQuestsOpen(false)}
         onFocusObjective={focusQuest}
+        onActiveObjectivePoisChange={setActiveQuestPois}
       />
     </main>
   );

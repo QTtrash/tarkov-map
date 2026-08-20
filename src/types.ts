@@ -9,6 +9,7 @@ export interface LocatorSettings {
   selectedMap: string;
   visibleMapLayers: string[];
   legendOpen: boolean;
+  showQuestMarkers: boolean;
   highContrast: boolean;
   overlayOpacity: number;
 }
@@ -234,6 +235,7 @@ export interface LockedDoorPoi extends PoiBase {
 
 export interface QuestObjectivePoi extends PoiBase {
   kind: "quest-objective";
+  mapId: string;
   taskId: string;
   objectiveId: string;
   description: string;

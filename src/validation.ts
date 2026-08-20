@@ -102,6 +102,7 @@ const settings = z.object({
   selectedMap: mapId,
   visibleMapLayers: z.array(identifier).max(64),
   legendOpen: z.boolean(),
+  showQuestMarkers: z.boolean(),
   highContrast: z.boolean(),
   overlayOpacity: z.number().finite().min(0.35).max(1),
 });

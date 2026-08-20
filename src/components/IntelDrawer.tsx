@@ -12,8 +12,12 @@ interface IntelDrawerProps {
   visible: Set<PoiCategory>;
   fix: PlayerFix | null;
   raidExtracts?: RaidExtractState | null;
+  showQuestMarkers: boolean;
+  activeQuestCount: number;
   onOpenChange: (open: boolean) => void;
   onToggle: (category: PoiCategory) => void;
+  onToggleQuestMarkers: () => void;
+  onHideAll: () => void;
   onSetVisible: (categories: PoiCategory[]) => void;
   onFocusPoi: (id: string) => void;
 }
@@ -27,8 +31,12 @@ export function IntelDrawer({
   visible,
   fix,
   raidExtracts = null,
+  showQuestMarkers,
+  activeQuestCount,
   onOpenChange,
   onToggle,
+  onToggleQuestMarkers,
+  onHideAll,
   onSetVisible,
   onFocusPoi,
 }: IntelDrawerProps) {
@@ -150,16 +158,30 @@ export function IntelDrawer({
 
           <div className="legend-actions">
             <button onClick={() => onSetVisible(defaultVisiblePoiCategories)}>Recommended</button>
-            <button onClick={() => onSetVisible([])}>Hide all</button>
+            <button onClick={onHideAll}>Hide all</button>
           </div>
 
           <div className="legend-groups">
             {poiCategoryGroups.map((group) => {
               const available = group.categories.filter((category) => (definition.poiCounts[category.id] ?? 0) > 0);
-              if (!available.length) return null;
+              if (!available.length && group.id !== "utility") return null;
               return (
                 <section className="legend-group" key={group.id}>
                   <h3>{group.name}</h3>
+                  {group.id === "utility" && (
+                    <button
+                      className={showQuestMarkers ? "legend-row quest-objective enabled" : "legend-row quest-objective"}
+                      onClick={onToggleQuestMarkers}
+                      aria-pressed={showQuestMarkers}
+                    >
+                      <span className="legend-symbol">
+                        <PoiGlyph category="quest-objective" />
+                      </span>
+                      <span>Quest markers</span>
+                      <b>{activeQuestCount}</b>
+                      <i aria-hidden="true" />
+                    </button>
+                  )}
                   {available.map((category) => (
                     <button
                       className={
