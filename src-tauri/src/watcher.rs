@@ -5,12 +5,15 @@ use crate::model::{
 use crate::ocr::read_exfil_text;
 use crate::parser::parse_screenshot_filename;
 use notify::{Event, RecommendedWatcher, RecursiveMode, Watcher};
+#[cfg(windows)]
 use regex::Regex;
 use std::collections::{HashSet, VecDeque};
 use std::fs::File;
 use std::io::{Read, Seek, SeekFrom};
 use std::path::{Path, PathBuf};
-use std::sync::{mpsc, Arc, LazyLock, RwLock};
+#[cfg(windows)]
+use std::sync::LazyLock;
+use std::sync::{mpsc, Arc, RwLock};
 use std::time::{Duration, SystemTime};
 use tauri::{AppHandle, Emitter};
 
