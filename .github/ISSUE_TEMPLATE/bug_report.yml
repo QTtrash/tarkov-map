@@ -8,7 +8,7 @@ body:
       value: Do not include invitation links, keys, private addresses, or sensitive logs. Report security issues privately.
   - type: input
     id: version
-    attributes: { label: Raid Signal version, placeholder: "1.0.0" }
+    attributes: { label: Raid Signal version, placeholder: "1.1.0" }
     validations: { required: true }
   - type: input
     id: windows

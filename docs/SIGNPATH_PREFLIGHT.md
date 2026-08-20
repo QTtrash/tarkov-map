@@ -9,7 +9,7 @@ SignPath Foundation confirms this project's eligibility in writing.
 - Project handle: `raid-signal`
 - Homepage: <https://signal.mouchsiadis-solutions.com>
 - Repository: <https://github.com/QTtrash/tarkov-map>
-- Current release: <https://github.com/QTtrash/tarkov-map/releases/tag/v1.0.0>
+- Current release: <https://github.com/QTtrash/tarkov-map/releases/tag/v1.1.0>
 - Distribution: Windows NSIS installer built on a GitHub-hosted Windows runner
 - Original code license: Apache-2.0
 - Asset boundary: bundled community map artwork is CC BY-NC-SA 4.0 and other
@@ -52,7 +52,7 @@ all maintainers use multi-factor authentication before submitting.
    installed executable.
 5. Generate checksums and the release manifest only after signing, scan the
    signed installer with Defender and ClamAV, attest the final files, and publish
-   a new patch release. Never replace the immutable v1.0.0 assets.
+   a new patch release. Never replace assets attached to an immutable release.
 
 If SignPath declines the application, retain the existing checksum, SBOM,
 provenance, malware scans, and explicit unsigned-installer warning. Removing or
