@@ -37,26 +37,26 @@ game files. No official approval or anti-cheat guarantee is implied.
 ## Install and verify
 
 Download the Windows installer and SHA-256 file from the immutable
-[v1.0.0 release](https://github.com/QTtrash/tarkov-map/releases/tag/v1.0.0).
+[v1.1.0 release](https://github.com/QTtrash/tarkov-map/releases/tag/v1.1.0).
 Installers are unsigned initially, so Windows may display an unknown-publisher
 warning. Do not download installers from repository commits or third-party mirrors.
 
 Verify the checksum in PowerShell from the directory containing both downloads:
 
 ```powershell
-$expected = (Get-Content .\Raid-Signal-Setup-1.0.0.exe.sha256).Split()[0]
-$actual = (Get-FileHash .\Raid-Signal-Setup-1.0.0.exe -Algorithm SHA256).Hash.ToLowerInvariant()
+$expected = (Get-Content .\Raid-Signal-Setup-1.1.0.exe.sha256).Split()[0]
+$actual = (Get-FileHash .\Raid-Signal-Setup-1.1.0.exe -Algorithm SHA256).Hash.ToLowerInvariant()
 if ($actual -ne $expected) { throw "Raid Signal checksum mismatch" }
 ```
 
 With the GitHub CLI installed, verify that GitHub Actions produced the artifact:
 
 ```text
-gh attestation verify Raid-Signal-Setup-1.0.0.exe -R QTtrash/tarkov-map
+gh attestation verify Raid-Signal-Setup-1.1.0.exe -R QTtrash/tarkov-map
 ```
 
 The release also contains `release.json` and an SPDX SBOM. The
-[v1.0.0 release workflow](https://github.com/QTtrash/tarkov-map/actions/runs/31826345419)
+[release workflow history](https://github.com/QTtrash/tarkov-map/actions/workflows/release.yml)
 records the successful build, Microsoft Defender scan, independent ClamAV scan,
 and publication gate. These controls provide traceable release evidence; they
 are not a third-party security audit or anti-cheat approval.

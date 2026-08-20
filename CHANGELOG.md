@@ -6,11 +6,22 @@ All notable changes to Raid Signal are recorded here. The format follows
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-08-20
+
+### Added
+
+- Added opt-in, map-specific markers for every objective belonging to an active
+  quest, contributed by [@TedCreator](https://github.com/TedCreator) in
+  [#12](https://github.com/QTtrash/tarkov-map/pull/12).
+
 ### Changed
 
 - Prepared the repository for public contribution with explicit licensing,
   hardened verification, agent-readable architecture, and reproducible release
   automation.
+- Made quest-marker visibility consistent across the desktop and companion,
+  including Utility and Hide all controls and stale-marker cleanup when maps or
+  PvP/PvE modes change.
 
 ## [1.0.0] - 2026-08-14
 
@@ -21,5 +32,6 @@ All notable changes to Raid Signal are recorded here. The format follows
   selection.
 - End-to-end encrypted Internet and LAN squad sharing with a phone companion.
 
-[Unreleased]: https://github.com/QTtrash/tarkov-map/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/QTtrash/tarkov-map/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/QTtrash/tarkov-map/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/QTtrash/tarkov-map/releases/tag/v1.0.0
