@@ -5,11 +5,12 @@ use crate::model::{
 use crate::ocr::read_exfil_text;
 use crate::parser::parse_screenshot_filename;
 use notify::{Event, RecommendedWatcher, RecursiveMode, Watcher};
+use regex::Regex;
 use std::collections::{HashSet, VecDeque};
 use std::fs::File;
 use std::io::{Read, Seek, SeekFrom};
 use std::path::{Path, PathBuf};
-use std::sync::{mpsc, Arc, RwLock};
+use std::sync::{mpsc, Arc, LazyLock, RwLock};
 use std::time::{Duration, SystemTime};
 use tauri::{AppHandle, Emitter};
 
@@ -670,8 +671,6 @@ fn registry_install_locations() -> Vec<PathBuf> {
 
 #[cfg(windows)]
 fn steam_install_locations() -> Vec<PathBuf> {
-    use regex::Regex;
-    use std::sync::LazyLock;
     use winreg::enums::{HKEY_CURRENT_USER, HKEY_LOCAL_MACHINE, KEY_READ};
     use winreg::RegKey;
 

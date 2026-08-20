@@ -28,6 +28,7 @@ export function buildActiveQuestObjectivePois(
             id: `quest-active-${quest.id}-${objective.id}-${mapId}-${zoneIndex}`,
             kind: "quest-objective" as const,
             category: "quest-objective" as const,
+            mapId,
             name: quest.name,
             aliases: [objective.description],
             description: objective.description,

@@ -200,6 +200,7 @@ mod tests {
             ]
         );
         assert!(!settings.legend_open);
+        assert!(!settings.show_quest_markers);
     }
 
     #[test]

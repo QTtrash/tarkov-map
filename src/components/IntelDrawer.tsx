@@ -164,7 +164,7 @@ export function IntelDrawer({
           <div className="legend-groups">
             {poiCategoryGroups.map((group) => {
               const available = group.categories.filter((category) => (definition.poiCounts[category.id] ?? 0) > 0);
-              if (!available.length) return null;
+              if (!available.length && group.id !== "utility") return null;
               return (
                 <section className="legend-group" key={group.id}>
                   <h3>{group.name}</h3>
@@ -172,6 +172,7 @@ export function IntelDrawer({
                     <button
                       className={showQuestMarkers ? "legend-row quest-objective enabled" : "legend-row quest-objective"}
                       onClick={onToggleQuestMarkers}
+                      aria-pressed={showQuestMarkers}
                     >
                       <span className="legend-symbol">
                         <PoiGlyph category="quest-objective" />

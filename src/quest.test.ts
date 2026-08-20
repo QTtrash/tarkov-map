@@ -80,7 +80,7 @@ describe("quest ordering", () => {
       quests: [activeQuest],
     };
 
-    expect(buildActiveQuestObjectivePois(bundle, "customs", progress)).toHaveLength(1);
+    expect(buildActiveQuestObjectivePois(bundle, "customs", progress)).toMatchObject([{ mapId: "customs" }]);
     expect(buildActiveQuestObjectivePois(bundle, "shoreline", progress)).toHaveLength(1);
     expect(buildActiveQuestObjectivePois(bundle, "woods", progress)).toHaveLength(0);
   });

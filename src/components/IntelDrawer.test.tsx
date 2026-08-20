@@ -27,6 +27,7 @@ describe("IntelDrawer", () => {
     const onFocusPoi = vi.fn();
     const onToggle = vi.fn();
     const onHideAll = vi.fn();
+    const onToggleQuestMarkers = vi.fn();
 
     render(
       <IntelDrawer
@@ -41,7 +42,7 @@ describe("IntelDrawer", () => {
         activeQuestCount={0}
         onOpenChange={vi.fn()}
         onToggle={onToggle}
-        onToggleQuestMarkers={vi.fn()}
+        onToggleQuestMarkers={onToggleQuestMarkers}
         onHideAll={onHideAll}
         onSetVisible={vi.fn()}
         onFocusPoi={onFocusPoi}
@@ -52,6 +53,10 @@ describe("IntelDrawer", () => {
     expect(onToggle).toHaveBeenCalledWith("extract-pmc");
     fireEvent.click(screen.getByRole("button", { name: "Hide all" }));
     expect(onHideAll).toHaveBeenCalledOnce();
+    const questMarkers = screen.getByRole("button", { name: /Quest markers/i });
+    expect(questMarkers).toHaveAttribute("aria-pressed", "false");
+    fireEvent.click(questMarkers);
+    expect(onToggleQuestMarkers).toHaveBeenCalledOnce();
 
     fireEvent.change(screen.getByPlaceholderText("Find an extract or location"), {
       target: { value: "zb-013" },

@@ -414,11 +414,12 @@ export function App() {
     (mapId: string, poi: QuestObjectivePoi | null) => {
       viewMap(mapId);
       setFocusedQuestPoi(poi);
+      if (poi) updateSettings({ showQuestMarkers: true });
       setShowQuests(false);
       setSelectedPoiId(poi?.id ?? null);
       setFocusPoiId(poi?.id ?? null);
     },
-    [viewMap],
+    [updateSettings, viewMap],
   );
 
   const createWaypoint = useCallback(
@@ -743,11 +744,14 @@ export function App() {
             fix={visibleFix}
             raidExtracts={raidExtracts}
             showQuestMarkers={settings.showQuestMarkers}
-            activeQuestCount={activeQuestPois.length}
+            activeQuestCount={activeQuestPois.filter((poi) => poi.mapId === definition.id).length}
             onOpenChange={(legendOpen) => updateSettings({ legendOpen })}
             onToggle={togglePoiCategory}
             onToggleQuestMarkers={() => updateSettings({ showQuestMarkers: !settings.showQuestMarkers })}
-            onHideAll={() => updateSettings({ visibleMapLayers: [], showQuestMarkers: false })}
+            onHideAll={() => {
+              setFocusedQuestPoi(null);
+              updateSettings({ visibleMapLayers: [], showQuestMarkers: false });
+            }}
             onSetVisible={setVisiblePoiCategories}
             onFocusPoi={focusPoi}
           />

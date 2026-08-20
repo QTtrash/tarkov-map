@@ -10,11 +10,13 @@ export function composePoiBundle(
   activeQuestPois: QuestObjectivePoi[],
   focusedQuestPoi: QuestObjectivePoi | null,
   pins: CustomPinPoi[],
-  showQuestMarkers = true,
+  showQuestMarkers: boolean,
 ): MapPoiBundle | null {
   if (!bundle) return null;
-  const questPois = showQuestMarkers ? [...activeQuestPois] : [];
-  if (focusedQuestPoi && !questPois.some((poi) => poi.id === focusedQuestPoi.id)) questPois.push(focusedQuestPoi);
+  const questPois = showQuestMarkers ? activeQuestPois.filter((poi) => poi.mapId === mapId) : [];
+  if (showQuestMarkers && focusedQuestPoi?.mapId === mapId && !questPois.some((poi) => poi.id === focusedQuestPoi.id)) {
+    questPois.push(focusedQuestPoi);
+  }
   return {
     ...bundle,
     pois: [
@@ -31,10 +33,12 @@ export function composeVisibleCategories(
   activeQuestPois: QuestObjectivePoi[],
   focusedQuestPoi: QuestObjectivePoi | null,
   pins: CustomPinPoi[],
-  showQuestMarkers = true,
+  showQuestMarkers: boolean,
 ) {
   const categories = new Set(visible);
-  if ((showQuestMarkers && activeQuestPois.length) || focusedQuestPoi) categories.add("quest-objective");
+  if (showQuestMarkers && (activeQuestPois.some((poi) => poi.mapId === mapId) || focusedQuestPoi?.mapId === mapId)) {
+    categories.add("quest-objective");
+  }
   if (pinsForMap(pins, mapId).length) categories.add("custom-pin");
   return categories;
 }

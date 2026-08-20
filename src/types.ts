@@ -235,6 +235,7 @@ export interface LockedDoorPoi extends PoiBase {
 
 export interface QuestObjectivePoi extends PoiBase {
   kind: "quest-objective";
+  mapId: string;
   taskId: string;
   objectiveId: string;
   description: string;

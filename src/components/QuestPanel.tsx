@@ -89,6 +89,16 @@ export function QuestPanel({ open, mapId, onClose, onFocusObjective, onActiveObj
     onActiveObjectivePoisChange(activeObjectivePois);
   }, [activeObjectivePois, onActiveObjectivePoisChange]);
 
+  function changeMode(nextMode: "regular" | "pve") {
+    if (nextMode === mode) return;
+    setBundle(null);
+    setProgress([]);
+    setExpanded(new Set());
+    setError(null);
+    onActiveObjectivePoisChange?.([]);
+    setMode(nextMode);
+  }
+
   async function updateStatus(taskId: string, status: QuestStatus) {
     try {
       const next = await setQuestProgress(mode, taskId, status);
@@ -121,10 +131,10 @@ export function QuestPanel({ open, mapId, onClose, onFocusObjective, onActiveObj
       </header>
       <div className="quest-toolbar">
         <div className="segmented">
-          <button className={mode === "regular" ? "active" : ""} onClick={() => setMode("regular")}>
+          <button className={mode === "regular" ? "active" : ""} onClick={() => changeMode("regular")}>
             PVP
           </button>
-          <button className={mode === "pve" ? "active" : ""} onClick={() => setMode("pve")}>
+          <button className={mode === "pve" ? "active" : ""} onClick={() => changeMode("pve")}>
             PVE
           </button>
         </div>
@@ -246,6 +256,7 @@ export function QuestPanel({ open, mapId, onClose, onFocusObjective, onActiveObj
                                     id: `quest-${quest.id}-${objective.id}-${objectiveMapId}`,
                                     kind: "quest-objective" as const,
                                     category: "quest-objective" as const,
+                                    mapId: objectiveMapId,
                                     name: quest.name,
                                     aliases: [objective.description],
                                     description: objective.description,

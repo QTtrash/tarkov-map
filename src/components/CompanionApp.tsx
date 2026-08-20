@@ -88,7 +88,7 @@ export function CompanionApp() {
   const [activeQuestPois, setActiveQuestPois] = useState<QuestObjectivePoi[]>([]);
   const [focusedQuestPoi, setFocusedQuestPoi] = useState<QuestObjectivePoi | null>(null);
   const [visible, setVisible] = useState<Set<PoiCategory>>(() => new Set(defaultVisiblePoiCategories));
-  const [showQuestMarkers, setShowQuestMarkers] = useState(true);
+  const [showQuestMarkers, setShowQuestMarkers] = useState(false);
   const [pins, setPins] = useState<CustomPinPoi[]>(() =>
     readStoredJson("raid-signal-companion-pins", parseCustomPins, []),
   );
@@ -248,6 +248,7 @@ export function CompanionApp() {
     (nextMapId: string, poi: QuestObjectivePoi | null) => {
       selectMap(nextMapId);
       setFocusedQuestPoi(poi);
+      if (poi) setShowQuestMarkers(true);
       setFocusPoiId(poi?.id ?? null);
       setQuestsOpen(false);
     },
@@ -366,7 +367,7 @@ export function CompanionApp() {
           visible={visible}
           fix={primaryFix}
           showQuestMarkers={showQuestMarkers}
-          activeQuestCount={activeQuestPois.length}
+          activeQuestCount={activeQuestPois.filter((poi) => poi.mapId === definition.id).length}
           onOpenChange={setIntelOpen}
           onToggle={(category) =>
             setVisible((current) => {
@@ -379,6 +380,7 @@ export function CompanionApp() {
           onToggleQuestMarkers={() => setShowQuestMarkers((current) => !current)}
           onHideAll={() => {
             setVisible(new Set());
+            setFocusedQuestPoi(null);
             setShowQuestMarkers(false);
           }}
           onSetVisible={(categories) => setVisible(new Set(categories))}
