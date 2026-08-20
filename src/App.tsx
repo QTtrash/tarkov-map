@@ -747,6 +747,7 @@ export function App() {
             onOpenChange={(legendOpen) => updateSettings({ legendOpen })}
             onToggle={togglePoiCategory}
             onToggleQuestMarkers={() => updateSettings({ showQuestMarkers: !settings.showQuestMarkers })}
+            onHideAll={() => updateSettings({ visibleMapLayers: [], showQuestMarkers: false })}
             onSetVisible={setVisiblePoiCategories}
             onFocusPoi={focusPoi}
           />

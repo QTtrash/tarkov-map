@@ -17,6 +17,7 @@ interface IntelDrawerProps {
   onOpenChange: (open: boolean) => void;
   onToggle: (category: PoiCategory) => void;
   onToggleQuestMarkers: () => void;
+  onHideAll: () => void;
   onSetVisible: (categories: PoiCategory[]) => void;
   onFocusPoi: (id: string) => void;
 }
@@ -35,6 +36,7 @@ export function IntelDrawer({
   onOpenChange,
   onToggle,
   onToggleQuestMarkers,
+  onHideAll,
   onSetVisible,
   onFocusPoi,
 }: IntelDrawerProps) {
@@ -156,7 +158,7 @@ export function IntelDrawer({
 
           <div className="legend-actions">
             <button onClick={() => onSetVisible(defaultVisiblePoiCategories)}>Recommended</button>
-            <button onClick={() => onSetVisible([])}>Hide all</button>
+            <button onClick={onHideAll}>Hide all</button>
           </div>
 
           <div className="legend-groups">

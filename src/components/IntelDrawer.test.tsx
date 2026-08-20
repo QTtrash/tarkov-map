@@ -26,6 +26,7 @@ describe("IntelDrawer", () => {
   it("searches, focuses, and toggles bundled map intelligence", () => {
     const onFocusPoi = vi.fn();
     const onToggle = vi.fn();
+    const onHideAll = vi.fn();
 
     render(
       <IntelDrawer
@@ -41,6 +42,7 @@ describe("IntelDrawer", () => {
         onOpenChange={vi.fn()}
         onToggle={onToggle}
         onToggleQuestMarkers={vi.fn()}
+        onHideAll={onHideAll}
         onSetVisible={vi.fn()}
         onFocusPoi={onFocusPoi}
       />,
@@ -48,6 +50,8 @@ describe("IntelDrawer", () => {
 
     fireEvent.click(screen.getByRole("button", { name: /PMC extracts/i }));
     expect(onToggle).toHaveBeenCalledWith("extract-pmc");
+    fireEvent.click(screen.getByRole("button", { name: "Hide all" }));
+    expect(onHideAll).toHaveBeenCalledOnce();
 
     fireEvent.change(screen.getByPlaceholderText("Find an extract or location"), {
       target: { value: "zb-013" },
@@ -72,6 +76,7 @@ describe("IntelDrawer", () => {
         onOpenChange={onOpenChange}
         onToggle={vi.fn()}
         onToggleQuestMarkers={vi.fn()}
+        onHideAll={vi.fn()}
         onSetVisible={vi.fn()}
         onFocusPoi={vi.fn()}
       />,

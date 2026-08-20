@@ -88,6 +88,7 @@ export function CompanionApp() {
   const [activeQuestPois, setActiveQuestPois] = useState<QuestObjectivePoi[]>([]);
   const [focusedQuestPoi, setFocusedQuestPoi] = useState<QuestObjectivePoi | null>(null);
   const [visible, setVisible] = useState<Set<PoiCategory>>(() => new Set(defaultVisiblePoiCategories));
+  const [showQuestMarkers, setShowQuestMarkers] = useState(true);
   const [pins, setPins] = useState<CustomPinPoi[]>(() =>
     readStoredJson("raid-signal-companion-pins", parseCustomPins, []),
   );
@@ -229,12 +230,12 @@ export function CompanionApp() {
   }, [definition.poiPath]);
 
   const renderedBundle = useMemo<MapPoiBundle | null>(
-    () => composePoiBundle(poiBundle, definition.id, activeQuestPois, focusedQuestPoi, pins, true),
-    [activeQuestPois, definition.id, focusedQuestPoi, pins, poiBundle],
+    () => composePoiBundle(poiBundle, definition.id, activeQuestPois, focusedQuestPoi, pins, showQuestMarkers),
+    [activeQuestPois, definition.id, focusedQuestPoi, pins, poiBundle, showQuestMarkers],
   );
   const renderedVisible = useMemo(
-    () => composeVisibleCategories(visible, definition.id, activeQuestPois, focusedQuestPoi, pins, true),
-    [activeQuestPois, definition.id, focusedQuestPoi, pins, visible],
+    () => composeVisibleCategories(visible, definition.id, activeQuestPois, focusedQuestPoi, pins, showQuestMarkers),
+    [activeQuestPois, definition.id, focusedQuestPoi, pins, showQuestMarkers, visible],
   );
 
   const selectMap = useCallback((nextMapId: string) => {
@@ -364,7 +365,7 @@ export function CompanionApp() {
           open={intelOpen}
           visible={visible}
           fix={primaryFix}
-          showQuestMarkers={true}
+          showQuestMarkers={showQuestMarkers}
           activeQuestCount={activeQuestPois.length}
           onOpenChange={setIntelOpen}
           onToggle={(category) =>
@@ -375,13 +376,11 @@ export function CompanionApp() {
               return next;
             })
           }
-          onToggleQuestMarkers={() =>
-            setVisible((current) => {
-              if (current.has("quest-objective")) current.delete("quest-objective");
-              else current.add("quest-objective");
-              return new Set(current);
-            })
-          }
+          onToggleQuestMarkers={() => setShowQuestMarkers((current) => !current)}
+          onHideAll={() => {
+            setVisible(new Set());
+            setShowQuestMarkers(false);
+          }}
           onSetVisible={(categories) => setVisible(new Set(categories))}
           onFocusPoi={(id) => {
             setSelectedPoiId(id);
