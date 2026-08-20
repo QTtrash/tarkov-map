@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { getMapDefinition } from "../data/maps";
 import { getQuestProgress, setQuestProgress } from "../locator";
-import { compareQuests, effectiveQuestStatus, questStatuses } from "../quest";
+import { buildActiveQuestObjectivePois, compareQuests, effectiveQuestStatus, questStatuses } from "../quest";
 import type { QuestBundle, QuestProgress, QuestStatus, QuestObjectivePoi } from "../types";
 import { parseQuestBundle } from "../validation";
 import { UiIcon } from "./Icons";
@@ -12,6 +12,7 @@ interface QuestPanelProps {
   mapId: string;
   onClose: () => void;
   onFocusObjective: (mapId: string, poi: QuestObjectivePoi | null) => void;
+  onActiveObjectivePoisChange?: (pois: QuestObjectivePoi[]) => void;
 }
 
 type StatusFilter = "all" | "actionable" | QuestStatus;
@@ -20,7 +21,7 @@ function mapLabel(mapId: string) {
   return getMapDefinition(mapId)?.displayName ?? mapId.replaceAll("-", " ");
 }
 
-export function QuestPanel({ open, mapId, onClose, onFocusObjective }: QuestPanelProps) {
+export function QuestPanel({ open, mapId, onClose, onFocusObjective, onActiveObjectivePoisChange }: QuestPanelProps) {
   const [mode, setMode] = useState<"regular" | "pve">("regular");
   const [bundle, setBundle] = useState<QuestBundle | null>(null);
   const [progress, setProgress] = useState<QuestProgress[]>([]);
@@ -32,7 +33,6 @@ export function QuestPanel({ open, mapId, onClose, onFocusObjective }: QuestPane
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!open) return;
     const controller = new AbortController();
     setError(null);
     void Promise.all([
@@ -51,7 +51,7 @@ export function QuestPanel({ open, mapId, onClose, onFocusObjective }: QuestPane
         if (!controller.signal.aborted) setError(String(reason));
       });
     return () => controller.abort();
-  }, [mode, open]);
+  }, [mode]);
 
   const progressIndex = useMemo(() => new Map(progress.map((entry) => [entry.taskId, entry])), [progress]);
   const questIndex = useMemo(() => new Map((bundle?.quests ?? []).map((quest) => [quest.id, quest])), [bundle]);
@@ -79,6 +79,15 @@ export function QuestPanel({ open, mapId, onClose, onFocusObjective }: QuestPane
       .sort((left, right) => compareQuests(left, right, progressIndex))
       .slice(0, 200);
   }, [bundle, mapId, progressIndex, query, showAllMaps, statusFilter, traderFilter]);
+
+  const activeObjectivePois = useMemo<QuestObjectivePoi[]>(() => {
+    return buildActiveQuestObjectivePois(bundle, mapId, progressIndex);
+  }, [bundle, mapId, progressIndex]);
+
+  useEffect(() => {
+    if (!onActiveObjectivePoisChange) return;
+    onActiveObjectivePoisChange(activeObjectivePois);
+  }, [activeObjectivePois, onActiveObjectivePoisChange]);
 
   async function updateStatus(taskId: string, status: QuestStatus) {
     try {

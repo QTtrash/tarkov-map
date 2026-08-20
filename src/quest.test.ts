@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { compareQuests, effectiveQuestStatus } from "./quest";
-import type { QuestDefinition, QuestProgress } from "./types";
+import { buildActiveQuestObjectivePois, compareQuests, effectiveQuestStatus } from "./quest";
+import type { QuestBundle, QuestDefinition, QuestProgress } from "./types";
 
 const quest = (id: string, requirements: string[] = [], level = 1): QuestDefinition => ({
   id,
@@ -39,5 +39,49 @@ describe("quest ordering", () => {
       "locked",
       "done",
     ]);
+  });
+
+  it("collects active objective markers for the active map", () => {
+    const activeQuest: QuestDefinition = {
+      ...quest("active"),
+      mapIds: ["customs", "shoreline"],
+      objectives: [
+        {
+          id: "objective-1",
+          description: "Inspect the checkpoint",
+          type: "kill",
+          optional: false,
+          mapIds: ["customs"],
+          details: [],
+          zones: [
+            {
+              mapId: "customs",
+              position: { x: 10, y: 0, z: 20 },
+              outline: [{ x: 10, y: 0, z: 20 }],
+              top: 0,
+              bottom: 0,
+            },
+            {
+              mapId: "shoreline",
+              position: { x: 30, y: 0, z: 40 },
+              outline: [{ x: 30, y: 0, z: 40 }],
+              top: 0,
+              bottom: 0,
+            },
+          ],
+        },
+      ],
+    };
+    const progress = new Map<string, QuestProgress>([["active", { taskId: "active", status: "active", updatedAt: 1 }]]);
+    const bundle: QuestBundle = {
+      schemaVersion: 2,
+      generatedAt: "2026-01-01",
+      gameMode: "regular",
+      quests: [activeQuest],
+    };
+
+    expect(buildActiveQuestObjectivePois(bundle, "customs", progress)).toHaveLength(1);
+    expect(buildActiveQuestObjectivePois(bundle, "shoreline", progress)).toHaveLength(1);
+    expect(buildActiveQuestObjectivePois(bundle, "woods", progress)).toHaveLength(0);
   });
 });

@@ -85,7 +85,8 @@ export function CompanionApp() {
   const [poiError, setPoiError] = useState<string | null>(null);
   const [selectedPoiId, setSelectedPoiId] = useState<string | null>(null);
   const [focusPoiId, setFocusPoiId] = useState<string | null>(null);
-  const [questPoi, setQuestPoi] = useState<QuestObjectivePoi | null>(null);
+  const [activeQuestPois, setActiveQuestPois] = useState<QuestObjectivePoi[]>([]);
+  const [focusedQuestPoi, setFocusedQuestPoi] = useState<QuestObjectivePoi | null>(null);
   const [visible, setVisible] = useState<Set<PoiCategory>>(() => new Set(defaultVisiblePoiCategories));
   const [pins, setPins] = useState<CustomPinPoi[]>(() =>
     readStoredJson("raid-signal-companion-pins", parseCustomPins, []),
@@ -228,24 +229,24 @@ export function CompanionApp() {
   }, [definition.poiPath]);
 
   const renderedBundle = useMemo<MapPoiBundle | null>(
-    () => composePoiBundle(poiBundle, definition.id, questPoi, pins),
-    [definition.id, pins, poiBundle, questPoi],
+    () => composePoiBundle(poiBundle, definition.id, activeQuestPois, focusedQuestPoi, pins, true),
+    [activeQuestPois, definition.id, focusedQuestPoi, pins, poiBundle],
   );
   const renderedVisible = useMemo(
-    () => composeVisibleCategories(visible, definition.id, questPoi, pins),
-    [definition.id, pins, questPoi, visible],
+    () => composeVisibleCategories(visible, definition.id, activeQuestPois, focusedQuestPoi, pins, true),
+    [activeQuestPois, definition.id, focusedQuestPoi, pins, visible],
   );
 
   const selectMap = useCallback((nextMapId: string) => {
     setFollow(false);
     setMapId(nextMapId);
     setFloor("base");
-    setQuestPoi(null);
+    setFocusedQuestPoi(null);
   }, []);
   const focusQuest = useCallback(
     (nextMapId: string, poi: QuestObjectivePoi | null) => {
       selectMap(nextMapId);
-      setQuestPoi(poi);
+      setFocusedQuestPoi(poi);
       setFocusPoiId(poi?.id ?? null);
       setQuestsOpen(false);
     },
@@ -363,6 +364,8 @@ export function CompanionApp() {
           open={intelOpen}
           visible={visible}
           fix={primaryFix}
+          showQuestMarkers={true}
+          activeQuestCount={activeQuestPois.length}
           onOpenChange={setIntelOpen}
           onToggle={(category) =>
             setVisible((current) => {
@@ -370,6 +373,13 @@ export function CompanionApp() {
               if (next.has(category)) next.delete(category);
               else next.add(category);
               return next;
+            })
+          }
+          onToggleQuestMarkers={() =>
+            setVisible((current) => {
+              if (current.has("quest-objective")) current.delete("quest-objective");
+              else current.add("quest-objective");
+              return new Set(current);
             })
           }
           onSetVisible={(categories) => setVisible(new Set(categories))}
@@ -384,6 +394,7 @@ export function CompanionApp() {
         mapId={definition.id}
         onClose={() => setQuestsOpen(false)}
         onFocusObjective={focusQuest}
+        onActiveObjectivePoisChange={setActiveQuestPois}
       />
     </main>
   );

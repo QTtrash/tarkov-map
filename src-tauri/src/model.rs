@@ -15,6 +15,7 @@ pub struct Settings {
     pub selected_map: String,
     pub visible_map_layers: Vec<String>,
     pub legend_open: bool,
+    pub show_quest_markers: bool,
     pub high_contrast: bool,
     pub overlay_opacity: f64,
 }
@@ -39,6 +40,7 @@ impl Default for Settings {
                 "btr".into(),
             ],
             legend_open: false,
+            show_quest_markers: false,
             high_contrast: false,
             overlay_opacity: 0.92,
         }

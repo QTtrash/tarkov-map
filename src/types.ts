@@ -9,6 +9,7 @@ export interface LocatorSettings {
   selectedMap: string;
   visibleMapLayers: string[];
   legendOpen: boolean;
+  showQuestMarkers: boolean;
   highContrast: boolean;
   overlayOpacity: number;
 }

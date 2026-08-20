@@ -113,7 +113,8 @@ export function App() {
   const [showAbout, setShowAbout] = useState(false);
   const [showQuests, setShowQuests] = useState(false);
   const [showSharing, setShowSharing] = useState(false);
-  const [questPoi, setQuestPoi] = useState<QuestObjectivePoi | null>(null);
+  const [activeQuestPois, setActiveQuestPois] = useState<QuestObjectivePoi[]>([]);
+  const [focusedQuestPoi, setFocusedQuestPoi] = useState<QuestObjectivePoi | null>(null);
   const [customPins, setCustomPins] = useState<CustomPinPoi[]>(() =>
     readStoredJson("raid-signal-custom-pins", parseCustomPins, []),
   );
@@ -270,6 +271,9 @@ export function App() {
 
   const definition = getMapDefinition(mapSession.viewedMapId) ?? maps[0];
   const detectedDefinition = getMapDefinition(mapSession.detectedMapId);
+  useEffect(() => {
+    setFocusedQuestPoi(null);
+  }, [definition.id]);
   const visibleFix = fix && (!fix.mapId || fix.mapId === definition.id) ? fix : null;
   const activeFloor = useMemo(
     () => (definition ? getActiveFloor(definition, visibleFix?.position ?? null, floorMode) : "base"),
@@ -280,12 +284,28 @@ export function App() {
     [settings.visibleMapLayers],
   );
   const renderedCategories = useMemo(
-    () => composeVisibleCategories(visiblePoiCategories, definition.id, questPoi, customPins),
-    [customPins, definition.id, questPoi, visiblePoiCategories],
+    () =>
+      composeVisibleCategories(
+        visiblePoiCategories,
+        definition.id,
+        activeQuestPois,
+        focusedQuestPoi,
+        customPins,
+        settings.showQuestMarkers,
+      ),
+    [activeQuestPois, customPins, definition.id, focusedQuestPoi, settings.showQuestMarkers, visiblePoiCategories],
   );
   const renderedPoiBundle = useMemo<MapPoiBundle | null>(
-    () => composePoiBundle(poiBundle, definition.id, questPoi, customPins),
-    [customPins, definition.id, poiBundle, questPoi],
+    () =>
+      composePoiBundle(
+        poiBundle,
+        definition.id,
+        activeQuestPois,
+        focusedQuestPoi,
+        customPins,
+        settings.showQuestMarkers,
+      ),
+    [activeQuestPois, customPins, definition.id, focusedQuestPoi, poiBundle, settings.showQuestMarkers],
   );
 
   useEffect(() => {
@@ -334,7 +354,7 @@ export function App() {
       if (!getMapDefinition(mapId)) return;
       setMapSession((current) => selectViewedMap(current, mapId));
       updateSettings({ selectedMap: mapId, autoFloor: true });
-      setQuestPoi(null);
+      setFocusedQuestPoi(null);
       setFloorMode("auto");
     },
     [updateSettings],
@@ -346,7 +366,7 @@ export function App() {
       if (next.viewedMapId !== current.viewedMapId) updateSettings({ selectedMap: next.viewedMapId, autoFloor: true });
       return next;
     });
-    setQuestPoi(null);
+    setFocusedQuestPoi(null);
     setFloorMode("auto");
   }, [updateSettings]);
 
@@ -393,7 +413,7 @@ export function App() {
   const focusQuestObjective = useCallback(
     (mapId: string, poi: QuestObjectivePoi | null) => {
       viewMap(mapId);
-      setQuestPoi(poi);
+      setFocusedQuestPoi(poi);
       setShowQuests(false);
       setSelectedPoiId(poi?.id ?? null);
       setFocusPoiId(poi?.id ?? null);
@@ -722,8 +742,11 @@ export function App() {
             visible={visiblePoiCategories}
             fix={visibleFix}
             raidExtracts={raidExtracts}
+            showQuestMarkers={settings.showQuestMarkers}
+            activeQuestCount={activeQuestPois.length}
             onOpenChange={(legendOpen) => updateSettings({ legendOpen })}
             onToggle={togglePoiCategory}
+            onToggleQuestMarkers={() => updateSettings({ showQuestMarkers: !settings.showQuestMarkers })}
             onSetVisible={setVisiblePoiCategories}
             onFocusPoi={focusPoi}
           />
@@ -735,6 +758,7 @@ export function App() {
         mapId={definition.id}
         onClose={() => setShowQuests(false)}
         onFocusObjective={focusQuestObjective}
+        onActiveObjectivePoisChange={setActiveQuestPois}
       />
       <SharePanel
         open={showSharing}

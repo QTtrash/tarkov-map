@@ -35,6 +35,7 @@ export const defaultSettings: LocatorSettings = {
   selectedMap: "customs",
   visibleMapLayers: ["extract-pmc", "extract-scav", "extract-shared", "transit", "switch", "btr"],
   legendOpen: false,
+  showQuestMarkers: false,
   highContrast: false,
   overlayOpacity: 0.92,
 };

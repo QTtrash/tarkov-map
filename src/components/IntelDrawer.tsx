@@ -12,8 +12,11 @@ interface IntelDrawerProps {
   visible: Set<PoiCategory>;
   fix: PlayerFix | null;
   raidExtracts?: RaidExtractState | null;
+  showQuestMarkers: boolean;
+  activeQuestCount: number;
   onOpenChange: (open: boolean) => void;
   onToggle: (category: PoiCategory) => void;
+  onToggleQuestMarkers: () => void;
   onSetVisible: (categories: PoiCategory[]) => void;
   onFocusPoi: (id: string) => void;
 }
@@ -27,8 +30,11 @@ export function IntelDrawer({
   visible,
   fix,
   raidExtracts = null,
+  showQuestMarkers,
+  activeQuestCount,
   onOpenChange,
   onToggle,
+  onToggleQuestMarkers,
   onSetVisible,
   onFocusPoi,
 }: IntelDrawerProps) {
@@ -160,6 +166,19 @@ export function IntelDrawer({
               return (
                 <section className="legend-group" key={group.id}>
                   <h3>{group.name}</h3>
+                  {group.id === "utility" && (
+                    <button
+                      className={showQuestMarkers ? "legend-row quest-objective enabled" : "legend-row quest-objective"}
+                      onClick={onToggleQuestMarkers}
+                    >
+                      <span className="legend-symbol">
+                        <PoiGlyph category="quest-objective" />
+                      </span>
+                      <span>Quest markers</span>
+                      <b>{activeQuestCount}</b>
+                      <i aria-hidden="true" />
+                    </button>
+                  )}
                   {available.map((category) => (
                     <button
                       className={

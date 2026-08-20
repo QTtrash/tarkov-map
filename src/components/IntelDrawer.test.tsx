@@ -36,8 +36,11 @@ describe("IntelDrawer", () => {
         open
         visible={new Set<PoiCategory>(["extract-pmc"])}
         fix={null}
+        showQuestMarkers={false}
+        activeQuestCount={0}
         onOpenChange={vi.fn()}
         onToggle={onToggle}
+        onToggleQuestMarkers={vi.fn()}
         onSetVisible={vi.fn()}
         onFocusPoi={onFocusPoi}
       />,
@@ -64,8 +67,11 @@ describe("IntelDrawer", () => {
         open={false}
         visible={new Set<PoiCategory>()}
         fix={null}
+        showQuestMarkers={false}
+        activeQuestCount={0}
         onOpenChange={onOpenChange}
         onToggle={vi.fn()}
+        onToggleQuestMarkers={vi.fn()}
         onSetVisible={vi.fn()}
         onFocusPoi={vi.fn()}
       />,
