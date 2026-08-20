@@ -23,6 +23,7 @@ import {
   parseSettings,
   readStoredJson,
 } from "./validation";
+import { allLootGroupIds } from "./poi";
 
 export const defaultSettings: LocatorSettings = {
   schemaVersion: 2,
@@ -34,6 +35,7 @@ export const defaultSettings: LocatorSettings = {
   deleteParsedScreenshots: false,
   selectedMap: "customs",
   visibleMapLayers: ["extract-pmc", "extract-scav", "extract-shared", "transit", "switch", "btr"],
+  visibleLootGroups: allLootGroupIds,
   legendOpen: false,
   showQuestMarkers: false,
   highContrast: false,

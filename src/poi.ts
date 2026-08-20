@@ -1,4 +1,4 @@
-import type { FloorDefinition, MapDefinition, MapPoi, MapPoiBundle, PoiCategory, Vec3 } from "./types";
+import type { FloorDefinition, LootGroupId, MapDefinition, MapPoi, MapPoiBundle, PoiCategory, Vec3 } from "./types";
 import { parsePoiBundle } from "./validation";
 
 export const defaultVisiblePoiCategories: PoiCategory[] = [
@@ -10,6 +10,65 @@ export const defaultVisiblePoiCategories: PoiCategory[] = [
   "btr",
   "boss-zone",
 ];
+
+export const lootGroupDefinitions: Array<{ id: LootGroupId; name: string; shortName: string }> = [
+  { id: "drawers", name: "Drawers", shortName: "DRW" },
+  { id: "bags", name: "Bags, jackets, cases", shortName: "BAG" },
+  { id: "weapon-ammo", name: "Weapon and ammo", shortName: "WPN" },
+  { id: "medical", name: "Medical", shortName: "MED" },
+  { id: "technical", name: "Tools and technical", shortName: "TEC" },
+  { id: "supply-crates", name: "Supply crates", shortName: "CRT" },
+  { id: "safes-cash", name: "Safes and cash", shortName: "VAL" },
+  { id: "caches", name: "Hidden caches", shortName: "CCH" },
+  { id: "bodies", name: "Bodies", shortName: "BDY" },
+  { id: "other", name: "Other containers", shortName: "OTH" },
+];
+
+export const allLootGroupIds = lootGroupDefinitions.map(({ id }) => id);
+
+const lootGroupsByType: Record<string, LootGroupId> = {
+  drawer: "drawers",
+  "duffle-bag": "bags",
+  jacket: "bags",
+  "plastic-suitcase": "bags",
+  "weapon-box": "weapon-ammo",
+  "wooden-ammo-box": "weapon-ammo",
+  "grenade-box": "weapon-ammo",
+  "medbag-smu06": "medical",
+  medcase: "medical",
+  "medical-supply-crate": "medical",
+  toolbox: "technical",
+  "pc-block": "technical",
+  "technical-supply-crate": "technical",
+  "wooden-crate": "supply-crates",
+  "ration-supply-crate": "supply-crates",
+  safe: "safes-cash",
+  "bank-safe": "safes-cash",
+  "cash-register": "safes-cash",
+  "bank-cash-register": "safes-cash",
+  "buried-barrel-cache": "caches",
+  "ground-cache": "caches",
+  "shturmans-stash": "caches",
+  "dead-scav": "bodies",
+  "pmc-body": "bodies",
+  "civilian-body": "bodies",
+  "scav-body": "bodies",
+  "lab-technician-body": "bodies",
+};
+
+export function lootGroupForType(lootType: string): LootGroupId {
+  return lootGroupsByType[lootType] ?? "other";
+}
+
+export function countLootGroups(pois: MapPoi[]) {
+  const counts = new Map<LootGroupId, number>();
+  for (const poi of pois) {
+    if (poi.kind !== "loot") continue;
+    const group = lootGroupForType(poi.lootType);
+    counts.set(group, (counts.get(group) ?? 0) + 1);
+  }
+  return counts;
+}
 
 export const poiCategoryGroups: Array<{
   id: string;

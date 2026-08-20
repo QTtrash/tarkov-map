@@ -25,11 +25,12 @@ import {
 } from "./locator";
 import { applyDetectedContext, returnToDetectedMap, selectViewedMap, type MapSessionState } from "./map-session";
 import { composePoiBundle, composeVisibleCategories } from "./map-overlays";
-import { defaultVisiblePoiCategories, loadPoiBundle } from "./poi";
+import { allLootGroupIds, defaultVisiblePoiCategories, loadPoiBundle, lootGroupForType } from "./poi";
 import { recognizeRaidExtracts } from "./raid";
 import type {
   CustomPinPoi,
   LocatorSettings,
+  LootGroupId,
   LocatorStatus,
   MapAssetState,
   MapPoiBundle,
@@ -146,6 +147,7 @@ export function App() {
         setSettings({
           ...loaded,
           visibleMapLayers: normalizedVisibleLayers(loaded.visibleMapLayers ?? defaultVisiblePoiCategories),
+          visibleLootGroups: loaded.visibleLootGroups ?? allLootGroupIds,
           legendOpen: loaded.legendOpen ?? false,
         });
         if (getMapDefinition(loaded.selectedMap)) {
@@ -283,6 +285,10 @@ export function App() {
     () => new Set(normalizedVisibleLayers(settings.visibleMapLayers ?? defaultVisiblePoiCategories)),
     [settings.visibleMapLayers],
   );
+  const visibleLootGroups = useMemo(
+    () => new Set(settings.visibleLootGroups ?? allLootGroupIds),
+    [settings.visibleLootGroups],
+  );
   const renderedCategories = useMemo(
     () =>
       composeVisibleCategories(
@@ -383,14 +389,43 @@ export function App() {
   const togglePoiCategory = useCallback((category: PoiCategory) => {
     setSettings((current) => {
       const nextLayers = new Set(normalizedVisibleLayers(current.visibleMapLayers ?? defaultVisiblePoiCategories));
+      const nextLootGroups = new Set(current.visibleLootGroups ?? allLootGroupIds);
       if (nextLayers.has(category)) nextLayers.delete(category);
-      else nextLayers.add(category);
-      const next = { ...current, visibleMapLayers: [...nextLayers] };
+      else {
+        nextLayers.add(category);
+        if (category === "loot" && nextLootGroups.size === 0)
+          allLootGroupIds.forEach((group) => nextLootGroups.add(group));
+      }
+      const next = { ...current, visibleMapLayers: [...nextLayers], visibleLootGroups: [...nextLootGroups] };
       void saveSettings(next).catch((error) => {
         setStatus((value) => ({
           ...value,
           level: "error",
           message: "Could not save layer settings",
+          lastError: String(error),
+        }));
+      });
+      return next;
+    });
+  }, []);
+
+  const toggleLootGroup = useCallback((group: LootGroupId) => {
+    setSettings((current) => {
+      const nextLayers = new Set(normalizedVisibleLayers(current.visibleMapLayers ?? defaultVisiblePoiCategories));
+      const nextLootGroups = new Set(current.visibleLootGroups ?? allLootGroupIds);
+      if (!nextLayers.has("loot")) {
+        nextLootGroups.clear();
+        nextLootGroups.add(group);
+      } else if (nextLootGroups.has(group)) nextLootGroups.delete(group);
+      else nextLootGroups.add(group);
+      if (nextLootGroups.size) nextLayers.add("loot");
+      else nextLayers.delete("loot");
+      const next = { ...current, visibleMapLayers: [...nextLayers], visibleLootGroups: [...nextLootGroups] };
+      void saveSettings(next).catch((error) => {
+        setStatus((value) => ({
+          ...value,
+          level: "error",
+          message: "Could not save loot filters",
           lastError: String(error),
         }));
       });
@@ -404,10 +439,16 @@ export function App() {
       if (poi && !visiblePoiCategories.has(poi.category)) {
         setVisiblePoiCategories([...visiblePoiCategories, poi.category]);
       }
+      if (poi?.kind === "loot" && !visibleLootGroups.has(lootGroupForType(poi.lootType))) {
+        updateSettings({
+          visibleMapLayers: [...visiblePoiCategories, "loot"],
+          visibleLootGroups: [...visibleLootGroups, lootGroupForType(poi.lootType)],
+        });
+      }
       setSelectedPoiId(id);
       setFocusPoiId(id);
     },
-    [renderedPoiBundle, setVisiblePoiCategories, visiblePoiCategories],
+    [renderedPoiBundle, setVisiblePoiCategories, updateSettings, visibleLootGroups, visiblePoiCategories],
   );
 
   const focusQuestObjective = useCallback(
@@ -476,7 +517,12 @@ export function App() {
 
   const floors = [definition.baseFloor, ...definition.floors.map(({ id, name }) => ({ id, name }))];
   const stale = fix ? now - fix.observedAt >= 60_000 : false;
-  const visibleCount = poiBundle?.pois.filter((poi) => visiblePoiCategories.has(poi.category)).length ?? 0;
+  const visibleCount =
+    poiBundle?.pois.filter(
+      (poi) =>
+        visiblePoiCategories.has(poi.category) &&
+        (poi.kind !== "loot" || visibleLootGroups.has(lootGroupForType(poi.lootType))),
+    ).length ?? 0;
   const activeExtractIds = useMemo(() => new Set(raidExtracts?.activeExtractIds ?? []), [raidExtracts]);
 
   return (
@@ -687,6 +733,7 @@ export function App() {
             follow={settings.followPlayer}
             poiBundle={renderedPoiBundle}
             visiblePoiCategories={renderedCategories}
+            visibleLootGroups={visibleLootGroups}
             selectedPoiId={selectedPoiId}
             focusPoiId={focusPoiId}
             activeExtractIds={activeExtractIds}
@@ -741,12 +788,14 @@ export function App() {
             error={poiError}
             open={settings.legendOpen}
             visible={visiblePoiCategories}
+            visibleLootGroups={visibleLootGroups}
             fix={visibleFix}
             raidExtracts={raidExtracts}
             showQuestMarkers={settings.showQuestMarkers}
             activeQuestCount={activeQuestPois.filter((poi) => poi.mapId === definition.id).length}
             onOpenChange={(legendOpen) => updateSettings({ legendOpen })}
             onToggle={togglePoiCategory}
+            onToggleLootGroup={toggleLootGroup}
             onToggleQuestMarkers={() => updateSettings({ showQuestMarkers: !settings.showQuestMarkers })}
             onHideAll={() => {
               setFocusedQuestPoi(null);

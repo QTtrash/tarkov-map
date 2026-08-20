@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { horizontalDistance, nearestExtracts, poiMatchesFloor, searchPois } from "./poi";
+import {
+  countLootGroups,
+  horizontalDistance,
+  lootGroupForType,
+  nearestExtracts,
+  poiMatchesFloor,
+  searchPois,
+} from "./poi";
 import type { MapDefinition, MapPoi } from "./types";
 
 const extract = (id: string, name: string, x: number, y: number, z: number): MapPoi => ({
@@ -69,5 +76,43 @@ describe("POI helpers", () => {
   it("searches names case-insensitively and limits results", () => {
     const pois = [extract("a", "Crossroads", 0, 0, 0), extract("b", "Road to Customs", 0, 0, 0)];
     expect(searchPois(pois, "ROAD", 1)).toHaveLength(1);
+  });
+
+  it("groups loot containers by their bundled loot type", () => {
+    const loot: MapPoi[] = [
+      {
+        id: "drawer",
+        kind: "loot",
+        category: "loot",
+        name: "Drawer",
+        position: { x: 0, y: 0, z: 0 },
+        lootType: "drawer",
+      },
+      {
+        id: "duffle",
+        kind: "loot",
+        category: "loot",
+        name: "Duffle bag",
+        position: { x: 0, y: 0, z: 0 },
+        lootType: "duffle-bag",
+      },
+      {
+        id: "future-container",
+        kind: "loot",
+        category: "loot",
+        name: "Future container",
+        position: { x: 0, y: 0, z: 0 },
+        lootType: "future-container",
+      },
+    ];
+
+    expect(countLootGroups(loot)).toEqual(
+      new Map([
+        ["drawers", 1],
+        ["bags", 1],
+        ["other", 1],
+      ]),
+    );
+    expect(lootGroupForType("medical-supply-crate")).toBe("medical");
   });
 });

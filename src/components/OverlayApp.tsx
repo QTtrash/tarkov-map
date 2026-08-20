@@ -11,7 +11,7 @@ import {
   setOverlayClickThrough,
   subscribeLocator,
 } from "../locator";
-import { defaultVisiblePoiCategories, loadPoiBundle } from "../poi";
+import { allLootGroupIds, defaultVisiblePoiCategories, loadPoiBundle } from "../poi";
 import { recognizeRaidExtracts } from "../raid";
 import type {
   LocatorSettings,
@@ -124,6 +124,10 @@ export function OverlayApp() {
     [settings.visibleMapLayers],
   );
   const active = useMemo(() => new Set(raidExtracts?.activeExtractIds ?? []), [raidExtracts]);
+  const visibleLootGroups = useMemo(
+    () => new Set(settings.visibleLootGroups ?? allLootGroupIds),
+    [settings.visibleLootGroups],
+  );
   const onAssetStateChange = useCallback((next: MapAssetState) => setAssetState(next), []);
   const retry = () => {
     setAssetState(idleAsset);
@@ -159,6 +163,7 @@ export function OverlayApp() {
           follow
           poiBundle={bundle}
           visiblePoiCategories={visible}
+          visibleLootGroups={visibleLootGroups}
           selectedPoiId={null}
           focusPoiId={null}
           activeExtractIds={active}

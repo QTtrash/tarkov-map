@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { maps, getMapDefinition } from "../data/maps";
-import { defaultVisiblePoiCategories, loadPoiBundle } from "../poi";
+import { allLootGroupIds, defaultVisiblePoiCategories, loadPoiBundle, lootGroupForType } from "../poi";
 import { composePoiBundle, composeVisibleCategories } from "../map-overlays";
 import { createSenderId, decryptPosition, EVICT_AFTER_MS, importRoomKey, parseInvitation } from "../sharing/protocol";
-import type { CustomPinPoi, MapPoiBundle, PoiCategory, QuestObjectivePoi, SquadPosition } from "../types";
+import type { CustomPinPoi, LootGroupId, MapPoiBundle, PoiCategory, QuestObjectivePoi, SquadPosition } from "../types";
 import { IntelDrawer } from "./IntelDrawer";
 import { MapView } from "./MapView";
 import { QuestPanel } from "./QuestPanel";
@@ -88,6 +88,7 @@ export function CompanionApp() {
   const [activeQuestPois, setActiveQuestPois] = useState<QuestObjectivePoi[]>([]);
   const [focusedQuestPoi, setFocusedQuestPoi] = useState<QuestObjectivePoi | null>(null);
   const [visible, setVisible] = useState<Set<PoiCategory>>(() => new Set(defaultVisiblePoiCategories));
+  const [visibleLootGroups, setVisibleLootGroups] = useState<Set<LootGroupId>>(() => new Set(allLootGroupIds));
   const [showQuestMarkers, setShowQuestMarkers] = useState(false);
   const [pins, setPins] = useState<CustomPinPoi[]>(() =>
     readStoredJson("raid-signal-companion-pins", parseCustomPins, []),
@@ -269,6 +270,41 @@ export function CompanionApp() {
       ]),
     [definition.id],
   );
+  const toggleCategory = useCallback((category: PoiCategory) => {
+    setVisible((current) => {
+      const next = new Set(current);
+      if (next.has(category)) next.delete(category);
+      else {
+        next.add(category);
+        if (category === "loot") {
+          setVisibleLootGroups((groups) => (groups.size ? groups : new Set(allLootGroupIds)));
+        }
+      }
+      return next;
+    });
+  }, []);
+  const toggleLootGroup = useCallback(
+    (group: LootGroupId) => {
+      if (!visible.has("loot")) {
+        setVisibleLootGroups(new Set([group]));
+        setVisible((categories) => new Set(categories).add("loot"));
+        return;
+      }
+      setVisibleLootGroups((current) => {
+        const next = new Set(current);
+        if (next.has(group)) next.delete(group);
+        else next.add(group);
+        setVisible((categories) => {
+          const nextCategories = new Set(categories);
+          if (next.size) nextCategories.add("loot");
+          else nextCategories.delete("loot");
+          return nextCategories;
+        });
+        return next;
+      });
+    },
+    [visible],
+  );
 
   if (connection === "invalid" || (connection !== "online" && !connectedOnce))
     return <CompanionGate state={connection} error={error} />;
@@ -332,6 +368,7 @@ export function CompanionApp() {
           follow={follow}
           poiBundle={renderedBundle}
           visiblePoiCategories={renderedVisible}
+          visibleLootGroups={visibleLootGroups}
           selectedPoiId={selectedPoiId}
           focusPoiId={focusPoiId}
           onFollowChange={setFollow}
@@ -365,18 +402,13 @@ export function CompanionApp() {
           error={poiError}
           open={intelOpen}
           visible={visible}
+          visibleLootGroups={visibleLootGroups}
           fix={primaryFix}
           showQuestMarkers={showQuestMarkers}
           activeQuestCount={activeQuestPois.filter((poi) => poi.mapId === definition.id).length}
           onOpenChange={setIntelOpen}
-          onToggle={(category) =>
-            setVisible((current) => {
-              const next = new Set(current);
-              if (next.has(category)) next.delete(category);
-              else next.add(category);
-              return next;
-            })
-          }
+          onToggle={toggleCategory}
+          onToggleLootGroup={toggleLootGroup}
           onToggleQuestMarkers={() => setShowQuestMarkers((current) => !current)}
           onHideAll={() => {
             setVisible(new Set());
@@ -385,6 +417,11 @@ export function CompanionApp() {
           }}
           onSetVisible={(categories) => setVisible(new Set(categories))}
           onFocusPoi={(id) => {
+            const poi = renderedBundle?.pois.find((candidate) => candidate.id === id);
+            if (poi) setVisible((current) => new Set(current).add(poi.category));
+            if (poi?.kind === "loot") {
+              setVisibleLootGroups((current) => new Set(current).add(lootGroupForType(poi.lootType)));
+            }
             setSelectedPoiId(id);
             setFocusPoiId(id);
           }}
