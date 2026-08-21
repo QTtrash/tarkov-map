@@ -634,6 +634,72 @@ h1 em {
   color: #aaa59b;
   text-underline-offset: 3px;
 }
+.community-sync-board {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(rgba(255, 90, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 90, 42, 0.035) 1px, transparent 1px), #090a08;
+  background-size: 34px 34px;
+}
+.community-sync-board > header,
+.community-sync-board > footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  color: var(--signal);
+  font: 500 9px/1.4 var(--mono);
+  letter-spacing: 0.12em;
+}
+.community-sync-board > header b,
+.community-sync-board > footer b {
+  color: #777269;
+  font-weight: 500;
+}
+.community-sync-board > footer {
+  border-top: 1px solid var(--line);
+  border-bottom: 0;
+}
+.community-sync-board__grid {
+  display: grid;
+  min-height: 410px;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: stretch;
+  gap: clamp(12px, 2vw, 28px);
+  padding: clamp(24px, 4vw, 58px);
+}
+.community-sync-board__grid article {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(18px, 2.5vw, 30px);
+  border: 1px solid #3a3831;
+  background: rgba(13, 13, 11, 0.88);
+}
+.community-sync-board__grid article > span,
+.community-sync-board__grid small {
+  color: #777269;
+  font: 500 8px/1.5 var(--mono);
+  letter-spacing: 0.1em;
+}
+.community-sync-board__grid strong {
+  margin-top: 18px;
+  color: var(--bone);
+  font-size: clamp(18px, 2vw, 28px);
+}
+.community-sync-board__grid code {
+  margin: 22px 0;
+  color: var(--signal);
+  font: 500 clamp(10px, 1.1vw, 13px)/2 var(--mono);
+}
+.community-sync-board__grid > i {
+  align-self: center;
+  color: var(--signal);
+  font: normal 400 25px/1 var(--mono);
+}
 .community-capture {
   position: relative;
   margin: 0;
@@ -1010,6 +1076,19 @@ footer a {
   }
   .community-flow {
     grid-template-columns: 1fr;
+  }
+  .community-sync-board > header,
+  .community-sync-board > footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .community-sync-board__grid {
+    min-height: 0;
+    grid-template-columns: 1fr;
+    padding: 18px;
+  }
+  .community-sync-board__grid > i {
+    transform: rotate(90deg);
   }
   .community-footer {
     align-items: flex-start;
