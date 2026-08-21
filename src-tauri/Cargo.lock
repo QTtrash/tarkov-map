@@ -2670,6 +2670,7 @@ name = "raid-signal"
 version = "1.2.0"
 dependencies = [
  "axum",
+ "chrono",
  "dirs",
  "notify",
  "regex",
@@ -2677,6 +2678,7 @@ dependencies = [
  "rusqlite",
  "serde",
  "serde_json",
+ "sha2",
  "tauri",
  "tauri-build",
  "tauri-plugin-global-shortcut",

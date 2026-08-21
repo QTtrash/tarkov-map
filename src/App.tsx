@@ -814,6 +814,9 @@ export function App() {
         onClose={() => setShowQuests(false)}
         onFocusObjective={focusQuestObjective}
         onActiveObjectivePoisChange={setActiveQuestPois}
+        onEnableQuestMarkersOnce={() => {
+          if (!settings.showQuestMarkers) updateSettings({ showQuestMarkers: true });
+        }}
       />
       <SharePanel
         open={showSharing}

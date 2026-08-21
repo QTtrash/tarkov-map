@@ -25,6 +25,10 @@ test("quest intelligence loads through the browser boundary", async ({ page }) =
   const dialog = page.getByRole("dialog", { name: "Quest navigator" });
   await expect(dialog).toBeVisible();
   await expect(dialog.getByPlaceholder("Search quests, traders, objectives")).toBeVisible();
+  await dialog.getByRole("button", { name: "SEASONAL" }).click();
+  await expect(dialog.getByText(/Seasonal quest eligibility is not reliably present/)).toBeVisible();
+  await dialog.getByRole("checkbox", { name: "All maps" }).check();
+  await expect(dialog.locator(".quest-card.unknown").first()).toBeVisible();
 });
 
 test("loot filters enable one child when their parent layer is off", async ({ page }) => {

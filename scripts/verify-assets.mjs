@@ -23,7 +23,7 @@ for (const [relative, expected] of Object.entries(checksums)) {
   if (actual !== expected) throw new Error(`Checksum mismatch for ${relative}`);
 }
 
-for (const mode of ["regular", "pve"]) {
+for (const mode of ["regular", "pve", "pvp-season"]) {
   const bundle = await readJson(path.join(mapsRoot, "quests", `${mode}.json`));
   if (bundle.schemaVersion !== 2 || bundle.gameMode !== mode || !Array.isArray(bundle.quests)) {
     throw new Error(`Invalid ${mode} quest bundle`);
@@ -39,4 +39,4 @@ for (const relative of poiFiles) {
   }
 }
 
-console.log(`Verified ${Object.keys(checksums).length} bundled assets and 15 intelligence bundles.`);
+console.log(`Verified ${Object.keys(checksums).length} bundled assets and 16 intelligence bundles.`);

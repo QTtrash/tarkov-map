@@ -3,6 +3,7 @@ mod model;
 mod ocr;
 mod overlay;
 mod parser;
+mod quest_log;
 mod quest_progress;
 mod settings_store;
 mod sharing;
@@ -14,7 +15,11 @@ use overlay::{
     set_overlay_click_through, set_overlay_state, show_overlay, show_overlay_internal,
     toggle_overlay, OverlayRuntimeState,
 };
-use quest_progress::{get_quest_progress, set_quest_progress};
+use quest_progress::{
+    confirm_quest_sync, dismiss_quest_sync_preview, get_quest_profiles, get_quest_progress,
+    get_quest_sync_preview, set_quest_player_level, set_quest_progress, set_quest_sync_enabled,
+    sync_quest_progress,
+};
 use std::path::PathBuf;
 use std::sync::{mpsc, Arc, Mutex, RwLock};
 use tauri::{Emitter, Manager, State};
@@ -186,16 +191,7 @@ pub fn run() {
                 std::fs::create_dir_all(parent)?;
             }
             let progress = rusqlite::Connection::open(progress_path)?;
-            progress.execute_batch(
-                "PRAGMA journal_mode=WAL;
-                 CREATE TABLE IF NOT EXISTS quest_progress (
-                   game_mode TEXT NOT NULL,
-                   task_id TEXT NOT NULL,
-                   status TEXT NOT NULL,
-                   updated_at INTEGER NOT NULL,
-                   PRIMARY KEY (game_mode, task_id)
-                 );",
-            )?;
+            quest_progress::initialize(&progress)?;
             if let Some(window) = app.get_webview_window("main") {
                 let pin = settings
                     .read()
@@ -285,6 +281,13 @@ pub fn run() {
             open_directory,
             get_quest_progress,
             set_quest_progress,
+            get_quest_sync_preview,
+            dismiss_quest_sync_preview,
+            confirm_quest_sync,
+            sync_quest_progress,
+            get_quest_profiles,
+            set_quest_player_level,
+            set_quest_sync_enabled,
             toggle_overlay,
             show_overlay,
             hide_overlay,

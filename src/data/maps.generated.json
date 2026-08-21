@@ -1555,6 +1555,7 @@
     "poiCounts": {
       "extract-shared": 3,
       "extract-pmc": 4,
+      "transit": 1,
       "switch": 15,
       "spawn-pmc": 70,
       "spawn-scav": 12,

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-21T20:26:47.094Z",
-  "gameMode": "regular",
+  "generatedAt": "2026-08-21T20:26:47.304Z",
+  "gameMode": "pvp-season",
   "quests": [
     {
       "id": "657315ddab5a49b71f098853",
@@ -4042,1661 +4042,6 @@
       "requirements": [
         {
           "taskId": "665eeca45d86b6c8aa03c79d",
-          "statuses": [
-            "complete"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "66058cb22cee99303f1ba067",
-      "name": "Easy Money - Part 1 [PVP ZONE]",
-      "traderId": "58330581ace78e27b8b10cee",
-      "traderName": "Skier",
-      "minPlayerLevel": 10,
-      "primaryMapId": "customs",
-      "mapIds": [
-        "customs"
-      ],
-      "summary": "Plant the Arena advertisement poster in the living quarters at the Scav base on Customs",
-      "experience": 3000,
-      "chainDepth": 0,
-      "rewardSummary": [
-        "3,000 XP",
-        "450 × Euros"
-      ],
-      "objectives": [
-        {
-          "id": "6606b709f7ce34bb26221cab",
-          "description": "Plant the Arena advertisement poster in the living quarters at the Scav base on Customs",
-          "type": "plantItem",
-          "optional": false,
-          "mapIds": [
-            "customs"
-          ],
-          "details": [
-            "Required item: Arena advertisement poster"
-          ],
-          "zones": [
-            {
-              "mapId": "customs",
-              "position": {
-                "x": 203.194,
-                "y": 1.98200011,
-                "z": -116.576004
-              },
-              "outline": [
-                {
-                  "x": 202.3006,
-                  "y": 1.98200011,
-                  "z": -117.2482
-                },
-                {
-                  "x": 204.267792,
-                  "y": 1.98200011,
-                  "z": -116.88739
-                },
-                {
-                  "x": 204.087387,
-                  "y": 1.98200011,
-                  "z": -115.903809
-                },
-                {
-                  "x": 202.120209,
-                  "y": 1.98200011,
-                  "z": -116.264618
-                }
-              ],
-              "top": 2.482,
-              "bottom": 1.48200011
-            },
-            {
-              "mapId": "customs",
-              "position": {
-                "x": 206.748,
-                "y": 2.049,
-                "z": -120.198
-              },
-              "outline": [
-                {
-                  "x": 206.422546,
-                  "y": 2.049,
-                  "z": -121.267609
-                },
-                {
-                  "x": 207.408417,
-                  "y": 2.049,
-                  "z": -121.100128
-                },
-                {
-                  "x": 207.073456,
-                  "y": 2.049,
-                  "z": -119.128387
-                },
-                {
-                  "x": 206.08757,
-                  "y": 2.049,
-                  "z": -119.295868
-                }
-              ],
-              "top": 2.549,
-              "bottom": 1.549
-            },
-            {
-              "mapId": "customs",
-              "position": {
-                "x": 192.342987,
-                "y": 2.17399955,
-                "z": -103.746994
-              },
-              "outline": [
-                {
-                  "x": 191.424,
-                  "y": 2.17399955,
-                  "z": -104.383728
-                },
-                {
-                  "x": 193.403778,
-                  "y": 2.17399955,
-                  "z": -104.100143
-                },
-                {
-                  "x": 193.262,
-                  "y": 2.17399955,
-                  "z": -103.11026
-                },
-                {
-                  "x": 191.2822,
-                  "y": 2.17399955,
-                  "z": -103.393845
-                }
-              ],
-              "top": 2.67399955,
-              "bottom": 1.67399955
-            },
-            {
-              "mapId": "customs",
-              "position": {
-                "x": 187.224,
-                "y": 2.17399955,
-                "z": -101.97
-              },
-              "outline": [
-                {
-                  "x": 186.898544,
-                  "y": 2.17399955,
-                  "z": -103.039612
-                },
-                {
-                  "x": 187.884415,
-                  "y": 2.17399955,
-                  "z": -102.872131
-                },
-                {
-                  "x": 187.549454,
-                  "y": 2.17399955,
-                  "z": -100.900391
-                },
-                {
-                  "x": 186.563568,
-                  "y": 2.17399955,
-                  "z": -101.067871
-                }
-              ],
-              "top": 2.67399955,
-              "bottom": 1.67399955
-            },
-            {
-              "mapId": "customs",
-              "position": {
-                "x": 206.88,
-                "y": 1.98200011,
-                "z": -124.64
-              },
-              "outline": [
-                {
-                  "x": 205.9866,
-                  "y": 1.98200011,
-                  "z": -125.312195
-                },
-                {
-                  "x": 207.9538,
-                  "y": 1.98200011,
-                  "z": -124.951385
-                },
-                {
-                  "x": 207.773392,
-                  "y": 1.98200011,
-                  "z": -123.967804
-                },
-                {
-                  "x": 205.8062,
-                  "y": 1.98200011,
-                  "z": -124.328613
-                }
-              ],
-              "top": 2.482,
-              "bottom": 1.48200011
-            }
-          ]
-        }
-      ],
-      "requirements": []
-    },
-    {
-      "id": "675c15fbf7da9792a4059871",
-      "name": "Provide Viewership",
-      "traderId": "6617beeaa9cfa777ca915b7c",
-      "traderName": "Ref",
-      "minPlayerLevel": 10,
-      "primaryMapId": "customs",
-      "mapIds": [
-        "customs"
-      ],
-      "summary": "Install the first WI-FI Camera inside the industrial plant on Customs · Install the second WI-FI Camera inside the industrial plant on Customs",
-      "experience": 32000,
-      "chainDepth": 2,
-      "rewardSummary": [
-        "32,000 XP",
-        "45 × GP coin",
-        "1 × Lone Star TX-15 DML 5.56x45 carbine Default",
-        "3 × AR-15 5.56x45 HK 30 STANAG polymer 30-round magazine",
-        "3 × 5.56x45mm M855A1 ammo pack (50 pcs)",
-        "+0.02 Ref reputation"
-      ],
-      "objectives": [
-        {
-          "id": "675c1c87caddcfa893af10e9",
-          "description": "Install the first WI-FI Camera inside the industrial plant on Customs",
-          "type": "plantItem",
-          "optional": false,
-          "mapIds": [
-            "customs"
-          ],
-          "details": [
-            "Required item: WI-FI Camera"
-          ],
-          "zones": [
-            {
-              "mapId": "customs",
-              "position": {
-                "x": 256.883,
-                "y": 13.587,
-                "z": -75.07704
-              },
-              "outline": [
-                {
-                  "x": 255.419586,
-                  "y": 14.1257305,
-                  "z": -75.64778
-                },
-                {
-                  "x": 258.295624,
-                  "y": 14.1257305,
-                  "z": -76.2697754
-                },
-                {
-                  "x": 258.546326,
-                  "y": 14.1257305,
-                  "z": -75.1105042
-                },
-                {
-                  "x": 255.670288,
-                  "y": 14.1257305,
-                  "z": -74.48851
-                }
-              ],
-              "top": 14.998724,
-              "bottom": 13.252737
-            }
-          ]
-        },
-        {
-          "id": "676047054c9696a7d071bc08",
-          "description": "Install the second WI-FI Camera inside the industrial plant on Customs",
-          "type": "plantItem",
-          "optional": false,
-          "mapIds": [
-            "customs"
-          ],
-          "details": [
-            "Required item: WI-FI Camera"
-          ],
-          "zones": [
-            {
-              "mapId": "customs",
-              "position": {
-                "x": 254.804031,
-                "y": 2.27799964,
-                "z": -75.23401
-              },
-              "outline": [
-                {
-                  "x": 253.432419,
-                  "y": 2.54179215,
-                  "z": -75.8246
-                },
-                {
-                  "x": 255.591888,
-                  "y": 2.54179215,
-                  "z": -76.291626
-                },
-                {
-                  "x": 255.961365,
-                  "y": 2.54179215,
-                  "z": -74.58322
-                },
-                {
-                  "x": 253.8019,
-                  "y": 2.54179215,
-                  "z": -74.11621
-                }
-              ],
-              "top": 3.68972421,
-              "bottom": 1.39385986
-            }
-          ]
-        },
-        {
-          "id": "6760470877d1b7790af5de11",
-          "description": "Install the third WI-FI Camera inside the industrial plant on Customs",
-          "type": "plantItem",
-          "optional": false,
-          "mapIds": [
-            "customs"
-          ],
-          "details": [
-            "Required item: WI-FI Camera"
-          ],
-          "zones": [
-            {
-              "mapId": "customs",
-              "position": {
-                "x": 262.401978,
-                "y": 6.48796558,
-                "z": -39.4110031
-              },
-              "outline": [
-                {
-                  "x": 261.0304,
-                  "y": 7.026696,
-                  "z": -40.0016022
-                },
-                {
-                  "x": 266.304,
-                  "y": 7.026696,
-                  "z": -41.1421127
-                },
-                {
-                  "x": 267.025269,
-                  "y": 7.026696,
-                  "z": -37.8070068
-                },
-                {
-                  "x": 261.751648,
-                  "y": 7.026696,
-                  "z": -36.6664963
-                }
-              ],
-              "top": 7.89969063,
-              "bottom": 6.15370274
-            }
-          ]
-        },
-        {
-          "id": "6760470b7d65f702a6295820",
-          "description": "Install the fourth WI-FI Camera inside the industrial plant on Customs",
-          "type": "plantItem",
-          "optional": false,
-          "mapIds": [
-            "customs"
-          ],
-          "details": [
-            "Required item: WI-FI Camera"
-          ],
-          "zones": [
-            {
-              "mapId": "customs",
-              "position": {
-                "x": 278.64,
-                "y": 2.16999984,
-                "z": -52.2000046
-              },
-              "outline": [
-                {
-                  "x": 276.31604,
-                  "y": 2.708731,
-                  "z": -54.35105
-                },
-                {
-                  "x": 278.996368,
-                  "y": 2.708731,
-                  "z": -54.8788223
-                },
-                {
-                  "x": 280.19104,
-                  "y": 2.708731,
-                  "z": -48.8114929
-                },
-                {
-                  "x": 277.5107,
-                  "y": 2.708731,
-                  "z": -48.28373
-                }
-              ],
-              "top": 3.581725,
-              "bottom": 1.835737
-            }
-          ]
-        },
-        {
-          "id": "675c1c980fd114390c638b89",
-          "description": "Eliminate any target inside the industrial plant on Customs",
-          "type": "shoot",
-          "optional": false,
-          "mapIds": [
-            "customs"
-          ],
-          "details": [
-            "Required count: 15",
-            "Targets: any target"
-          ],
-          "zones": [
-            {
-              "mapId": "customs",
-              "position": {
-                "x": 276.38,
-                "y": 2.16999984,
-                "z": -45.57
-              },
-              "outline": [
-                {
-                  "x": 252.431961,
-                  "y": 8.607824,
-                  "z": -75.94702
-                },
-                {
-                  "x": 283.740845,
-                  "y": 8.607824,
-                  "z": -82.28296
-                },
-                {
-                  "x": 298.234741,
-                  "y": 8.607824,
-                  "z": -10.6618347
-                },
-                {
-                  "x": 266.925842,
-                  "y": 8.607824,
-                  "z": -4.325905
-                }
-              ],
-              "top": 17.4135,
-              "bottom": -0.197851419
-            }
-          ]
-        }
-      ],
-      "requirements": [
-        {
-          "taskId": "66058cb5ae4719735349b9e8",
-          "statuses": [
-            "active",
-            "complete"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "66058cb7c7f3584787181476",
-      "name": "Balancing - Part 1 [PVP ZONE]",
-      "traderId": "6617beeaa9cfa777ca915b7c",
-      "traderName": "Ref",
-      "minPlayerLevel": 10,
-      "primaryMapId": "reserve",
-      "mapIds": [
-        "reserve",
-        "lighthouse",
-        "interchange",
-        "customs",
-        "factory",
-        "icebreaker",
-        "woods",
-        "ground-zero",
-        "shoreline",
-        "streets-of-tarkov"
-      ],
-      "summary": "Eliminate Scavs while using a Steyr AUG on any location",
-      "experience": 5100,
-      "chainDepth": 2,
-      "rewardSummary": [
-        "5,100 XP",
-        "45 × GP coin",
-        "1 × Steyr AUG A1 5.56x45 assault rifle Default",
-        "3 × 5.56x45mm M856 ammo pack (50 pcs)",
-        "3 × Steyr AUG 5.56x45 30-round magazine",
-        "+0.03 Ref reputation"
-      ],
-      "objectives": [
-        {
-          "id": "6606d133fcb99b9004aa2d1d",
-          "description": "Eliminate Scavs while using a Steyr AUG on any location",
-          "type": "shoot",
-          "optional": false,
-          "mapIds": [
-            "reserve",
-            "lighthouse",
-            "interchange",
-            "customs",
-            "factory",
-            "icebreaker",
-            "woods",
-            "ground-zero",
-            "shoreline",
-            "streets-of-tarkov"
-          ],
-          "details": [
-            "Required count: 5",
-            "Targets: Scav, Scavs, Sniper"
-          ],
-          "zones": []
-        }
-      ],
-      "requirements": [
-        {
-          "taskId": "66058cb5ae4719735349b9e8",
-          "statuses": [
-            "complete"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "66058cbd9f59e625462acc8e",
-      "name": "Create a Distraction - Part 1 [PVP ZONE]",
-      "traderId": "6617beeaa9cfa777ca915b7c",
-      "traderName": "Ref",
-      "minPlayerLevel": 10,
-      "primaryMapId": "ground-zero",
-      "mapIds": [
-        "ground-zero"
-      ],
-      "summary": "Plant TP-200 TNT bricks on the second floor of the cafe on Ground Zero",
-      "experience": 5000,
-      "chainDepth": 5,
-      "rewardSummary": [
-        "5,000 XP",
-        "28 × GP coin",
-        "1 × Desert Tech MDR 5.56x45 assault rifle EXPS3-0",
-        "3 × AR-15 5.56x45 Magpul PMAG 20 GEN M3 STANAG 20-round magazine",
-        "1 × 5.56x45mm M856 ammo pack (100 pcs)",
-        "+0.05 Ref reputation"
-      ],
-      "objectives": [
-        {
-          "id": "660a9dc64c0927ead4fcfeef",
-          "description": "Plant TP-200 TNT bricks on the second floor of the cafe on Ground Zero",
-          "type": "plantItem",
-          "optional": false,
-          "mapIds": [
-            "ground-zero"
-          ],
-          "details": [
-            "Required count: 3",
-            "Required item: TP-200 TNT brick"
-          ],
-          "zones": [
-            {
-              "mapId": "ground-zero",
-              "position": {
-                "x": 107.46,
-                "y": 29.09,
-                "z": 148.06
-              },
-              "outline": [
-                {
-                  "x": 98.96,
-                  "y": 29.09,
-                  "z": 138.61
-                },
-                {
-                  "x": 115.96,
-                  "y": 29.09,
-                  "z": 138.61
-                },
-                {
-                  "x": 115.96,
-                  "y": 29.09,
-                  "z": 157.51
-                },
-                {
-                  "x": 98.96,
-                  "y": 29.09,
-                  "z": 157.51
-                }
-              ],
-              "top": 29.84,
-              "bottom": 28.34
-            },
-            {
-              "mapId": "ground-zero",
-              "position": {
-                "x": 107.46,
-                "y": 29.09,
-                "z": 148.06
-              },
-              "outline": [
-                {
-                  "x": 98.96,
-                  "y": 29.09,
-                  "z": 138.61
-                },
-                {
-                  "x": 115.96,
-                  "y": 29.09,
-                  "z": 138.61
-                },
-                {
-                  "x": 115.96,
-                  "y": 29.09,
-                  "z": 157.51
-                },
-                {
-                  "x": 98.96,
-                  "y": 29.09,
-                  "z": 157.51
-                }
-              ],
-              "top": 29.84,
-              "bottom": 28.34
-            }
-          ]
-        }
-      ],
-      "requirements": [
-        {
-          "taskId": "66058cbb06ef1d50a60c1f46",
-          "statuses": [
-            "complete"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "66058cb9e8e4f17985230805",
-      "name": "Balancing - Part 2 [PVP ZONE]",
-      "traderId": "6617beeaa9cfa777ca915b7c",
-      "traderName": "Ref",
-      "minPlayerLevel": 10,
-      "primaryMapId": null,
-      "mapIds": [],
-      "summary": "Eliminate PMC operatives while wearing a PACA Soft Armor on any location",
-      "experience": 7000,
-      "chainDepth": 3,
-      "rewardSummary": [
-        "7,000 XP",
-        "45 × GP coin",
-        "2 × Death Shadow lightweight armored mask",
-        "+0.03 Ref reputation"
-      ],
-      "objectives": [
-        {
-          "id": "660a9c99c650fa4d531f4c96",
-          "description": "Eliminate PMC operatives while wearing a PACA Soft Armor on any location",
-          "type": "shoot",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 2",
-            "Targets: any PMC operatives"
-          ],
-          "zones": []
-        }
-      ],
-      "requirements": [
-        {
-          "taskId": "66058cb7c7f3584787181476",
-          "statuses": [
-            "complete"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "66058cb5ae4719735349b9e8",
-      "name": "Easy Money - Part 2 [PVP ZONE]",
-      "traderId": "6617beeaa9cfa777ca915b7c",
-      "traderName": "Ref",
-      "minPlayerLevel": 10,
-      "primaryMapId": null,
-      "mapIds": [],
-      "summary": "Hand over the found in raid items from the Drinks category · Hand over the found in raid items from the Food category",
-      "experience": 2900,
-      "chainDepth": 1,
-      "rewardSummary": [
-        "2,900 XP",
-        "22 × GP coin",
-        "+0.02 Ref reputation"
-      ],
-      "objectives": [
-        {
-          "id": "6606bd2aa49db36b69b6dbf9",
-          "description": "Hand over the found in raid items from the Drinks category",
-          "type": "giveItem",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 5",
-            "Items must have Found in Raid status",
-            "19 accepted item types"
-          ],
-          "zones": []
-        },
-        {
-          "id": "6606bd6768f8018fffebd998",
-          "description": "Hand over the found in raid items from the Food category",
-          "type": "giveItem",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 5",
-            "Items must have Found in Raid status",
-            "22 accepted item types"
-          ],
-          "zones": []
-        }
-      ],
-      "requirements": [
-        {
-          "taskId": "66058cb22cee99303f1ba067",
-          "statuses": [
-            "complete"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "66058cc72cee99303f1ba069",
-      "name": "To Great Heights! - Part 4 [PVP ZONE]",
-      "traderId": "6617beeaa9cfa777ca915b7c",
-      "traderName": "Ref",
-      "minPlayerLevel": 10,
-      "primaryMapId": null,
-      "mapIds": [],
-      "summary": "Hand over Roubles · Win three out of six matches in TeamFight, BlastGang, or CheckPoint mode in Arena",
-      "experience": 5600,
-      "chainDepth": 9,
-      "rewardSummary": [
-        "5,600 XP",
-        "2,500,000 × Roubles",
-        "35 × GP coin",
-        "1 × Unlocked supply crate (Rare)",
-        "+0.05 Ref reputation"
-      ],
-      "objectives": [
-        {
-          "id": "6633a85e347a2a2b4051a26b",
-          "description": "Hand over Roubles",
-          "type": "giveItem",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 1000000",
-            "Required item: Roubles"
-          ],
-          "zones": []
-        },
-        {
-          "id": "662bb23200ae352a6d5a415d",
-          "description": "Win three out of six matches in TeamFight, BlastGang, or CheckPoint mode in Arena",
-          "type": "visit",
-          "optional": false,
-          "mapIds": [],
-          "details": [],
-          "zones": []
-        },
-        {
-          "id": "665493a649bd17856482ba77",
-          "description": "Win three out of six matches in TeamFight, BlastGang, or CheckPoint mode in Arena",
-          "type": "visit",
-          "optional": true,
-          "mapIds": [],
-          "details": [
-            "Optional objective"
-          ],
-          "zones": []
-        }
-      ],
-      "requirements": [
-        {
-          "taskId": "66058cc5bb83da7ba474aba9",
-          "statuses": [
-            "complete"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "66058cbf2f19c31a5a1337ec",
-      "name": "Create a Distraction - Part 2 [PVP ZONE]",
-      "traderId": "6617beeaa9cfa777ca915b7c",
-      "traderName": "Ref",
-      "minPlayerLevel": 10,
-      "primaryMapId": "streets-of-tarkov",
-      "mapIds": [
-        "streets-of-tarkov"
-      ],
-      "summary": "Eliminate Kaban's or Kollontay's guards on Streets of Tarkov",
-      "experience": 10000,
-      "chainDepth": 6,
-      "rewardSummary": [
-        "10,000 XP",
-        "1 × Degtyarev RPDN 7.62x39 machine gun Default",
-        "1 × RPD 7.62x39 Buben 100-round box",
-        "10 × 7.62x39mm FMJ ammo pack (20 pcs)",
-        "1 × Lega Medal",
-        "+0.07 Ref reputation"
-      ],
-      "objectives": [
-        {
-          "id": "660d5effb318c171fb1ca234",
-          "description": "Eliminate Kaban's or Kollontay's guards on Streets of Tarkov",
-          "type": "shoot",
-          "optional": false,
-          "mapIds": [
-            "streets-of-tarkov"
-          ],
-          "details": [
-            "Required count: 2",
-            "Targets: Kaban Guard (Sniper), Basmach, Gus, Kaban Guard, Kollontay Guard (Assault), Kollontay Guard (Security)"
-          ],
-          "zones": []
-        }
-      ],
-      "requirements": [
-        {
-          "taskId": "66058cbd9f59e625462acc8e",
-          "statuses": [
-            "complete"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "66058ccf06ef1d50a60c1f48",
-      "name": "Between Two Fires [PVP ZONE]",
-      "traderId": "579dc571d53a0658a154fbec",
-      "traderName": "Fence",
-      "minPlayerLevel": 10,
-      "primaryMapId": "customs",
-      "mapIds": [
-        "customs"
-      ],
-      "summary": "Return to the old champion's hideout on Customs · Locate and obtain the compromising information on Ref",
-      "experience": 18500,
-      "chainDepth": 15,
-      "rewardSummary": [
-        "18,500 XP",
-        "165,000 × Roubles",
-        "1 × Secure container Theta",
-        "+0.2 Fence reputation"
-      ],
-      "objectives": [
-        {
-          "id": "6658eb28849643547f210708",
-          "description": "Return to the old champion's hideout on Customs",
-          "type": "visit",
-          "optional": false,
-          "mapIds": [
-            "customs"
-          ],
-          "details": [],
-          "zones": [
-            {
-              "mapId": "customs",
-              "position": {
-                "x": 179.937988,
-                "y": 3.98100019,
-                "z": 164.798
-              },
-              "outline": [
-                {
-                  "x": 178.784119,
-                  "y": 3.98100019,
-                  "z": 163.980347
-                },
-                {
-                  "x": 180.755646,
-                  "y": 3.98100019,
-                  "z": 163.6441
-                },
-                {
-                  "x": 181.091873,
-                  "y": 3.98100019,
-                  "z": 165.615646
-                },
-                {
-                  "x": 179.120346,
-                  "y": 3.98100019,
-                  "z": 165.951874
-                }
-              ],
-              "top": 4.981,
-              "bottom": 2.98100019
-            },
-            {
-              "mapId": "customs",
-              "position": {
-                "x": 179.937988,
-                "y": 3.98100019,
-                "z": 164.798
-              },
-              "outline": [
-                {
-                  "x": 178.784119,
-                  "y": 3.98100019,
-                  "z": 163.980347
-                },
-                {
-                  "x": 180.755646,
-                  "y": 3.98100019,
-                  "z": 163.6441
-                },
-                {
-                  "x": 181.091873,
-                  "y": 3.98100019,
-                  "z": 165.615646
-                },
-                {
-                  "x": 179.120346,
-                  "y": 3.98100019,
-                  "z": 165.951874
-                }
-              ],
-              "top": 4.981,
-              "bottom": 2.98100019
-            }
-          ]
-        },
-        {
-          "id": "664fd7aba8d870609d099fed",
-          "description": "Locate and obtain the compromising information on Ref",
-          "type": "findQuestItem",
-          "optional": false,
-          "mapIds": [
-            "customs"
-          ],
-          "details": [],
-          "zones": []
-        },
-        {
-          "id": "664fd7f0837ee02ad4c8e658",
-          "description": "Hand over the found info",
-          "type": "giveQuestItem",
-          "optional": false,
-          "mapIds": [],
-          "details": [],
-          "zones": []
-        }
-      ],
-      "requirements": [
-        {
-          "taskId": "66058ccde8e4f17985230807",
-          "statuses": [
-            "complete"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "66058ccde8e4f17985230807",
-      "name": "Against the Conscience - Part 2 [PVP ZONE]",
-      "traderId": "6617beeaa9cfa777ca915b7c",
-      "traderName": "Ref",
-      "minPlayerLevel": 10,
-      "primaryMapId": null,
-      "mapIds": [],
-      "summary": "Eliminate enemies in any game mode in Arena",
-      "experience": 23000,
-      "chainDepth": 14,
-      "rewardSummary": [
-        "23,000 XP",
-        "100 × GP coin",
-        "+0.04 Ref reputation"
-      ],
-      "objectives": [
-        {
-          "id": "663b9bb7fe7953705cb09114",
-          "description": "Eliminate enemies in any game mode in Arena",
-          "type": "shoot",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 100",
-            "Targets: any target"
-          ],
-          "zones": []
-        }
-      ],
-      "requirements": [
-        {
-          "taskId": "66058ccbc7f3584787181478",
-          "statuses": [
-            "complete"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "66058cbb06ef1d50a60c1f46",
-      "name": "Surprise [PVP ZONE]",
-      "traderId": "6617beeaa9cfa777ca915b7c",
-      "traderName": "Ref",
-      "minPlayerLevel": 10,
-      "primaryMapId": null,
-      "mapIds": [],
-      "summary": "Hand over the found in raid items: Class 4 or higher ballistic plates",
-      "experience": 3600,
-      "chainDepth": 4,
-      "rewardSummary": [
-        "3,600 XP",
-        "55 × GP coin",
-        "1 × Maska-1SCh bulletproof helmet (Killa Edition) Default",
-        "+0.04 Ref reputation"
-      ],
-      "objectives": [
-        {
-          "id": "6606d08b4e2e27ca2d80085e",
-          "description": "Hand over the found in raid items: Class 4 or higher ballistic plates",
-          "type": "giveItem",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 3",
-            "Items must have Found in Raid status",
-            "32 accepted item types"
-          ],
-          "zones": []
-        }
-      ],
-      "requirements": [
-        {
-          "taskId": "66058cb9e8e4f17985230805",
-          "statuses": [
-            "complete"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "66058cc9ae4719735349b9ea",
-      "name": "To Great Heights! - Part 5 [PVP ZONE]",
-      "traderId": "6617beeaa9cfa777ca915b7c",
-      "traderName": "Ref",
-      "minPlayerLevel": 10,
-      "primaryMapId": null,
-      "mapIds": [],
-      "summary": "Win a match claiming at least 2nd place in the team in TeamFight, BlastGang, or CheckPoint mode",
-      "experience": 6900,
-      "chainDepth": 10,
-      "rewardSummary": [
-        "6,900 XP",
-        "40 × GP coin",
-        "+0.04 Ref reputation"
-      ],
-      "objectives": [
-        {
-          "id": "6978a38c3df6fd9e18d5ed3b",
-          "description": "Win a match claiming at least 2nd place in the team in TeamFight, BlastGang, or CheckPoint mode",
-          "type": "visit",
-          "optional": false,
-          "mapIds": [],
-          "details": [],
-          "zones": []
-        }
-      ],
-      "requirements": [
-        {
-          "taskId": "66058cc72cee99303f1ba069",
-          "statuses": [
-            "complete"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "66058cd19f59e625462acc90",
-      "name": "Decisions, Decisions [PVP ZONE]",
-      "traderId": "6617beeaa9cfa777ca915b7c",
-      "traderName": "Ref",
-      "minPlayerLevel": 10,
-      "primaryMapId": "customs",
-      "mapIds": [
-        "customs"
-      ],
-      "summary": "Locate and obtain the compromising information on Ref · Hand over the found info",
-      "experience": 18500,
-      "chainDepth": 16,
-      "rewardSummary": [
-        "18,500 XP",
-        "72 × GP coin",
-        "1 × Secure container Theta",
-        "+0.15 Ref reputation",
-        "-0.15 Fence reputation"
-      ],
-      "objectives": [
-        {
-          "id": "664fd86520fa1bd9f8fa5489",
-          "description": "Locate and obtain the compromising information on Ref",
-          "type": "findQuestItem",
-          "optional": false,
-          "mapIds": [
-            "customs"
-          ],
-          "details": [],
-          "zones": []
-        },
-        {
-          "id": "664fd88c4f7e4352f0799f92",
-          "description": "Hand over the found info",
-          "type": "giveQuestItem",
-          "optional": false,
-          "mapIds": [],
-          "details": [],
-          "zones": []
-        }
-      ],
-      "requirements": [
-        {
-          "taskId": "66058ccf06ef1d50a60c1f48",
-          "statuses": [
-            "active"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "66058cc1da30b620a34e6e86",
-      "name": "To Great Heights! - Part 1 [PVP ZONE]",
-      "traderId": "6617beeaa9cfa777ca915b7c",
-      "traderName": "Ref",
-      "minPlayerLevel": 10,
-      "primaryMapId": null,
-      "mapIds": [],
-      "summary": "Win a match in CheckPoint or LastHero mode in Arena",
-      "experience": 2800,
-      "chainDepth": 6,
-      "rewardSummary": [
-        "2,800 XP",
-        "55 × GP coin",
-        "+0.02 Ref reputation"
-      ],
-      "objectives": [
-        {
-          "id": "662ba5a89d8041c264dd9673",
-          "description": "Win a match in CheckPoint or LastHero mode in Arena",
-          "type": "visit",
-          "optional": false,
-          "mapIds": [],
-          "details": [],
-          "zones": []
-        }
-      ],
-      "requirements": [
-        {
-          "taskId": "69788db3878a4385d10c0718",
-          "statuses": [
-            "complete"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "66058cc208308761cf390993",
-      "name": "To Great Heights! - Part 2 [PVP ZONE]",
-      "traderId": "6617beeaa9cfa777ca915b7c",
-      "traderName": "Ref",
-      "minPlayerLevel": 10,
-      "primaryMapId": null,
-      "mapIds": [],
-      "summary": "Win a match in TeamFight, BlastGang, or CheckPoint mode in Arena",
-      "experience": 3500,
-      "chainDepth": 7,
-      "rewardSummary": [
-        "3,500 XP",
-        "32 × GP coin",
-        "1 × Locked weapon crate (Rare)",
-        "+0.02 Ref reputation"
-      ],
-      "objectives": [
-        {
-          "id": "662ba78e19c86d3199ae0a93",
-          "description": "Win a match in TeamFight, BlastGang, or CheckPoint mode in Arena",
-          "type": "visit",
-          "optional": false,
-          "mapIds": [],
-          "details": [],
-          "zones": []
-        }
-      ],
-      "requirements": [
-        {
-          "taskId": "66058cc1da30b620a34e6e86",
-          "statuses": [
-            "complete"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "66058cc5bb83da7ba474aba9",
-      "name": "To Great Heights! - Part 3 [PVP ZONE]",
-      "traderId": "6617beeaa9cfa777ca915b7c",
-      "traderName": "Ref",
-      "minPlayerLevel": 10,
-      "primaryMapId": null,
-      "mapIds": [],
-      "summary": "Win 2 matches while claiming at least 3rd place in TeamFight, BlastGang, or CheckPoint mode in Arena",
-      "experience": 4500,
-      "chainDepth": 8,
-      "rewardSummary": [
-        "4,500 XP",
-        "28 × GP coin",
-        "1 × Locked valuables crate (Rare)",
-        "+0.03 Ref reputation"
-      ],
-      "objectives": [
-        {
-          "id": "662ba61d3ed61b6b78187b71",
-          "description": "Win 2 matches while claiming at least 3rd place in TeamFight, BlastGang, or CheckPoint mode in Arena",
-          "type": "visit",
-          "optional": false,
-          "mapIds": [],
-          "details": [],
-          "zones": []
-        }
-      ],
-      "requirements": [
-        {
-          "taskId": "66058cc208308761cf390993",
-          "statuses": [
-            "complete"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "697895b6c639962b2e0cf268",
-      "name": "Hold the Lead [PVP ZONE]",
-      "traderId": "6617beeaa9cfa777ca915b7c",
-      "traderName": "Ref",
-      "minPlayerLevel": 10,
-      "primaryMapId": null,
-      "mapIds": [],
-      "summary": "Eliminate enemies in Arena",
-      "experience": 9100,
-      "chainDepth": 12,
-      "rewardSummary": [
-        "9,100 XP",
-        "75 × GP coin"
-      ],
-      "objectives": [
-        {
-          "id": "697895e700201d158bb28f22",
-          "description": "Eliminate enemies in Arena",
-          "type": "shoot",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 75",
-            "Targets: any PMC operatives"
-          ],
-          "zones": []
-        }
-      ],
-      "requirements": [
-        {
-          "taskId": "69789418b2187365e70bb947",
-          "statuses": [
-            "complete"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "697877e0c639962b2e0cf24f",
-      "name": "Arena Business [PVP ZONE]\n",
-      "traderId": "6617beeaa9cfa777ca915b7c",
-      "traderName": "Ref",
-      "minPlayerLevel": 10,
-      "primaryMapId": null,
-      "mapIds": [],
-      "summary": "Complete the task Professional Fitness - Part 2 · Complete the task To Great Heights! - Part 6",
-      "experience": 19500,
-      "chainDepth": 3,
-      "rewardSummary": [
-        "19,500 XP",
-        "102 × GP coin",
-        "1 × Lega Medal",
-        "1 × Locked weapon crate (Rare)",
-        "1 × Locked supply crate (Rare)"
-      ],
-      "objectives": [
-        {
-          "id": "69789727f9ef98d604a0a4eb",
-          "description": "Complete the task Professional Fitness - Part 2",
-          "type": "taskStatus",
-          "optional": false,
-          "mapIds": [],
-          "details": [],
-          "zones": []
-        },
-        {
-          "id": "69789737271caeeb3db66e8d",
-          "description": "Complete the task To Great Heights! - Part 6",
-          "type": "taskStatus",
-          "optional": false,
-          "mapIds": [],
-          "details": [],
-          "zones": []
-        },
-        {
-          "id": "6978973c2834db5eb178fdc8",
-          "description": "Complete the task Hold the Lead",
-          "type": "taskStatus",
-          "optional": false,
-          "mapIds": [],
-          "details": [],
-          "zones": []
-        }
-      ],
-      "requirements": [
-        {
-          "taskId": "66058cb7c7f3584787181476",
-          "statuses": [
-            "complete"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "69788c2bac719606e40b4e77",
-      "name": "Professional Fitness - Part 1 [PVP ZONE]",
-      "traderId": "6617beeaa9cfa777ca915b7c",
-      "traderName": "Ref",
-      "minPlayerLevel": 10,
-      "primaryMapId": null,
-      "mapIds": [],
-      "summary": "Play a match in CheckPoint or Last Hero mode",
-      "experience": 1800,
-      "chainDepth": 4,
-      "rewardSummary": [
-        "1,800 XP",
-        "10 × GP coin",
-        "+0.01 Ref reputation"
-      ],
-      "objectives": [
-        {
-          "id": "69788c6d403c43a13a7ba7c2",
-          "description": "Play a match in CheckPoint or Last Hero mode",
-          "type": "visit",
-          "optional": false,
-          "mapIds": [],
-          "details": [],
-          "zones": []
-        }
-      ],
-      "requirements": [
-        {
-          "taskId": "697877e0c639962b2e0cf24f",
-          "statuses": [
-            "active"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "69788db3878a4385d10c0718",
-      "name": "Professional Fitness - Part 2 [PVP ZONE]",
-      "traderId": "6617beeaa9cfa777ca915b7c",
-      "traderName": "Ref",
-      "minPlayerLevel": 10,
-      "primaryMapId": null,
-      "mapIds": [],
-      "summary": "Eliminate enemies in Arena",
-      "experience": 2400,
-      "chainDepth": 5,
-      "rewardSummary": [
-        "2,400 XP",
-        "15 × GP coin",
-        "1 × Lega Medal",
-        "+0.01 Ref reputation"
-      ],
-      "objectives": [
-        {
-          "id": "69788fc3dc3074ce1c851e20",
-          "description": "Eliminate enemies in Arena",
-          "type": "shoot",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 20",
-            "Targets: any PMC operatives"
-          ],
-          "zones": []
-        }
-      ],
-      "requirements": [
-        {
-          "taskId": "69788c2bac719606e40b4e77",
-          "statuses": [
-            "complete"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "69789418b2187365e70bb947",
-      "name": "To Great Heights! - Part 6 [PVP ZONE]",
-      "traderId": "6617beeaa9cfa777ca915b7c",
-      "traderName": "Ref",
-      "minPlayerLevel": 10,
-      "primaryMapId": null,
-      "mapIds": [],
-      "summary": "Win two matches in a row in TeamFight, BlastGang, or CheckPoint mode",
-      "experience": 7700,
-      "chainDepth": 11,
-      "rewardSummary": [
-        "7,700 XP",
-        "55 × GP coin",
-        "+0.04 Ref reputation"
-      ],
-      "objectives": [
-        {
-          "id": "6978a28fe2bee676ada49c79",
-          "description": "Win two matches in a row in TeamFight, BlastGang, or CheckPoint mode",
-          "type": "visit",
-          "optional": false,
-          "mapIds": [],
-          "details": [],
-          "zones": []
-        }
-      ],
-      "requirements": [
-        {
-          "taskId": "66058cc9ae4719735349b9ea",
-          "statuses": [
-            "complete"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "66058ccbc7f3584787181478",
-      "name": "Against the Conscience - Part 1 [PVP ZONE]",
-      "traderId": "579dc571d53a0658a154fbec",
-      "traderName": "Fence",
-      "minPlayerLevel": 10,
-      "primaryMapId": "customs",
-      "mapIds": [
-        "customs"
-      ],
-      "summary": "Locate the old champion's room on Customs · Find out what happened to the champion",
-      "experience": 11700,
-      "chainDepth": 13,
-      "rewardSummary": [
-        "11,700 XP",
-        "50,000 × Roubles",
-        "1 × CQC Osprey MK4A plate carrier (Assault, MTP) Default",
-        "1 × HK 416A5 5.56x45 assault rifle Default",
-        "3 × AR-15 5.56x45 HK Steel Maritime STANAG 30-round magazine"
-      ],
-      "objectives": [
-        {
-          "id": "664ef2e5c11296c444642040",
-          "description": "Locate the old champion's room on Customs",
-          "type": "visit",
-          "optional": false,
-          "mapIds": [
-            "customs"
-          ],
-          "details": [],
-          "zones": [
-            {
-              "mapId": "customs",
-              "position": {
-                "x": 179.937988,
-                "y": 3.98100019,
-                "z": 164.798
-              },
-              "outline": [
-                {
-                  "x": 178.784119,
-                  "y": 3.98100019,
-                  "z": 163.980347
-                },
-                {
-                  "x": 180.755646,
-                  "y": 3.98100019,
-                  "z": 163.6441
-                },
-                {
-                  "x": 181.091873,
-                  "y": 3.98100019,
-                  "z": 165.615646
-                },
-                {
-                  "x": 179.120346,
-                  "y": 3.98100019,
-                  "z": 165.951874
-                }
-              ],
-              "top": 4.981,
-              "bottom": 2.98100019
-            },
-            {
-              "mapId": "customs",
-              "position": {
-                "x": 179.937988,
-                "y": 3.98100019,
-                "z": 164.798
-              },
-              "outline": [
-                {
-                  "x": 178.784119,
-                  "y": 3.98100019,
-                  "z": 163.980347
-                },
-                {
-                  "x": 180.755646,
-                  "y": 3.98100019,
-                  "z": 163.6441
-                },
-                {
-                  "x": 181.091873,
-                  "y": 3.98100019,
-                  "z": 165.615646
-                },
-                {
-                  "x": 179.120346,
-                  "y": 3.98100019,
-                  "z": 165.951874
-                }
-              ],
-              "top": 4.981,
-              "bottom": 2.98100019
-            }
-          ]
-        },
-        {
-          "id": "67e6b531ca71d03c35350b31",
-          "description": "Locate and obtain the key at the smugglers' base on Shoreline",
-          "type": "findItem",
-          "optional": true,
-          "mapIds": [],
-          "details": [
-            "Required item: Dorm overseer key",
-            "Optional objective"
-          ],
-          "zones": []
-        },
-        {
-          "id": "664ef37c4c1e8a2e6c4b1e9a",
-          "description": "Find out what happened to the champion",
-          "type": "visit",
-          "optional": false,
-          "mapIds": [
-            "customs"
-          ],
-          "details": [],
-          "zones": [
-            {
-              "mapId": "customs",
-              "position": {
-                "x": 182.769989,
-                "y": 3.4139998,
-                "z": 163.85
-              },
-              "outline": [
-                {
-                  "x": 182.193054,
-                  "y": 3.4139998,
-                  "z": 163.441162
-                },
-                {
-                  "x": 183.178818,
-                  "y": 3.4139998,
-                  "z": 163.273056
-                },
-                {
-                  "x": 183.346939,
-                  "y": 3.4139998,
-                  "z": 164.25882
-                },
-                {
-                  "x": 182.361176,
-                  "y": 3.4139998,
-                  "z": 164.426941
-                }
-              ],
-              "top": 3.9139998,
-              "bottom": 2.9139998
-            },
-            {
-              "mapId": "customs",
-              "position": {
-                "x": 182.769989,
-                "y": 3.4139998,
-                "z": 163.85
-              },
-              "outline": [
-                {
-                  "x": 182.193054,
-                  "y": 3.4139998,
-                  "z": 163.441162
-                },
-                {
-                  "x": 183.178818,
-                  "y": 3.4139998,
-                  "z": 163.273056
-                },
-                {
-                  "x": 183.346939,
-                  "y": 3.4139998,
-                  "z": 164.25882
-                },
-                {
-                  "x": 182.361176,
-                  "y": 3.4139998,
-                  "z": 164.426941
-                }
-              ],
-              "top": 3.9139998,
-              "bottom": 2.9139998
-            }
-          ]
-        },
-        {
-          "id": "664ef3c238dad5c6686a6d1e",
-          "description": "Survive and extract from the location",
-          "type": "extract",
-          "optional": false,
-          "mapIds": [
-            "customs"
-          ],
-          "details": [],
-          "zones": []
-        }
-      ],
-      "requirements": [
-        {
-          "taskId": "66058cbd9f59e625462acc8e",
-          "statuses": [
-            "complete"
-          ]
-        },
-        {
-          "taskId": "697895b6c639962b2e0cf268",
           "statuses": [
             "complete"
           ]
@@ -16582,103 +14927,6 @@
       "requirements": []
     },
     {
-      "id": "6761ff17cdc36bd66102e9d0",
-      "name": "Neuanfang",
-      "traderId": "5ac3b934156ae10c4430e83c",
-      "traderName": "Ragman",
-      "minPlayerLevel": 30,
-      "primaryMapId": "the-lab",
-      "mapIds": [
-        "the-lab"
-      ],
-      "summary": "Eliminate PMC operatives · Survive and extract from The Lab",
-      "experience": 11000,
-      "chainDepth": 0,
-      "rewardSummary": [
-        "11,000 XP",
-        "200,000 × Roubles",
-        "+0.01 Ragman reputation"
-      ],
-      "objectives": [
-        {
-          "id": "6762015739c53fca8ac51336",
-          "description": "Eliminate PMC operatives",
-          "type": "shoot",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 10",
-            "Targets: any PMC operatives"
-          ],
-          "zones": []
-        },
-        {
-          "id": "6761ff17cdc36bd66102e9d6",
-          "description": "Survive and extract from The Lab",
-          "type": "extract",
-          "optional": false,
-          "mapIds": [
-            "the-lab"
-          ],
-          "details": [],
-          "zones": []
-        },
-        {
-          "id": "6761ff17cdc36bd66102e9d8",
-          "description": "Hand over any found in raid PMC figurine",
-          "type": "giveItem",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 2",
-            "Items must have Found in Raid status",
-            "7 accepted item types"
-          ],
-          "zones": []
-        },
-        {
-          "id": "6761ff17cdc36bd66102e9d9",
-          "description": "Hand over any found in raid Scav figurine",
-          "type": "giveItem",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 2",
-            "Items must have Found in Raid status",
-            "6 accepted item types"
-          ],
-          "zones": []
-        },
-        {
-          "id": "6761ff17cdc36bd66102e9da",
-          "description": "Hand over any found in raid Boss figurine",
-          "type": "giveItem",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 2",
-            "Items must have Found in Raid status",
-            "5 accepted item types"
-          ],
-          "zones": []
-        },
-        {
-          "id": "6761ff17cdc36bd66102e9e1",
-          "description": "Hand over any found in raid Trader figurine",
-          "type": "giveItem",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 2",
-            "Items must have Found in Raid status",
-            "11 accepted item types"
-          ],
-          "zones": []
-        }
-      ],
-      "requirements": []
-    },
-    {
       "id": "5c0d0d5086f774363760aef2",
       "name": "Athlete",
       "traderId": "54cb57776803fa99248b456e",
@@ -17431,129 +15679,6 @@
       "requirements": []
     },
     {
-      "id": "6848100b00afffa81f09e365",
-      "name": "Neuanfang",
-      "traderId": "5ac3b934156ae10c4430e83c",
-      "traderName": "Ragman",
-      "minPlayerLevel": 35,
-      "primaryMapId": "the-lab",
-      "mapIds": [
-        "the-lab",
-        "streets-of-tarkov"
-      ],
-      "summary": "Eliminate PMC operatives · Eliminate Raiders",
-      "experience": 11000,
-      "chainDepth": 0,
-      "rewardSummary": [
-        "11,000 XP",
-        "2,000,000 × Roubles",
-        "2 × Physical Bitcoin",
-        "+0.01 Ragman reputation"
-      ],
-      "objectives": [
-        {
-          "id": "6848100b00afffa81f09e369",
-          "description": "Eliminate PMC operatives",
-          "type": "shoot",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 15",
-            "Targets: any PMC operatives"
-          ],
-          "zones": []
-        },
-        {
-          "id": "684812156189183883f13947",
-          "description": "Eliminate Raiders",
-          "type": "shoot",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 20",
-            "Targets: Raider"
-          ],
-          "zones": []
-        },
-        {
-          "id": "6848100b00afffa81f09e36b",
-          "description": "Use the transit from The Lab to Streets of Tarkov",
-          "type": "extract",
-          "optional": false,
-          "mapIds": [
-            "the-lab",
-            "streets-of-tarkov"
-          ],
-          "details": [],
-          "zones": []
-        },
-        {
-          "id": "6848116061809d65b8503617",
-          "description": "Survive and extract from Streets of Tarkov",
-          "type": "extract",
-          "optional": false,
-          "mapIds": [
-            "streets-of-tarkov"
-          ],
-          "details": [],
-          "zones": []
-        },
-        {
-          "id": "6848100b00afffa81f09e36d",
-          "description": "Hand over any found in raid PMC figurine",
-          "type": "giveItem",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 3",
-            "Items must have Found in Raid status",
-            "7 accepted item types"
-          ],
-          "zones": []
-        },
-        {
-          "id": "6848100b00afffa81f09e36e",
-          "description": "Hand over any found in raid Scav figurine",
-          "type": "giveItem",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 3",
-            "Items must have Found in Raid status",
-            "6 accepted item types"
-          ],
-          "zones": []
-        },
-        {
-          "id": "6848100b00afffa81f09e36f",
-          "description": "Hand over any found in raid Boss figurine",
-          "type": "giveItem",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 3",
-            "Items must have Found in Raid status",
-            "5 accepted item types"
-          ],
-          "zones": []
-        },
-        {
-          "id": "6848100b00afffa81f09e376",
-          "description": "Hand over any found in raid Trader figurine",
-          "type": "giveItem",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 3",
-            "Items must have Found in Raid status",
-            "11 accepted item types"
-          ],
-          "zones": []
-        }
-      ],
-      "requirements": []
-    },
-    {
       "id": "5c0bdb5286f774166e38eed4",
       "name": "Flint",
       "traderId": "58330581ace78e27b8b10cee",
@@ -17587,134 +15712,6 @@
           "taskId": "5b4795fb86f7745876267770",
           "statuses": [
             "complete"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "67e993b1ac26bf29380a320b",
-      "name": "Surprise Gift [PVP ZONE]",
-      "traderId": "638f541a29ffd1183d187f57",
-      "traderName": "Lightkeeper",
-      "minPlayerLevel": 35,
-      "primaryMapId": "customs",
-      "mapIds": [
-        "customs",
-        "lighthouse"
-      ],
-      "summary": "Return to the old champion's hideout on Customs · Locate and obtain the compromising information on Ref",
-      "experience": 25500,
-      "chainDepth": 16,
-      "rewardSummary": [
-        "25,500 XP",
-        "1,000 × Dollars",
-        "+0.01 Lightkeeper reputation"
-      ],
-      "objectives": [
-        {
-          "id": "67e993b1ac26bf29380a320e",
-          "description": "Return to the old champion's hideout on Customs",
-          "type": "visit",
-          "optional": false,
-          "mapIds": [
-            "customs"
-          ],
-          "details": [],
-          "zones": [
-            {
-              "mapId": "customs",
-              "position": {
-                "x": 179.937988,
-                "y": 3.98100019,
-                "z": 164.798
-              },
-              "outline": [
-                {
-                  "x": 178.784119,
-                  "y": 3.98100019,
-                  "z": 163.980347
-                },
-                {
-                  "x": 180.755646,
-                  "y": 3.98100019,
-                  "z": 163.6441
-                },
-                {
-                  "x": 181.091873,
-                  "y": 3.98100019,
-                  "z": 165.615646
-                },
-                {
-                  "x": 179.120346,
-                  "y": 3.98100019,
-                  "z": 165.951874
-                }
-              ],
-              "top": 4.981,
-              "bottom": 2.98100019
-            },
-            {
-              "mapId": "customs",
-              "position": {
-                "x": 179.937988,
-                "y": 3.98100019,
-                "z": 164.798
-              },
-              "outline": [
-                {
-                  "x": 178.784119,
-                  "y": 3.98100019,
-                  "z": 163.980347
-                },
-                {
-                  "x": 180.755646,
-                  "y": 3.98100019,
-                  "z": 163.6441
-                },
-                {
-                  "x": 181.091873,
-                  "y": 3.98100019,
-                  "z": 165.615646
-                },
-                {
-                  "x": 179.120346,
-                  "y": 3.98100019,
-                  "z": 165.951874
-                }
-              ],
-              "top": 4.981,
-              "bottom": 2.98100019
-            }
-          ]
-        },
-        {
-          "id": "67e993b1ac26bf29380a3210",
-          "description": "Locate and obtain the compromising information on Ref",
-          "type": "findQuestItem",
-          "optional": false,
-          "mapIds": [
-            "customs"
-          ],
-          "details": [],
-          "zones": []
-        },
-        {
-          "id": "67e993b1ac26bf29380a3212",
-          "description": "Hand over the found info",
-          "type": "giveQuestItem",
-          "optional": false,
-          "mapIds": [
-            "lighthouse"
-          ],
-          "details": [],
-          "zones": []
-        }
-      ],
-      "requirements": [
-        {
-          "taskId": "66058ccf06ef1d50a60c1f48",
-          "statuses": [
-            "active"
           ]
         }
       ]
@@ -17790,43 +15787,6 @@
       "requirements": [
         {
           "taskId": "5a68667486f7742607157d28",
-          "statuses": [
-            "complete"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "67e993f5ed537409f009da75",
-      "name": "Postponed Reward [PVP ZONE]",
-      "traderId": "6617beeaa9cfa777ca915b7c",
-      "traderName": "Ref",
-      "minPlayerLevel": 35,
-      "primaryMapId": null,
-      "mapIds": [],
-      "summary": "Hand over the item: Lega Medal",
-      "experience": 0,
-      "chainDepth": 17,
-      "rewardSummary": [
-        "1 × Secure container Theta",
-        "+0.01 Ref reputation"
-      ],
-      "objectives": [
-        {
-          "id": "67ebc5f501052193cdb4c9ac",
-          "description": "Hand over the item: Lega Medal",
-          "type": "giveItem",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required item: Lega Medal"
-          ],
-          "zones": []
-        }
-      ],
-      "requirements": [
-        {
-          "taskId": "67e993b1ac26bf29380a320b",
           "statuses": [
             "complete"
           ]
@@ -19617,142 +17577,6 @@
           "details": [
             "Required count: 10",
             "Targets: any PMC operatives"
-          ],
-          "zones": []
-        }
-      ],
-      "requirements": []
-    },
-    {
-      "id": "68481881f43abfdda2058369",
-      "name": "Neuanfang",
-      "traderId": "5ac3b934156ae10c4430e83c",
-      "traderName": "Ragman",
-      "minPlayerLevel": 40,
-      "primaryMapId": "the-lab",
-      "mapIds": [
-        "the-lab",
-        "streets-of-tarkov",
-        "interchange"
-      ],
-      "summary": "Eliminate PMC operatives · Eliminate Rogues",
-      "experience": 11000,
-      "chainDepth": 0,
-      "rewardSummary": [
-        "11,000 XP",
-        "3,000,000 × Roubles",
-        "3 × Physical Bitcoin",
-        "+0.01 Ragman reputation"
-      ],
-      "objectives": [
-        {
-          "id": "68481881f43abfdda205836d",
-          "description": "Eliminate PMC operatives",
-          "type": "shoot",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 20",
-            "Targets: any PMC operatives"
-          ],
-          "zones": []
-        },
-        {
-          "id": "68481a8eda10b760b3b1a73f",
-          "description": "Eliminate Rogues",
-          "type": "shoot",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 30",
-            "Targets: Rogue"
-          ],
-          "zones": []
-        },
-        {
-          "id": "68481881f43abfdda205836f",
-          "description": "Use the transit from The Lab to Streets of Tarkov",
-          "type": "extract",
-          "optional": false,
-          "mapIds": [
-            "the-lab",
-            "streets-of-tarkov"
-          ],
-          "details": [],
-          "zones": []
-        },
-        {
-          "id": "68483a05801f8d9e40ac05b1",
-          "description": "Use the transit from Streets of Tarkov to Interchange",
-          "type": "extract",
-          "optional": false,
-          "mapIds": [
-            "streets-of-tarkov",
-            "interchange"
-          ],
-          "details": [],
-          "zones": []
-        },
-        {
-          "id": "68486a0eda4828c0772e337b",
-          "description": "Survive and extract from Interchange",
-          "type": "extract",
-          "optional": false,
-          "mapIds": [
-            "interchange"
-          ],
-          "details": [],
-          "zones": []
-        },
-        {
-          "id": "68481881f43abfdda2058371",
-          "description": "Hand over any found in raid PMC figurine",
-          "type": "giveItem",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 3",
-            "Items must have Found in Raid status",
-            "7 accepted item types"
-          ],
-          "zones": []
-        },
-        {
-          "id": "68481881f43abfdda2058372",
-          "description": "Hand over any found in raid Scav figurine",
-          "type": "giveItem",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 3",
-            "Items must have Found in Raid status",
-            "6 accepted item types"
-          ],
-          "zones": []
-        },
-        {
-          "id": "68481881f43abfdda2058373",
-          "description": "Hand over any found in raid Boss figurine",
-          "type": "giveItem",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 3",
-            "Items must have Found in Raid status",
-            "5 accepted item types"
-          ],
-          "zones": []
-        },
-        {
-          "id": "68481881f43abfdda205837a",
-          "description": "Hand over any found in raid Trader figurine",
-          "type": "giveItem",
-          "optional": false,
-          "mapIds": [],
-          "details": [
-            "Required count: 3",
-            "Items must have Found in Raid status",
-            "11 accepted item types"
           ],
           "zones": []
         }
@@ -47544,6 +45368,262 @@
           "mapIds": [],
           "details": [],
           "zones": []
+        }
+      ],
+      "requirements": []
+    },
+    {
+      "id": "675c15fbf7da9792a4059871",
+      "name": "Provide Viewership",
+      "traderId": "6617beeaa9cfa777ca915b7c",
+      "traderName": "Ref",
+      "minPlayerLevel": 0,
+      "primaryMapId": "customs",
+      "mapIds": [
+        "customs"
+      ],
+      "summary": "Install the first WI-FI Camera inside the industrial plant on Customs · Install the second WI-FI Camera inside the industrial plant on Customs",
+      "experience": 32000,
+      "chainDepth": 0,
+      "rewardSummary": [
+        "32,000 XP",
+        "45 × GP coin",
+        "1 × Lone Star TX-15 DML 5.56x45 carbine Default",
+        "3 × AR-15 5.56x45 HK 30 STANAG polymer 30-round magazine",
+        "3 × 5.56x45mm M855A1 ammo pack (50 pcs)",
+        "+0.02 Ref reputation"
+      ],
+      "objectives": [
+        {
+          "id": "675c1c87caddcfa893af10e9",
+          "description": "Install the first WI-FI Camera inside the industrial plant on Customs",
+          "type": "plantItem",
+          "optional": false,
+          "mapIds": [
+            "customs"
+          ],
+          "details": [
+            "Required item: WI-FI Camera"
+          ],
+          "zones": [
+            {
+              "mapId": "customs",
+              "position": {
+                "x": 256.883,
+                "y": 13.587,
+                "z": -75.07704
+              },
+              "outline": [
+                {
+                  "x": 255.419586,
+                  "y": 14.1257305,
+                  "z": -75.64778
+                },
+                {
+                  "x": 258.295624,
+                  "y": 14.1257305,
+                  "z": -76.2697754
+                },
+                {
+                  "x": 258.546326,
+                  "y": 14.1257305,
+                  "z": -75.1105042
+                },
+                {
+                  "x": 255.670288,
+                  "y": 14.1257305,
+                  "z": -74.48851
+                }
+              ],
+              "top": 14.998724,
+              "bottom": 13.252737
+            }
+          ]
+        },
+        {
+          "id": "676047054c9696a7d071bc08",
+          "description": "Install the second WI-FI Camera inside the industrial plant on Customs",
+          "type": "plantItem",
+          "optional": false,
+          "mapIds": [
+            "customs"
+          ],
+          "details": [
+            "Required item: WI-FI Camera"
+          ],
+          "zones": [
+            {
+              "mapId": "customs",
+              "position": {
+                "x": 254.804031,
+                "y": 2.27799964,
+                "z": -75.23401
+              },
+              "outline": [
+                {
+                  "x": 253.432419,
+                  "y": 2.54179215,
+                  "z": -75.8246
+                },
+                {
+                  "x": 255.591888,
+                  "y": 2.54179215,
+                  "z": -76.291626
+                },
+                {
+                  "x": 255.961365,
+                  "y": 2.54179215,
+                  "z": -74.58322
+                },
+                {
+                  "x": 253.8019,
+                  "y": 2.54179215,
+                  "z": -74.11621
+                }
+              ],
+              "top": 3.68972421,
+              "bottom": 1.39385986
+            }
+          ]
+        },
+        {
+          "id": "6760470877d1b7790af5de11",
+          "description": "Install the third WI-FI Camera inside the industrial plant on Customs",
+          "type": "plantItem",
+          "optional": false,
+          "mapIds": [
+            "customs"
+          ],
+          "details": [
+            "Required item: WI-FI Camera"
+          ],
+          "zones": [
+            {
+              "mapId": "customs",
+              "position": {
+                "x": 262.401978,
+                "y": 6.48796558,
+                "z": -39.4110031
+              },
+              "outline": [
+                {
+                  "x": 261.0304,
+                  "y": 7.026696,
+                  "z": -40.0016022
+                },
+                {
+                  "x": 266.304,
+                  "y": 7.026696,
+                  "z": -41.1421127
+                },
+                {
+                  "x": 267.025269,
+                  "y": 7.026696,
+                  "z": -37.8070068
+                },
+                {
+                  "x": 261.751648,
+                  "y": 7.026696,
+                  "z": -36.6664963
+                }
+              ],
+              "top": 7.89969063,
+              "bottom": 6.15370274
+            }
+          ]
+        },
+        {
+          "id": "6760470b7d65f702a6295820",
+          "description": "Install the fourth WI-FI Camera inside the industrial plant on Customs",
+          "type": "plantItem",
+          "optional": false,
+          "mapIds": [
+            "customs"
+          ],
+          "details": [
+            "Required item: WI-FI Camera"
+          ],
+          "zones": [
+            {
+              "mapId": "customs",
+              "position": {
+                "x": 278.64,
+                "y": 2.16999984,
+                "z": -52.2000046
+              },
+              "outline": [
+                {
+                  "x": 276.31604,
+                  "y": 2.708731,
+                  "z": -54.35105
+                },
+                {
+                  "x": 278.996368,
+                  "y": 2.708731,
+                  "z": -54.8788223
+                },
+                {
+                  "x": 280.19104,
+                  "y": 2.708731,
+                  "z": -48.8114929
+                },
+                {
+                  "x": 277.5107,
+                  "y": 2.708731,
+                  "z": -48.28373
+                }
+              ],
+              "top": 3.581725,
+              "bottom": 1.835737
+            }
+          ]
+        },
+        {
+          "id": "675c1c980fd114390c638b89",
+          "description": "Eliminate any target inside the industrial plant on Customs",
+          "type": "shoot",
+          "optional": false,
+          "mapIds": [
+            "customs"
+          ],
+          "details": [
+            "Required count: 15",
+            "Targets: any target"
+          ],
+          "zones": [
+            {
+              "mapId": "customs",
+              "position": {
+                "x": 276.38,
+                "y": 2.16999984,
+                "z": -45.57
+              },
+              "outline": [
+                {
+                  "x": 252.431961,
+                  "y": 8.607824,
+                  "z": -75.94702
+                },
+                {
+                  "x": 283.740845,
+                  "y": 8.607824,
+                  "z": -82.28296
+                },
+                {
+                  "x": 298.234741,
+                  "y": 8.607824,
+                  "z": -10.6618347
+                },
+                {
+                  "x": 266.925842,
+                  "y": 8.607824,
+                  "z": -4.325905
+                }
+              ],
+              "top": 17.4135,
+              "bottom": -0.197851419
+            }
+          ]
         }
       ],
       "requirements": []

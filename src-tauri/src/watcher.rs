@@ -458,6 +458,20 @@ fn resolve_latest_log_folder(settings: &Settings) -> Option<PathBuf> {
         })
 }
 
+pub(crate) fn resolve_logs_root(settings: &Settings) -> Option<PathBuf> {
+    if let Some(configured) = &settings.logs_dir {
+        return configured.is_dir().then(|| configured.clone());
+    }
+    automatic_logs_roots()
+        .into_iter()
+        .filter(|root| root.is_dir())
+        .max_by_key(|root| {
+            latest_under_logs_root(root)
+                .and_then(|folder| folder.metadata().ok())
+                .and_then(|metadata| metadata.modified().ok())
+        })
+}
+
 fn latest_under_logs_root(root: &Path) -> Option<PathBuf> {
     if root
         .file_name()

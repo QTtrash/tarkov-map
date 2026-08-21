@@ -7,8 +7,10 @@ pins.
 ## Desktop data
 
 The Windows application reads only user-selected Escape from Tarkov screenshot
-and log directories. Parsed position, raid, quest, and waypoint state remains on
-the local device unless the user explicitly starts a sharing session.
+and log directories. Automatic quest import is off until the user reviews and
+confirms a local preview. Raw profile IDs are one-way hashed before local
+persistence. Quest progress, profile level, and custom waypoints always remain
+on the local device and are not part of sharing sessions.
 
 ## Sharing data
 

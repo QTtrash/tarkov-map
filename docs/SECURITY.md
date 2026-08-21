@@ -23,6 +23,12 @@
   served with CSP, `nosniff`, framing, referrer, and permissions headers.
 - Settings updates validate before durable writes and preserve a recoverable
   backup of the last good file.
+- Quest-log import is opt-in and previewed before the first write. It bounds JSON
+  records, accepts only known modes/statuses and exact task identifiers, hashes
+  profile IDs before persistence, deduplicates events, skips unattributed input,
+  and quarantines suspicious quest-start bursts.
+- Quest profiles, player levels, and progress remain local. They are not included
+  in room protocol v1 and never reach either relay or the phone companion.
 
 Report vulnerabilities through GitHub private vulnerability reporting as
 described in the root `SECURITY.md`.
