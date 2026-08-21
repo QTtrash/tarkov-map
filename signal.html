@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="referrer" content="no-referrer" />
     <meta name="theme-color" content="#070706" />
-    <meta name="description" content="Raid Signal is a local-first encrypted squad map for Escape from Tarkov." />
+    <meta name="description" content="Raid Signal is a local-first Escape from Tarkov map with automatic quest tracking and encrypted squad coordination." />
     <link rel="canonical" href="https://signal.mouchsiadis-solutions.com/" />
     <meta property="og:title" content="Raid Signal — Local-first, encrypted, open source" />
-    <meta property="og:description" content="Open-source Windows raid navigation with end-to-end encrypted squad coordination." />
+    <meta property="og:description" content="Open-source Windows raid navigation with automatic local quest tracking and end-to-end encrypted squad coordination." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://signal.mouchsiadis-solutions.com/" />
     <meta property="og:image" content="https://signal.mouchsiadis-solutions.com/images/raid-signal-open-source.png" />
     <meta property="og:image:alt" content="Raid Signal — local-first, encrypted, open source" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Raid Signal — Local-first, encrypted, open source" />
-    <meta name="twitter:description" content="Open-source Windows raid navigation with end-to-end encrypted squad coordination." />
+    <meta name="twitter:description" content="Open-source Windows raid navigation with automatic local quest tracking and end-to-end encrypted squad coordination." />
     <meta name="twitter:image" content="https://signal.mouchsiadis-solutions.com/images/raid-signal-open-source.png" />
     <title>Raid Signal — Encrypted squad maps</title>
   </head>
@@ -88,7 +88,7 @@
       <section class="system-section" id="system">
         <header class="section-heading">
           <div><p class="eyebrow">SYSTEM / REAL PRODUCT</p><h2>A field instrument, just like the real thing.</h2></div>
-          <p>Offline maps, raid context, quests, POIs, waypoints, native overlay, and encrypted squad coordination in one focused tool.</p>
+          <p>Offline maps, automatic local quest progress, POIs, waypoints, native overlay, and encrypted squad coordination in one focused tool.</p>
         </header>
         <div class="product-captures">
           <figure class="product-capture product-capture--desktop">
@@ -109,43 +109,63 @@
       <section class="community-section" id="community" aria-labelledby="community-title">
         <header class="community-heading">
           <div>
-            <p class="eyebrow">V1.2.0 / COMMUNITY SHIPPED</p>
-            <h2 id="community-title">Pick the loot you need. Leave the clutter behind.</h2>
+            <p class="eyebrow">V1.3.0 / COMMUNITY REQUEST SHIPPED</p>
+            <h2 id="community-title">Your active tasks. Already on the map.</h2>
           </div>
           <div class="community-intro">
-            <p>All 551 Customs containers no longer have to compete for attention. Choose the container groups that matter to this raid, with the same view on desktop, overlay, and phone.</p>
+            <p>Raid Signal can now recognize explicit quest events from Tarkov-created logs, keep PvP, PvE, and Seasonal profiles separate, and show current active objectives without making you select every task again.</p>
             <div class="community-contributor">
-              <span>COMMUNITY CONTRIBUTOR</span>
-              <strong><a href="https://github.com/Carbneth" target="_blank" rel="noopener noreferrer">@Carbneth</a></strong>
-              <p>Contributed the categorization and UI foundation in <a href="https://github.com/QTtrash/tarkov-map/pull/15" target="_blank" rel="noopener noreferrer">PR #15</a>. Maintainer review added boundary hardening, migration checks, and a browser regression before release.</p>
+              <span>COMMUNITY REQUEST</span>
+              <strong><a href="https://www.reddit.com/user/iShadowLTu/" target="_blank" rel="noopener noreferrer">u/iShadowLTu</a></strong>
+              <p>Asked whether Raid Signal could read task events from the logs it already locates and automatically show objectives for active tasks. The reviewed implementation shipped in <a href="https://github.com/QTtrash/tarkov-map/pull/19" target="_blank" rel="noopener noreferrer">PR #19</a>.</p>
             </div>
           </div>
         </header>
 
-        <figure class="community-capture">
-          <img src="/images/raid-signal-v1-2-loot-filters.webp" alt="Raid Signal v1.2.0 on Customs with Drawers, Medical, and Hidden caches selected in the loot container filters" width="1440" height="900" loading="lazy" />
-          <figcaption><span>V1.2.0 / CUSTOMS</span><b>171 SHOWN / THREE LOOT GROUPS SELECTED</b></figcaption>
-        </figure>
+        <div class="community-sync-board" role="img" aria-label="Quest events move from local Tarkov logs through a reviewed local import into active map markers; profile and quest data are never relayed">
+          <header><span>LOCAL QUEST SIGNAL</span><b>PVP / PVE / SEASONAL</b></header>
+          <div class="community-sync-board__grid">
+            <article><span>01 / TARKOV LOGS</span><strong>EXPLICIT EVENTS</strong><code>STARTED<br />COMPLETED<br />FAILED</code><small>Bounded local parsing</small></article>
+            <i aria-hidden="true">→</i>
+            <article><span>02 / REVIEW</span><strong>PROFILE ISOLATION</strong><code>PROFILE 7F••••••<br />NEWEST EVENT WINS<br />BACKFILL CONFIRM</code><small>Raw profile ID not stored</small></article>
+            <i aria-hidden="true">→</i>
+            <article><span>03 / MAP</span><strong>ACTIVE OBJECTIVES</strong><code>CURRENT MODE<br />CURRENT PROFILE<br />MARKERS READY</code><small>Pause sync at any time</small></article>
+          </div>
+          <footer><span>DESKTOP ONLY / OPT-IN</span><b>LOGS + QUEST STATE NEVER ENTER ROOM PROTOCOL V1</b></footer>
+        </div>
 
-        <div class="community-flow" aria-label="Loot filter workflow">
-          <article><span>01</span><strong>OPEN RESOURCES</strong><p>Open Map Intel → Resources. Every group shows its live count for the selected map.</p></article>
-          <article><span>02</span><strong>PICK THE TARGETS</strong><p>Enable drawers, medical, caches, or any combination. Selecting a child while Loot is off starts with only that group.</p></article>
-          <article><span>03</span><strong>KEEP ONE VIEW</strong><p>The desktop map, native overlay, and encrypted phone companion apply the same container categories and marker language.</p></article>
+        <div class="community-flow" aria-label="Automatic quest tracking workflow">
+          <article><span>01</span><strong>PREVIEW FIRST</strong><p>The first historical scan shows anonymized profile, mode, and event counts before anything is imported.</p></article>
+          <article><span>02</span><strong>TRUST EVENTS</strong><p>Only explicit started, completed, and failed records change progress. Suspicious bursts and unattributed input are withheld.</p></article>
+          <article><span>03</span><strong>STAY IN CONTROL</strong><p>Adjust an optional profile level, browse another mode, correct a status manually, or pause automatic syncing.</p></article>
         </div>
 
         <footer class="community-footer">
-          <p>All ten groups are available to older settings automatically. Unknown future container types fall back safely to Other containers.</p>
+          <p>Seasonal eligibility remains unknown unless a supported event says otherwise. The app does not infer completed tasks from quest chains, trader standing, inventory, or game memory.</p>
           <div>
-            <a href="https://github.com/QTtrash/tarkov-map/pull/15" target="_blank" rel="noopener noreferrer">VIEW PR #15 ↗</a>
-            <a href="https://github.com/QTtrash/tarkov-map/releases/tag/v1.2.0" target="_blank" rel="noopener noreferrer">OPEN V1.2.0 RELEASE ↗</a>
+            <a href="https://github.com/QTtrash/tarkov-map/pull/19" target="_blank" rel="noopener noreferrer">VIEW PR #19 ↗</a>
+            <a href="https://github.com/QTtrash/tarkov-map/releases/tag/v1.3.0" target="_blank" rel="noopener noreferrer">OPEN V1.3.0 RELEASE ↗</a>
           </div>
         </footer>
 
         <aside class="community-archive" aria-labelledby="community-archive-title">
+          <img src="/images/raid-signal-v1-2-loot-filters.webp" alt="Raid Signal v1.2.0 loot-container filters on Customs" width="1440" height="900" loading="lazy" />
+          <div class="community-archive__copy">
+            <span>V1.2.0 / COMMUNITY ARCHIVE</span>
+            <h3 id="community-archive-title">Loot filtering cut through dense maps.</h3>
+            <p><a href="https://github.com/Carbneth" target="_blank" rel="noopener noreferrer">@Carbneth</a> contributed the categorization and UI foundation for ten opt-in container groups.</p>
+          </div>
+          <div class="community-archive__links">
+            <a href="https://github.com/QTtrash/tarkov-map/pull/15" target="_blank" rel="noopener noreferrer">PR #15 ↗</a>
+            <a href="https://github.com/QTtrash/tarkov-map/releases/tag/v1.2.0" target="_blank" rel="noopener noreferrer">V1.2.0 ↗</a>
+          </div>
+        </aside>
+
+        <aside class="community-archive" aria-labelledby="community-archive-v1-1-title">
           <img src="/images/raid-signal-v1-1-quest-markers.webp" alt="Raid Signal v1.1.0 active quest objective markers on Customs" width="1440" height="900" loading="lazy" />
           <div class="community-archive__copy">
             <span>V1.1.0 / COMMUNITY ARCHIVE</span>
-            <h3 id="community-archive-title">Active quest routes joined the map.</h3>
+            <h3 id="community-archive-v1-1-title">Active quest routes joined the map.</h3>
             <p><a href="https://github.com/TedCreator" target="_blank" rel="noopener noreferrer">@TedCreator</a> contributed the foundation for showing every objective from active quests on the selected map.</p>
           </div>
           <div class="community-archive__links">
@@ -169,7 +189,7 @@
           <article><span>LICENSE</span><strong>Apache-2.0 code</strong><p>Map artwork and data remain under the terms in the asset ledger.</p><a href="https://github.com/QTtrash/tarkov-map/blob/main/ASSET_LICENSES.md">READ LICENSE BOUNDARY ↗</a></article>
           <article><span>RELEASE</span><strong data-release-version>Latest release</strong><p data-release-published>Immutable installer, checksum, manifest, SBOM, and provenance.</p><a href="https://github.com/QTtrash/tarkov-map/releases" data-release-url>OPEN RELEASE ↗</a></article>
           <article class="source-proof__hash"><span>SHA-256</span><code data-release-sha>Published with each GitHub release</code><a href="https://github.com/QTtrash/tarkov-map/releases" data-checksum-url>DOWNLOAD CHECKSUM ↗</a></article>
-          <article><span>RELEASE GATES</span><strong>CI + independent scans</strong><p>v1.2.0 is published only after project and browser tests, Defender, ClamAV, SPDX SBOM generation, and GitHub provenance.</p><a href="https://github.com/QTtrash/tarkov-map/actions/workflows/release.yml">VIEW RELEASE WORKFLOW ↗</a></article>
+          <article><span>RELEASE GATES</span><strong>CI + independent scans</strong><p>v1.3.0 is published only after project and browser tests, Defender, ClamAV, SPDX SBOM generation, and GitHub provenance.</p><a href="https://github.com/QTtrash/tarkov-map/actions/workflows/release.yml">VIEW RELEASE WORKFLOW ↗</a></article>
         </div>
       </section>
 

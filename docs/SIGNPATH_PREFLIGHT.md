@@ -9,7 +9,7 @@ SignPath Foundation confirms this project's eligibility in writing.
 - Project handle: `raid-signal`
 - Homepage: <https://signal.mouchsiadis-solutions.com>
 - Repository: <https://github.com/QTtrash/tarkov-map>
-- Current release: <https://github.com/QTtrash/tarkov-map/releases/tag/v1.2.0>
+- Current release: <https://github.com/QTtrash/tarkov-map/releases/tag/v1.3.0>
 - Distribution: Windows NSIS installer built on a GitHub-hosted Windows runner
 - Original code license: Apache-2.0
 - Asset boundary: bundled community map artwork is CC BY-NC-SA 4.0 and other

@@ -52,10 +52,10 @@ test("public landing page exposes privacy and lazy scene controls", async ({ pag
   await page.route("**/release.json", (route) =>
     route.fulfill({
       json: {
-        filename: "Raid-Signal-Setup-1.2.0.exe",
-        version: "1.2.0",
+        filename: "Raid-Signal-Setup-1.3.0.exe",
+        version: "1.3.0",
         sha256: "8a29f31c3d5f977752138bb76c6055476714f5aca11ca8ed590629ab630b4741",
-        downloadUrl: "https://github.com/QTtrash/tarkov-map/releases/download/v1.2.0/Raid-Signal-Setup-1.2.0.exe",
+        downloadUrl: "https://github.com/QTtrash/tarkov-map/releases/download/v1.3.0/Raid-Signal-Setup-1.3.0.exe",
         size: 27000000,
         publishedAt: "2026-08-21T12:30:00.000Z",
       },
@@ -64,9 +64,17 @@ test("public landing page exposes privacy and lazy scene controls", async ({ pag
   await page.goto("/signal.html");
   await expect(page.getByRole("heading", { name: /Your squad/ })).toBeVisible();
   await expect(page.getByRole("heading", { name: /Built in public/ })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Pick the loot you need. Leave the clutter behind." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Your active tasks. Already on the map." })).toBeVisible();
+  await expect(page.getByRole("link", { name: "u/iShadowLTu" })).toHaveAttribute(
+    "href",
+    "https://www.reddit.com/user/iShadowLTu/",
+  );
+  await expect(page.getByRole("link", { name: "VIEW PR #19 ↗" })).toHaveAttribute(
+    "href",
+    "https://github.com/QTtrash/tarkov-map/pull/19",
+  );
   await expect(page.getByRole("link", { name: "@Carbneth" })).toHaveAttribute("href", "https://github.com/Carbneth");
-  await expect(page.getByRole("link", { name: "VIEW PR #15 ↗" })).toHaveAttribute(
+  await expect(page.getByRole("link", { name: "PR #15 ↗" })).toHaveAttribute(
     "href",
     "https://github.com/QTtrash/tarkov-map/pull/15",
   );
@@ -82,9 +90,9 @@ test("public landing page exposes privacy and lazy scene controls", async ({ pag
     "href",
     "https://github.com/QTtrash/tarkov-map/actions/workflows/release.yml",
   );
-  await expect(page.getByRole("link", { name: "DOWNLOAD 1.2.0 FOR WINDOWS" }).first()).toHaveAttribute(
+  await expect(page.getByRole("link", { name: "DOWNLOAD 1.3.0 FOR WINDOWS" }).first()).toHaveAttribute(
     "href",
-    "https://github.com/QTtrash/tarkov-map/releases/download/v1.2.0/Raid-Signal-Setup-1.2.0.exe",
+    "https://github.com/QTtrash/tarkov-map/releases/download/v1.3.0/Raid-Signal-Setup-1.3.0.exe",
   );
   await expect(page.locator("[data-release-sha]")).toHaveText(
     "8a29f31c3d5f977752138bb76c6055476714f5aca11ca8ed590629ab630b4741",
@@ -97,11 +105,13 @@ test("public landing page keeps the community spotlight usable on mobile", async
   await page.setViewportSize({ width: 390, height: 844 });
   await page.route("**/release.json", (route) => route.abort());
   await page.goto("/signal.html#community");
-  await expect(page.getByRole("heading", { name: "Pick the loot you need. Leave the clutter behind." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Your active tasks. Already on the map." })).toBeVisible();
+  await expect(page.getByRole("link", { name: "u/iShadowLTu" })).toBeVisible();
   await expect(page.getByRole("link", { name: "@Carbneth" })).toBeVisible();
   await expect(page.getByRole("link", { name: "@TedCreator" })).toBeVisible();
   await expect(page.locator(".community-flow article")).toHaveCount(3);
-  await expect(page.locator(".community-archive")).toBeVisible();
+  await expect(page.locator(".community-sync-board")).toBeVisible();
+  await expect(page.locator(".community-archive")).toHaveCount(2);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(
     true,
   );
