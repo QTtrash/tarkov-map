@@ -1,17 +1,24 @@
 ## What changed
 
-- Active quests can now show all of their objectives on the selected map.
-- Quest markers remain opt-in and have a dedicated Utility toggle.
-- Hide all now hides focused and active quest markers together.
-- Changing maps or PvP/PvE modes clears markers that no longer apply.
+- Loot containers can now be filtered through ten useful groups, including
+  drawers, bags, weapon and ammo containers, medical, technical, supply crates,
+  safes and cash, hidden caches, bodies, and a safe fallback for future types.
+- Each group has its own count, icon, and map color in the desktop, overlay, and
+  encrypted phone companion.
+- Selecting a child group while the parent layer is off enables only that group,
+  making it quick to reduce a dense map to the containers relevant to a raid.
+- The web, relay, Rust, and GitHub Actions dependency stacks were upgraded and
+  repaired against the project's full Windows and browser verification gates.
 
-This is Raid Signal's first merged community feature. Thank you
-[@TedCreator](https://github.com/TedCreator) for contributing the foundation in
-[#12](https://github.com/QTtrash/tarkov-map/pull/12). Maintainer review added
-compatibility hardening and regression coverage before merge.
+Thank you [@Carbneth](https://github.com/Carbneth) for contributing the feature
+and UI foundation in [#15](https://github.com/QTtrash/tarkov-map/pull/15).
+Maintainer review completed inherited-key, settings-migration, focus-state, and
+browser edge-case hardening before merge.
 
-Settings schema v2 and room protocol v1 remain compatible. This release does not
-change filesystem access, relay behavior, telemetry, or sharing trust boundaries.
+Settings schema v2 and room protocol v1 remain compatible. Older settings gain
+all loot groups by default. This release does not change filesystem access,
+invitation-fragment handling, relay plaintext visibility, telemetry, or position
+history: the relay still forwards ciphertext only and stores no positions.
 
 ## Install and verify
 
