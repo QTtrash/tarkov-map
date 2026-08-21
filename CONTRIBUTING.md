@@ -7,7 +7,7 @@ provenance and redistribution terms.
 
 ## Development setup
 
-Install Node 22.18, npm 11.14, Rust 1.93 with Rustfmt and Clippy, and the current
+Install Node 22.23, npm 11.14, Rust 1.93 with Rustfmt and Clippy, and the current
 [Tauri Windows prerequisites](https://v2.tauri.app/start/prerequisites/).
 
 ```text

@@ -63,7 +63,7 @@ are not a third-party security audit or anti-cheat approval.
 
 ## Build and verify
 
-Requirements are Node 22.18, npm 11.14, Rust 1.93, and the current
+Requirements are Node 22.23, npm 11.14, Rust 1.93, and the current
 [Tauri Windows prerequisites](https://v2.tauri.app/start/prerequisites/).
 
 ```text

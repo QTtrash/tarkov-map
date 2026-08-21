@@ -8,6 +8,16 @@ const entries = {
   signal: new URL("signal.html", import.meta.url).pathname,
 };
 
+const entriesForMode = (mode: string): Record<string, string> => {
+  if (mode === "desktop") {
+    return { main: entries.main, overlay: entries.overlay, companion: entries.companion };
+  }
+  if (mode === "web") {
+    return { companion: entries.companion, signal: entries.signal };
+  }
+  return entries;
+};
+
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
   clearScreen: false,
@@ -18,15 +28,10 @@ export default defineConfig(({ mode }) => ({
   envPrefix: ["VITE_", "TAURI_"],
   build: {
     target: ["chrome105", "safari15"],
-    minify: "esbuild",
+    minify: "oxc",
     sourcemap: true,
     rollupOptions: {
-      input:
-        mode === "desktop"
-          ? { main: entries.main, overlay: entries.overlay, companion: entries.companion }
-          : mode === "web"
-            ? { companion: entries.companion, signal: entries.signal }
-            : entries,
+      input: entriesForMode(mode),
     },
   },
   test: {
