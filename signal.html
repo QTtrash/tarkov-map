@@ -109,37 +109,50 @@
       <section class="community-section" id="community" aria-labelledby="community-title">
         <header class="community-heading">
           <div>
-            <p class="eyebrow">V1.1.0 / COMMUNITY SHIPPED</p>
-            <h2 id="community-title">One quest at a time became the whole route.</h2>
+            <p class="eyebrow">V1.2.0 / COMMUNITY SHIPPED</p>
+            <h2 id="community-title">Pick the loot you need. Leave the clutter behind.</h2>
           </div>
           <div class="community-intro">
-            <p>Raid Signal's first community feature contribution is live. Active quests can now place all of their relevant objectives on the selected map together.</p>
+            <p>All 551 Customs containers no longer have to compete for attention. Choose the container groups that matter to this raid, with the same view on desktop, overlay, and phone.</p>
             <div class="community-contributor">
               <span>COMMUNITY CONTRIBUTOR</span>
-              <strong><a href="https://github.com/TedCreator" target="_blank" rel="noopener noreferrer">@TedCreator</a></strong>
-              <p>Contributed the foundation in <a href="https://github.com/QTtrash/tarkov-map/pull/12" target="_blank" rel="noopener noreferrer">PR #12</a>. Maintainer review added compatibility hardening and regression coverage before release.</p>
+              <strong><a href="https://github.com/Carbneth" target="_blank" rel="noopener noreferrer">@Carbneth</a></strong>
+              <p>Contributed the categorization and UI foundation in <a href="https://github.com/QTtrash/tarkov-map/pull/15" target="_blank" rel="noopener noreferrer">PR #15</a>. Maintainer review added boundary hardening, migration checks, and a browser regression before release.</p>
             </div>
           </div>
         </header>
 
         <figure class="community-capture">
-          <img src="/images/raid-signal-v1-1-quest-markers.webp" alt="Raid Signal v1.1.0 showing several active quest objective markers on Customs with the Quest markers utility enabled" width="1440" height="900" loading="lazy" />
-          <figcaption><span>V1.1.0 / CUSTOMS</span><b>ACTIVE QUEST OBJECTIVES / MAP-SCOPED</b></figcaption>
+          <img src="/images/raid-signal-v1-2-loot-filters.webp" alt="Raid Signal v1.2.0 on Customs with Drawers, Medical, and Hidden caches selected in the loot container filters" width="1440" height="900" loading="lazy" />
+          <figcaption><span>V1.2.0 / CUSTOMS</span><b>171 SHOWN / THREE LOOT GROUPS SELECTED</b></figcaption>
         </figure>
 
-        <div class="community-flow" aria-label="Quest marker workflow">
-          <article><span>01</span><strong>MARK ACTIVE</strong><p>Set several quests to active in the Quest Navigator.</p></article>
-          <article><span>02</span><strong>ENABLE MARKERS</strong><p>Open Map Intel → Utility and enable Quest markers.</p></article>
-          <article><span>03</span><strong>STAY IN CONTEXT</strong><p>Only the selected map is shown. Hide all and map or PvP/PvE changes clear markers that no longer apply.</p></article>
+        <div class="community-flow" aria-label="Loot filter workflow">
+          <article><span>01</span><strong>OPEN RESOURCES</strong><p>Open Map Intel → Resources. Every group shows its live count for the selected map.</p></article>
+          <article><span>02</span><strong>PICK THE TARGETS</strong><p>Enable drawers, medical, caches, or any combination. Selecting a child while Loot is off starts with only that group.</p></article>
+          <article><span>03</span><strong>KEEP ONE VIEW</strong><p>The desktop map, native overlay, and encrypted phone companion apply the same container categories and marker language.</p></article>
         </div>
 
         <footer class="community-footer">
-          <p>Quest markers remain off by default, and the original single-objective “Show point” workflow still works.</p>
+          <p>All ten groups are available to older settings automatically. Unknown future container types fall back safely to Other containers.</p>
           <div>
-            <a href="https://github.com/QTtrash/tarkov-map/pull/12" target="_blank" rel="noopener noreferrer">VIEW PR #12 ↗</a>
-            <a href="https://github.com/QTtrash/tarkov-map/releases/tag/v1.1.0" target="_blank" rel="noopener noreferrer">OPEN V1.1.0 RELEASE ↗</a>
+            <a href="https://github.com/QTtrash/tarkov-map/pull/15" target="_blank" rel="noopener noreferrer">VIEW PR #15 ↗</a>
+            <a href="https://github.com/QTtrash/tarkov-map/releases/tag/v1.2.0" target="_blank" rel="noopener noreferrer">OPEN V1.2.0 RELEASE ↗</a>
           </div>
         </footer>
+
+        <aside class="community-archive" aria-labelledby="community-archive-title">
+          <img src="/images/raid-signal-v1-1-quest-markers.webp" alt="Raid Signal v1.1.0 active quest objective markers on Customs" width="1440" height="900" loading="lazy" />
+          <div class="community-archive__copy">
+            <span>V1.1.0 / COMMUNITY ARCHIVE</span>
+            <h3 id="community-archive-title">Active quest routes joined the map.</h3>
+            <p><a href="https://github.com/TedCreator" target="_blank" rel="noopener noreferrer">@TedCreator</a> contributed the foundation for showing every objective from active quests on the selected map.</p>
+          </div>
+          <div class="community-archive__links">
+            <a href="https://github.com/QTtrash/tarkov-map/pull/12" target="_blank" rel="noopener noreferrer">PR #12 ↗</a>
+            <a href="https://github.com/QTtrash/tarkov-map/releases/tag/v1.1.0" target="_blank" rel="noopener noreferrer">V1.1.0 ↗</a>
+          </div>
+        </aside>
       </section>
 
       <section class="source-section" id="source">
@@ -156,7 +169,7 @@
           <article><span>LICENSE</span><strong>Apache-2.0 code</strong><p>Map artwork and data remain under the terms in the asset ledger.</p><a href="https://github.com/QTtrash/tarkov-map/blob/main/ASSET_LICENSES.md">READ LICENSE BOUNDARY ↗</a></article>
           <article><span>RELEASE</span><strong data-release-version>Latest release</strong><p data-release-published>Immutable installer, checksum, manifest, SBOM, and provenance.</p><a href="https://github.com/QTtrash/tarkov-map/releases" data-release-url>OPEN RELEASE ↗</a></article>
           <article class="source-proof__hash"><span>SHA-256</span><code data-release-sha>Published with each GitHub release</code><a href="https://github.com/QTtrash/tarkov-map/releases" data-checksum-url>DOWNLOAD CHECKSUM ↗</a></article>
-          <article><span>RELEASE GATES</span><strong>CI + independent scans</strong><p>v1.1.0 passed project tests, four Chromium paths, Defender, ClamAV, SPDX SBOM generation, and GitHub provenance.</p><a href="https://github.com/QTtrash/tarkov-map/actions/runs/32376201098">VIEW V1.1.0 RELEASE RUN ↗</a></article>
+          <article><span>RELEASE GATES</span><strong>CI + independent scans</strong><p>v1.2.0 is published only after project and browser tests, Defender, ClamAV, SPDX SBOM generation, and GitHub provenance.</p><a href="https://github.com/QTtrash/tarkov-map/actions/workflows/release.yml">VIEW RELEASE WORKFLOW ↗</a></article>
         </div>
       </section>
 
