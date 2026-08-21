@@ -114,5 +114,7 @@ describe("POI helpers", () => {
       ]),
     );
     expect(lootGroupForType("medical-supply-crate")).toBe("medical");
+    expect(lootGroupForType("constructor")).toBe("other");
+    expect(lootGroupForType("__proto__")).toBe("other");
   });
 });

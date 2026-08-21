@@ -27,6 +27,23 @@ test("quest intelligence loads through the browser boundary", async ({ page }) =
   await expect(dialog.getByPlaceholder("Search quests, traders, objectives")).toBeVisible();
 });
 
+test("loot filters enable one child when their parent layer is off", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Open map legend" }).click();
+
+  const lootLayer = page.getByRole("button", { name: /Loot containers/i });
+  const drawers = page.getByRole("button", { name: /Drawers \d+/i });
+  const bags = page.getByRole("button", { name: /Bags, jackets, cases \d+/i });
+  await expect(lootLayer).toHaveAttribute("aria-pressed", "false");
+  await expect(drawers).toHaveAttribute("aria-pressed", "false");
+
+  await drawers.click();
+
+  await expect(lootLayer).toHaveAttribute("aria-pressed", "true");
+  await expect(drawers).toHaveAttribute("aria-pressed", "true");
+  await expect(bags).toHaveAttribute("aria-pressed", "false");
+});
+
 test("public landing page exposes privacy and lazy scene controls", async ({ page }) => {
   await page.route("**/release.json", (route) =>
     route.fulfill({

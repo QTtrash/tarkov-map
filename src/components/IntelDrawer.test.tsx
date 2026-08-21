@@ -76,8 +76,8 @@ describe("IntelDrawer", () => {
     expect(questMarkers).toHaveAttribute("aria-pressed", "false");
     fireEvent.click(questMarkers);
     expect(onToggleQuestMarkers).toHaveBeenCalledOnce();
-    expect(screen.getByRole("button", { name: /Drawers 1/i })).toHaveAttribute("aria-pressed", "false");
-    fireEvent.click(screen.getByRole("button", { name: /Bags, jackets, cases 1/i }));
+    expect(screen.getByRole("button", { name: /Drawers\s*1/i })).toHaveAttribute("aria-pressed", "false");
+    fireEvent.click(screen.getByRole("button", { name: /Bags, jackets, cases\s*1/i }));
     expect(onToggleLootGroup).toHaveBeenCalledWith("bags");
 
     fireEvent.change(screen.getByPlaceholderText("Find an extract or location"), {

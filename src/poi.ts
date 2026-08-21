@@ -26,38 +26,38 @@ export const lootGroupDefinitions: Array<{ id: LootGroupId; name: string; shortN
 
 export const allLootGroupIds = lootGroupDefinitions.map(({ id }) => id);
 
-const lootGroupsByType: Record<string, LootGroupId> = {
-  drawer: "drawers",
-  "duffle-bag": "bags",
-  jacket: "bags",
-  "plastic-suitcase": "bags",
-  "weapon-box": "weapon-ammo",
-  "wooden-ammo-box": "weapon-ammo",
-  "grenade-box": "weapon-ammo",
-  "medbag-smu06": "medical",
-  medcase: "medical",
-  "medical-supply-crate": "medical",
-  toolbox: "technical",
-  "pc-block": "technical",
-  "technical-supply-crate": "technical",
-  "wooden-crate": "supply-crates",
-  "ration-supply-crate": "supply-crates",
-  safe: "safes-cash",
-  "bank-safe": "safes-cash",
-  "cash-register": "safes-cash",
-  "bank-cash-register": "safes-cash",
-  "buried-barrel-cache": "caches",
-  "ground-cache": "caches",
-  "shturmans-stash": "caches",
-  "dead-scav": "bodies",
-  "pmc-body": "bodies",
-  "civilian-body": "bodies",
-  "scav-body": "bodies",
-  "lab-technician-body": "bodies",
-};
+const lootGroupsByType = new Map<string, LootGroupId>([
+  ["drawer", "drawers"],
+  ["duffle-bag", "bags"],
+  ["jacket", "bags"],
+  ["plastic-suitcase", "bags"],
+  ["weapon-box", "weapon-ammo"],
+  ["wooden-ammo-box", "weapon-ammo"],
+  ["grenade-box", "weapon-ammo"],
+  ["medbag-smu06", "medical"],
+  ["medcase", "medical"],
+  ["medical-supply-crate", "medical"],
+  ["toolbox", "technical"],
+  ["pc-block", "technical"],
+  ["technical-supply-crate", "technical"],
+  ["wooden-crate", "supply-crates"],
+  ["ration-supply-crate", "supply-crates"],
+  ["safe", "safes-cash"],
+  ["bank-safe", "safes-cash"],
+  ["cash-register", "safes-cash"],
+  ["bank-cash-register", "safes-cash"],
+  ["buried-barrel-cache", "caches"],
+  ["ground-cache", "caches"],
+  ["shturmans-stash", "caches"],
+  ["dead-scav", "bodies"],
+  ["pmc-body", "bodies"],
+  ["civilian-body", "bodies"],
+  ["scav-body", "bodies"],
+  ["lab-technician-body", "bodies"],
+]);
 
 export function lootGroupForType(lootType: string): LootGroupId {
-  return lootGroupsByType[lootType] ?? "other";
+  return lootGroupsByType.get(lootType) ?? "other";
 }
 
 export function countLootGroups(pois: MapPoi[]) {

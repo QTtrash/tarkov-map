@@ -440,9 +440,10 @@ export function App() {
         setVisiblePoiCategories([...visiblePoiCategories, poi.category]);
       }
       if (poi?.kind === "loot" && !visibleLootGroups.has(lootGroupForType(poi.lootType))) {
+        const lootGroup = lootGroupForType(poi.lootType);
         updateSettings({
-          visibleMapLayers: [...visiblePoiCategories, "loot"],
-          visibleLootGroups: [...visibleLootGroups, lootGroupForType(poi.lootType)],
+          visibleMapLayers: [...new Set([...visiblePoiCategories, "loot"])],
+          visibleLootGroups: [...visibleLootGroups, lootGroup],
         });
       }
       setSelectedPoiId(id);

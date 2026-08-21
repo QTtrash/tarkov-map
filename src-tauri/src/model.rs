@@ -222,6 +222,10 @@ mod tests {
         assert!(settings.always_on_top);
         assert!(!settings.follow_player);
         assert_eq!(
+            settings.visible_loot_groups,
+            Settings::default().visible_loot_groups
+        );
+        assert_eq!(
             settings.visible_map_layers,
             vec![
                 "extract-pmc",
@@ -247,6 +251,10 @@ mod tests {
         let mut invalid = Settings::default();
         invalid.overlay_opacity = f64::NAN;
         assert!(invalid.validate().is_err());
+
+        let mut invalid_group = Settings::default();
+        invalid_group.visible_loot_groups = vec!["constructor".into()];
+        assert!(invalid_group.validate().is_err());
     }
 
     #[test]
