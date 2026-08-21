@@ -13,6 +13,7 @@ const poiTranslationsUrl = "https://json.tarkov.dev/regular/maps_en";
 const questUrls = {
   regular: ["https://json.tarkov.dev/regular/tasks", "https://json.tarkov.dev/regular/tasks_en"],
   pve: ["https://json.tarkov.dev/pve/tasks", "https://json.tarkov.dev/pve/tasks_en"],
+  "pvp-season": ["https://json.tarkov.dev/pvp-season/tasks", "https://json.tarkov.dev/pvp-season/tasks_en"],
 };
 const itemUrls = ["https://json.tarkov.dev/regular/items", "https://json.tarkov.dev/regular/items_en"];
 const traderUrls = ["https://json.tarkov.dev/regular/traders", "https://json.tarkov.dev/regular/traders_en"];

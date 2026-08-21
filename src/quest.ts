@@ -1,10 +1,25 @@
-import type { QuestBundle, QuestDefinition, QuestObjectivePoi, QuestProgress, QuestStatus } from "./types";
+import type {
+  QuestBundle,
+  QuestDefinition,
+  QuestDisplayStatus,
+  QuestGameMode,
+  QuestObjectivePoi,
+  QuestProgress,
+  QuestStatus,
+} from "./types";
 
 export const questStatuses: QuestStatus[] = ["locked", "available", "active", "completed", "failed"];
 
-export function effectiveQuestStatus(quest: QuestDefinition, progress: Map<string, QuestProgress>): QuestStatus {
+export function effectiveQuestStatus(
+  quest: QuestDefinition,
+  progress: Map<string, QuestProgress>,
+  playerLevel?: number | null,
+  gameMode: QuestGameMode = "regular",
+): QuestDisplayStatus {
   const saved = progress.get(quest.id)?.status;
   if (saved) return saved;
+  if (gameMode === "pvp-season") return "unknown";
+  if (playerLevel !== null && playerLevel !== undefined && playerLevel < quest.minPlayerLevel) return "locked";
   return quest.requirements.every((requirement) => progress.get(requirement.taskId)?.status === "completed")
     ? "available"
     : "locked";
@@ -43,11 +58,25 @@ export function buildActiveQuestObjectivePois(
     );
 }
 
-const statusRank: Record<QuestStatus, number> = { active: 0, available: 1, locked: 2, failed: 3, completed: 4 };
+const statusRank: Record<QuestDisplayStatus, number> = {
+  active: 0,
+  available: 1,
+  unknown: 2,
+  locked: 3,
+  failed: 4,
+  completed: 5,
+};
 
-export function compareQuests(left: QuestDefinition, right: QuestDefinition, progress: Map<string, QuestProgress>) {
+export function compareQuests(
+  left: QuestDefinition,
+  right: QuestDefinition,
+  progress: Map<string, QuestProgress>,
+  playerLevel?: number | null,
+  gameMode: QuestGameMode = "regular",
+) {
   const statusDelta =
-    statusRank[effectiveQuestStatus(left, progress)] - statusRank[effectiveQuestStatus(right, progress)];
+    statusRank[effectiveQuestStatus(left, progress, playerLevel, gameMode)] -
+    statusRank[effectiveQuestStatus(right, progress, playerLevel, gameMode)];
   return (
     statusDelta ||
     left.minPlayerLevel - right.minPlayerLevel ||

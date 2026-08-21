@@ -27,6 +27,15 @@ describe("quest ordering", () => {
     expect(effectiveQuestStatus(quest("third", ["missing"]), progress)).toBe("locked");
   });
 
+  it("uses an optional player level conservatively and never infers Seasonal eligibility", () => {
+    const progress = new Map<string, QuestProgress>();
+    expect(effectiveQuestStatus(quest("levelled", [], 20), progress, 12, "regular")).toBe("locked");
+    expect(effectiveQuestStatus(quest("levelled", [], 20), progress, null, "regular")).toBe("available");
+    expect(effectiveQuestStatus(quest("seasonal"), progress, 79, "pvp-season")).toBe("unknown");
+    progress.set("seasonal", { taskId: "seasonal", status: "active", updatedAt: 1, source: "logs" });
+    expect(effectiveQuestStatus(quest("seasonal"), progress, 79, "pvp-season")).toBe("active");
+  });
+
   it("puts active and available work before locked and completed work", () => {
     const quests = [quest("locked", ["missing"]), quest("available"), quest("active"), quest("done")];
     const progress = new Map<string, QuestProgress>([

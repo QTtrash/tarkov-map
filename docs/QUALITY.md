@@ -11,6 +11,8 @@ Defender and ClamAV scans, SHA-256, an SPDX SBOM, and artifact provenance.
 ## Test ownership
 
 - Pure parsing, geometry, protocol, and domain rules: unit tests beside modules.
+- Quest-log fixtures cover multiline records, profile/mode attribution,
+  deduplication, suspicious start bursts, and manual-versus-log ordering.
 - Storage, filesystem, HTTP, WebSocket, and native boundaries: failure-oriented
   integration tests including malformed and missing input.
 - User journeys and keyboard/focus behavior: `tests/e2e/` in Chromium.

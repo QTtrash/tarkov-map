@@ -9,7 +9,11 @@ import type {
   OverlayState,
   PlayerFix,
   QuestProgress,
+  QuestProfile,
+  QuestGameMode,
   QuestStatus,
+  QuestSyncPreview,
+  QuestSyncResult,
 } from "./types";
 import {
   parseLocatorSnapshot,
@@ -20,6 +24,9 @@ import {
   parsePlayerFix,
   parseQuestProgress,
   parseQuestProgressEntry,
+  parseQuestProfiles,
+  parseQuestSyncPreview,
+  parseQuestSyncResult,
   parseSettings,
   readStoredJson,
 } from "./validation";
@@ -136,25 +143,82 @@ export async function registerGlobalShortcuts() {
   if (!state.shortcutReady && state.lastError) throw new Error(state.lastError);
 }
 
-export async function getQuestProgress(gameMode: "regular" | "pve"): Promise<QuestProgress[]> {
-  if (isTauriRuntime()) return parseQuestProgress(await invoke<unknown>("get_quest_progress", { gameMode }));
+export async function getQuestProgress(gameMode: QuestGameMode, profileKey?: string): Promise<QuestProgress[]> {
+  if (isTauriRuntime())
+    return parseQuestProgress(await invoke<unknown>("get_quest_progress", { gameMode, profileKey }));
   return readStoredJson(`quest-progress:${gameMode}`, parseQuestProgress, []);
 }
 
 export async function setQuestProgress(
-  gameMode: "regular" | "pve",
+  gameMode: QuestGameMode,
   taskId: string,
   status: QuestStatus,
+  profileKey?: string,
 ): Promise<QuestProgress> {
   if (isTauriRuntime())
-    return parseQuestProgressEntry(await invoke<unknown>("set_quest_progress", { gameMode, taskId, status }));
+    return parseQuestProgressEntry(
+      await invoke<unknown>("set_quest_progress", { gameMode, taskId, status, profileKey }),
+    );
   const progress = await getQuestProgress(gameMode);
-  const next = { taskId, status, updatedAt: Date.now() };
+  const next = { taskId, status, updatedAt: Date.now(), source: "manual" as const };
   localStorage.setItem(
     `quest-progress:${gameMode}`,
     JSON.stringify([...progress.filter((entry) => entry.taskId !== taskId), next]),
   );
   return next;
+}
+
+export async function getQuestProfiles(): Promise<QuestProfile[]> {
+  if (!isTauriRuntime()) return [];
+  return parseQuestProfiles(await invoke<unknown>("get_quest_profiles"));
+}
+
+export async function getQuestSyncPreview(): Promise<QuestSyncPreview> {
+  if (!isTauriRuntime()) {
+    return {
+      available: false,
+      enabled: false,
+      shouldReview: false,
+      logsRoot: null,
+      profiles: [],
+      eventCount: 0,
+      filesScanned: 0,
+      malformedRecords: 0,
+      unattributedRecords: 0,
+      suspiciousSessions: 0,
+      fingerprint: "",
+      message: "Automatic quest tracking is available in the Windows desktop app.",
+    };
+  }
+  return parseQuestSyncPreview(await invoke<unknown>("get_quest_sync_preview"));
+}
+
+export async function dismissQuestSyncPreview(fingerprint: string): Promise<void> {
+  if (isTauriRuntime()) await invoke("dismiss_quest_sync_preview", { fingerprint });
+}
+
+export async function confirmQuestSync(): Promise<QuestSyncResult> {
+  return parseQuestSyncResult(await invoke<unknown>("confirm_quest_sync"));
+}
+
+export async function syncQuestProgress(): Promise<QuestSyncResult> {
+  return parseQuestSyncResult(await invoke<unknown>("sync_quest_progress"));
+}
+
+export async function setQuestSyncEnabled(enabled: boolean): Promise<void> {
+  if (isTauriRuntime()) await invoke("set_quest_sync_enabled", { enabled });
+}
+
+export async function setQuestPlayerLevel(
+  gameMode: QuestGameMode,
+  profileKey: string,
+  playerLevel: number | null,
+): Promise<QuestProfile> {
+  if (!isTauriRuntime()) throw new Error("Profile levels are stored by the Windows desktop app.");
+  const profiles = parseQuestProfiles([
+    await invoke<unknown>("set_quest_player_level", { gameMode, profileKey, playerLevel }),
+  ]);
+  return profiles[0];
 }
 
 export async function subscribeLocator(handlers: {

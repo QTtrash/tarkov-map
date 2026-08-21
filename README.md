@@ -27,6 +27,8 @@ game files. No official approval or anti-cheat guarantee is implied.
 - Native Tauri desktop map and compact always-on-top overlay.
 - Screenshot coordinate parsing, raid/map detection, floors, POIs, extracts,
   quests, and local custom waypoints.
+- Opt-in quest progress import from Tarkov-created logs with an anonymized review,
+  isolated PvP, PvE, and Seasonal profiles, and manual corrections.
 - Three-hour Internet invitations and same-Wi-Fi LAN sessions.
 - AES-256-GCM position updates with a fresh nonce and room-bound authenticated
   data; invitation keys remain in URL fragments and never reach the relay.

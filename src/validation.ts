@@ -11,7 +11,10 @@ import type {
   OverlayState,
   PlayerFix,
   QuestBundle,
+  QuestProfile,
   QuestProgress,
+  QuestSyncPreview,
+  QuestSyncResult,
 } from "./types";
 
 const finite = z.number().finite();
@@ -90,6 +93,46 @@ const questProgress = z.object({
   taskId: identifier,
   status: z.enum(["locked", "available", "active", "completed", "failed"]),
   updatedAt: z.number().int().nonnegative(),
+  source: z.enum(["manual", "logs"]).optional(),
+  profileKey: z
+    .string()
+    .regex(/^[a-f0-9]{64}$/)
+    .nullable()
+    .optional(),
+});
+const questGameMode = z.enum(["regular", "pve", "pvp-season"]);
+const questProfile = z.object({
+  profileKey: z.string().regex(/^[a-f0-9]{64}$/),
+  gameMode: questGameMode,
+  lastSeen: z.number().int().nonnegative(),
+  isCurrent: z.boolean(),
+  playerLevel: z.number().int().min(1).max(79).nullable(),
+});
+const questLogProfilePreview = questProfile.omit({ playerLevel: true }).extend({
+  eventCount: z.number().int().nonnegative(),
+  startedCount: z.number().int().nonnegative(),
+  failedCount: z.number().int().nonnegative(),
+  completedCount: z.number().int().nonnegative(),
+});
+const questSyncPreview = z.object({
+  available: z.boolean(),
+  enabled: z.boolean(),
+  shouldReview: z.boolean(),
+  logsRoot: z.string().max(32_768).nullable(),
+  profiles: z.array(questLogProfilePreview).max(100),
+  eventCount: z.number().int().nonnegative(),
+  filesScanned: z.number().int().nonnegative(),
+  malformedRecords: z.number().int().nonnegative(),
+  unattributedRecords: z.number().int().nonnegative(),
+  suspiciousSessions: z.number().int().nonnegative(),
+  fingerprint: z.string().max(64),
+  message: z.string().max(512),
+});
+const questSyncResult = z.object({
+  importedEvents: z.number().int().nonnegative(),
+  profiles: z.array(questProfile).max(100),
+  detectedMode: questGameMode.nullable(),
+  enableQuestMarkers: z.boolean(),
 });
 const settings = z.object({
   schemaVersion: z.literal(2),
@@ -220,7 +263,7 @@ export const parseQuestBundle = (value: unknown) =>
     .object({
       schemaVersion: z.literal(2),
       generatedAt: z.string().min(1),
-      gameMode: z.enum(["regular", "pve"]),
+      gameMode: questGameMode,
       quests: z.array(quest),
     })
     .parse(value) as QuestBundle;
@@ -236,6 +279,9 @@ export const parseCustomPins = (value: unknown) => z.array(customPin).max(500).p
 export const parseQuestProgress = (value: unknown) =>
   z.array(questProgress).max(10_000).parse(value) as QuestProgress[];
 export const parseQuestProgressEntry = (value: unknown) => questProgress.parse(value) as QuestProgress;
+export const parseQuestProfiles = (value: unknown) => z.array(questProfile).max(100).parse(value) as QuestProfile[];
+export const parseQuestSyncPreview = (value: unknown) => questSyncPreview.parse(value) as QuestSyncPreview;
+export const parseQuestSyncResult = (value: unknown) => questSyncResult.parse(value) as QuestSyncResult;
 export const parseAssetChecksums = (value: unknown) =>
   z.record(z.string(), z.string().regex(/^[a-f0-9]{64}$/)).parse(value);
 

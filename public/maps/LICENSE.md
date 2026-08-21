@@ -1,15 +1,3 @@
-Raid Signal map artwork attribution
-
-- Eleven SVG map assets: the-hideout/tarkov-dev-svg-maps contributors.
-- Icebreaker and Labyrinth raster map images: RE3MR (https://reemr.se/).
-- License for these bundled map artworks: CC BY-NC-SA 4.0.
-- Adaptation: assets are self-hosted and calibrated to Tarkov.dev coordinate bounds for interactive overlays.
-- Retrieved: 2026-08-12. File hashes are recorded in asset-checksums.json.
-
-Raid Signal is free and noncommercial. Escape from Tarkov and related game
-materials remain the property of their respective owners. Attribution does not
-imply endorsement.
-
 Attribution-NonCommercial-ShareAlike 4.0 International
 
 =======================================================================

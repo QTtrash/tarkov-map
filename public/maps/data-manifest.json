@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-12T22:10:56.790Z",
+  "generatedAt": "2026-08-21T20:27:00.788Z",
   "sources": [
     "https://raw.githubusercontent.com/the-hideout/tarkov-dev/main/src/data/maps.json",
     "https://json.tarkov.dev/regular/maps",
@@ -9,6 +9,8 @@
     "https://json.tarkov.dev/regular/tasks_en",
     "https://json.tarkov.dev/pve/tasks",
     "https://json.tarkov.dev/pve/tasks_en",
+    "https://json.tarkov.dev/pvp-season/tasks",
+    "https://json.tarkov.dev/pvp-season/tasks_en",
     "https://json.tarkov.dev/regular/items",
     "https://json.tarkov.dev/regular/items_en",
     "https://json.tarkov.dev/regular/traders",
@@ -18,5 +20,5 @@
     "https://www.re3mr.com/maps/Labyrinth/re3mrLabyrinthPNG.png",
     "https://reemr.se/"
   ],
-  "assetCount": 45
+  "assetCount": 46
 }

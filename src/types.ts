@@ -319,13 +319,58 @@ export interface QuestDefinition {
 export interface QuestBundle {
   schemaVersion: 2;
   generatedAt: string;
-  gameMode: "regular" | "pve";
+  gameMode: QuestGameMode;
   quests: QuestDefinition[];
 }
 
+export type QuestGameMode = "regular" | "pve" | "pvp-season";
 export type QuestStatus = "locked" | "available" | "active" | "completed" | "failed";
+export type QuestDisplayStatus = QuestStatus | "unknown";
 export interface QuestProgress {
   taskId: string;
   status: QuestStatus;
   updatedAt: number;
+  source?: "manual" | "logs";
+  profileKey?: string | null;
+}
+
+export interface QuestProfile {
+  profileKey: string;
+  gameMode: QuestGameMode;
+  lastSeen: number;
+  isCurrent: boolean;
+  playerLevel: number | null;
+}
+
+export interface QuestLogProfilePreview {
+  profileKey: string;
+  gameMode: QuestGameMode;
+  lastSeen: number;
+  eventCount: number;
+  startedCount: number;
+  failedCount: number;
+  completedCount: number;
+  isCurrent: boolean;
+}
+
+export interface QuestSyncPreview {
+  available: boolean;
+  enabled: boolean;
+  shouldReview: boolean;
+  logsRoot: string | null;
+  profiles: QuestLogProfilePreview[];
+  eventCount: number;
+  filesScanned: number;
+  malformedRecords: number;
+  unattributedRecords: number;
+  suspiciousSessions: number;
+  fingerprint: string;
+  message: string;
+}
+
+export interface QuestSyncResult {
+  importedEvents: number;
+  profiles: QuestProfile[];
+  detectedMode: QuestGameMode | null;
+  enableQuestMarkers: boolean;
 }

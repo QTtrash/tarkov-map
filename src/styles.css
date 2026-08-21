@@ -1877,6 +1877,120 @@ a:focus-visible {
 .quest-result-bar b {
   color: var(--muted);
 }
+.quest-profile-bar {
+  display: flex;
+  align-items: end;
+  gap: 8px;
+  padding: 9px 16px;
+  border-bottom: 1px solid var(--rule-soft);
+  color: var(--muted);
+  font:
+    500 8px/1 "IBM Plex Mono",
+    monospace;
+}
+.quest-profile-bar label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.quest-profile-bar label > span {
+  color: var(--faint);
+  letter-spacing: 0.08em;
+}
+.quest-profile-bar label i {
+  display: inline-grid;
+  width: 13px;
+  height: 13px;
+  place-items: center;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  font-style: normal;
+}
+.quest-profile-bar select,
+.quest-profile-bar input,
+.quest-profile-bar button {
+  height: 30px;
+  border: 1px solid var(--rule);
+  padding: 0 8px;
+  color: var(--bone);
+  background: var(--raised);
+  font:
+    500 8px/1 "IBM Plex Mono",
+    monospace;
+}
+.quest-profile-bar input {
+  width: 92px;
+}
+.quest-advisory {
+  margin: 10px 16px 0;
+  padding: 9px 11px;
+  border: 1px solid #665d38;
+  color: #c9bb82;
+  background: #18160f;
+  font-size: 10px;
+}
+.quest-review-dialog {
+  width: min(680px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+}
+.quest-review-dialog > header,
+.quest-review-dialog > footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid var(--rule);
+}
+.quest-review-dialog > footer {
+  justify-content: flex-end;
+  border-top: 1px solid var(--rule);
+  border-bottom: 0;
+}
+.quest-review-body {
+  overflow-y: auto;
+  padding: 16px;
+}
+.quest-review-body > p {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+.quest-review-stats {
+  display: flex;
+  gap: 8px;
+  margin: 14px 0;
+}
+.quest-review-stats span,
+.quest-review-body article {
+  border: 1px solid var(--rule);
+  padding: 8px 10px;
+  color: var(--muted);
+  font:
+    500 8px/1.4 "IBM Plex Mono",
+    monospace;
+}
+.quest-review-body article {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 5px 12px;
+  margin-top: 7px;
+}
+.quest-review-body article strong {
+  color: var(--bone);
+}
+.quest-review-body article small {
+  grid-column: 1 / -1;
+  color: var(--faint);
+}
+.quest-review-warning {
+  margin-top: 12px;
+  border: 1px solid #6d5432;
+  padding: 8px 10px;
+  color: #d2ad70;
+  background: #19130d;
+  font-size: 10px;
+}
 .segmented {
   display: flex;
   border: 1px solid var(--rule);
@@ -1931,6 +2045,9 @@ a:focus-visible {
 }
 .quest-card.failed {
   border-left-color: var(--danger);
+}
+.quest-card.unknown {
+  border-left-color: #766c4e;
 }
 .quest-card > header {
   min-height: 54px;
@@ -2005,6 +2122,18 @@ a:focus-visible {
   font:
     normal 500 7px/1 "IBM Plex Mono",
     monospace;
+}
+.quest-map-tags em {
+  margin-left: auto;
+  padding: 3px 5px;
+  border: 1px solid var(--rule);
+  color: var(--muted);
+  font:
+    normal 500 7px/1 "IBM Plex Mono",
+    monospace;
+}
+.quest-map-tags em + i {
+  margin-left: 0;
 }
 .quest-details {
   border-top: 1px solid var(--rule);

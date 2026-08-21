@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "mapId": "the-lab",
-  "generatedAt": "2026-08-12T15:59:04.533Z",
+  "generatedAt": "2026-08-21T20:26:46.100Z",
   "sources": [
     "https://json.tarkov.dev/regular/maps",
     "https://json.tarkov.dev/regular/maps_en"
@@ -359,6 +359,42 @@
         "40ec0101fbf68e6d1b762a72080b9b9b9c91f6f1"
       ],
       "transferItem": null
+    },
+    {
+      "id": "transit-8",
+      "sourceId": "8",
+      "kind": "transit",
+      "category": "transit",
+      "name": "Transit to Streets of Tarkov",
+      "position": {
+        "x": -169.079956,
+        "y": 1.32,
+        "z": -420.878052
+      },
+      "outline": [
+        {
+          "x": -173.306656,
+          "y": 1.18199265,
+          "z": -423.000641
+        },
+        {
+          "x": -166.9697,
+          "y": 1.18199265,
+          "z": -423.000641
+        },
+        {
+          "x": -166.9697,
+          "y": 1.18199265,
+          "z": -418.111145
+        },
+        {
+          "x": -173.306656,
+          "y": 1.18199265,
+          "z": -418.111145
+        }
+      ],
+      "top": 2.32000017,
+      "bottom": 0.0439852476
     },
     {
       "id": "014e9122e0fad99bcff6f93161712c3c6e1a2a75",
