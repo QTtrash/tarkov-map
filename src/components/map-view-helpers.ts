@@ -1,5 +1,6 @@
 import L from "leaflet";
-import type { MapAsset, MapDefinition, MapPoi, PoiCategory, SquadPosition } from "../types";
+import { lootGroupForType } from "../poi";
+import type { LootGroupId, MapAsset, MapDefinition, MapPoi, PoiCategory, SquadPosition } from "../types";
 
 function rotate(latLng: L.LatLng, degrees: number) {
   if (!degrees) return latLng;
@@ -79,7 +80,23 @@ export function assetForFloor(definition: MapDefinition, activeFloor: string): M
   return definition.floors.find((floor) => floor.id === activeFloor)?.asset ?? definition.baseAsset;
 }
 
-function glyphMarkup(category: PoiCategory) {
+function lootGlyphMarkup(group: LootGroupId) {
+  const paths: Record<LootGroupId, string> = {
+    drawers: '<path d="M5 4h14v16H5V4Zm0 5h14M5 14h14M10 7h4M10 12h4M10 17h4"/>',
+    bags: '<path d="M5 9h14l1 11H4L5 9Zm4 0V6a3 3 0 0 1 6 0v3"/>',
+    "weapon-ammo": '<path d="m5 18 9-12 4 3-9 12-4-3Zm8-11 2-3 4 3-2 3M5 18l4 3"/>',
+    medical: '<path d="M9 4h6v5h5v6h-5v5H9v-5H4V9h5V4Z"/>',
+    technical: '<path d="m14 6 4-2 2 2-2 4-3 1-6 9-4-1-1-4 9-6 1-3Z"/>',
+    "supply-crates": '<path d="M3 7h18v13H3V7Zm0 4h18M8 7V4h8v3M12 11v9"/>',
+    "safes-cash": '<path d="M4 5h16v15H4V5Zm4 4h8v7H8V9Zm4 1v5M9 12h6"/>',
+    caches: '<path d="M3 17c3-5 5-7 9-7s6 2 9 7M6 17h12M9 10V7h6v3"/>',
+    bodies: '<path d="M8 6a4 4 0 1 1 8 0M5 21v-5a7 7 0 0 1 14 0v5M8 14l4 3 4-3"/>',
+    other: '<path d="M4 7h16v13H4V7Zm4 0V4h8v3M9 13h6"/>',
+  };
+  return paths[group];
+}
+
+function glyphMarkup(category: PoiCategory, lootGroup?: LootGroupId) {
   let paths: string;
   if (category.startsWith("extract-")) {
     paths = '<path d="M5 5h8v3M5 19h8v-3M11 12h10M17 8l4 4-4 4M5 5v14"/>';
@@ -103,7 +120,7 @@ function glyphMarkup(category: PoiCategory) {
   } else if (category.startsWith("spawn-")) {
     paths = '<circle cx="12" cy="12" r="7"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/>';
   } else if (category === "loot") {
-    paths = '<path d="M3 8h18v12H3V8ZM7 8V4h10v4M9 13h6"/>';
+    paths = lootGroup ? lootGlyphMarkup(lootGroup) : '<path d="M3 8h18v12H3V8ZM7 8V4h10v4M9 13h6"/>';
   } else {
     paths = '<path d="M4 15h12l4 3H8l-4-3ZM7 15l3-8h7l3 3"/><circle cx="14" cy="7" r="2"/>';
   }
@@ -111,6 +128,7 @@ function glyphMarkup(category: PoiCategory) {
 }
 
 export function poiIcon(poi: MapPoi, selected: boolean, active = false) {
+  const lootGroup = poi.kind === "loot" ? lootGroupForType(poi.lootType) : undefined;
   const label =
     poi.kind === "extract" || poi.kind === "transit"
       ? `<span class="poi-marker-label">${escapeHtml(poi.name)}</span>`
@@ -119,7 +137,7 @@ export function poiIcon(poi: MapPoi, selected: boolean, active = false) {
     className: "poi-marker-shell",
     iconSize: [26, 26],
     iconAnchor: [13, 13],
-    html: `<div class="poi-marker ${poi.category}${selected ? " selected" : ""}${active ? " raid-active" : ""}"><span class="poi-marker-glyph">${glyphMarkup(poi.category)}</span>${label}</div>`,
+    html: `<div class="poi-marker ${poi.category}${lootGroup ? ` loot-${lootGroup}` : ""}${selected ? " selected" : ""}${active ? " raid-active" : ""}"><span class="poi-marker-glyph">${glyphMarkup(poi.category, lootGroup)}</span>${label}</div>`,
   });
 }
 

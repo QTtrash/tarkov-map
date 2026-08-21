@@ -1,7 +1,14 @@
 import { useMemo, useState } from "react";
-import { defaultVisiblePoiCategories, nearestExtracts, poiCategoryGroups, searchPois } from "../poi";
-import type { MapDefinition, MapPoiBundle, PlayerFix, PoiCategory, RaidExtractState } from "../types";
-import { PoiGlyph, UiIcon } from "./Icons";
+import {
+  countLootGroups,
+  defaultVisiblePoiCategories,
+  lootGroupDefinitions,
+  nearestExtracts,
+  poiCategoryGroups,
+  searchPois,
+} from "../poi";
+import type { LootGroupId, MapDefinition, MapPoiBundle, PlayerFix, PoiCategory, RaidExtractState } from "../types";
+import { LootGroupGlyph, PoiGlyph, UiIcon } from "./Icons";
 
 interface IntelDrawerProps {
   definition: MapDefinition;
@@ -10,12 +17,14 @@ interface IntelDrawerProps {
   error: string | null;
   open: boolean;
   visible: Set<PoiCategory>;
+  visibleLootGroups: ReadonlySet<LootGroupId>;
   fix: PlayerFix | null;
   raidExtracts?: RaidExtractState | null;
   showQuestMarkers: boolean;
   activeQuestCount: number;
   onOpenChange: (open: boolean) => void;
   onToggle: (category: PoiCategory) => void;
+  onToggleLootGroup: (group: LootGroupId) => void;
   onToggleQuestMarkers: () => void;
   onHideAll: () => void;
   onSetVisible: (categories: PoiCategory[]) => void;
@@ -29,12 +38,14 @@ export function IntelDrawer({
   error,
   open,
   visible,
+  visibleLootGroups,
   fix,
   raidExtracts = null,
   showQuestMarkers,
   activeQuestCount,
   onOpenChange,
   onToggle,
+  onToggleLootGroup,
   onToggleQuestMarkers,
   onHideAll,
   onSetVisible,
@@ -42,6 +53,7 @@ export function IntelDrawer({
 }: IntelDrawerProps) {
   const [query, setQuery] = useState("");
   const results = useMemo(() => searchPois(bundle?.pois ?? [], query), [bundle, query]);
+  const lootCounts = useMemo(() => countLootGroups(bundle?.pois ?? []), [bundle]);
   const nearest = useMemo(
     () =>
       fix && bundle
@@ -183,21 +195,51 @@ export function IntelDrawer({
                     </button>
                   )}
                   {available.map((category) => (
-                    <button
-                      className={
-                        visible.has(category.id) ? `legend-row ${category.id} enabled` : `legend-row ${category.id}`
-                      }
+                    <div
+                      className={category.id === "loot" ? "legend-category-with-children" : undefined}
                       key={category.id}
-                      aria-pressed={visible.has(category.id)}
-                      onClick={() => onToggle(category.id)}
                     >
-                      <span className="legend-symbol">
-                        <PoiGlyph category={category.id} />
-                      </span>
-                      <span>{category.name}</span>
-                      <b>{definition.poiCounts[category.id]}</b>
-                      <i aria-hidden="true" />
-                    </button>
+                      <button
+                        className={
+                          visible.has(category.id) ? `legend-row ${category.id} enabled` : `legend-row ${category.id}`
+                        }
+                        aria-pressed={visible.has(category.id)}
+                        onClick={() => onToggle(category.id)}
+                      >
+                        <span className="legend-symbol">
+                          <PoiGlyph category={category.id} />
+                        </span>
+                        <span>{category.name}</span>
+                        <b>{definition.poiCounts[category.id]}</b>
+                        <i aria-hidden="true" />
+                      </button>
+                      {category.id === "loot" && (
+                        <div className="loot-filter-grid" aria-label="Loot container categories">
+                          {lootGroupDefinitions.map((lootGroup) => {
+                            const count = lootCounts.get(lootGroup.id) ?? 0;
+                            if (!count) return null;
+                            const enabled = visible.has("loot") && visibleLootGroups.has(lootGroup.id);
+                            return (
+                              <button
+                                className={
+                                  enabled ? `loot-filter ${lootGroup.id} enabled` : `loot-filter ${lootGroup.id}`
+                                }
+                                key={lootGroup.id}
+                                aria-pressed={enabled}
+                                onClick={() => onToggleLootGroup(lootGroup.id)}
+                              >
+                                <span className="loot-filter-symbol">
+                                  <LootGroupGlyph group={lootGroup.id} />
+                                </span>
+                                <span>{lootGroup.name}</span>
+                                <b>{count}</b>
+                                <i aria-hidden="true" />
+                              </button>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </section>
               );

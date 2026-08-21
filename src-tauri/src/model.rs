@@ -14,6 +14,7 @@ pub struct Settings {
     pub delete_parsed_screenshots: bool,
     pub selected_map: String,
     pub visible_map_layers: Vec<String>,
+    pub visible_loot_groups: Vec<String>,
     pub legend_open: bool,
     pub show_quest_markers: bool,
     pub high_contrast: bool,
@@ -38,6 +39,18 @@ impl Default for Settings {
                 "transit".into(),
                 "switch".into(),
                 "btr".into(),
+            ],
+            visible_loot_groups: vec![
+                "drawers".into(),
+                "bags".into(),
+                "weapon-ammo".into(),
+                "medical".into(),
+                "technical".into(),
+                "supply-crates".into(),
+                "safes-cash".into(),
+                "caches".into(),
+                "bodies".into(),
+                "other".into(),
             ],
             legend_open: false,
             show_quest_markers: false,
@@ -74,6 +87,26 @@ impl Settings {
             })
         {
             return Err("Invalid visible map layers".into());
+        }
+        const LOOT_GROUPS: [&str; 10] = [
+            "drawers",
+            "bags",
+            "weapon-ammo",
+            "medical",
+            "technical",
+            "supply-crates",
+            "safes-cash",
+            "caches",
+            "bodies",
+            "other",
+        ];
+        if self.visible_loot_groups.len() > LOOT_GROUPS.len()
+            || self
+                .visible_loot_groups
+                .iter()
+                .any(|group| !LOOT_GROUPS.contains(&group.as_str()))
+        {
+            return Err("Invalid visible loot groups".into());
         }
         if !self.overlay_opacity.is_finite() || !(0.35..=1.0).contains(&self.overlay_opacity) {
             return Err("Overlay opacity must be between 0.35 and 1.0".into());
@@ -189,6 +222,10 @@ mod tests {
         assert!(settings.always_on_top);
         assert!(!settings.follow_player);
         assert_eq!(
+            settings.visible_loot_groups,
+            Settings::default().visible_loot_groups
+        );
+        assert_eq!(
             settings.visible_map_layers,
             vec![
                 "extract-pmc",
@@ -214,6 +251,10 @@ mod tests {
         let mut invalid = Settings::default();
         invalid.overlay_opacity = f64::NAN;
         assert!(invalid.validate().is_err());
+
+        let mut invalid_group = Settings::default();
+        invalid_group.visible_loot_groups = vec!["constructor".into()];
+        assert!(invalid_group.validate().is_err());
     }
 
     #[test]

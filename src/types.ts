@@ -8,6 +8,7 @@ export interface LocatorSettings {
   deleteParsedScreenshots: boolean;
   selectedMap: string;
   visibleMapLayers: string[];
+  visibleLootGroups: LootGroupId[];
   legendOpen: boolean;
   showQuestMarkers: boolean;
   highContrast: boolean;
@@ -175,6 +176,18 @@ export type PoiCategory =
   | "custom-pin"
   | "loot"
   | "stationary-weapon";
+
+export type LootGroupId =
+  | "drawers"
+  | "bags"
+  | "weapon-ammo"
+  | "medical"
+  | "technical"
+  | "supply-crates"
+  | "safes-cash"
+  | "caches"
+  | "bodies"
+  | "other";
 
 interface PoiBase {
   id: string;

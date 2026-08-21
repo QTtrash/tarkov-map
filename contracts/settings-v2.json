@@ -8,6 +8,18 @@
   "deleteParsedScreenshots": false,
   "selectedMap": "customs",
   "visibleMapLayers": ["extract-pmc", "extract-scav", "extract-shared", "transit", "switch", "btr"],
+  "visibleLootGroups": [
+    "drawers",
+    "bags",
+    "weapon-ammo",
+    "medical",
+    "technical",
+    "supply-crates",
+    "safes-cash",
+    "caches",
+    "bodies",
+    "other"
+  ],
   "legendOpen": false,
   "showQuestMarkers": false,
   "highContrast": false,

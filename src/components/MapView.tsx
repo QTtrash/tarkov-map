@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet.markercluster";
 import { prepareSvgMap, versionedMapAssetPath } from "../map-assets";
-import { poiMatchesFloor } from "../poi";
+import { allLootGroupIds, lootGroupForType, poiMatchesFloor } from "../poi";
 import {
   assetForFloor,
   createMapCrs,
@@ -15,7 +15,15 @@ import {
   squadMarkerIcon,
   worldPoint,
 } from "./map-view-helpers";
-import type { MapAssetState, MapDefinition, MapPoiBundle, PlayerFix, PoiCategory, SquadPosition } from "../types";
+import type {
+  LootGroupId,
+  MapAssetState,
+  MapDefinition,
+  MapPoiBundle,
+  PlayerFix,
+  PoiCategory,
+  SquadPosition,
+} from "../types";
 
 interface MapViewProps {
   definition: MapDefinition;
@@ -25,6 +33,7 @@ interface MapViewProps {
   follow: boolean;
   poiBundle: MapPoiBundle | null;
   visiblePoiCategories: Set<PoiCategory>;
+  visibleLootGroups?: ReadonlySet<LootGroupId>;
   selectedPoiId: string | null;
   focusPoiId: string | null;
   activeExtractIds?: Set<string>;
@@ -35,6 +44,7 @@ interface MapViewProps {
 }
 
 const noActiveExtracts = new Set<string>();
+const allLootGroups = new Set(allLootGroupIds);
 
 export { createMapCrs } from "./map-view-helpers";
 
@@ -46,6 +56,7 @@ export function MapView({
   follow,
   poiBundle,
   visiblePoiCategories,
+  visibleLootGroups = allLootGroups,
   selectedPoiId,
   focusPoiId,
   activeExtractIds = noActiveExtracts,
@@ -243,6 +254,7 @@ export function MapView({
         : L.layerGroup();
       for (const poi of poiBundle.pois) {
         if (poi.category !== category || !poiMatchesFloor(poi, definition, activeFloor)) continue;
+        if (poi.kind === "loot" && !visibleLootGroups.has(lootGroupForType(poi.lootType))) continue;
         const outline = outlineForPoi(poi);
         if (outline) outline.addTo(group);
         const marker = L.marker(worldPoint(poi.position), {
@@ -282,7 +294,7 @@ export function MapView({
       poiParentsRef.current.clear();
       poiOutlinesRef.current.clear();
     };
-  }, [activeExtractIds, activeFloor, definition, onSelectPoi, poiBundle, visiblePoiCategories]);
+  }, [activeExtractIds, activeFloor, definition, onSelectPoi, poiBundle, visibleLootGroups, visiblePoiCategories]);
 
   useEffect(() => {
     selectedPoiRef.current = selectedPoiId;

@@ -1126,6 +1126,115 @@ a:focus-visible {
   transform: translateX(10px);
   background: currentColor;
 }
+.legend-category-with-children {
+  border-bottom: 1px solid var(--rule-soft);
+}
+.legend-category-with-children > .legend-row {
+  border-bottom: 1px solid var(--rule-soft);
+}
+.loot-filter-grid {
+  position: relative;
+  padding: 5px 0 7px 17px;
+}
+.loot-filter-grid::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 10px;
+  left: 6px;
+  border-left: 1px solid #353a35;
+}
+.loot-filter {
+  display: grid;
+  width: 100%;
+  min-height: 29px;
+  grid-template-columns: 22px 1fr auto 16px;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 0;
+  color: #555b55;
+  background: transparent;
+  text-align: left;
+}
+.loot-filter:hover {
+  color: #7b8179;
+  background: linear-gradient(90deg, #1a1e1a 0%, transparent 86%);
+}
+.loot-filter.enabled {
+  color: var(--loot-color, #9da196);
+}
+.loot-filter-symbol {
+  display: grid;
+  width: 20px;
+  height: 20px;
+  place-items: center;
+  border: 1px solid currentColor;
+  background: #0d100e;
+}
+.loot-filter > span:nth-child(2) {
+  color: inherit;
+  font-size: 10px;
+}
+.loot-filter > b {
+  color: var(--faint);
+  font:
+    400 7px/1 "IBM Plex Mono",
+    monospace;
+}
+.loot-filter > i {
+  width: 7px;
+  height: 7px;
+  border: 1px solid #444a44;
+  background: transparent;
+}
+.loot-filter.enabled > i {
+  border-color: currentColor;
+  background: currentColor;
+  box-shadow: 0 0 0 2px #111411 inset;
+}
+.loot-filter.drawers,
+.poi-marker.loot-drawers {
+  --loot-color: #b8a57a;
+}
+.loot-filter.bags,
+.poi-marker.loot-bags {
+  --loot-color: #a99075;
+}
+.loot-filter.weapon-ammo,
+.poi-marker.loot-weapon-ammo {
+  --loot-color: #bd7868;
+}
+.loot-filter.medical,
+.poi-marker.loot-medical {
+  --loot-color: #c77c78;
+}
+.loot-filter.technical,
+.poi-marker.loot-technical {
+  --loot-color: #7fa4a0;
+}
+.loot-filter.supply-crates,
+.poi-marker.loot-supply-crates {
+  --loot-color: #8f9b6e;
+}
+.loot-filter.safes-cash,
+.poi-marker.loot-safes-cash {
+  --loot-color: #c7a85f;
+}
+.loot-filter.caches,
+.poi-marker.loot-caches {
+  --loot-color: #779167;
+}
+.loot-filter.bodies,
+.poi-marker.loot-bodies {
+  --loot-color: #927d8f;
+}
+.loot-filter.other,
+.poi-marker.loot-other {
+  --loot-color: #858a82;
+}
+.poi-marker[class*="loot-"] {
+  color: var(--loot-color) !important;
+}
 .drawer-message,
 .intel-note {
   margin: 12px;

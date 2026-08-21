@@ -5,9 +5,13 @@ import { parseCustomPins, parseQuestProgress, parseSettings, readStoredJson } fr
 describe("runtime boundary validation", () => {
   it("accepts current settings and rejects unsupported or unsafe values", () => {
     expect(parseSettings(defaultSettings)).toEqual(defaultSettings);
+    const olderSettings: Record<string, unknown> = { ...defaultSettings };
+    delete olderSettings.visibleLootGroups;
+    expect(parseSettings(olderSettings)).toEqual(defaultSettings);
     expect(() => parseSettings({ ...defaultSettings, schemaVersion: 99 })).toThrow();
     expect(() => parseSettings({ ...defaultSettings, overlayOpacity: Number.NaN })).toThrow();
     expect(() => parseSettings({ ...defaultSettings, selectedMap: "../escape" })).toThrow();
+    expect(() => parseSettings({ ...defaultSettings, visibleLootGroups: ["constructor"] })).toThrow();
   });
 
   it("rejects malformed persisted pins and progress", () => {
