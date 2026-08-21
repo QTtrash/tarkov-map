@@ -16,16 +16,16 @@ pub fn read_exfil_text(path: &Path) -> Result<String, String> {
     {
         let file = StorageFile::GetFileFromPathAsync(&HSTRING::from(path))
             .map_err(|error| error.to_string())?
-            .get()
+            .join()
             .map_err(|error| format!("Screenshot is not readable yet: {error}"))?;
         let stream = file
             .OpenAsync(FileAccessMode::Read)
             .map_err(|error| error.to_string())?
-            .get()
+            .join()
             .map_err(|error| error.to_string())?;
         let decoder = BitmapDecoder::CreateAsync(&stream)
             .map_err(|error| error.to_string())?
-            .get()
+            .join()
             .map_err(|error| error.to_string())?;
         let source_width = decoder.PixelWidth().map_err(|error| error.to_string())?;
         let source_height = decoder.PixelHeight().map_err(|error| error.to_string())?;
@@ -49,7 +49,7 @@ pub fn read_exfil_text(path: &Path) -> Result<String, String> {
                 ColorManagementMode::DoNotColorManage,
             )
             .map_err(|error| error.to_string())?
-            .get()
+            .join()
             .map_err(|error| error.to_string())?;
         let engine = OcrEngine::TryCreateFromUserProfileLanguages().map_err(|error| {
             format!("Windows OCR is unavailable; install a Windows language OCR pack: {error}")
@@ -57,7 +57,7 @@ pub fn read_exfil_text(path: &Path) -> Result<String, String> {
         let result = engine
             .RecognizeAsync(&bitmap)
             .map_err(|error| error.to_string())?
-            .get()
+            .join()
             .map_err(|error| error.to_string())?;
         let lines = result.Lines().map_err(|error| error.to_string())?;
         let mut selected = Vec::new();
