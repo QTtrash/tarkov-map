@@ -52,10 +52,10 @@ test("public landing page exposes privacy and lazy scene controls", async ({ pag
   await page.route("**/release.json", (route) =>
     route.fulfill({
       json: {
-        filename: "Raid-Signal-Setup-1.3.0.exe",
-        version: "1.3.0",
+        filename: "Raid-Signal-Setup-1.3.1.exe",
+        version: "1.3.1",
         sha256: "8a29f31c3d5f977752138bb76c6055476714f5aca11ca8ed590629ab630b4741",
-        downloadUrl: "https://github.com/QTtrash/tarkov-map/releases/download/v1.3.0/Raid-Signal-Setup-1.3.0.exe",
+        downloadUrl: "https://github.com/QTtrash/tarkov-map/releases/download/v1.3.1/Raid-Signal-Setup-1.3.1.exe",
         size: 27000000,
         publishedAt: "2026-08-21T12:30:00.000Z",
       },
@@ -96,9 +96,9 @@ test("public landing page exposes privacy and lazy scene controls", async ({ pag
     "href",
     "https://github.com/QTtrash/tarkov-map/actions/workflows/release.yml",
   );
-  await expect(page.getByRole("link", { name: "DOWNLOAD 1.3.0 FOR WINDOWS" }).first()).toHaveAttribute(
+  await expect(page.getByRole("link", { name: "DOWNLOAD 1.3.1 FOR WINDOWS" }).first()).toHaveAttribute(
     "href",
-    "https://github.com/QTtrash/tarkov-map/releases/download/v1.3.0/Raid-Signal-Setup-1.3.0.exe",
+    "https://github.com/QTtrash/tarkov-map/releases/download/v1.3.1/Raid-Signal-Setup-1.3.1.exe",
   );
   await expect(page.locator("[data-release-sha]")).toHaveText(
     "8a29f31c3d5f977752138bb76c6055476714f5aca11ca8ed590629ab630b4741",

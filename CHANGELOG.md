@@ -6,6 +6,32 @@ All notable changes to Raid Signal are recorded here. The format follows
 
 ## [Unreleased]
 
+## [1.3.1] - 2026-08-22
+
+### Fixed
+
+- Scan notification and output logs independently so an unrelated notification
+  file no longer suppresses supported quest records in the corresponding output
+  log, while deduplicating events found in both sources.
+- Distinguish the configured parent logs root from the resolved active session
+  and make folder rescans, quest scans, empty results, and successful imports
+  visibly observable.
+
+### Changed
+
+- Mark quest-log import as experimental and report unsupported current log
+  formats explicitly instead of presenting a zero-event scan without context.
+- Add a privacy-safe Copy Diagnostics summary and structured compatibility issue
+  form to help map future Tarkov formats without requesting raw logs.
+- Treat quest lifecycle traces as diagnostic hints only; ambiguous IDs are never
+  imported as task progress.
+
+### Security and privacy
+
+- Diagnostics exclude filesystem paths, profile and task IDs, timestamps,
+  fingerprints, and raw log content. Settings schema v2, room protocol v1, and
+  relay behavior remain unchanged.
+
 ## [1.3.0] - 2026-08-21
 
 ### Added
@@ -82,7 +108,8 @@ All notable changes to Raid Signal are recorded here. The format follows
   selection.
 - End-to-end encrypted Internet and LAN squad sharing with a phone companion.
 
-[Unreleased]: https://github.com/QTtrash/tarkov-map/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/QTtrash/tarkov-map/compare/v1.3.1...HEAD
+[1.3.1]: https://github.com/QTtrash/tarkov-map/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/QTtrash/tarkov-map/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/QTtrash/tarkov-map/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/QTtrash/tarkov-map/compare/v1.0.0...v1.1.0
