@@ -64,7 +64,9 @@ test("public landing page exposes privacy and lazy scene controls", async ({ pag
   await page.goto("/signal.html");
   await expect(page.getByRole("heading", { name: /Your squad/ })).toBeVisible();
   await expect(page.getByRole("heading", { name: /Built in public/ })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Your active tasks. Already on the map." })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Quest-log import, without pretending every build matches." }),
+  ).toBeVisible();
   await expect(page.getByRole("link", { name: "u/iShadowLTu" })).toHaveAttribute(
     "href",
     "https://www.reddit.com/user/iShadowLTu/",
@@ -72,6 +74,10 @@ test("public landing page exposes privacy and lazy scene controls", async ({ pag
   await expect(page.getByRole("link", { name: "VIEW PR #19 ↗" })).toHaveAttribute(
     "href",
     "https://github.com/QTtrash/tarkov-map/pull/19",
+  );
+  await expect(page.getByRole("link", { name: "REPORT COMPATIBILITY ↗" })).toHaveAttribute(
+    "href",
+    "https://github.com/QTtrash/tarkov-map/issues/new?template=quest_log_compatibility.yml",
   );
   await expect(page.getByRole("link", { name: "@Carbneth" })).toHaveAttribute("href", "https://github.com/Carbneth");
   await expect(page.getByRole("link", { name: "PR #15 ↗" })).toHaveAttribute(
@@ -105,7 +111,9 @@ test("public landing page keeps the community spotlight usable on mobile", async
   await page.setViewportSize({ width: 390, height: 844 });
   await page.route("**/release.json", (route) => route.abort());
   await page.goto("/signal.html#community");
-  await expect(page.getByRole("heading", { name: "Your active tasks. Already on the map." })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Quest-log import, without pretending every build matches." }),
+  ).toBeVisible();
   await expect(page.getByRole("link", { name: "u/iShadowLTu" })).toBeVisible();
   await expect(page.getByRole("link", { name: "@Carbneth" })).toBeVisible();
   await expect(page.getByRole("link", { name: "@TedCreator" })).toBeVisible();

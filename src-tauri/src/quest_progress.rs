@@ -37,7 +37,13 @@ pub(crate) struct QuestSyncPreviewPayload {
     logs_root: Option<String>,
     profiles: Vec<QuestLogProfile>,
     event_count: usize,
+    sessions_scanned: usize,
     files_scanned: usize,
+    notification_files_scanned: usize,
+    output_files_scanned: usize,
+    chat_message_markers: usize,
+    lifecycle_hints: usize,
+    format_status: String,
     malformed_records: usize,
     unattributed_records: usize,
     suspicious_sessions: usize,
@@ -634,8 +640,10 @@ fn preview_from_scan(
     let available = !scan.events.is_empty();
     let message = if available {
         "Quest events were found. Review the profile and mode summary before importing."
+    } else if scan.files_scanned > 0 {
+        "No recognized quest-event records were found. The retained logs may contain no quest transition, or this Tarkov build may use an unsupported format."
     } else {
-        "No supported quest events were found in the available logs."
+        "No notification or output log files were available to scan."
     };
     QuestSyncPreviewPayload {
         available,
@@ -644,7 +652,18 @@ fn preview_from_scan(
         logs_root: Some(root.to_string_lossy().into_owned()),
         profiles: scan.profiles,
         event_count: scan.events.len(),
+        sessions_scanned: scan.sessions_scanned,
         files_scanned: scan.files_scanned,
+        notification_files_scanned: scan.notification_files_scanned,
+        output_files_scanned: scan.output_files_scanned,
+        chat_message_markers: scan.chat_message_markers,
+        lifecycle_hints: scan.lifecycle_hints,
+        format_status: if available {
+            "recognized"
+        } else {
+            "no-recognized-events"
+        }
+        .into(),
         malformed_records: scan.malformed_records,
         unattributed_records: scan.unattributed_records,
         suspicious_sessions: scan.suspicious_sessions,
@@ -661,7 +680,13 @@ fn empty_preview(message: &str, enabled: bool) -> QuestSyncPreviewPayload {
         logs_root: None,
         profiles: Vec::new(),
         event_count: 0,
+        sessions_scanned: 0,
         files_scanned: 0,
+        notification_files_scanned: 0,
+        output_files_scanned: 0,
+        chat_message_markers: 0,
+        lifecycle_hints: 0,
+        format_status: "no-recognized-events".into(),
         malformed_records: 0,
         unattributed_records: 0,
         suspicious_sessions: 0,

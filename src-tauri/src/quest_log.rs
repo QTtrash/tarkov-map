@@ -61,7 +61,12 @@ pub(crate) struct QuestLogProfile {
 pub(crate) struct QuestLogScan {
     pub events: Vec<QuestLogEvent>,
     pub profiles: Vec<QuestLogProfile>,
+    pub sessions_scanned: usize,
     pub files_scanned: usize,
+    pub notification_files_scanned: usize,
+    pub output_files_scanned: usize,
+    pub chat_message_markers: usize,
+    pub lifecycle_hints: usize,
     pub malformed_records: usize,
     pub unattributed_records: usize,
     pub suspicious_sessions: usize,
@@ -125,6 +130,7 @@ fn session_folders(root: &Path, latest_only: bool) -> Result<Vec<PathBuf>, Strin
 }
 
 fn scan_session(session: &Path, scan: &mut QuestLogScan) {
+    scan.sessions_scanned += 1;
     let session_key = session
         .file_name()
         .map(|name| hash_text(&name.to_string_lossy()))
@@ -159,19 +165,24 @@ fn scan_session(session: &Path, scan: &mut QuestLogScan) {
     output_files.truncate(MAX_LOG_FILES_PER_KIND);
 
     let mut markers = Vec::new();
-    for path in application_files.iter().chain(notification_files.iter()) {
+    for path in application_files
+        .iter()
+        .chain(notification_files.iter())
+        .chain(output_files.iter())
+    {
         collect_markers(path, &mut markers);
     }
     markers.sort_by_key(|marker| marker.observed_at);
 
-    let event_files = if notification_files.is_empty() {
-        output_files
-    } else {
-        notification_files
-    };
     let event_start = scan.events.len();
-    for path in &event_files {
+    for path in &notification_files {
         scan.files_scanned += 1;
+        scan.notification_files_scanned += 1;
+        parse_event_file(path, &markers, &session_key, scan);
+    }
+    for path in &output_files {
+        scan.files_scanned += 1;
+        scan.output_files_scanned += 1;
         parse_event_file(path, &markers, &session_key, scan);
     }
     let distinct_started = scan.events[event_start..]
@@ -253,7 +264,19 @@ fn parse_event_file(path: &Path, markers: &[Marker], session_key: &str, scan: &m
                 }
                 return;
             }
+            if [
+                "AcceptQuest",
+                "SendQuestComplete",
+                "SendQuestFail",
+                "EFT.Quests.Quest:SetStatus",
+            ]
+            .iter()
+            .any(|hint| line.contains(hint))
+            {
+                scan.lifecycle_hints += 1;
+            }
             if line.contains("ChatMessageReceived") {
+                scan.chat_message_markers += 1;
                 if waiting_for_json && !json.is_empty() {
                     scan.malformed_records += 1;
                 }
@@ -653,7 +676,7 @@ mod tests {
     }
 
     #[test]
-    fn uses_output_only_as_fallback_and_ignores_nonquest_chat() {
+    fn imports_output_events_even_when_notifications_exist() {
         let root = tempdir().unwrap();
         let session = root.path().join("log_2026.08.21_10-00-00_1.0.0.0");
         std::fs::create_dir(&session).unwrap();
@@ -663,15 +686,46 @@ mod tests {
         )
         .unwrap();
         std::fs::write(
+            session.join("push-notifications_000.log"),
+            "2026-08-21 10:00:01.500 {\"type\":\"userMatchCreated\",\"eventId\":\"abcdefabcdefabcdefabcdef\"}\n",
+        )
+        .unwrap();
+        std::fs::write(
             session.join("output_000.log"),
-            "2026-08-21 10:00:02.000 ChatMessageReceived\n{\"message\":{\"type\":2,\"text\":\"ordinary message\"}}\n2026-08-21 10:00:03.000 ChatMessageReceived\n{\"message\":{\"type\":10,\"text\":\"abcdefabcdefabcdefabcdef started\"}}\n",
+            "2026-08-21 10:00:02.000 AcceptQuest without an attributable task id\n2026-08-21 10:00:03.000 ChatMessageReceived\n{\"eventId\":\"event-1\",\"message\":{\"_id\":\"message-1\",\"type\":10,\"text\":\"abcdefabcdefabcdefabcdef started\"}}\n",
         )
         .unwrap();
 
         let scan = scan_logs(root.path(), false).unwrap();
         assert_eq!(scan.events.len(), 1);
         assert_eq!(scan.events[0].game_mode, "pvp-season");
+        assert_eq!(scan.sessions_scanned, 1);
+        assert_eq!(scan.files_scanned, 2);
+        assert_eq!(scan.notification_files_scanned, 1);
+        assert_eq!(scan.output_files_scanned, 1);
+        assert_eq!(scan.chat_message_markers, 1);
+        assert_eq!(scan.lifecycle_hints, 1);
         assert_eq!(scan.malformed_records, 0);
+    }
+
+    #[test]
+    fn deduplicates_the_same_event_across_notification_and_output_logs() {
+        let root = tempdir().unwrap();
+        let session = root.path().join("log_2026.08.21_10-00-00_1.0.0.0");
+        std::fs::create_dir(&session).unwrap();
+        std::fs::write(
+            session.join("application_000.log"),
+            "2026-08-21 10:00:00.000 Session mode: Regular\n2026-08-21 10:00:01.000 ProfileId:0123456789abcdef01234567\n",
+        )
+        .unwrap();
+        let event = "2026-08-21 10:00:02.000 ChatMessageReceived\n{\"eventId\":\"event-1\",\"message\":{\"_id\":\"message-1\",\"type\":12,\"dt\":1787306402,\"successMessageText\":\"abcdefabcdefabcdefabcdef complete\"}}\n";
+        std::fs::write(session.join("push-notifications_000.log"), event).unwrap();
+        std::fs::write(session.join("output_000.log"), event).unwrap();
+
+        let scan = scan_logs(root.path(), false).unwrap();
+        assert_eq!(scan.events.len(), 1);
+        assert_eq!(scan.files_scanned, 2);
+        assert_eq!(scan.chat_message_markers, 2);
     }
 
     #[test]

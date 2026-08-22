@@ -1,4 +1,5 @@
-import { isTauriRuntime, readLatestScreenshot, resetOverlayWindow, rescanDirectories } from "../locator";
+import { useEffect, useRef, useState } from "react";
+import { isTauriRuntime, readLatestScreenshot, resetOverlayWindow } from "../locator";
 import type { MapSessionState } from "../map-session";
 import type { LocatorSettings, LocatorStatus, OverlayState, RaidExtractState } from "../types";
 import { Dialog } from "./Dialog";
@@ -14,6 +15,8 @@ interface SettingsDialogProps {
   onClose: () => void;
   onBrowse: (kind: "screenshots" | "logs") => Promise<void>;
   onOpenDirectory: (kind: "screenshots" | "logs") => Promise<void>;
+  onRescanDirectories: () => Promise<void>;
+  onReviewQuestLogs: () => void;
   onUpdateSettings: (patch: Partial<LocatorSettings>) => void;
   onOverlayAction: (action: () => Promise<void>, failureMessage: string) => Promise<void>;
 }
@@ -28,9 +31,33 @@ export function SettingsDialog({
   onClose,
   onBrowse,
   onOpenDirectory,
+  onRescanDirectories,
+  onReviewQuestLogs,
   onUpdateSettings,
   onOverlayAction,
 }: SettingsDialogProps) {
+  const [rescanState, setRescanState] = useState<"idle" | "scanning" | "success" | "error">("idle");
+  const [rescanMessage, setRescanMessage] = useState<string | null>(null);
+  const rescanBaseline = useRef<LocatorStatus | null>(null);
+
+  useEffect(() => {
+    if (rescanState !== "scanning" || !rescanBaseline.current || status === rescanBaseline.current) return;
+    setRescanState(status.level === "error" ? "error" : "success");
+    setRescanMessage(status.level === "error" ? (status.lastError ?? status.message) : "Folder paths refreshed");
+  }, [rescanState, status]);
+
+  async function rescan() {
+    rescanBaseline.current = status;
+    setRescanState("scanning");
+    setRescanMessage("Checking configured and automatically detected folders…");
+    try {
+      await onRescanDirectories();
+    } catch (error) {
+      setRescanState("error");
+      setRescanMessage(String(error));
+    }
+  }
+
   return (
     <Dialog className="settings-dialog" titleId="settings-title" onClose={onClose}>
       <header>
@@ -61,18 +88,29 @@ export function SettingsDialog({
         <button className="folder-row" onClick={() => void onBrowse("logs")}>
           <UiIcon name="folder" />
           <span>
-            <b>APPLICATION LOGS</b>
-            <small>{status.logsDir ?? "Folder not detected"}</small>
+            <b>CONFIGURED LOGS ROOT</b>
+            <small>{settings.logsDir ?? "Automatic detection"}</small>
           </span>
           <strong>BROWSE</strong>
         </button>
         {status.logsDir && (
+          <div className="resolved-folder">
+            <span>ACTIVE SESSION</span>
+            <code>{status.logsDir}</code>
+          </div>
+        )}
+        {settings.logsDir && (
           <button className="inline-action" onClick={() => void onOpenDirectory("logs")}>
-            OPEN LOGS FOLDER
+            OPEN CONFIGURED LOGS ROOT
           </button>
         )}
-        <button className="dialog-button" onClick={() => void rescanDirectories()}>
-          RESCAN FOLDERS
+        <button className="dialog-button" onClick={() => void rescan()} disabled={rescanState === "scanning"}>
+          {rescanState === "scanning" ? "SCANNING FOLDERS…" : "RESCAN FOLDERS"}
+        </button>
+        {rescanMessage && <p className={`rescan-result ${rescanState}`}>{rescanMessage}</p>}
+        <p className="field-help">Folder rescan updates data-source detection. Quest records are scanned separately.</p>
+        <button className="dialog-button secondary" onClick={onReviewQuestLogs}>
+          REVIEW QUEST LOGS
         </button>
         <button className="dialog-button secondary" onClick={() => void readLatestScreenshot()}>
           READ LATEST SCREENSHOT

@@ -360,7 +360,13 @@ export interface QuestSyncPreview {
   logsRoot: string | null;
   profiles: QuestLogProfilePreview[];
   eventCount: number;
+  sessionsScanned: number;
   filesScanned: number;
+  notificationFilesScanned: number;
+  outputFilesScanned: number;
+  chatMessageMarkers: number;
+  lifecycleHints: number;
+  formatStatus: "recognized" | "no-recognized-events";
   malformedRecords: number;
   unattributedRecords: number;
   suspiciousSessions: number;

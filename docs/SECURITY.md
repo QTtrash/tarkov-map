@@ -26,7 +26,12 @@
 - Quest-log import is opt-in and previewed before the first write. It bounds JSON
   records, accepts only known modes/statuses and exact task identifiers, hashes
   profile IDs before persistence, deduplicates events, skips unattributed input,
-  and quarantines suspicious quest-start bursts.
+  quarantines suspicious quest-start bursts, and never promotes lifecycle hints
+  or arbitrary identifiers into progress.
+- Copied quest diagnostics contain only application version, path roles, bounded
+  counters, and safe status categories. They exclude paths, filenames, profile
+  keys, timestamps, fingerprints, and log contents. Raw logs must not be attached
+  to public compatibility reports.
 - Quest profiles, player levels, and progress remain local. They are not included
   in room protocol v1 and never reach either relay or the phone companion.
 
