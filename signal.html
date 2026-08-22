@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="referrer" content="no-referrer" />
     <meta name="theme-color" content="#070706" />
-    <meta name="description" content="Raid Signal is a local-first Escape from Tarkov map with automatic quest tracking and encrypted squad coordination." />
+    <meta name="description" content="Raid Signal is a local-first Escape from Tarkov map with experimental quest-log import and encrypted squad coordination." />
     <link rel="canonical" href="https://signal.mouchsiadis-solutions.com/" />
     <meta property="og:title" content="Raid Signal — Local-first, encrypted, open source" />
     <meta property="og:description" content="Open-source Windows raid navigation with automatic local quest tracking and end-to-end encrypted squad coordination." />
@@ -109,42 +109,42 @@
       <section class="community-section" id="community" aria-labelledby="community-title">
         <header class="community-heading">
           <div>
-            <p class="eyebrow">V1.3.0 / COMMUNITY REQUEST SHIPPED</p>
-            <h2 id="community-title">Your active tasks. Already on the map.</h2>
+            <p class="eyebrow">V1.3.1 / EXPERIMENTAL COMPATIBILITY</p>
+            <h2 id="community-title">Quest-log import, without pretending every build matches.</h2>
           </div>
           <div class="community-intro">
-            <p>Raid Signal can now recognize explicit quest events from Tarkov-created logs, keep PvP, PvE, and Seasonal profiles separate, and show current active objectives without making you select every task again.</p>
+            <p>Raid Signal imports only explicit quest records it can safely recognize and attribute. Current Tarkov builds may not retain that format, so v1.3.1 scans both notification and output logs, explains zero-event results, and lets players copy a privacy-safe compatibility summary.</p>
             <div class="community-contributor">
               <span>COMMUNITY REQUEST</span>
               <strong><a href="https://www.reddit.com/user/iShadowLTu/" target="_blank" rel="noopener noreferrer">u/iShadowLTu</a></strong>
-              <p>Asked whether Raid Signal could read task events from the logs it already locates and automatically show objectives for active tasks. The reviewed implementation shipped in <a href="https://github.com/QTtrash/tarkov-map/pull/19" target="_blank" rel="noopener noreferrer">PR #19</a>.</p>
+              <p>Asked whether Raid Signal could read task events from the logs it already locates and automatically show objectives for active tasks. The experiment began in <a href="https://github.com/QTtrash/tarkov-map/pull/19" target="_blank" rel="noopener noreferrer">PR #19</a>; current-format compatibility remains community-tested and explicitly experimental.</p>
             </div>
           </div>
         </header>
 
-        <div class="community-sync-board" role="img" aria-label="Quest events move from local Tarkov logs through a reviewed local import into active map markers; profile and quest data are never relayed">
+        <div class="community-sync-board" role="img" aria-label="Notification and output logs move through local compatibility diagnostics; only safely recognized quest events may be imported, and no log or quest data is relayed">
           <header><span>LOCAL QUEST SIGNAL</span><b>PVP / PVE / SEASONAL</b></header>
           <div class="community-sync-board__grid">
-            <article><span>01 / TARKOV LOGS</span><strong>EXPLICIT EVENTS</strong><code>STARTED<br />COMPLETED<br />FAILED</code><small>Bounded local parsing</small></article>
+            <article><span>01 / TARKOV LOGS</span><strong>SCAN BOTH SOURCES</strong><code>NOTIFICATION<br />OUTPUT<br />BOUNDED READS</code><small>Local and opt-in</small></article>
             <i aria-hidden="true">→</i>
-            <article><span>02 / REVIEW</span><strong>PROFILE ISOLATION</strong><code>PROFILE 7F••••••<br />NEWEST EVENT WINS<br />BACKFILL CONFIRM</code><small>Raw profile ID not stored</small></article>
+            <article><span>02 / REVIEW</span><strong>VISIBLE DIAGNOSTICS</strong><code>EVENT COUNTS<br />FORMAT STATUS<br />SAFE COPY</code><small>No paths or log contents</small></article>
             <i aria-hidden="true">→</i>
-            <article><span>03 / MAP</span><strong>ACTIVE OBJECTIVES</strong><code>CURRENT MODE<br />CURRENT PROFILE<br />MARKERS READY</code><small>Pause sync at any time</small></article>
+            <article><span>03 / MAP</span><strong>RECOGNIZED ONLY</strong><code>NO ID GUESSING<br />NO TRACE INFERENCE<br />MANUAL FALLBACK</code><small>Accuracy before automation</small></article>
           </div>
           <footer><span>DESKTOP ONLY / OPT-IN</span><b>LOGS + QUEST STATE NEVER ENTER ROOM PROTOCOL V1</b></footer>
         </div>
 
-        <div class="community-flow" aria-label="Automatic quest tracking workflow">
-          <article><span>01</span><strong>PREVIEW FIRST</strong><p>The first historical scan shows anonymized profile, mode, and event counts before anything is imported.</p></article>
-          <article><span>02</span><strong>TRUST EVENTS</strong><p>Only explicit started, completed, and failed records change progress. Suspicious bursts and unattributed input are withheld.</p></article>
-          <article><span>03</span><strong>STAY IN CONTROL</strong><p>Adjust an optional profile level, browse another mode, correct a status manually, or pause automatic syncing.</p></article>
+        <div class="community-flow" aria-label="Experimental quest-log compatibility workflow">
+          <article><span>01</span><strong>SEE WHAT RAN</strong><p>Folder rescan, log scan, configured root, active session, and import outcomes now have distinct visible states.</p></article>
+          <article><span>02</span><strong>REPORT SAFELY</strong><p>Copy counts-only diagnostics and submit them through the dedicated compatibility form—never post raw logs.</p></article>
+          <article><span>03</span><strong>HELP MAP THE FORMAT</strong><p>Players who can accept, complete, or fail a quest today can help identify a trustworthy current event structure.</p></article>
         </div>
 
         <footer class="community-footer">
-          <p>Seasonal eligibility remains unknown unless a supported event says otherwise. The app does not infer completed tasks from quest chains, trader standing, inventory, or game memory.</p>
+          <p>Automatic import is experimental. No recognized events means nothing is imported; manual quest tracking remains available. Raw logs must never be posted publicly.</p>
           <div>
             <a href="https://github.com/QTtrash/tarkov-map/pull/19" target="_blank" rel="noopener noreferrer">VIEW PR #19 ↗</a>
-            <a href="https://github.com/QTtrash/tarkov-map/releases/tag/v1.3.0" target="_blank" rel="noopener noreferrer">OPEN V1.3.0 RELEASE ↗</a>
+            <a href="https://github.com/QTtrash/tarkov-map/issues/new?template=quest_log_compatibility.yml" target="_blank" rel="noopener noreferrer">REPORT COMPATIBILITY ↗</a>
           </div>
         </footer>
 
@@ -189,7 +189,7 @@
           <article><span>LICENSE</span><strong>Apache-2.0 code</strong><p>Map artwork and data remain under the terms in the asset ledger.</p><a href="https://github.com/QTtrash/tarkov-map/blob/main/ASSET_LICENSES.md">READ LICENSE BOUNDARY ↗</a></article>
           <article><span>RELEASE</span><strong data-release-version>Latest release</strong><p data-release-published>Immutable installer, checksum, manifest, SBOM, and provenance.</p><a href="https://github.com/QTtrash/tarkov-map/releases" data-release-url>OPEN RELEASE ↗</a></article>
           <article class="source-proof__hash"><span>SHA-256</span><code data-release-sha>Published with each GitHub release</code><a href="https://github.com/QTtrash/tarkov-map/releases" data-checksum-url>DOWNLOAD CHECKSUM ↗</a></article>
-          <article><span>RELEASE GATES</span><strong>CI + independent scans</strong><p>v1.3.0 is published only after project and browser tests, Defender, ClamAV, SPDX SBOM generation, and GitHub provenance.</p><a href="https://github.com/QTtrash/tarkov-map/actions/workflows/release.yml">VIEW RELEASE WORKFLOW ↗</a></article>
+          <article><span>RELEASE GATES</span><strong>CI + independent scans</strong><p>Each release is published only after project and browser tests, Defender, ClamAV, SPDX SBOM generation, and GitHub provenance.</p><a href="https://github.com/QTtrash/tarkov-map/actions/workflows/release.yml">VIEW RELEASE WORKFLOW ↗</a></article>
         </div>
       </section>
 

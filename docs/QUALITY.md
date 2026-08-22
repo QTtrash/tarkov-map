@@ -12,7 +12,11 @@ Defender and ClamAV scans, SHA-256, an SPDX SBOM, and artifact provenance.
 
 - Pure parsing, geometry, protocol, and domain rules: unit tests beside modules.
 - Quest-log fixtures cover multiline records, profile/mode attribution,
-  deduplication, suspicious start bursts, and manual-versus-log ordering.
+  cross-source scanning and deduplication, unrelated notification/lifecycle
+  rejection, suspicious start bursts, and manual-versus-log ordering.
+- Quest compatibility UI tests cover configured-root versus active-session
+  display, visible scan outcomes, zero-event explanations, and privacy-safe
+  clipboard summaries.
 - Storage, filesystem, HTTP, WebSocket, and native boundaries: failure-oriented
   integration tests including malformed and missing input.
 - User journeys and keyboard/focus behavior: `tests/e2e/` in Chromium.

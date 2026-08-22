@@ -12,6 +12,11 @@ confirms a local preview. Raw profile IDs are one-way hashed before local
 persistence. Quest progress, profile level, and custom waypoints always remain
 on the local device and are not part of sharing sessions.
 
+The optional **Copy Diagnostics** action copies counts and safe compatibility
+categories only. It excludes filesystem paths, filenames, identifiers,
+timestamps, fingerprints, and log contents. Raw Tarkov logs can contain account,
+network, token, path, and chat data and must not be posted publicly.
+
 ## Sharing data
 
 Internet and LAN sharing sends encrypted map ID, coordinates, heading, callsign,

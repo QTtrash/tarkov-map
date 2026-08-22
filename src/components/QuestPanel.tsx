@@ -12,6 +12,7 @@ import {
   setQuestSyncEnabled,
   syncQuestProgress,
 } from "../locator";
+import { questCompatibilityIssueUrl, questDiagnosticSummary } from "../quest-diagnostics";
 import { buildActiveQuestObjectivePois, compareQuests, effectiveQuestStatus, questStatuses } from "../quest";
 import type {
   QuestBundle,
@@ -34,6 +35,7 @@ interface QuestPanelProps {
   onFocusObjective: (mapId: string, poi: QuestObjectivePoi | null) => void;
   onActiveObjectivePoisChange?: (pois: QuestObjectivePoi[]) => void;
   onEnableQuestMarkersOnce?: () => void;
+  onImportComplete?: () => void;
 }
 
 type StatusFilter = "all" | "actionable" | QuestDisplayStatus;
@@ -65,6 +67,7 @@ export function QuestPanel({
   onFocusObjective,
   onActiveObjectivePoisChange,
   onEnableQuestMarkersOnce,
+  onImportComplete,
 }: QuestPanelProps) {
   const [mode, setMode] = useState<QuestGameMode>("regular");
   const [bundle, setBundle] = useState<QuestBundle | null>(null);
@@ -79,6 +82,8 @@ export function QuestPanel({
   const [syncBusy, setSyncBusy] = useState(false);
   const [syncEnabled, setSyncEnabled] = useState(false);
   const [syncMessage, setSyncMessage] = useState<string | null>(null);
+  const [reviewError, setReviewError] = useState<string | null>(null);
+  const [diagnosticCopied, setDiagnosticCopied] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
   const [query, setQuery] = useState("");
   const [showAllMaps, setShowAllMaps] = useState(false);
@@ -229,6 +234,8 @@ export function QuestPanel({
   async function openLogReview() {
     if (!isTauriRuntime()) return;
     setSyncBusy(true);
+    setReviewError(null);
+    setDiagnosticCopied(false);
     try {
       const preview = await getQuestSyncPreview();
       setReview(preview);
@@ -248,6 +255,7 @@ export function QuestPanel({
 
   async function confirmImport() {
     setSyncBusy(true);
+    setReviewError(null);
     try {
       const result = await confirmQuestSync();
       setProfiles(result.profiles);
@@ -264,10 +272,22 @@ export function QuestPanel({
       setSyncMessage(`${result.importedEvents} quest log event${result.importedEvents === 1 ? "" : "s"} imported`);
       setRefreshKey((current) => current + 1);
       setReviewOpen(false);
+      onImportComplete?.();
     } catch (reason) {
-      setError(String(reason));
+      setReviewError(String(reason));
     } finally {
       setSyncBusy(false);
+    }
+  }
+
+  async function copyDiagnostics() {
+    if (!review) return;
+    try {
+      await navigator.clipboard.writeText(questDiagnosticSummary(review));
+      setDiagnosticCopied(true);
+      setReviewError(null);
+    } catch (reason) {
+      setReviewError(`Diagnostics could not be copied: ${String(reason)}`);
     }
   }
 
@@ -339,6 +359,13 @@ export function QuestPanel({
             </button>
           </header>
           <div className="quest-review-body">
+            <div className="quest-experimental-notice">
+              <strong>EXPERIMENTAL LOG COMPATIBILITY</strong>
+              <p>
+                Tarkov builds do not always retain a supported quest-event format. Raid Signal imports only explicit,
+                safely attributed records and never guesses from lifecycle traces or unrelated IDs.
+              </p>
+            </div>
             <p>{review.message}</p>
             <p>
               Raid Signal reads supported quest notifications from your local Tarkov logs. Profile IDs are one-way
@@ -347,8 +374,14 @@ export function QuestPanel({
             <div className="quest-review-stats">
               <span>{review.eventCount} EVENTS</span>
               <span>{review.profiles.length} PROFILES</span>
+              <span>{review.sessionsScanned} SESSIONS</span>
               <span>{review.filesScanned} FILES</span>
             </div>
+            <p className="field-help">
+              {review.notificationFilesScanned} notification · {review.outputFilesScanned} output ·{" "}
+              {review.chatMessageMarkers} recognized format markers · {review.lifecycleHints} non-authoritative
+              lifecycle hints
+            </p>
             {review.profiles.map((profile) => (
               <article key={`${profile.gameMode}:${profile.profileKey}`}>
                 <strong>{profileLabel(profile.profileKey)}</strong>
@@ -384,13 +417,30 @@ export function QuestPanel({
               Newest events win, including later manual corrections. Existing v1.2 manual progress is attached to each
               detected current profile during this first import.
             </p>
+            {!review.available && (
+              <div className="quest-review-warning">
+                <p>No supported quest events are available to import, so marker import is disabled.</p>
+                <p>
+                  Copy the privacy-safe summary and submit a compatibility report. It contains no paths, IDs,
+                  timestamps, or log contents.
+                </p>
+                <a href={questCompatibilityIssueUrl} target="_blank" rel="noreferrer">
+                  OPEN COMPATIBILITY REPORT ↗
+                </a>
+              </div>
+            )}
+            {reviewError && <p className="error-box">{reviewError}</p>}
+            {diagnosticCopied && <p className="success-box">Privacy-safe diagnostics copied.</p>}
           </div>
           <footer>
+            <button className="secondary" onClick={() => void copyDiagnostics()} disabled={syncBusy}>
+              COPY DIAGNOSTICS
+            </button>
             <button className="secondary" onClick={() => void closeLogReview()} disabled={syncBusy}>
               NOT NOW
             </button>
             <button className="primary" onClick={() => void confirmImport()} disabled={syncBusy || !review.available}>
-              {syncBusy ? "IMPORTING…" : "IMPORT AND ENABLE MARKERS"}
+              {syncBusy ? "IMPORTING…" : review.available ? "IMPORT AND ENABLE MARKERS" : "NO EVENTS TO IMPORT"}
             </button>
           </footer>
         </Dialog>
@@ -452,6 +502,13 @@ export function QuestPanel({
               </select>
             </label>
           </div>
+          <div className="quest-experimental-notice quest-experimental-notice--panel">
+            <strong>EXPERIMENTAL LOG IMPORT</strong>
+            <p>
+              Current Tarkov builds may not retain recognized quest events. Manual quest tracking remains available;
+              automatic import never infers progress from ambiguous log lines.
+            </p>
+          </div>
           <div className="quest-profile-bar">
             {isTauriRuntime() ? (
               <>
@@ -502,7 +559,7 @@ export function QuestPanel({
                   </button>
                 ) : (
                   <button onClick={() => void openLogReview()} disabled={syncBusy}>
-                    REVIEW LOG IMPORT
+                    {syncBusy ? "SCANNING LOGS…" : "REVIEW LOG IMPORT"}
                   </button>
                 )}
               </>

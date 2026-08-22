@@ -1627,6 +1627,47 @@ a:focus-visible {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.resolved-folder {
+  display: grid;
+  gap: 4px;
+  padding: 8px 10px;
+  border: 1px solid var(--rule);
+  color: var(--faint);
+  background: #0d100e;
+}
+.resolved-folder span,
+.resolved-folder code {
+  overflow: hidden;
+  font:
+    400 8px/1.4 "IBM Plex Mono",
+    monospace;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.resolved-folder span {
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+.rescan-result {
+  margin: 7px 0 !important;
+  font:
+    500 8px/1.4 "IBM Plex Mono",
+    monospace !important;
+  letter-spacing: 0.04em;
+}
+.rescan-result.success {
+  color: var(--pmc);
+}
+.rescan-result.error {
+  color: #d17b6d;
+}
+.field-help {
+  color: var(--faint) !important;
+  font:
+    400 9px/1.5 "IBM Plex Mono",
+    monospace !important;
+}
 .dialog-button {
   height: 34px;
   width: 100%;
@@ -1830,6 +1871,11 @@ a:focus-visible {
   cursor: not-allowed;
   opacity: 0.55;
 }
+.quest-review-dialog button:disabled,
+.quest-profile-bar button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
 .quest-toolbar {
   display: grid;
   grid-template-columns: auto minmax(260px, 1fr) auto;
@@ -1956,6 +2002,35 @@ a:focus-visible {
   font-size: 11px;
   line-height: 1.55;
 }
+.quest-experimental-notice {
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border: 1px solid #756334;
+  color: #d8c27f;
+  background: #1a170d;
+}
+.quest-experimental-notice strong {
+  font:
+    600 9px/1 "IBM Plex Mono",
+    monospace;
+  letter-spacing: 0.08em;
+}
+.quest-experimental-notice p {
+  margin: 6px 0 0;
+  color: #c8bd98;
+  font-size: 10px;
+  line-height: 1.45;
+}
+.quest-experimental-notice--panel {
+  margin: 10px 16px 0;
+}
+.success-box {
+  margin-top: 10px !important;
+  padding: 8px 10px;
+  border: 1px solid #405f4d;
+  color: var(--pmc) !important;
+  background: #101a14;
+}
 .quest-review-stats {
   display: flex;
   gap: 8px;
@@ -1990,6 +2065,13 @@ a:focus-visible {
   color: #d2ad70;
   background: #19130d;
   font-size: 10px;
+}
+.quest-review-warning a {
+  color: #e0c37d;
+  font:
+    600 8px/1.4 "IBM Plex Mono",
+    monospace;
+  letter-spacing: 0.05em;
 }
 .segmented {
   display: flex;

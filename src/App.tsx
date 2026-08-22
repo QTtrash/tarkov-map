@@ -817,6 +817,7 @@ export function App() {
         onEnableQuestMarkersOnce={() => {
           if (!settings.showQuestMarkers) updateSettings({ showQuestMarkers: true });
         }}
+        onImportComplete={() => setShowQuests(true)}
       />
       <SharePanel
         open={showSharing}
@@ -838,6 +839,11 @@ export function App() {
           onClose={() => setShowSettings(false)}
           onBrowse={browse}
           onOpenDirectory={openDirectory}
+          onRescanDirectories={rescanDirectories}
+          onReviewQuestLogs={() => {
+            setShowSettings(false);
+            setShowQuests(true);
+          }}
           onUpdateSettings={updateSettings}
           onOverlayAction={runOverlayAction}
         />

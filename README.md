@@ -27,8 +27,11 @@ game files. No official approval or anti-cheat guarantee is implied.
 - Native Tauri desktop map and compact always-on-top overlay.
 - Screenshot coordinate parsing, raid/map detection, floors, POIs, extracts,
   quests, and local custom waypoints.
-- Opt-in quest progress import from Tarkov-created logs with an anonymized review,
-  isolated PvP, PvE, and Seasonal profiles, and manual corrections.
+- Experimental, opt-in quest progress import for recognized Tarkov-created log
+  records, with an anonymized review, privacy-safe diagnostics, isolated PvP,
+  PvE, and Seasonal profiles, and manual corrections. Current Tarkov builds may
+  not retain a supported quest-event format; Raid Signal never guesses progress
+  from ambiguous lifecycle traces or unrelated IDs.
 - Three-hour Internet invitations and same-Wi-Fi LAN sessions.
 - AES-256-GCM position updates with a fresh nonce and room-bound authenticated
   data; invitation keys remain in URL fragments and never reach the relay.
@@ -62,6 +65,12 @@ The release also contains `release.json` and an SPDX SBOM. The
 records the successful build, Microsoft Defender scan, independent ClamAV scan,
 and publication gate. These controls provide traceable release evidence; they
 are not a third-party security audit or anti-cheat approval.
+
+Quest-log compatibility reports must use the app's **Copy Diagnostics** action.
+Never publish raw Tarkov logs; they can contain account, network, token, path,
+and chat data. Use the dedicated
+[compatibility report](https://github.com/QTtrash/tarkov-map/issues/new?template=quest_log_compatibility.yml)
+for counts-only reports.
 
 ## Build and verify
 

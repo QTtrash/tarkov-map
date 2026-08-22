@@ -16,9 +16,10 @@ files. The Cloudflare Worker adapter is not a supported runtime.
 
 1. Rust watches user-selected screenshot and log directories.
 2. Parsers emit validated Tauri events; React keeps the current locator snapshot.
-   After explicit review and confirmation, supported quest notifications are
-   deduplicated into profile-isolated local SQLite state. Raw profile IDs are
-   hashed before persistence.
+   Notification and output logs are scanned independently and deduplicated.
+   After explicit review and confirmation, recognized quest records enter
+   profile-isolated local SQLite state. Raw profile IDs are hashed before
+   persistence; ambiguous lifecycle hints remain diagnostic-only.
 3. Bundled map/quest/POI JSON and native quest-sync payloads are validated before
    rendering.
 4. Sharing clients create a timestamped room ID and 256-bit key. AES-256-GCM
@@ -32,6 +33,8 @@ files. The Cloudflare Worker adapter is not a supported runtime.
 - `src/sharing/` owns protocol v1, invitation parsing, encryption, and decrypted
   payload validation.
 - `src/validation.ts` owns untrusted TypeScript runtime schemas.
+- `src/quest-diagnostics.ts` owns the counts-only, privacy-safe compatibility
+  summary copied by the desktop UI.
 - `src/components/map-view-helpers.ts` owns Leaflet rendering primitives;
   `MapView.tsx` owns their lifecycle and synchronization.
 - `SettingsDialog.tsx` and `AboutDialog.tsx` own modal presentation; `App.tsx`
