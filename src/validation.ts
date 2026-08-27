@@ -11,6 +11,7 @@ import type {
   OverlayState,
   PlayerFix,
   QuestBundle,
+  QuestPoiSnapshot,
   QuestProfile,
   QuestProgress,
   QuestSyncPreview,
@@ -81,6 +82,15 @@ const poi = z
     bottom: finite.nullable().optional(),
   })
   .loose();
+const questObjectivePoi = poi.extend({
+  kind: z.literal("quest-objective"),
+  category: z.literal("quest-objective"),
+  mapId,
+  taskId: identifier,
+  objectiveId: identifier,
+  description: z.string(),
+});
+const questPoiSnapshot = z.object({ mapId, pois: z.array(questObjectivePoi).max(128) });
 const customPin = z.object({
   id: identifier,
   kind: z.literal("custom-pin"),
@@ -282,6 +292,7 @@ export const parseLocatorStatus = (value: unknown) =>
   locatorSnapshot.shape.status.unwrap().parse(value) as LocatorStatus;
 export const parseOcrText = (value: unknown) => locatorSnapshot.shape.ocrText.unwrap().parse(value) as OcrTextCapture;
 export const parseCustomPins = (value: unknown) => z.array(customPin).max(500).parse(value) as CustomPinPoi[];
+export const parseQuestPoiSnapshot = (value: unknown) => questPoiSnapshot.parse(value) as QuestPoiSnapshot;
 export const parseQuestProgress = (value: unknown) =>
   z.array(questProgress).max(10_000).parse(value) as QuestProgress[];
 export const parseQuestProgressEntry = (value: unknown) => questProgress.parse(value) as QuestProgress;
