@@ -669,26 +669,44 @@ export function QuestPanel({
                               <div className="quest-objective-actions">
                                 {navigableMaps.map((objectiveMapId) => {
                                   const zone = objective.zones.find((candidate) => candidate.mapId === objectiveMapId);
+                                  // Find-item objectives have no zone, so fall back to the first candidate point.
+                                  const candidate = zone
+                                    ? null
+                                    : objective.possibleLocations.find(
+                                        (location) => location.mapId === objectiveMapId && location.positions.length,
+                                      );
+                                  const shared = {
+                                    id: `quest-${quest.id}-${objective.id}-${objectiveMapId}`,
+                                    category: "quest-objective" as const,
+                                    mapId: objectiveMapId,
+                                    name: quest.name,
+                                    aliases: [objective.description],
+                                    description: objective.description,
+                                    taskId: quest.id,
+                                    objectiveId: objective.id,
+                                  };
                                   const poi = zone
                                     ? {
-                                        id: `quest-${quest.id}-${objective.id}-${objectiveMapId}`,
+                                        ...shared,
                                         kind: "quest-objective" as const,
-                                        category: "quest-objective" as const,
-                                        mapId: objectiveMapId,
-                                        name: quest.name,
-                                        aliases: [objective.description],
-                                        description: objective.description,
-                                        taskId: quest.id,
-                                        objectiveId: objective.id,
                                         position: zone.position,
                                         outline: zone.outline,
                                         top: zone.top,
                                         bottom: zone.bottom,
                                       }
-                                    : null;
+                                    : candidate
+                                      ? {
+                                          ...shared,
+                                          kind: "quest-possible-location" as const,
+                                          position: candidate.positions[0],
+                                          locationIndex: 0,
+                                          locationCount: candidate.positions.length,
+                                        }
+                                      : null;
                                   return (
                                     <button key={objectiveMapId} onClick={() => onFocusObjective(objectiveMapId, poi)}>
-                                      {zone ? "SHOW POINT" : "VIEW"} · {mapLabel(objectiveMapId).toUpperCase()}
+                                      {zone ? "SHOW POINT" : candidate ? "SHOW AREA" : "VIEW"} ·{" "}
+                                      {mapLabel(objectiveMapId).toUpperCase()}
                                     </button>
                                   );
                                 })}

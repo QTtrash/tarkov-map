@@ -78,6 +78,7 @@ describe("quest ordering", () => {
               bottom: 0,
             },
           ],
+          possibleLocations: [],
         },
       ],
     };
@@ -92,5 +93,47 @@ describe("quest ordering", () => {
     expect(buildActiveQuestObjectivePois(bundle, "customs", progress)).toMatchObject([{ mapId: "customs" }]);
     expect(buildActiveQuestObjectivePois(bundle, "shoreline", progress)).toHaveLength(1);
     expect(buildActiveQuestObjectivePois(bundle, "woods", progress)).toHaveLength(0);
+  });
+
+  it("marks every candidate spawn point of an objective that has no zone", () => {
+    const activeQuest: QuestDefinition = {
+      ...quest("active"),
+      mapIds: ["interchange"],
+      objectives: [
+        {
+          id: "objective-1",
+          description: "Locate the magazine",
+          type: "findQuestItem",
+          optional: false,
+          mapIds: ["interchange"],
+          details: [],
+          zones: [],
+          possibleLocations: [
+            {
+              mapId: "interchange",
+              positions: [
+                { x: 14.6, y: 38.4, z: -4.7 },
+                { x: 19.5, y: 36.5, z: -12.5 },
+              ],
+            },
+            { mapId: "woods", positions: [{ x: 1, y: 2, z: 3 }] },
+          ],
+        },
+      ],
+    };
+    const progress = new Map<string, QuestProgress>([["active", { taskId: "active", status: "active", updatedAt: 1 }]]);
+    const bundle: QuestBundle = {
+      schemaVersion: 2,
+      generatedAt: "2026-01-01",
+      gameMode: "regular",
+      quests: [activeQuest],
+    };
+
+    const pois = buildActiveQuestObjectivePois(bundle, "interchange", progress);
+    expect(pois).toHaveLength(2);
+    expect(pois.every((poi) => poi.kind === "quest-possible-location")).toBe(true);
+    expect(new Set(pois.map((poi) => poi.id)).size).toBe(2);
+    expect(pois[0]).toMatchObject({ locationIndex: 0, locationCount: 2, position: { x: 14.6, y: 38.4, z: -4.7 } });
+    expect(buildActiveQuestObjectivePois(bundle, "customs", progress)).toHaveLength(0);
   });
 });

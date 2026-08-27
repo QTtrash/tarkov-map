@@ -36,8 +36,8 @@ export function buildActiveQuestObjectivePois(
     .filter((quest) => quest.mapIds.includes(mapId))
     .filter((quest) => effectiveQuestStatus(quest, progress) === "active")
     .flatMap((quest) =>
-      quest.objectives.flatMap((objective) =>
-        objective.zones
+      quest.objectives.flatMap((objective) => [
+        ...objective.zones
           .filter((zone) => zone.mapId === mapId)
           .map((zone, zoneIndex) => ({
             id: `quest-active-${quest.id}-${objective.id}-${mapId}-${zoneIndex}`,
@@ -54,7 +54,25 @@ export function buildActiveQuestObjectivePois(
             top: zone.top,
             bottom: zone.bottom,
           })),
-      ),
+        ...objective.possibleLocations
+          .filter((location) => location.mapId === mapId)
+          .flatMap((location, locationIndex) =>
+            location.positions.map((position, positionIndex) => ({
+              id: `quest-active-${quest.id}-${objective.id}-${mapId}-possible-${locationIndex}-${positionIndex}`,
+              kind: "quest-possible-location" as const,
+              category: "quest-objective" as const,
+              mapId,
+              name: quest.name,
+              aliases: [objective.description],
+              description: objective.description,
+              taskId: quest.id,
+              objectiveId: objective.id,
+              position,
+              locationIndex: positionIndex,
+              locationCount: location.positions.length,
+            })),
+          ),
+      ]),
     );
 }
 

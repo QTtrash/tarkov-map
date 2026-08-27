@@ -359,7 +359,15 @@ function normalizeQuestBundle(
           bottom: zone.bottom ?? null,
         }))
         .filter((zone) => zone.mapId);
-      const objectiveMapIds = unique([...(objective.maps || []).map(mapName), ...zones.map((zone) => zone.mapId)]);
+      // Find-item objectives carry candidate spawn points here instead of zones.
+      const possibleLocations = (objective.possibleLocations || [])
+        .map((location) => ({ mapId: mapName(location.map), positions: (location.positions || []).map(vector) }))
+        .filter((location) => location.mapId && location.positions.length);
+      const objectiveMapIds = unique([
+        ...(objective.maps || []).map(mapName),
+        ...zones.map((zone) => zone.mapId),
+        ...possibleLocations.map((location) => location.mapId),
+      ]);
       const objectiveItems = (objective.items || []).map(itemName);
       const details = [];
       if (Number(objective.count || 0) > 1) details.push(`Required count: ${Number(objective.count)}`);
@@ -381,6 +389,7 @@ function normalizeQuestBundle(
         mapIds: objectiveMapIds,
         details,
         zones,
+        possibleLocations,
       };
     });
     const declaredMap = mapName(task.map);
