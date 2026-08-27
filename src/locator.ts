@@ -1,5 +1,5 @@
 import { invoke } from "@tauri-apps/api/core";
-import { listen, type UnlistenFn } from "@tauri-apps/api/event";
+import { emitTo, listen, type UnlistenFn } from "@tauri-apps/api/event";
 import type {
   LocatorSettings,
   LocatorSnapshot,
@@ -14,6 +14,7 @@ import type {
   QuestStatus,
   QuestSyncPreview,
   QuestSyncResult,
+  SquadPosition,
 } from "./types";
 import {
   parseLocatorSnapshot,
@@ -28,6 +29,7 @@ import {
   parseQuestSyncPreview,
   parseQuestSyncResult,
   parseSettings,
+  parseSquadPositions,
   readStoredJson,
 } from "./validation";
 import { allLootGroupIds } from "./poi";
@@ -130,6 +132,23 @@ export async function getLocatorSnapshot(): Promise<LocatorSnapshot> {
 export async function subscribeOverlayState(handler: (state: OverlayState) => void): Promise<UnlistenFn> {
   if (!isTauriRuntime()) return () => undefined;
   return listen<OverlayState>("overlay://state-changed", (event) => handler(event.payload));
+}
+
+// Squad positions are decrypted in the main window, so the overlay webview receives them
+// over the app's own event channel rather than holding a second relay connection.
+export async function publishSquadPositions(positions: SquadPosition[]) {
+  if (isTauriRuntime()) await emitTo("overlay", "squad://positions", positions);
+}
+
+export async function subscribeSquadPositions(handler: (positions: SquadPosition[]) => void): Promise<UnlistenFn> {
+  if (!isTauriRuntime()) return () => undefined;
+  return listen<unknown>("squad://positions", (event) => {
+    try {
+      handler(parseSquadPositions(event.payload));
+    } catch (error) {
+      console.warn("Ignored invalid native event payload", error);
+    }
+  });
 }
 
 export async function setOverlayClickThrough(enabled: boolean) {

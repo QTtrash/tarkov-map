@@ -16,6 +16,7 @@ import {
   getOverlayState,
   loadSettings,
   openDirectory,
+  publishSquadPositions,
   registerGlobalShortcuts,
   rescanDirectories,
   saveSettings,
@@ -236,6 +237,11 @@ export function App() {
   const receiveSquadPosition = useCallback((position: SquadPosition) => {
     setSquadPositions((current) => [...current.filter((entry) => entry.senderId !== position.senderId), position]);
   }, []);
+
+  // Republishing on the readiness edge resends a snapshot when the overlay opens mid-session.
+  useEffect(() => {
+    void publishSquadPositions(squadPositions);
+  }, [squadPositions, overlayState.ready]);
 
   useEffect(() => {
     void fetch("/maps/data-manifest.json")

@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { defaultSettings } from "./locator";
-import { parseCustomPins, parseQuestProgress, parseSettings, readStoredJson } from "./validation";
+import { parseCustomPins, parseQuestProgress, parseSettings, parseSquadPositions, readStoredJson } from "./validation";
 
 describe("runtime boundary validation", () => {
   it("accepts current settings and rejects unsupported or unsafe values", () => {
@@ -28,6 +28,27 @@ describe("runtime boundary validation", () => {
       ]),
     ).toThrow();
     expect(() => parseQuestProgress([{ taskId: "task", status: "invented", updatedAt: 1 }])).toThrow();
+  });
+
+  it("accepts squad positions relayed to the overlay and rejects malformed ones", () => {
+    const position = {
+      senderId: "11111111-1111-1111-1111-111111111111",
+      sequence: 1,
+      nickname: "PLAYER",
+      mapId: "customs",
+      position: { x: 1, y: 2, z: 3 },
+      heading: 90,
+      observedAt: 1,
+      receivedAt: 2,
+    };
+    expect(parseSquadPositions([position])).toEqual([position]);
+    expect(parseSquadPositions([{ ...position, heading: null }])).toEqual([{ ...position, heading: null }]);
+    expect(() => parseSquadPositions([{ ...position, senderId: "not-a-sender" }])).toThrow();
+    expect(() => parseSquadPositions([{ ...position, sequence: 0 }])).toThrow();
+    expect(() => parseSquadPositions([{ ...position, nickname: "" }])).toThrow();
+    expect(() => parseSquadPositions([{ ...position, mapId: "../escape" }])).toThrow();
+    expect(() => parseSquadPositions([{ ...position, heading: 360 }])).toThrow();
+    expect(() => parseSquadPositions(Array.from({ length: 17 }, () => position))).toThrow();
   });
 
   it("falls back without rewriting corrupt local storage", () => {

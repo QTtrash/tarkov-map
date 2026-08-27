@@ -10,6 +10,7 @@ import {
   overlayReady,
   setOverlayClickThrough,
   subscribeLocator,
+  subscribeSquadPositions,
 } from "../locator";
 import { allLootGroupIds, defaultVisiblePoiCategories, loadPoiBundle } from "../poi";
 import { recognizeRaidExtracts } from "../raid";
@@ -22,6 +23,7 @@ import type {
   PlayerFix,
   PoiCategory,
   RaidExtractState,
+  SquadPosition,
 } from "../types";
 import { UiIcon } from "./Icons";
 import { MapView } from "./MapView";
@@ -32,6 +34,7 @@ const idleAsset: MapAssetState = { status: "idle", asset: null, message: null };
 export function OverlayApp() {
   const [settings, setSettings] = useState<LocatorSettings>(defaultSettings);
   const [fix, setFix] = useState<PlayerFix | null>(null);
+  const [squadPositions, setSquadPositions] = useState<SquadPosition[]>([]);
   const [context, setContext] = useState<MapContext>({ mapId: null, inRaid: false, source: "manual" });
   const [bundle, setBundle] = useState<MapPoiBundle | null>(null);
   const [bundleError, setBundleError] = useState<string | null>(null);
@@ -45,6 +48,7 @@ export function OverlayApp() {
     let disposed = false;
     let cleanup: (() => void) | undefined;
     let cleanupInvalidate: (() => void) | undefined;
+    let cleanupSquad: (() => void) | undefined;
     const applyContext = (next: MapContext) => {
       setContext(next);
       if (!next.inRaid) setRaidExtracts(null);
@@ -63,6 +67,8 @@ export function OverlayApp() {
         return;
       }
       cleanupInvalidate = await listen("overlay://invalidate-map", () => setRetryKey((current) => current + 1));
+      // Subscribe before signalling readiness so the snapshot the main window sends cannot be missed.
+      cleanupSquad = await subscribeSquadPositions(setSquadPositions);
       const [loaded, snapshot] = await Promise.all([loadSettings(), getLocatorSnapshot()]);
       if (disposed) return;
       setSettings(loaded);
@@ -83,6 +89,7 @@ export function OverlayApp() {
       window.removeEventListener("keydown", onKeyDown);
       cleanup?.();
       cleanupInvalidate?.();
+      cleanupSquad?.();
     };
   }, []);
 
@@ -167,6 +174,7 @@ export function OverlayApp() {
           selectedPoiId={null}
           focusPoiId={null}
           activeExtractIds={active}
+          squadPositions={squadPositions}
           onFollowChange={noop}
           onSelectPoi={noop}
           onAssetStateChange={onAssetStateChange}

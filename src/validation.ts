@@ -15,6 +15,7 @@ import type {
   QuestProgress,
   QuestSyncPreview,
   QuestSyncResult,
+  SquadPosition,
 } from "./types";
 
 const finite = z.number().finite();
@@ -252,6 +253,16 @@ const quest = z.object({
   ),
   requirements: z.array(z.object({ taskId: identifier, statuses: z.array(z.string()) })),
 });
+const squadPosition = z.object({
+  senderId: z.string().regex(/^[0-9a-f-]{36}$/i),
+  sequence: z.number().int().positive(),
+  nickname: z.string().min(1).max(24),
+  mapId,
+  position: vec3,
+  heading: finite.min(0).lt(360).nullable(),
+  observedAt: finite,
+  receivedAt: finite,
+});
 
 export const parseMapDefinitions = (value: unknown) => z.array(mapDefinition).min(1).parse(value) as MapDefinition[];
 export const parsePoiBundle = (value: unknown) =>
@@ -282,6 +293,7 @@ export const parseLocatorStatus = (value: unknown) =>
   locatorSnapshot.shape.status.unwrap().parse(value) as LocatorStatus;
 export const parseOcrText = (value: unknown) => locatorSnapshot.shape.ocrText.unwrap().parse(value) as OcrTextCapture;
 export const parseCustomPins = (value: unknown) => z.array(customPin).max(500).parse(value) as CustomPinPoi[];
+export const parseSquadPositions = (value: unknown) => z.array(squadPosition).max(16).parse(value) as SquadPosition[];
 export const parseQuestProgress = (value: unknown) =>
   z.array(questProgress).max(10_000).parse(value) as QuestProgress[];
 export const parseQuestProgressEntry = (value: unknown) => questProgress.parse(value) as QuestProgress;
