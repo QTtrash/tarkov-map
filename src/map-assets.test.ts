@@ -19,6 +19,17 @@ describe("map assets", () => {
     expect(svg.querySelector("#Third_Floor")?.getAttribute("style")).toBe("display: none;");
   });
 
+  it("keeps the base artwork for an elevation band the packaged SVG does not draw", () => {
+    const reserve = maps.find((map) => map.id === "reserve")!;
+    const reserveSource = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+      <g id="Ground_Level"><path /></g>
+      <g id="Bunkers"><path /></g>
+    </svg>`;
+    const svg = prepareSvgMap(reserveSource, reserve, "2nd-floor");
+    expect(svg.querySelector("#Ground_Level")?.getAttribute("style")).toBe("");
+    expect(svg.querySelector("#Bunkers")?.getAttribute("style")).toBe("display: none;");
+  });
+
   it("rejects a floor that is missing from the packaged SVG", () => {
     expect(() => prepareSvgMap(source, customs, "Underground_Level")).toThrow("missing floor layer Underground_Level");
   });

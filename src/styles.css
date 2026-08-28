@@ -1293,6 +1293,12 @@ a:focus-visible {
 .quest-objective {
   color: #d8b66a !important;
 }
+/* Candidate spawn points read as hollow so they are not mistaken for a confirmed objective area. */
+.poi-marker.quest-possible-location .poi-marker-glyph {
+  border-style: dashed;
+  background: transparent;
+  box-shadow: none;
+}
 .custom-pin {
   color: #d8b66a !important;
 }

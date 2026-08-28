@@ -12,9 +12,10 @@ const bridge = vi.hoisted(() => ({
 vi.mock("@tauri-apps/api/event", () => ({ listen: bridge.listen, emitTo: bridge.emitTo }));
 vi.mock("@tauri-apps/api/core", () => ({ invoke: vi.fn(async () => undefined) }));
 
-import { publishSquadPositions, subscribeSquadPositions } from "./locator";
+import { publishQuestPois, publishSquadPositions, subscribeQuestPois, subscribeSquadPositions } from "./locator";
+import type { QuestPoiSnapshot, SquadPosition } from "./types";
 
-const position = {
+const position: SquadPosition = {
   senderId: "11111111-1111-1111-1111-111111111111",
   sequence: 1,
   nickname: "PLAYER",
@@ -25,7 +26,24 @@ const position = {
   receivedAt: 2,
 };
 
-describe("squad position bridge", () => {
+const questSnapshot: QuestPoiSnapshot = {
+  mapId: "customs",
+  pois: [
+    {
+      id: "quest-active-task-objective-customs-0",
+      kind: "quest-objective",
+      category: "quest-objective",
+      mapId: "customs",
+      name: "Debut",
+      description: "Eliminate Scavs",
+      taskId: "task",
+      objectiveId: "objective",
+      position: { x: 10, y: 0, z: 20 },
+    },
+  ],
+};
+
+describe("overlay event bridges", () => {
   beforeEach(() => {
     Object.defineProperty(window, "__TAURI_INTERNALS__", { value: {}, configurable: true });
   });
@@ -38,19 +56,35 @@ describe("squad position bridge", () => {
 
   it("stays inert outside the native runtime", async () => {
     delete (window as unknown as Record<string, unknown>).__TAURI_INTERNALS__;
+    await publishQuestPois(questSnapshot);
     await publishSquadPositions([position]);
-    const unlisten = await subscribeSquadPositions(vi.fn());
+    const unlistenQuest = await subscribeQuestPois(vi.fn());
+    const unlistenSquad = await subscribeSquadPositions(vi.fn());
     expect(bridge.emitTo).not.toHaveBeenCalled();
     expect(bridge.listen).not.toHaveBeenCalled();
-    expect(() => unlisten()).not.toThrow();
+    expect(() => unlistenQuest()).not.toThrow();
+    expect(() => unlistenSquad()).not.toThrow();
   });
 
-  it("sends positions to the overlay window", async () => {
+  it("sends both validated snapshots to the overlay window", async () => {
+    await publishQuestPois(questSnapshot);
     await publishSquadPositions([position]);
-    expect(bridge.emitTo).toHaveBeenCalledWith("overlay", "squad://positions", [position]);
+    expect(bridge.emitTo).toHaveBeenNthCalledWith(1, "overlay", "quest://objective-pois", questSnapshot);
+    expect(bridge.emitTo).toHaveBeenNthCalledWith(2, "overlay", "squad://positions", [position]);
   });
 
-  it("delivers valid payloads and drops malformed ones", async () => {
+  it("delivers valid quest snapshots and drops malformed ones", async () => {
+    const handler = vi.fn();
+    await subscribeQuestPois(handler);
+    const deliver = bridge.listeners.get("quest://objective-pois")!;
+    deliver({ payload: questSnapshot });
+    deliver({ payload: { ...questSnapshot, mapId: "../escape" } });
+    deliver({ payload: "not-a-snapshot" });
+    expect(handler).toHaveBeenCalledTimes(1);
+    expect(handler).toHaveBeenCalledWith(questSnapshot);
+  });
+
+  it("delivers valid squad positions and drops malformed ones", async () => {
     const handler = vi.fn();
     await subscribeSquadPositions(handler);
     const deliver = bridge.listeners.get("squad://positions")!;

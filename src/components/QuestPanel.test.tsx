@@ -56,6 +56,7 @@ const activeQuest: QuestDefinition = {
       mapIds: ["customs"],
       details: [],
       zones: [{ mapId: "customs", position: { x: 10, y: 0, z: 20 }, outline: [], top: null, bottom: null }],
+      possibleLocations: [],
     },
   ],
 };

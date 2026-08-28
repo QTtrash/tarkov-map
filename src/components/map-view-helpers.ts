@@ -133,11 +133,12 @@ export function poiIcon(poi: MapPoi, selected: boolean, active = false) {
     poi.kind === "extract" || poi.kind === "transit"
       ? `<span class="poi-marker-label">${escapeHtml(poi.name)}</span>`
       : "";
+  const candidate = poi.kind === "quest-possible-location" ? " quest-possible-location" : "";
   return L.divIcon({
     className: "poi-marker-shell",
     iconSize: [26, 26],
     iconAnchor: [13, 13],
-    html: `<div class="poi-marker ${poi.category}${lootGroup ? ` loot-${lootGroup}` : ""}${selected ? " selected" : ""}${active ? " raid-active" : ""}"><span class="poi-marker-glyph">${glyphMarkup(poi.category, lootGroup)}</span>${label}</div>`,
+    html: `<div class="poi-marker ${poi.category}${lootGroup ? ` loot-${lootGroup}` : ""}${candidate}${selected ? " selected" : ""}${active ? " raid-active" : ""}"><span class="poi-marker-glyph">${glyphMarkup(poi.category, lootGroup)}</span>${label}</div>`,
   });
 }
 
@@ -161,6 +162,11 @@ export function popupContent(poi: MapPoi, index: Map<string, MapPoi>, onFocus: (
     const chance = document.createElement("small");
     chance.textContent = `Raid chance ${Math.round(poi.spawnChance * 100)}% · zone weight ${Math.round(poi.zoneChance * 100)}%`;
     content.append(chance);
+  }
+  if (poi.kind === "quest-possible-location" && poi.locationCount) {
+    const candidate = document.createElement("small");
+    candidate.textContent = `Possible location ${(poi.locationIndex ?? 0) + 1} of ${poi.locationCount}`;
+    content.append(candidate);
   }
   if (poi.kind === "locked-door" && poi.keyIds.length) {
     const key = document.createElement("small");

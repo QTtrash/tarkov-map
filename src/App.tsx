@@ -17,6 +17,7 @@ import {
   loadSettings,
   openDirectory,
   publishSquadPositions,
+  publishQuestPois,
   registerGlobalShortcuts,
   rescanDirectories,
   saveSettings,
@@ -27,7 +28,7 @@ import {
 import { applyDetectedContext, returnToDetectedMap, selectViewedMap, type MapSessionState } from "./map-session";
 import { composePoiBundle, composeVisibleCategories } from "./map-overlays";
 import { allLootGroupIds, defaultVisiblePoiCategories, loadPoiBundle, lootGroupForType } from "./poi";
-import { recognizeRaidExtracts } from "./raid";
+import { accumulateRaidExtracts } from "./raid";
 import type {
   CustomPinPoi,
   LocatorSettings,
@@ -320,6 +321,11 @@ export function App() {
     [activeQuestPois, customPins, definition.id, focusedQuestPoi, poiBundle, settings.showQuestMarkers],
   );
 
+  // The snapshot names its map because the overlay can be showing a different one.
+  useEffect(() => {
+    void publishQuestPois({ mapId: definition.id, pois: activeQuestPois });
+  }, [activeQuestPois, definition.id, overlayState.ready]);
+
   useEffect(() => {
     if (!definition) return;
     const controller = new AbortController();
@@ -343,7 +349,7 @@ export function App() {
     if (!lastOcr || !poiBundle) return;
     const mapId = lastOcr.mapId && getMapDefinition(lastOcr.mapId) ? lastOcr.mapId : definition.id;
     if (mapId !== definition.id) return;
-    setRaidExtracts(recognizeRaidExtracts(lastOcr, mapId, poiBundle.pois));
+    setRaidExtracts((previous) => accumulateRaidExtracts(previous, lastOcr, mapId, poiBundle.pois));
   }, [definition.id, lastOcr, poiBundle]);
 
   const updateSettings = useCallback((patch: Partial<LocatorSettings>) => {
@@ -530,7 +536,12 @@ export function App() {
         visiblePoiCategories.has(poi.category) &&
         (poi.kind !== "loot" || visibleLootGroups.has(lootGroupForType(poi.lootType))),
     ).length ?? 0;
-  const activeExtractIds = useMemo(() => new Set(raidExtracts?.activeExtractIds ?? []), [raidExtracts]);
+  // The reading is kept while browsing another map, but only ever shown on the map it describes.
+  const raidExtractsForMap = useMemo(
+    () => (raidExtracts && raidExtracts.mapId === definition.id ? raidExtracts : null),
+    [raidExtracts, definition.id],
+  );
+  const activeExtractIds = useMemo(() => new Set(raidExtractsForMap?.activeExtractIds ?? []), [raidExtractsForMap]);
 
   return (
     <main className={settings.highContrast ? "app-shell high-contrast" : "app-shell"}>
@@ -797,7 +808,7 @@ export function App() {
             visible={visiblePoiCategories}
             visibleLootGroups={visibleLootGroups}
             fix={visibleFix}
-            raidExtracts={raidExtracts}
+            raidExtracts={raidExtractsForMap}
             showQuestMarkers={settings.showQuestMarkers}
             activeQuestCount={activeQuestPois.filter((poi) => poi.mapId === definition.id).length}
             onOpenChange={(legendOpen) => updateSettings({ legendOpen })}
@@ -841,7 +852,7 @@ export function App() {
           mapSession={mapSession}
           overlayState={overlayState}
           dataGeneratedAt={dataGeneratedAt}
-          raidExtracts={raidExtracts}
+          raidExtracts={raidExtractsForMap}
           onClose={() => setShowSettings(false)}
           onBrowse={browse}
           onOpenDirectory={openDirectory}

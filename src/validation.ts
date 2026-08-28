@@ -11,6 +11,7 @@ import type {
   OverlayState,
   PlayerFix,
   QuestBundle,
+  QuestPoiSnapshot,
   QuestProfile,
   QuestProgress,
   QuestSyncPreview,
@@ -82,6 +83,49 @@ const poi = z
     bottom: finite.nullable().optional(),
   })
   .loose();
+const questPoiShape = {
+  id: identifier,
+  category: z.literal("quest-objective"),
+  mapId,
+  name: z.string().min(1).max(256),
+  aliases: z.array(z.string().max(256)).max(16).optional(),
+  description: z.string().max(512),
+  taskId: identifier,
+  objectiveId: identifier,
+  position: vec3,
+  outline: z.array(vec3).max(64).optional(),
+  top: finite.nullable().optional(),
+  bottom: finite.nullable().optional(),
+};
+const questObjectivePoi = z.union([
+  z.object({ ...questPoiShape, kind: z.literal("quest-objective") }),
+  z.object({
+    ...questPoiShape,
+    kind: z.literal("quest-possible-location"),
+    locationIndex: z.number().int().nonnegative().max(127),
+    locationCount: z.number().int().positive().max(128),
+  }),
+]);
+const questPoiSnapshot = z
+  .object({ mapId, pois: z.array(questObjectivePoi).max(128) })
+  .superRefine((snapshot, context) => {
+    snapshot.pois.forEach((candidate, index) => {
+      if (candidate.mapId !== snapshot.mapId) {
+        context.addIssue({
+          code: "custom",
+          message: "Quest POI map does not match its snapshot",
+          path: ["pois", index, "mapId"],
+        });
+      }
+      if (candidate.kind === "quest-possible-location" && candidate.locationIndex >= candidate.locationCount) {
+        context.addIssue({
+          code: "custom",
+          message: "Quest POI location index is outside its candidate set",
+          path: ["pois", index, "locationIndex"],
+        });
+      }
+    });
+  });
 const customPin = z.object({
   id: identifier,
   kind: z.literal("custom-pin"),
@@ -249,19 +293,24 @@ const quest = z.object({
       zones: z.array(
         z.object({ mapId, position: vec3, outline: z.array(vec3), top: finite.nullable(), bottom: finite.nullable() }),
       ),
+      // Defaulted so bundles generated before this field existed still parse.
+      possibleLocations: z
+        .array(z.object({ mapId, positions: z.array(vec3).max(64) }))
+        .max(16)
+        .default([]),
     }),
   ),
   requirements: z.array(z.object({ taskId: identifier, statuses: z.array(z.string()) })),
 });
 const squadPosition = z.object({
   senderId: z.string().regex(/^[0-9a-f-]{36}$/i),
-  sequence: z.number().int().positive(),
+  sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
   nickname: z.string().min(1).max(24),
   mapId,
   position: vec3,
   heading: finite.min(0).lt(360).nullable(),
-  observedAt: finite,
-  receivedAt: finite,
+  observedAt: z.number().int().nonnegative(),
+  receivedAt: z.number().int().nonnegative(),
 });
 
 export const parseMapDefinitions = (value: unknown) => z.array(mapDefinition).min(1).parse(value) as MapDefinition[];
@@ -294,6 +343,7 @@ export const parseLocatorStatus = (value: unknown) =>
 export const parseOcrText = (value: unknown) => locatorSnapshot.shape.ocrText.unwrap().parse(value) as OcrTextCapture;
 export const parseCustomPins = (value: unknown) => z.array(customPin).max(500).parse(value) as CustomPinPoi[];
 export const parseSquadPositions = (value: unknown) => z.array(squadPosition).max(16).parse(value) as SquadPosition[];
+export const parseQuestPoiSnapshot = (value: unknown) => questPoiSnapshot.parse(value) as QuestPoiSnapshot;
 export const parseQuestProgress = (value: unknown) =>
   z.array(questProgress).max(10_000).parse(value) as QuestProgress[];
 export const parseQuestProgressEntry = (value: unknown) => questProgress.parse(value) as QuestProgress;

@@ -11,9 +11,11 @@ import {
   setOverlayClickThrough,
   subscribeLocator,
   subscribeSquadPositions,
+  subscribeQuestPois,
 } from "../locator";
+import { composePoiBundle, composeVisibleCategories } from "../map-overlays";
 import { allLootGroupIds, defaultVisiblePoiCategories, loadPoiBundle } from "../poi";
-import { recognizeRaidExtracts } from "../raid";
+import { accumulateRaidExtracts } from "../raid";
 import type {
   LocatorSettings,
   MapAssetState,
@@ -22,6 +24,7 @@ import type {
   OcrTextCapture,
   PlayerFix,
   PoiCategory,
+  QuestPoiSnapshot,
   RaidExtractState,
   SquadPosition,
 } from "../types";
@@ -35,6 +38,7 @@ export function OverlayApp() {
   const [settings, setSettings] = useState<LocatorSettings>(defaultSettings);
   const [fix, setFix] = useState<PlayerFix | null>(null);
   const [squadPositions, setSquadPositions] = useState<SquadPosition[]>([]);
+  const [questSnapshot, setQuestSnapshot] = useState<QuestPoiSnapshot | null>(null);
   const [context, setContext] = useState<MapContext>({ mapId: null, inRaid: false, source: "manual" });
   const [bundle, setBundle] = useState<MapPoiBundle | null>(null);
   const [bundleError, setBundleError] = useState<string | null>(null);
@@ -49,6 +53,7 @@ export function OverlayApp() {
     let cleanup: (() => void) | undefined;
     let cleanupInvalidate: (() => void) | undefined;
     let cleanupSquad: (() => void) | undefined;
+    let cleanupQuest: (() => void) | undefined;
     const applyContext = (next: MapContext) => {
       setContext(next);
       if (!next.inRaid) setRaidExtracts(null);
@@ -67,8 +72,21 @@ export function OverlayApp() {
         return;
       }
       cleanupInvalidate = await listen("overlay://invalidate-map", () => setRetryKey((current) => current + 1));
+      if (disposed) {
+        cleanupInvalidate();
+        return;
+      }
       // Subscribe before signalling readiness so the snapshot the main window sends cannot be missed.
       cleanupSquad = await subscribeSquadPositions(setSquadPositions);
+      if (disposed) {
+        cleanupSquad();
+        return;
+      }
+      cleanupQuest = await subscribeQuestPois(setQuestSnapshot);
+      if (disposed) {
+        cleanupQuest();
+        return;
+      }
       const [loaded, snapshot] = await Promise.all([loadSettings(), getLocatorSnapshot()]);
       if (disposed) return;
       setSettings(loaded);
@@ -90,6 +108,7 @@ export function OverlayApp() {
       cleanup?.();
       cleanupInvalidate?.();
       cleanupSquad?.();
+      cleanupQuest?.();
     };
   }, []);
 
@@ -121,16 +140,39 @@ export function OverlayApp() {
     return () => controller.abort();
   }, [definition, retryKey]);
   useEffect(() => {
-    if (capture && bundle) setRaidExtracts(recognizeRaidExtracts(capture, definition.id, bundle.pois));
+    if (capture && bundle)
+      setRaidExtracts((previous) => accumulateRaidExtracts(previous, capture, definition.id, bundle.pois));
   }, [bundle, capture, definition.id]);
+  // Discard a snapshot computed for a map the overlay is no longer showing. Filtering here rather
+  // than in the listener keeps the comparison against the current render's map.
+  const activeQuestPois = useMemo(
+    () => (questSnapshot?.mapId === definition.id ? questSnapshot.pois : []),
+    [questSnapshot, definition.id],
+  );
+  const renderedPoiBundle = useMemo<MapPoiBundle | null>(
+    () => composePoiBundle(bundle, definition.id, activeQuestPois, null, [], settings.showQuestMarkers),
+    [activeQuestPois, bundle, definition.id, settings.showQuestMarkers],
+  );
   const visible = useMemo(
     () =>
-      new Set(
-        (settings.visibleMapLayers.length ? settings.visibleMapLayers : defaultVisiblePoiCategories) as PoiCategory[],
+      composeVisibleCategories(
+        new Set(
+          (settings.visibleMapLayers.length ? settings.visibleMapLayers : defaultVisiblePoiCategories) as PoiCategory[],
+        ),
+        definition.id,
+        activeQuestPois,
+        null,
+        [],
+        settings.showQuestMarkers,
       ),
-    [settings.visibleMapLayers],
+    [activeQuestPois, definition.id, settings.showQuestMarkers, settings.visibleMapLayers],
   );
-  const active = useMemo(() => new Set(raidExtracts?.activeExtractIds ?? []), [raidExtracts]);
+  // The reading is kept while the map changes, but only ever shown on the map it describes.
+  const raidExtractsForMap = useMemo(
+    () => (raidExtracts && raidExtracts.mapId === definition.id ? raidExtracts : null),
+    [raidExtracts, definition.id],
+  );
+  const active = useMemo(() => new Set(raidExtractsForMap?.activeExtractIds ?? []), [raidExtractsForMap]);
   const visibleLootGroups = useMemo(
     () => new Set(settings.visibleLootGroups ?? allLootGroupIds),
     [settings.visibleLootGroups],
@@ -168,7 +210,7 @@ export function OverlayApp() {
           activeFloor={floor}
           fix={fix}
           follow
-          poiBundle={bundle}
+          poiBundle={renderedPoiBundle}
           visiblePoiCategories={visible}
           visibleLootGroups={visibleLootGroups}
           selectedPoiId={null}
@@ -201,8 +243,8 @@ export function OverlayApp() {
         )}
         <div className="overlay-readout">
           <strong>
-            {raidExtracts?.status === "recognized"
-              ? `${raidExtracts.activeExtractIds.length} ACTIVE EXITS`
+            {raidExtractsForMap?.status === "recognized"
+              ? `${raidExtractsForMap.activeExtractIds.length} ACTIVE EXITS`
               : "EXITS UNKNOWN"}
           </strong>
           <span>{fix ? `${fix.position.x.toFixed(1)} / ${fix.position.z.toFixed(1)}` : "TAKE SCREENSHOT"}</span>
