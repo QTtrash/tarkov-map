@@ -6,6 +6,37 @@ All notable changes to Raid Signal are recorded here. The format follows
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-08-28
+
+### Added
+
+- Show live squad positions and active quest markers in the compact native
+  overlay, contributed by
+  [@Reiss-Cashmore](https://github.com/Reiss-Cashmore).
+- Map candidate spawn locations for active find-item quest objectives, with
+  distinct hollow markers and refreshed Regular, PvE, and Seasonal PvP data.
+
+### Fixed
+
+- Keep the base map visible when an elevation band intentionally has no
+  packaged SVG layer.
+- Preserve the last recognized extract panel when later screenshots contain
+  unrelated OCR text, while clearing it when the raid ends.
+
+### Changed
+
+- Refresh the checksummed Tarkov.dev POI and quest snapshot, including current
+  boss spawn chances and deduplicated candidate quest locations.
+- Update compatible frontend tooling, paired CodeQL actions, and secret-scan
+  tooling while retaining the pinned Node 22 and TypeScript 6 support lines.
+
+### Security and privacy
+
+- Validate and bound both local main-window-to-overlay event channels before
+  sending or rendering their payloads. Decrypted squad positions remain
+  process-local; settings schema v2, room protocol v1, invitation handling, and
+  ciphertext-only relay behavior are unchanged.
+
 ## [1.3.1] - 2026-08-22
 
 ### Fixed
@@ -108,7 +139,8 @@ All notable changes to Raid Signal are recorded here. The format follows
   selection.
 - End-to-end encrypted Internet and LAN squad sharing with a phone companion.
 
-[Unreleased]: https://github.com/QTtrash/tarkov-map/compare/v1.3.1...HEAD
+[Unreleased]: https://github.com/QTtrash/tarkov-map/compare/v1.4.0...HEAD
+[1.4.0]: https://github.com/QTtrash/tarkov-map/compare/v1.3.1...v1.4.0
 [1.3.1]: https://github.com/QTtrash/tarkov-map/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/QTtrash/tarkov-map/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/QTtrash/tarkov-map/compare/v1.1.0...v1.2.0

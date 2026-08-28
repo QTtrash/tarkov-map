@@ -24,9 +24,10 @@ game files. No official approval or anti-cheat guarantee is implied.
 
 ![Raid Signal desktop map](public/images/raid-signal-desktop.webp)
 
-- Native Tauri desktop map and compact always-on-top overlay.
+- Native Tauri desktop map and compact always-on-top overlay with live squad,
+  quest, and extract markers.
 - Screenshot coordinate parsing, raid/map detection, floors, POIs, extracts,
-  quests, and local custom waypoints.
+  quests, candidate find-item locations, and local custom waypoints.
 - Experimental, opt-in quest progress import for recognized Tarkov-created log
   records, with an anonymized review, privacy-safe diagnostics, isolated PvP,
   PvE, and Seasonal profiles, and manual corrections. Current Tarkov builds may
@@ -42,22 +43,22 @@ game files. No official approval or anti-cheat guarantee is implied.
 ## Install and verify
 
 Download the Windows installer and SHA-256 file from the immutable
-[v1.3.1 release](https://github.com/QTtrash/tarkov-map/releases/tag/v1.3.1).
+[v1.4.0 release](https://github.com/QTtrash/tarkov-map/releases/tag/v1.4.0).
 Installers are unsigned initially, so Windows may display an unknown-publisher
 warning. Do not download installers from repository commits or third-party mirrors.
 
 Verify the checksum in PowerShell from the directory containing both downloads:
 
 ```powershell
-$expected = (Get-Content .\Raid-Signal-Setup-1.3.1.exe.sha256).Split()[0]
-$actual = (Get-FileHash .\Raid-Signal-Setup-1.3.1.exe -Algorithm SHA256).Hash.ToLowerInvariant()
+$expected = (Get-Content .\Raid-Signal-Setup-1.4.0.exe.sha256).Split()[0]
+$actual = (Get-FileHash .\Raid-Signal-Setup-1.4.0.exe -Algorithm SHA256).Hash.ToLowerInvariant()
 if ($actual -ne $expected) { throw "Raid Signal checksum mismatch" }
 ```
 
 With the GitHub CLI installed, verify that GitHub Actions produced the artifact:
 
 ```text
-gh attestation verify Raid-Signal-Setup-1.3.1.exe -R QTtrash/tarkov-map
+gh attestation verify Raid-Signal-Setup-1.4.0.exe -R QTtrash/tarkov-map
 ```
 
 The release also contains `release.json` and an SPDX SBOM. The

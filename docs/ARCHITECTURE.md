@@ -22,17 +22,23 @@ files. The Cloudflare Worker adapter is not a supported runtime.
    persistence; ambiguous lifecycle hints remain diagnostic-only.
 3. Bundled map/quest/POI JSON and native quest-sync payloads are validated before
    rendering.
-4. Sharing clients create a timestamped room ID and 256-bit key. AES-256-GCM
+4. The main desktop webview derives active quest markers and decrypts squad
+   positions. Bounded, validated snapshots cross process-local Tauri event
+   channels to the compact overlay; the overlay opens no second relay
+   connection and discards quest snapshots for other maps.
+5. Sharing clients create a timestamped room ID and 256-bit key. AES-256-GCM
    uses a fresh 96-bit nonce and room-bound authenticated data for every update.
-5. The key remains after `#` in the invitation URL. Browsers do not send that
+6. The key remains after `#` in the invitation URL. Browsers do not send that
    fragment to the HTTP or WebSocket server.
-6. Relays enforce limits and forward ciphertext without parsing application data.
+7. Relays enforce limits and forward ciphertext without parsing application data.
 
 ## Ownership boundaries
 
 - `src/sharing/` owns protocol v1, invitation parsing, encryption, and decrypted
   payload validation.
 - `src/validation.ts` owns untrusted TypeScript runtime schemas.
+- `src/locator.ts` owns the validated process-local quest and squad event bridges
+  between the main and overlay webviews.
 - `src/quest-diagnostics.ts` owns the counts-only, privacy-safe compatibility
   summary copied by the desktop UI.
 - `src/components/map-view-helpers.ts` owns Leaflet rendering primitives;
