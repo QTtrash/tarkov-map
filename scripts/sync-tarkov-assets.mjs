@@ -360,9 +360,22 @@ function normalizeQuestBundle(
         }))
         .filter((zone) => zone.mapId);
       // Find-item objectives carry candidate spawn points here instead of zones.
-      const possibleLocations = (objective.possibleLocations || [])
-        .map((location) => ({ mapId: mapName(location.map), positions: (location.positions || []).map(vector) }))
-        .filter((location) => location.mapId && location.positions.length);
+      const possibleLocationsByMap = new Map();
+      for (const location of objective.possibleLocations || []) {
+        const mapId = mapName(location.map);
+        if (!mapId) continue;
+        const entry = possibleLocationsByMap.get(mapId) || { mapId, positions: [], positionKeys: new Set() };
+        for (const position of (location.positions || []).map(vector)) {
+          const key = `${position.x}\u0000${position.y}\u0000${position.z}`;
+          if (entry.positionKeys.has(key)) continue;
+          entry.positionKeys.add(key);
+          entry.positions.push(position);
+        }
+        possibleLocationsByMap.set(mapId, entry);
+      }
+      const possibleLocations = [...possibleLocationsByMap.values()]
+        .filter((location) => location.positions.length)
+        .map(({ mapId, positions }) => ({ mapId, positions }));
       const objectiveMapIds = unique([
         ...(objective.maps || []).map(mapName),
         ...zones.map((zone) => zone.mapId),

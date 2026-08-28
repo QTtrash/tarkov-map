@@ -116,6 +116,13 @@ describe("quest ordering", () => {
                 { x: 19.5, y: 36.5, z: -12.5 },
               ],
             },
+            {
+              mapId: "interchange",
+              positions: [
+                { x: 14.6, y: 38.4, z: -4.7 },
+                { x: 25.1, y: 34.2, z: -10.3 },
+              ],
+            },
             { mapId: "woods", positions: [{ x: 1, y: 2, z: 3 }] },
           ],
         },
@@ -130,10 +137,11 @@ describe("quest ordering", () => {
     };
 
     const pois = buildActiveQuestObjectivePois(bundle, "interchange", progress);
-    expect(pois).toHaveLength(2);
+    expect(pois).toHaveLength(3);
     expect(pois.every((poi) => poi.kind === "quest-possible-location")).toBe(true);
-    expect(new Set(pois.map((poi) => poi.id)).size).toBe(2);
-    expect(pois[0]).toMatchObject({ locationIndex: 0, locationCount: 2, position: { x: 14.6, y: 38.4, z: -4.7 } });
+    expect(new Set(pois.map((poi) => poi.id)).size).toBe(3);
+    expect(pois[0]).toMatchObject({ locationIndex: 0, locationCount: 3, position: { x: 14.6, y: 38.4, z: -4.7 } });
+    expect(pois[2]).toMatchObject({ locationIndex: 2, locationCount: 3, position: { x: 25.1, y: 34.2, z: -10.3 } });
     expect(buildActiveQuestObjectivePois(bundle, "customs", progress)).toHaveLength(0);
   });
 });
