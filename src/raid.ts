@@ -79,3 +79,16 @@ export function recognizeRaidExtracts(capture: OcrTextCapture, mapId: string, po
       : capture.message || "Active extracts unknown",
   };
 }
+
+// A screenshot without the exfil panel in frame recognizes nothing, so it must not erase the
+// last real reading. A capture that does recognize extracts is treated as authoritative.
+export function accumulateRaidExtracts(
+  previous: RaidExtractState | null,
+  capture: OcrTextCapture,
+  mapId: string,
+  pois: MapPoi[],
+): RaidExtractState {
+  const next = recognizeRaidExtracts(capture, mapId, pois);
+  if (next.status !== "unknown") return next;
+  return previous && previous.mapId === mapId ? previous : next;
+}
