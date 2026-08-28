@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "mapId": "factory",
-  "generatedAt": "2026-08-21T20:26:45.628Z",
+  "generatedAt": "2026-08-28T08:20:38.626Z",
   "sources": [
     "https://json.tarkov.dev/regular/maps",
     "https://json.tarkov.dev/regular/maps_en"
@@ -2266,7 +2266,7 @@
       },
       "bossId": "bossTagilla",
       "bossName": "Tagilla",
-      "spawnChance": 0.3,
+      "spawnChance": 0.35,
       "zoneChance": 1
     },
     {

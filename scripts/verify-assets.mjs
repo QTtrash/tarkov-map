@@ -28,6 +28,36 @@ for (const mode of ["regular", "pve", "pvp-season"]) {
   if (bundle.schemaVersion !== 2 || bundle.gameMode !== mode || !Array.isArray(bundle.quests)) {
     throw new Error(`Invalid ${mode} quest bundle`);
   }
+  let possibleLocationCount = 0;
+  for (const quest of bundle.quests) {
+    for (const objective of quest.objectives || []) {
+      if (objective.possibleLocations === undefined) continue;
+      if (!Array.isArray(objective.possibleLocations)) {
+        throw new Error(`Invalid possible locations in ${mode} quest ${quest.id}`);
+      }
+      const seenMaps = new Set();
+      const seenPositions = new Set();
+      for (const location of objective.possibleLocations) {
+        if (!/^[a-z0-9-]{2,32}$/.test(location.mapId) || seenMaps.has(location.mapId)) {
+          throw new Error(`Invalid or duplicate possible-location map in ${mode} quest ${quest.id}`);
+        }
+        seenMaps.add(location.mapId);
+        if (!Array.isArray(location.positions) || !location.positions.length || location.positions.length > 64) {
+          throw new Error(`Invalid possible-location positions in ${mode} quest ${quest.id}`);
+        }
+        for (const position of location.positions) {
+          if (![position.x, position.y, position.z].every(Number.isFinite)) {
+            throw new Error(`Non-finite possible location in ${mode} quest ${quest.id}`);
+          }
+          const key = `${location.mapId}\u0000${position.x}\u0000${position.y}\u0000${position.z}`;
+          if (seenPositions.has(key)) throw new Error(`Duplicate possible location in ${mode} quest ${quest.id}`);
+          seenPositions.add(key);
+          possibleLocationCount += 1;
+        }
+      }
+    }
+  }
+  if (!possibleLocationCount) throw new Error(`No possible quest locations found for ${mode}`);
 }
 
 const poiFiles = Object.keys(checksums).filter((file) => file.startsWith("poi/") && file.endsWith(".json"));

@@ -402,7 +402,7 @@ function normalizeQuestBundle(
         mapIds: objectiveMapIds,
         details,
         zones,
-        possibleLocations,
+        ...(possibleLocations.length ? { possibleLocations } : {}),
       };
     });
     const declaredMap = mapName(task.map);

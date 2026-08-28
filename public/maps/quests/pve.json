@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-21T20:26:47.188Z",
+  "generatedAt": "2026-08-28T08:20:40.159Z",
   "gameMode": "pve",
   "quests": [
     {
@@ -595,7 +595,34 @@
             "ground-zero"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "ground-zero",
+              "positions": [
+                {
+                  "x": -11.949866,
+                  "y": 30.2254,
+                  "z": 49.585052
+                },
+                {
+                  "x": -12.356882,
+                  "y": 30.692001,
+                  "z": 49.026344
+                },
+                {
+                  "x": -12.127326,
+                  "y": 30.6906,
+                  "z": 48.043213
+                },
+                {
+                  "x": -12.333414,
+                  "y": 30.691,
+                  "z": 49.01263
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "65817fc99a039ed2e97896e4",
@@ -745,7 +772,19 @@
             "shoreline"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "shoreline",
+              "positions": [
+                {
+                  "x": -218.02002,
+                  "y": 2.815,
+                  "z": -86.09
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5a68763786f77474c33a40a1",
@@ -805,7 +844,39 @@
             "streets-of-tarkov"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "streets-of-tarkov",
+              "positions": [
+                {
+                  "x": 84.013,
+                  "y": 1.4772,
+                  "z": 129.821
+                },
+                {
+                  "x": 77.503006,
+                  "y": 1.6469002,
+                  "z": 139.955
+                },
+                {
+                  "x": 83.267105,
+                  "y": 1.6377001,
+                  "z": 124.5388
+                },
+                {
+                  "x": 81.737,
+                  "y": 1.888,
+                  "z": 144.2245
+                },
+                {
+                  "x": 80.18001,
+                  "y": 3.9165,
+                  "z": 143.7027
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "639135d89444fb141f4e6eec",
@@ -847,7 +918,19 @@
             "factory"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "factory",
+              "positions": [
+                {
+                  "x": -5.05500031,
+                  "y": -2.657,
+                  "z": 18.5820026
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "66a7eebed6bac3ecc16f7d6b",
@@ -889,7 +972,19 @@
             "woods"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "woods",
+              "positions": [
+                {
+                  "x": -94.25195,
+                  "y": -15.702,
+                  "z": 218.992981
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5a68770f86f774747d4b0d8b",
@@ -1210,7 +1305,34 @@
             "streets-of-tarkov"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "streets-of-tarkov",
+              "positions": [
+                {
+                  "x": 245.89398,
+                  "y": -0.6870003,
+                  "z": 55.196
+                },
+                {
+                  "x": 249.29099,
+                  "y": -0.5653,
+                  "z": 57.7654
+                },
+                {
+                  "x": 247.16199,
+                  "y": -0.47999954,
+                  "z": 51.082
+                },
+                {
+                  "x": 245.60138,
+                  "y": -0.32450008,
+                  "z": 57.9813
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "64f5bbc967e11a7c6206e00e",
@@ -1369,7 +1491,34 @@
             "streets-of-tarkov"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "streets-of-tarkov",
+              "positions": [
+                {
+                  "x": -29.297,
+                  "y": 10.104,
+                  "z": -70.153
+                },
+                {
+                  "x": -41.380898,
+                  "y": 5.9082,
+                  "z": -42.932404
+                },
+                {
+                  "x": -42.788002,
+                  "y": 10.1146,
+                  "z": -66.412
+                },
+                {
+                  "x": -26.149,
+                  "y": 10.6282,
+                  "z": -56.0783
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "64f6aa6cdd44b6417729b536",
@@ -2086,7 +2235,29 @@
             "factory"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "factory",
+              "positions": [
+                {
+                  "x": 23.249971,
+                  "y": 8.535252,
+                  "z": 39.403866
+                },
+                {
+                  "x": 25.56231,
+                  "y": 8.0731945,
+                  "z": 38.48874
+                },
+                {
+                  "x": 26.326584,
+                  "y": 8.978607,
+                  "z": 36.763622
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "597a15c386f77405ba6887d2",
@@ -2504,7 +2675,34 @@
             "factory"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "factory",
+              "positions": [
+                {
+                  "x": -22.717655,
+                  "y": -1.8816979,
+                  "z": 48.669617
+                },
+                {
+                  "x": -21.713234,
+                  "y": -2.088474,
+                  "z": 44.430035
+                },
+                {
+                  "x": -18.40426,
+                  "y": -1.9747472,
+                  "z": 46.692566
+                },
+                {
+                  "x": -23.265278,
+                  "y": -1.8564624,
+                  "z": 44.83158
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "66a0e69ec03c2dad1a84993a",
@@ -3399,18 +3597,18 @@
       "traderId": "5c0647fdd443bc2504c2d371",
       "traderName": "Jaeger",
       "minPlayerLevel": 9,
-      "primaryMapId": "reserve",
+      "primaryMapId": "icebreaker",
       "mapIds": [
-        "reserve",
+        "icebreaker",
         "lighthouse",
         "interchange",
         "customs",
-        "factory",
-        "icebreaker",
-        "woods",
-        "ground-zero",
         "shoreline",
-        "streets-of-tarkov"
+        "factory",
+        "woods",
+        "streets-of-tarkov",
+        "reserve",
+        "ground-zero"
       ],
       "summary": "Eliminate Scavs while suffering from the Pain status effect",
       "experience": 10000,
@@ -3427,16 +3625,16 @@
           "type": "shoot",
           "optional": false,
           "mapIds": [
-            "reserve",
+            "icebreaker",
             "lighthouse",
             "interchange",
             "customs",
-            "factory",
-            "icebreaker",
-            "woods",
-            "ground-zero",
             "shoreline",
-            "streets-of-tarkov"
+            "factory",
+            "woods",
+            "streets-of-tarkov",
+            "reserve",
+            "ground-zero"
           ],
           "details": [
             "Required count: 3",
@@ -3960,7 +4158,29 @@
             "shoreline"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "shoreline",
+              "positions": [
+                {
+                  "x": -203.14978,
+                  "y": -6.2083,
+                  "z": -76.56938
+                },
+                {
+                  "x": -198.71509,
+                  "y": -6.8583,
+                  "z": -74.49104
+                },
+                {
+                  "x": -201.39575,
+                  "y": -6.9828005,
+                  "z": -79.43288
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "666078bee6ed30ab2294f593",
@@ -4302,18 +4522,18 @@
       "traderId": "6617beeaa9cfa777ca915b7c",
       "traderName": "Ref",
       "minPlayerLevel": 10,
-      "primaryMapId": "reserve",
+      "primaryMapId": "icebreaker",
       "mapIds": [
-        "reserve",
+        "icebreaker",
         "lighthouse",
         "interchange",
         "customs",
-        "factory",
-        "icebreaker",
-        "woods",
-        "ground-zero",
         "shoreline",
-        "streets-of-tarkov"
+        "factory",
+        "woods",
+        "streets-of-tarkov",
+        "reserve",
+        "ground-zero"
       ],
       "summary": "Eliminate Scavs while using a Steyr AUG on any location",
       "experience": 5100,
@@ -4333,16 +4553,16 @@
           "type": "shoot",
           "optional": false,
           "mapIds": [
-            "reserve",
+            "icebreaker",
             "lighthouse",
             "interchange",
             "customs",
-            "factory",
-            "icebreaker",
-            "woods",
-            "ground-zero",
             "shoreline",
-            "streets-of-tarkov"
+            "factory",
+            "woods",
+            "streets-of-tarkov",
+            "reserve",
+            "ground-zero"
           ],
           "details": [
             "Required count: 5",
@@ -4874,7 +5094,19 @@
             "customs"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "customs",
+              "positions": [
+                {
+                  "x": 183.096085,
+                  "y": 2.8125,
+                  "z": 164.0104
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "6834254f2f0e2a7eb90b62f2",
@@ -5000,7 +5232,19 @@
             "customs"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "customs",
+              "positions": [
+                {
+                  "x": 183.096085,
+                  "y": 2.8125,
+                  "z": 164.0104
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "683425dd8f5b18d29a05d9d8",
@@ -5859,7 +6103,19 @@
             "streets-of-tarkov"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "streets-of-tarkov",
+              "positions": [
+                {
+                  "x": -177.12001,
+                  "y": 6.1466,
+                  "z": 227.1259
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "638fd0805e5a195d2c443754",
@@ -5945,7 +6201,24 @@
             "streets-of-tarkov"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "streets-of-tarkov",
+              "positions": [
+                {
+                  "x": -70.079,
+                  "y": 5.7520537,
+                  "z": 69.437
+                },
+                {
+                  "x": -65.262,
+                  "y": 5.8899994,
+                  "z": 66.363
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "639136fa9444fb141f4e6ef0",
@@ -7039,7 +7312,19 @@
             "the-lab"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "the-lab",
+              "positions": [
+                {
+                  "x": -173.7443,
+                  "y": 1.2538,
+                  "z": -374.4323
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "6672e49679243c500ec02c2e",
@@ -7203,7 +7488,59 @@
             "interchange"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "interchange",
+              "positions": [
+                {
+                  "x": 14.628261,
+                  "y": 38.453,
+                  "z": -4.792009
+                },
+                {
+                  "x": 19.517511,
+                  "y": 36.581486,
+                  "z": -12.575807
+                },
+                {
+                  "x": 18.42624,
+                  "y": 36.605,
+                  "z": -3.7190084
+                },
+                {
+                  "x": 30.47102,
+                  "y": 37.457,
+                  "z": -19.500854
+                },
+                {
+                  "x": 16.287987,
+                  "y": 36.938198,
+                  "z": -12.538616
+                },
+                {
+                  "x": 14.321921,
+                  "y": 37.783,
+                  "z": -2.4580088
+                },
+                {
+                  "x": 18.86084,
+                  "y": 37.444,
+                  "z": -5.540009
+                },
+                {
+                  "x": 26.164429,
+                  "y": 37.216,
+                  "z": 0.66467285
+                },
+                {
+                  "x": 8.725121,
+                  "y": 37.335,
+                  "z": -18.523008
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "667a95972740eaeca1ecda21",
@@ -7424,7 +7761,79 @@
             "shoreline"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "shoreline",
+              "positions": [
+                {
+                  "x": 323.6604,
+                  "y": -54.315098,
+                  "z": -81.6693
+                },
+                {
+                  "x": 356.91577,
+                  "y": -53.751503,
+                  "z": -102.371796
+                },
+                {
+                  "x": 283.93066,
+                  "y": -54.425518,
+                  "z": -182.97021
+                },
+                {
+                  "x": 198.78613,
+                  "y": -47.53198,
+                  "z": 99.03204
+                },
+                {
+                  "x": 290.54077,
+                  "y": -49.778496,
+                  "z": -40.20999
+                },
+                {
+                  "x": 286.66602,
+                  "y": -54.426006,
+                  "z": -176.1002
+                },
+                {
+                  "x": 207.40076,
+                  "y": -48.321987,
+                  "z": 100.21301
+                },
+                {
+                  "x": 200.07935,
+                  "y": -48.323788,
+                  "z": 101.413025
+                },
+                {
+                  "x": 329.95728,
+                  "y": -54.41971,
+                  "z": -143.7411
+                },
+                {
+                  "x": 357.51904,
+                  "y": -54.224304,
+                  "z": -108.451096
+                },
+                {
+                  "x": 324.36182,
+                  "y": -53.755207,
+                  "z": -145.42566
+                },
+                {
+                  "x": -527.06055,
+                  "y": -54.81454,
+                  "z": 405.39777
+                },
+                {
+                  "x": 290.49097,
+                  "y": -50.609997,
+                  "z": -38.983994
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "667571cb7620e3041bad913c",
@@ -7815,7 +8224,49 @@
             "streets-of-tarkov"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "streets-of-tarkov",
+              "positions": [
+                {
+                  "x": 248.9992,
+                  "y": -3.6352,
+                  "z": 53.766003
+                },
+                {
+                  "x": 245.67201,
+                  "y": -3.622,
+                  "z": 50.760002
+                },
+                {
+                  "x": 246.69151,
+                  "y": -0.07700001,
+                  "z": 47.761
+                },
+                {
+                  "x": 242.953,
+                  "y": -0.7722,
+                  "z": 55.2452
+                },
+                {
+                  "x": 243.3352,
+                  "y": -3.6153,
+                  "z": 52.953503
+                },
+                {
+                  "x": 248.3334,
+                  "y": -3.6317,
+                  "z": 55.362602
+                },
+                {
+                  "x": 247.70201,
+                  "y": -0.403,
+                  "z": 58.834
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "667988545af9f7082798b67d",
@@ -9807,7 +10258,19 @@
             "lighthouse"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "lighthouse",
+              "positions": [
+                {
+                  "x": -248.4343,
+                  "y": 0.159906387,
+                  "z": -328.300323
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "61904ebb22e6d82ee97ccbbe",
@@ -10229,10 +10692,10 @@
       "primaryMapId": "customs",
       "mapIds": [
         "customs",
+        "shoreline",
         "factory",
         "woods",
         "ground-zero",
-        "shoreline",
         "streets-of-tarkov"
       ],
       "summary": "Locate and neutralize Priest · Locate the ritual spot on Chekannaya st. on Streets of Tarkov",
@@ -10250,10 +10713,10 @@
           "optional": false,
           "mapIds": [
             "customs",
+            "shoreline",
             "factory",
             "woods",
-            "ground-zero",
-            "shoreline"
+            "ground-zero"
           ],
           "details": [
             "Targets: Cultist Priest"
@@ -10932,7 +11395,19 @@
             "shoreline"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "shoreline",
+              "positions": [
+                {
+                  "x": -340.984,
+                  "y": -2.725,
+                  "z": -88.627
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5a3ba76486f7744d39436da2",
@@ -11841,7 +12316,19 @@
             "shoreline"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "shoreline",
+              "positions": [
+                {
+                  "x": -267.220947,
+                  "y": -0.017,
+                  "z": -145.576
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5a28223786f7741c7a0b5401",
@@ -12556,10 +13043,10 @@
       "primaryMapId": "customs",
       "mapIds": [
         "customs",
+        "shoreline",
         "factory",
         "woods",
-        "ground-zero",
-        "shoreline"
+        "ground-zero"
       ],
       "summary": "Eliminate the hooded men with the double barrel shotgun",
       "experience": 16000,
@@ -12579,10 +13066,10 @@
           "optional": false,
           "mapIds": [
             "customs",
+            "shoreline",
             "factory",
             "woods",
-            "ground-zero",
-            "shoreline"
+            "ground-zero"
           ],
           "details": [
             "Required count: 2",
@@ -12968,7 +13455,19 @@
             "reserve"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "reserve",
+              "positions": [
+                {
+                  "x": -88.065,
+                  "y": -19.129,
+                  "z": 151.055
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "60929afc35915c62b44fd05c",
@@ -13010,7 +13509,19 @@
             "lighthouse"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "lighthouse",
+              "positions": [
+                {
+                  "x": -115.694664,
+                  "y": 40.7532349,
+                  "z": 88.8879852
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "63ac1a941b5c95746621ddb2",
@@ -13097,7 +13608,19 @@
             "interchange"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "interchange",
+              "positions": [
+                {
+                  "x": 137.963,
+                  "y": 24.107,
+                  "z": 268.126
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "671a598e596272a846fa862a",
@@ -14851,18 +15374,18 @@
       "traderId": "5ac3b934156ae10c4430e83c",
       "traderName": "Ragman",
       "minPlayerLevel": 25,
-      "primaryMapId": "reserve",
+      "primaryMapId": "icebreaker",
       "mapIds": [
-        "reserve",
+        "icebreaker",
         "lighthouse",
         "interchange",
         "customs",
-        "factory",
-        "icebreaker",
-        "woods",
-        "ground-zero",
         "shoreline",
+        "factory",
+        "woods",
         "streets-of-tarkov",
+        "reserve",
+        "ground-zero",
         "the-lab"
       ],
       "summary": "Eliminate Scavs · Survive and extract from The Lab",
@@ -14879,16 +15402,16 @@
           "type": "shoot",
           "optional": false,
           "mapIds": [
-            "reserve",
+            "icebreaker",
             "lighthouse",
             "interchange",
             "customs",
-            "factory",
-            "icebreaker",
-            "woods",
-            "ground-zero",
             "shoreline",
-            "streets-of-tarkov"
+            "factory",
+            "woods",
+            "streets-of-tarkov",
+            "reserve",
+            "ground-zero"
           ],
           "details": [
             "Required count: 50",
@@ -15040,7 +15563,19 @@
             "reserve"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "reserve",
+              "positions": [
+                {
+                  "x": 99.78601,
+                  "y": -6.725,
+                  "z": 59.1600342
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "6092947635915c62b44fd05b",
@@ -15342,7 +15877,44 @@
             "the-labyrinth"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "the-labyrinth",
+              "positions": [
+                {
+                  "x": -8.0034485,
+                  "y": 0.84599996,
+                  "z": 30.262415
+                },
+                {
+                  "x": -4.6923904,
+                  "y": 0.8037,
+                  "z": 36.09659
+                },
+                {
+                  "x": -9.512562,
+                  "y": 0.8756001,
+                  "z": 26.163725
+                },
+                {
+                  "x": -10.467064,
+                  "y": 0.8489001,
+                  "z": 22.710201
+                },
+                {
+                  "x": -5.4125657,
+                  "y": 1.1162,
+                  "z": 27.037369
+                },
+                {
+                  "x": -11.049734,
+                  "y": 0.79559994,
+                  "z": 25.961308
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "67a0de2750fdff39d267ea16",
@@ -15483,7 +16055,34 @@
             "the-labyrinth"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "the-labyrinth",
+              "positions": [
+                {
+                  "x": 13.811146,
+                  "y": 0.67560005,
+                  "z": 3.1006217
+                },
+                {
+                  "x": 12.568995,
+                  "y": 0.08430004,
+                  "z": 11.800928
+                },
+                {
+                  "x": 12.337366,
+                  "y": 1.0143001,
+                  "z": 19.364975
+                },
+                {
+                  "x": 17.567907,
+                  "y": 0.049000025,
+                  "z": 6.3015003
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "67a0de9190545ec5612fdda5",
@@ -16112,7 +16711,64 @@
             "streets-of-tarkov"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "streets-of-tarkov",
+              "positions": [
+                {
+                  "x": 44.3447,
+                  "y": 12.643499,
+                  "z": 151.7695
+                },
+                {
+                  "x": 42.913,
+                  "y": 11.729299,
+                  "z": 152.35751
+                },
+                {
+                  "x": 44.6515,
+                  "y": 11.760698,
+                  "z": 149.32391
+                },
+                {
+                  "x": 41.052006,
+                  "y": 12.560199,
+                  "z": 154.98201
+                },
+                {
+                  "x": 42.291004,
+                  "y": 12.553749,
+                  "z": 148.51831
+                },
+                {
+                  "x": 36.349213,
+                  "y": 12.278599,
+                  "z": 148.5618
+                },
+                {
+                  "x": 36.995472,
+                  "y": 12.501999,
+                  "z": 153.30731
+                },
+                {
+                  "x": 36.493984,
+                  "y": 11.8429985,
+                  "z": 157.48001
+                },
+                {
+                  "x": 34.95802,
+                  "y": 12.501999,
+                  "z": 152.32729
+                },
+                {
+                  "x": 40.601604,
+                  "y": 11.7158985,
+                  "z": 153.7631
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "639135bbc115f907b14700a8",
@@ -16132,10 +16788,10 @@
       "traderId": "5ac3b934156ae10c4430e83c",
       "traderName": "Ragman",
       "minPlayerLevel": 27,
-      "primaryMapId": "reserve",
+      "primaryMapId": "the-lab",
       "mapIds": [
-        "reserve",
-        "the-lab"
+        "the-lab",
+        "reserve"
       ],
       "summary": "Eliminate Raiders · Hand over the found in raid WARTECH brand equipment",
       "experience": 28000,
@@ -16151,8 +16807,8 @@
           "type": "shoot",
           "optional": false,
           "mapIds": [
-            "reserve",
-            "the-lab"
+            "the-lab",
+            "reserve"
           ],
           "details": [
             "Required count: 100",
@@ -16182,10 +16838,10 @@
       "traderId": "5ac3b934156ae10c4430e83c",
       "traderName": "Ragman",
       "minPlayerLevel": 27,
-      "primaryMapId": "reserve",
+      "primaryMapId": "the-lab",
       "mapIds": [
-        "reserve",
-        "the-lab"
+        "the-lab",
+        "reserve"
       ],
       "summary": "Eliminate Raiders · Hand over the found in raid WARTECH brand equipment",
       "experience": 28000,
@@ -16201,8 +16857,8 @@
           "type": "shoot",
           "optional": false,
           "mapIds": [
-            "reserve",
-            "the-lab"
+            "the-lab",
+            "reserve"
           ],
           "details": [
             "Required count: 100",
@@ -16467,13 +17123,13 @@
       "traderId": "5c0647fdd443bc2504c2d371",
       "traderName": "Jaeger",
       "minPlayerLevel": 33,
-      "primaryMapId": "lighthouse",
+      "primaryMapId": "icebreaker",
       "mapIds": [
+        "icebreaker",
         "lighthouse",
         "customs",
-        "icebreaker",
-        "woods",
-        "shoreline"
+        "shoreline",
+        "woods"
       ],
       "summary": "Locate and neutralize Knight (in one raid) · Locate and neutralize Big Pipe (in one raid)",
       "experience": 65000,
@@ -16491,11 +17147,11 @@
           "type": "shoot",
           "optional": false,
           "mapIds": [
+            "icebreaker",
             "lighthouse",
             "customs",
-            "icebreaker",
-            "woods",
-            "shoreline"
+            "shoreline",
+            "woods"
           ],
           "details": [
             "Targets: Knight"
@@ -16510,8 +17166,8 @@
           "mapIds": [
             "lighthouse",
             "customs",
-            "woods",
-            "shoreline"
+            "shoreline",
+            "woods"
           ],
           "details": [
             "Targets: Big Pipe"
@@ -16526,8 +17182,8 @@
           "mapIds": [
             "lighthouse",
             "customs",
-            "woods",
-            "shoreline"
+            "shoreline",
+            "woods"
           ],
           "details": [
             "Targets: Birdeye"
@@ -17213,7 +17869,19 @@
             "customs"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "customs",
+              "positions": [
+                {
+                  "x": 183.096085,
+                  "y": 2.8125,
+                  "z": 164.0104
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "683427418f5b18d29a05d9e9",
@@ -17586,18 +18254,18 @@
       "traderId": "54cb50c76803fa8b248b4571",
       "traderName": "Prapor",
       "minPlayerLevel": 36,
-      "primaryMapId": "reserve",
+      "primaryMapId": "icebreaker",
       "mapIds": [
-        "reserve",
+        "icebreaker",
         "lighthouse",
         "interchange",
         "customs",
-        "factory",
-        "icebreaker",
-        "woods",
-        "ground-zero",
         "shoreline",
-        "streets-of-tarkov"
+        "factory",
+        "woods",
+        "streets-of-tarkov",
+        "reserve",
+        "ground-zero"
       ],
       "summary": "Find the item in raid: any Kalashnikov AK-74 assault rifle · Hand over the AK-74",
       "experience": 28000,
@@ -17701,16 +18369,16 @@
           "type": "shoot",
           "optional": false,
           "mapIds": [
-            "reserve",
+            "icebreaker",
             "lighthouse",
             "interchange",
             "customs",
-            "factory",
-            "icebreaker",
-            "woods",
-            "ground-zero",
             "shoreline",
-            "streets-of-tarkov"
+            "factory",
+            "woods",
+            "streets-of-tarkov",
+            "reserve",
+            "ground-zero"
           ],
           "details": [
             "Required count: 20",
@@ -17788,8 +18456,8 @@
             "reserve",
             "interchange",
             "lighthouse",
-            "woods",
             "shoreline",
+            "woods",
             "factory",
             "the-lab"
           ],
@@ -18503,7 +19171,19 @@
             "factory"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "factory",
+              "positions": [
+                {
+                  "x": -19.4730015,
+                  "y": 0.518,
+                  "z": -52.22601
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "6a60703aaa77a4b86e07aa3b",
@@ -18564,7 +19244,19 @@
             "shoreline"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "shoreline",
+              "positions": [
+                {
+                  "x": -358.954956,
+                  "y": 2.549,
+                  "z": -76.994
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5a2822de86f7740a245249ce",
@@ -19885,10 +20577,10 @@
       "traderId": "5ac3b934156ae10c4430e83c",
       "traderName": "Ragman",
       "minPlayerLevel": 42,
-      "primaryMapId": "lighthouse",
+      "primaryMapId": "icebreaker",
       "mapIds": [
-        "lighthouse",
-        "icebreaker"
+        "icebreaker",
+        "lighthouse"
       ],
       "summary": "Eliminate Rogues · Hand over the found in raid LBT brand equipment",
       "experience": 65000,
@@ -19904,8 +20596,8 @@
           "type": "shoot",
           "optional": false,
           "mapIds": [
-            "lighthouse",
-            "icebreaker"
+            "icebreaker",
+            "lighthouse"
           ],
           "details": [
             "Required count: 100",
@@ -19935,10 +20627,10 @@
       "traderId": "5ac3b934156ae10c4430e83c",
       "traderName": "Ragman",
       "minPlayerLevel": 42,
-      "primaryMapId": "lighthouse",
+      "primaryMapId": "icebreaker",
       "mapIds": [
-        "lighthouse",
-        "icebreaker"
+        "icebreaker",
+        "lighthouse"
       ],
       "summary": "Eliminate Rogues · Hand over the found in raid LBT brand equipment",
       "experience": 65000,
@@ -19954,8 +20646,8 @@
           "type": "shoot",
           "optional": false,
           "mapIds": [
-            "lighthouse",
-            "icebreaker"
+            "icebreaker",
+            "lighthouse"
           ],
           "details": [
             "Required count: 100",
@@ -21108,7 +21800,29 @@
             "reserve"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "reserve",
+              "positions": [
+                {
+                  "x": 40.606384,
+                  "y": -4.2792,
+                  "z": -125.85956
+                },
+                {
+                  "x": 55.599854,
+                  "y": -4.0034003,
+                  "z": -116.45944
+                },
+                {
+                  "x": 62.03839,
+                  "y": -4.2307005,
+                  "z": -108.80054
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "6840711071516aad97bd9156",
@@ -21165,7 +21879,29 @@
             "customs"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "customs",
+              "positions": [
+                {
+                  "x": 582.0181,
+                  "y": 3.949,
+                  "z": 5.8941956
+                },
+                {
+                  "x": 583.6775,
+                  "y": 0.46440005,
+                  "z": 7.1766663
+                },
+                {
+                  "x": 582.0181,
+                  "y": 3.949,
+                  "z": 5.894165
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "6840714469caa738cc1225c3",
@@ -21527,7 +22263,34 @@
           "details": [
             "Optional objective"
           ],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "woods",
+              "positions": [
+                {
+                  "x": -544.42566,
+                  "y": 19.2192,
+                  "z": -204.0365
+                },
+                {
+                  "x": -547.692,
+                  "y": 15.73,
+                  "z": -198.267
+                },
+                {
+                  "x": -549.10596,
+                  "y": 19.003,
+                  "z": -200.84
+                },
+                {
+                  "x": -544.42993,
+                  "y": 19.2138,
+                  "z": -204.03448
+                }
+              ]
+            }
+          ]
         }
       ],
       "requirements": [
@@ -21676,20 +22439,6 @@
           ],
           "details": [
             "Required count: 2",
-            "Targets: any PMC operatives"
-          ],
-          "zones": []
-        },
-        {
-          "id": "65e09b343458a36a766837c7",
-          "description": "Eliminate PMC operatives on Ground Zero",
-          "type": "shoot",
-          "optional": false,
-          "mapIds": [
-            "ground-zero"
-          ],
-          "details": [
-            "Required count: 4",
             "Targets: any PMC operatives"
           ],
           "zones": []
@@ -22277,7 +23026,19 @@
             "customs"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "customs",
+              "positions": [
+                {
+                  "x": 102.2964,
+                  "y": 2.9634,
+                  "z": -5.9064
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5975de1f86f7744ca53b7c82",
@@ -22375,7 +23136,19 @@
             "customs"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "customs",
+              "positions": [
+                {
+                  "x": -202.8806,
+                  "y": 7.6911,
+                  "z": -102.4012
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "59674fe586f7744f4e358aa2",
@@ -22485,7 +23258,19 @@
             "customs"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "customs",
+              "positions": [
+                {
+                  "x": 204.073,
+                  "y": 4.6952,
+                  "z": 12.3975
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5a3fbdb086f7745a554f0c31",
@@ -22628,7 +23413,19 @@
             "factory"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "factory",
+              "positions": [
+                {
+                  "x": -19.9610023,
+                  "y": 0.047,
+                  "z": 21.9430027
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5968962686f7740e7266d973",
@@ -22717,7 +23514,19 @@
             "customs"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "customs",
+              "positions": [
+                {
+                  "x": 178.07,
+                  "y": 2.877,
+                  "z": 148.702
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5a3fc03286f77414d64f9941",
@@ -23091,7 +23900,19 @@
             "customs"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "customs",
+              "positions": [
+                {
+                  "x": 239.183,
+                  "y": 0.713,
+                  "z": 160.595
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5a3fb8f686f7742384533f10",
@@ -23289,7 +24110,19 @@
             "woods"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "woods",
+              "positions": [
+                {
+                  "x": -3.322,
+                  "y": -1.4843,
+                  "z": -81.1259
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "596a0eaf86f774576d4c957f",
@@ -23538,7 +24371,19 @@
             "customs"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "customs",
+              "positions": [
+                {
+                  "x": 367.6828,
+                  "y": 1.3008,
+                  "z": -50.5712
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5a3fbabc86f774231d75afbe",
@@ -23820,7 +24665,19 @@
             "customs"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "customs",
+              "positions": [
+                {
+                  "x": 180.8072,
+                  "y": 6.7378,
+                  "z": 150.0781
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "6a5a91ade94475b65ec117ef",
@@ -23916,7 +24773,29 @@
             "customs"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "customs",
+              "positions": [
+                {
+                  "x": 498.5496,
+                  "y": 5.6390033,
+                  "z": -141.5012
+                },
+                {
+                  "x": 487.27258,
+                  "y": 5.6429906,
+                  "z": -138.6152
+                },
+                {
+                  "x": 485.8996,
+                  "y": 5.639,
+                  "z": -140.5882
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5a3fbbfd86f77459d52a16a8",
@@ -24059,7 +24938,19 @@
             "customs"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "customs",
+              "positions": [
+                {
+                  "x": 194.2243,
+                  "y": 3.7256,
+                  "z": 171.0656
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "597a0bb486f77426d66c0634",
@@ -24070,7 +24961,19 @@
             "customs"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "customs",
+              "positions": [
+                {
+                  "x": 194.7797,
+                  "y": 4.4267,
+                  "z": 173.1325
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "597a0bf886f7742717106d13",
@@ -24587,7 +25490,19 @@
             "shoreline"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "shoreline",
+              "positions": [
+                {
+                  "x": -152.349976,
+                  "y": -14.546,
+                  "z": -301.219
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5a280f8d86f774141b501756",
@@ -25053,7 +25968,19 @@
             "shoreline"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "shoreline",
+              "positions": [
+                {
+                  "x": 81.4337158,
+                  "y": -31.8154,
+                  "z": -166.845
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5a27ffb186f774192932b3d5",
@@ -25064,7 +25991,19 @@
             "shoreline"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "shoreline",
+              "positions": [
+                {
+                  "x": -552.9468,
+                  "y": -31.2057,
+                  "z": -128.2434
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5a27ffc786f77415ca58ae47",
@@ -25737,7 +26676,19 @@
             "shoreline"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "shoreline",
+              "positions": [
+                {
+                  "x": -285.103027,
+                  "y": 2.512,
+                  "z": -89.3500061
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5a28184c86f774376e43772a",
@@ -26573,7 +27524,34 @@
             "customs"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "customs",
+              "positions": [
+                {
+                  "x": -200.80325,
+                  "y": 7.2233152,
+                  "z": -100.563126
+                },
+                {
+                  "x": -201.84921,
+                  "y": 7.3305416,
+                  "z": -102.94797
+                },
+                {
+                  "x": -202.591,
+                  "y": 7.223,
+                  "z": -98.431
+                },
+                {
+                  "x": -204.38757,
+                  "y": 7.32987,
+                  "z": -98.63279
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5ac6240786f77417204ca2b9",
@@ -27923,7 +28901,19 @@
             "interchange"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "interchange",
+              "positions": [
+                {
+                  "x": -76.48059,
+                  "y": 27.9598122,
+                  "z": -157.719238
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5ae9b36c86f774307c29df04",
@@ -27934,7 +28924,19 @@
             "interchange"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "interchange",
+              "positions": [
+                {
+                  "x": 38.0084229,
+                  "y": 27.9528084,
+                  "z": 147.143677
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5ae9b3b186f7745bbc722762",
@@ -27945,7 +28947,19 @@
             "interchange"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "interchange",
+              "positions": [
+                {
+                  "x": -1.99902344,
+                  "y": 27.9606133,
+                  "z": -292.8999
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5ae9b34686f7743129512ccf",
@@ -28005,7 +29019,19 @@
             "interchange"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "interchange",
+              "positions": [
+                {
+                  "x": 86.60339,
+                  "y": 28.06081,
+                  "z": 120.860718
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5ae9b63286f774229110402d",
@@ -28322,7 +29348,19 @@
             "interchange"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "interchange",
+              "positions": [
+                {
+                  "x": 20.2713623,
+                  "y": 36.60581,
+                  "z": -4.425293
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5ae9c0e186f7746419683c5e",
@@ -28333,7 +29371,19 @@
             "interchange"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "interchange",
+              "positions": [
+                {
+                  "x": -31.44458,
+                  "y": 27.5668068,
+                  "z": -136.191284
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5ae9c0c986f77468ab400f88",
@@ -29248,7 +30298,19 @@
             "shoreline"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "shoreline",
+              "positions": [
+                {
+                  "x": -186.06189,
+                  "y": -2.7302,
+                  "z": -86.1152039
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5b478f8886f7744d1b23c622",
@@ -29394,7 +30456,19 @@
             "interchange"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "interchange",
+              "positions": [
+                {
+                  "x": 19.3435,
+                  "y": 28.1595,
+                  "z": -106.6355
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "6a5ab19ed7c5bd68ea2803b6",
@@ -29551,7 +30625,19 @@
             "woods"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "woods",
+              "positions": [
+                {
+                  "x": 233.843018,
+                  "y": -1.235,
+                  "z": -71.10199
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "66d07de6c7ef9040fff0b789",
@@ -29571,7 +30657,19 @@
             "woods"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "woods",
+              "positions": [
+                {
+                  "x": 56.7149658,
+                  "y": -1.791,
+                  "z": -50.3070068
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5b4795a586f774587a39506d",
@@ -29594,15 +30692,15 @@
       "primaryMapId": "streets-of-tarkov",
       "mapIds": [
         "streets-of-tarkov",
-        "reserve",
+        "icebreaker",
         "lighthouse",
         "interchange",
         "customs",
+        "shoreline",
         "factory",
-        "icebreaker",
         "woods",
-        "ground-zero",
-        "shoreline"
+        "reserve",
+        "ground-zero"
       ],
       "summary": "Eliminate Scavs from over 40 meters away with a bolt-action rifle with iron sights",
       "experience": 3000,
@@ -29621,15 +30719,15 @@
           "optional": false,
           "mapIds": [
             "streets-of-tarkov",
-            "reserve",
+            "icebreaker",
             "lighthouse",
             "interchange",
             "customs",
+            "shoreline",
             "factory",
-            "icebreaker",
             "woods",
-            "ground-zero",
-            "shoreline"
+            "reserve",
+            "ground-zero"
           ],
           "details": [
             "Required count: 5",
@@ -30532,7 +31630,19 @@
             "woods"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "woods",
+              "positions": [
+                {
+                  "x": -257.1476,
+                  "y": 8.518,
+                  "z": 7.9998
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5d249aa286f77475e8376399",
@@ -31042,10 +32152,10 @@
       "traderId": "5c0647fdd443bc2504c2d371",
       "traderName": "Jaeger",
       "minPlayerLevel": 0,
-      "primaryMapId": "reserve",
+      "primaryMapId": "the-lab",
       "mapIds": [
-        "reserve",
-        "the-lab"
+        "the-lab",
+        "reserve"
       ],
       "summary": "Eliminate Raiders",
       "experience": 28000,
@@ -31063,8 +32173,8 @@
           "type": "shoot",
           "optional": false,
           "mapIds": [
-            "reserve",
-            "the-lab"
+            "the-lab",
+            "reserve"
           ],
           "details": [
             "Required count: 6",
@@ -31341,7 +32451,19 @@
             "shoreline"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "shoreline",
+              "positions": [
+                {
+                  "x": -226.552,
+                  "y": 2.089,
+                  "z": -87.571
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5d357e0e86f7745b3f307c56",
@@ -31687,7 +32809,19 @@
             "shoreline"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "shoreline",
+              "positions": [
+                {
+                  "x": -314.594971,
+                  "y": -55.7427,
+                  "z": 480.1722
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5edabb950c502106f869bc04",
@@ -31707,7 +32841,19 @@
             "shoreline"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "shoreline",
+              "positions": [
+                {
+                  "x": 99.45056,
+                  "y": -44.3777,
+                  "z": 107.002594
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5edabc2ca0055865214cb5a6",
@@ -32061,7 +33207,19 @@
             "the-lab"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "the-lab",
+              "positions": [
+                {
+                  "x": -133.0114,
+                  "y": 5.0157,
+                  "z": -335.2083
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "5eec9d054110547f1f545c99",
@@ -32376,7 +33534,19 @@
             "reserve"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "reserve",
+              "positions": [
+                {
+                  "x": -114.36499,
+                  "y": -13.7081,
+                  "z": 27.3590088
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "60ae0dfe2d6a8320983d19ba",
@@ -32387,7 +33557,19 @@
             "reserve"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "reserve",
+              "positions": [
+                {
+                  "x": -114.18103,
+                  "y": -13.6893,
+                  "z": 39.7880249
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "60ae0e2c79e83a2cf96f35ce",
@@ -32398,7 +33580,19 @@
             "reserve"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "reserve",
+              "positions": [
+                {
+                  "x": -121.867004,
+                  "y": -14.314,
+                  "z": 38.6560059
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "60916b41b89a3c264d7296f9",
@@ -32459,7 +33653,19 @@
             "reserve"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "reserve",
+              "positions": [
+                {
+                  "x": -59.0209961,
+                  "y": -3.637,
+                  "z": -36.1919861
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "60ae12ffb809a474875907aa",
@@ -32470,7 +33676,19 @@
             "reserve"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "reserve",
+              "positions": [
+                {
+                  "x": -80.47601,
+                  "y": -3.647,
+                  "z": -30.7659912
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "609169cfeca522371e5725c5",
@@ -32977,18 +34195,18 @@
       "traderId": "54cb50c76803fa8b248b4571",
       "traderName": "Prapor",
       "minPlayerLevel": 0,
-      "primaryMapId": "reserve",
+      "primaryMapId": "icebreaker",
       "mapIds": [
-        "reserve",
+        "icebreaker",
         "lighthouse",
         "interchange",
         "customs",
-        "factory",
-        "icebreaker",
-        "woods",
-        "ground-zero",
         "shoreline",
-        "streets-of-tarkov"
+        "factory",
+        "woods",
+        "streets-of-tarkov",
+        "reserve",
+        "ground-zero"
       ],
       "summary": "Eliminate Scavs with headshots",
       "experience": 65000,
@@ -33006,16 +34224,16 @@
           "type": "shoot",
           "optional": false,
           "mapIds": [
-            "reserve",
+            "icebreaker",
             "lighthouse",
             "interchange",
             "customs",
-            "factory",
-            "icebreaker",
-            "woods",
-            "ground-zero",
             "shoreline",
-            "streets-of-tarkov"
+            "factory",
+            "woods",
+            "streets-of-tarkov",
+            "reserve",
+            "ground-zero"
           ],
           "details": [
             "Required count: 40",
@@ -33035,10 +34253,10 @@
       "primaryMapId": "customs",
       "mapIds": [
         "customs",
+        "shoreline",
         "factory",
         "woods",
-        "ground-zero",
-        "shoreline"
+        "ground-zero"
       ],
       "summary": "Obtain the unusual cultist knives · Hand over the items",
       "experience": 65000,
@@ -33082,10 +34300,10 @@
           "optional": false,
           "mapIds": [
             "customs",
+            "shoreline",
             "factory",
             "woods",
-            "ground-zero",
-            "shoreline"
+            "ground-zero"
           ],
           "details": [
             "Required count: 5",
@@ -33537,7 +34755,19 @@
             "lighthouse"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "lighthouse",
+              "positions": [
+                {
+                  "x": 139.195068,
+                  "y": 3.26197624,
+                  "z": -129.871185
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "617bf29a52e86c73d372a917",
@@ -33859,7 +35089,19 @@
             "lighthouse"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "lighthouse",
+              "positions": [
+                {
+                  "x": -111.0176,
+                  "y": 9.24679,
+                  "z": -750.147034
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "61951c30aa0f643f9a0ae1b7",
@@ -33870,7 +35112,19 @@
             "lighthouse"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "lighthouse",
+              "positions": [
+                {
+                  "x": 53.2094955,
+                  "y": 8.74386,
+                  "z": -638.8754
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "617bf77a3de8a6689b533a2a",
@@ -35007,7 +36261,114 @@
             "lighthouse"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "lighthouse",
+              "positions": [
+                {
+                  "x": 1.3590012,
+                  "y": 2.1595,
+                  "z": -630.85803
+                },
+                {
+                  "x": 40.274002,
+                  "y": 15.1105,
+                  "z": -619.311
+                },
+                {
+                  "x": 135.2674,
+                  "y": 5.6936,
+                  "z": 287.9223
+                },
+                {
+                  "x": -140.383,
+                  "y": 2.9291,
+                  "z": -686.027
+                },
+                {
+                  "x": -54.7156,
+                  "y": 2.5759,
+                  "z": -525.9251
+                },
+                {
+                  "x": -80.694,
+                  "y": 18.8225,
+                  "z": -92.13699
+                },
+                {
+                  "x": -114.139,
+                  "y": 40.3917,
+                  "z": 95.112976
+                },
+                {
+                  "x": -60.6951,
+                  "y": 5.3316,
+                  "z": -627.51587
+                },
+                {
+                  "x": -125.2112,
+                  "y": 3.9244,
+                  "z": -530.8186
+                },
+                {
+                  "x": -46.276,
+                  "y": 8.6158,
+                  "z": -521.0152
+                },
+                {
+                  "x": -116.042,
+                  "y": 40.3917,
+                  "z": 91.302
+                },
+                {
+                  "x": -68.905,
+                  "y": 26.475,
+                  "z": 136.367
+                },
+                {
+                  "x": -54.7257,
+                  "y": 6.5304,
+                  "z": -294.8269
+                },
+                {
+                  "x": -115.97301,
+                  "y": 41.2528,
+                  "z": 88.95398
+                },
+                {
+                  "x": -77.514,
+                  "y": 20.469,
+                  "z": -72.084015
+                },
+                {
+                  "x": 0.42720032,
+                  "y": 3.3931,
+                  "z": -654.5141
+                },
+                {
+                  "x": -69.291,
+                  "y": 3.4699,
+                  "z": -695.73
+                },
+                {
+                  "x": -180.09456,
+                  "y": 15.249,
+                  "z": -651.085
+                },
+                {
+                  "x": -81.666,
+                  "y": 22.3841,
+                  "z": -91.04553
+                },
+                {
+                  "x": -100.585,
+                  "y": 1.5309,
+                  "z": -491.943
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "633d8b77f2ab4f3f095029d6",
@@ -35137,7 +36498,129 @@
             "lighthouse"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "lighthouse",
+              "positions": [
+                {
+                  "x": -65.779,
+                  "y": 5.8256,
+                  "z": -734.927
+                },
+                {
+                  "x": -197.6766,
+                  "y": 5.7923,
+                  "z": -651.9562
+                },
+                {
+                  "x": -139.22,
+                  "y": 2.4206,
+                  "z": -686.048
+                },
+                {
+                  "x": 0.19200134,
+                  "y": 2.8773,
+                  "z": -598.199
+                },
+                {
+                  "x": -122.483,
+                  "y": 5.4249,
+                  "z": -733.80457
+                },
+                {
+                  "x": -68.6482,
+                  "y": 2.978,
+                  "z": -697.1657
+                },
+                {
+                  "x": -134.9648,
+                  "y": 2.879,
+                  "z": -678.8499
+                },
+                {
+                  "x": -28.763802,
+                  "y": 2.8203,
+                  "z": -525.2898
+                },
+                {
+                  "x": 50.545998,
+                  "y": 5.927,
+                  "z": -649.859
+                },
+                {
+                  "x": -61.8229,
+                  "y": 2.7611,
+                  "z": -689.448
+                },
+                {
+                  "x": -133.4922,
+                  "y": 2.8779,
+                  "z": -497.9937
+                },
+                {
+                  "x": -100.754,
+                  "y": 1.0697,
+                  "z": -491.3172
+                },
+                {
+                  "x": 27.950996,
+                  "y": 9.0999,
+                  "z": -650.5705
+                },
+                {
+                  "x": -114.446,
+                  "y": 9.1008,
+                  "z": -731.515
+                },
+                {
+                  "x": 30.520096,
+                  "y": 9.1071,
+                  "z": -646.7069
+                },
+                {
+                  "x": -178.272,
+                  "y": 5.8178,
+                  "z": -649.599
+                },
+                {
+                  "x": -63.175003,
+                  "y": 5.2796,
+                  "z": -627.414
+                },
+                {
+                  "x": -46.718002,
+                  "y": 8.1166,
+                  "z": -519.991
+                },
+                {
+                  "x": -171.334,
+                  "y": 9.2309,
+                  "z": -633.393
+                },
+                {
+                  "x": -69.882,
+                  "y": 2.4355,
+                  "z": -654.61597
+                },
+                {
+                  "x": -100.294,
+                  "y": 1.024,
+                  "z": -492.171
+                },
+                {
+                  "x": -134.978,
+                  "y": 2.879,
+                  "z": -678.816
+                },
+                {
+                  "x": -100.336,
+                  "y": 1.0239,
+                  "z": -491.862
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "6391e31bfa894f0a866afdec",
@@ -35522,7 +37005,19 @@
             "lighthouse"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "lighthouse",
+              "positions": [
+                {
+                  "x": 352.6155,
+                  "y": 16.2869,
+                  "z": 545.5324
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "626c30c55bef5d7d590bd41b",
@@ -35565,7 +37060,19 @@
             "streets-of-tarkov"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "streets-of-tarkov",
+              "positions": [
+                {
+                  "x": 66.8009949,
+                  "y": 7.72719955,
+                  "z": 303.143
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "639135534b15ca31f76bc319",
@@ -35607,7 +37114,34 @@
             "streets-of-tarkov"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "streets-of-tarkov",
+              "positions": [
+                {
+                  "x": 39.234997,
+                  "y": 1.5159998,
+                  "z": 117.6931
+                },
+                {
+                  "x": 39.475,
+                  "y": 1.1955996,
+                  "z": 113.47099
+                },
+                {
+                  "x": 36.107998,
+                  "y": 1.2919998,
+                  "z": 126.599
+                },
+                {
+                  "x": 42.395695,
+                  "y": 1.9179997,
+                  "z": 118.768196
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "6391359b9444fb141f4e6ee8",
@@ -35891,7 +37425,64 @@
             "streets-of-tarkov"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "streets-of-tarkov",
+              "positions": [
+                {
+                  "x": 95.209,
+                  "y": 2.6704998,
+                  "z": 323.80298
+                },
+                {
+                  "x": 98.317,
+                  "y": 2.6703997,
+                  "z": 316.63898
+                },
+                {
+                  "x": 92.783005,
+                  "y": 3.6801996,
+                  "z": 324.0796
+                },
+                {
+                  "x": 95.8846,
+                  "y": 2.6708999,
+                  "z": 319.08118
+                },
+                {
+                  "x": 92.4178,
+                  "y": 4.2957997,
+                  "z": 324.1068
+                },
+                {
+                  "x": 97.526505,
+                  "y": 2.6721997,
+                  "z": 317.0785
+                },
+                {
+                  "x": 92.884,
+                  "y": 2.6683998,
+                  "z": 323.711
+                },
+                {
+                  "x": 95.28351,
+                  "y": 2.671,
+                  "z": 318.9527
+                },
+                {
+                  "x": 97.119,
+                  "y": 2.6696997,
+                  "z": 320.445
+                },
+                {
+                  "x": 91.192,
+                  "y": 2.6707,
+                  "z": 323.2334
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "639135e0fa894f0a866afde8",
@@ -35947,7 +37538,34 @@
             "streets-of-tarkov"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "streets-of-tarkov",
+              "positions": [
+                {
+                  "x": 213.23589,
+                  "y": -0.88670063,
+                  "z": 410.32123
+                },
+                {
+                  "x": 210.5096,
+                  "y": -0.773201,
+                  "z": 407.50043
+                },
+                {
+                  "x": 208.7273,
+                  "y": -0.44880104,
+                  "z": 408.63458
+                },
+                {
+                  "x": 208.443,
+                  "y": -0.3692007,
+                  "z": 412.14648
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "639135e8c115f907b14700ac",
@@ -36300,7 +37918,129 @@
             "lighthouse"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "lighthouse",
+              "positions": [
+                {
+                  "x": -65.779,
+                  "y": 5.8256,
+                  "z": -734.927
+                },
+                {
+                  "x": -197.6766,
+                  "y": 5.7923,
+                  "z": -651.9562
+                },
+                {
+                  "x": -139.22,
+                  "y": 2.4206,
+                  "z": -686.048
+                },
+                {
+                  "x": 0.19200134,
+                  "y": 2.8773,
+                  "z": -598.199
+                },
+                {
+                  "x": -122.483,
+                  "y": 5.4249,
+                  "z": -733.80457
+                },
+                {
+                  "x": -68.6482,
+                  "y": 2.978,
+                  "z": -697.1657
+                },
+                {
+                  "x": -134.9648,
+                  "y": 2.879,
+                  "z": -678.8499
+                },
+                {
+                  "x": -28.763802,
+                  "y": 2.8203,
+                  "z": -525.2898
+                },
+                {
+                  "x": 50.545998,
+                  "y": 5.927,
+                  "z": -649.859
+                },
+                {
+                  "x": -61.8229,
+                  "y": 2.7611,
+                  "z": -689.448
+                },
+                {
+                  "x": -133.4922,
+                  "y": 2.8779,
+                  "z": -497.9937
+                },
+                {
+                  "x": -100.754,
+                  "y": 1.0697,
+                  "z": -491.3172
+                },
+                {
+                  "x": 27.950996,
+                  "y": 9.0999,
+                  "z": -650.5705
+                },
+                {
+                  "x": -114.446,
+                  "y": 9.1008,
+                  "z": -731.515
+                },
+                {
+                  "x": 30.520096,
+                  "y": 9.1071,
+                  "z": -646.7069
+                },
+                {
+                  "x": -178.272,
+                  "y": 5.8178,
+                  "z": -649.599
+                },
+                {
+                  "x": -63.175003,
+                  "y": 5.2796,
+                  "z": -627.414
+                },
+                {
+                  "x": -46.718002,
+                  "y": 8.1166,
+                  "z": -519.991
+                },
+                {
+                  "x": -171.334,
+                  "y": 9.2309,
+                  "z": -633.393
+                },
+                {
+                  "x": -69.882,
+                  "y": 2.4355,
+                  "z": -654.61597
+                },
+                {
+                  "x": -100.294,
+                  "y": 1.024,
+                  "z": -492.171
+                },
+                {
+                  "x": -134.978,
+                  "y": 2.879,
+                  "z": -678.816
+                },
+                {
+                  "x": -100.336,
+                  "y": 1.0239,
+                  "z": -491.862
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "6391d9e7ee79ee703e3012e5",
@@ -36744,7 +38484,29 @@
             "streets-of-tarkov"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "streets-of-tarkov",
+              "positions": [
+                {
+                  "x": -127.914,
+                  "y": 2.3809996,
+                  "z": 397.04297
+                },
+                {
+                  "x": -129.309,
+                  "y": 2.3735995,
+                  "z": 392.5885
+                },
+                {
+                  "x": -132.2276,
+                  "y": 2.3789997,
+                  "z": 397.61707
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "63990ae2dcdd126fef1771c2",
@@ -36808,7 +38570,24 @@
             "lighthouse"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "lighthouse",
+              "positions": [
+                {
+                  "x": 21.277908,
+                  "y": 5.3119993,
+                  "z": -445.48795
+                },
+                {
+                  "x": 32.03167,
+                  "y": 4.912996,
+                  "z": -454.48978
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "6399c929d65735732c6ba766",
@@ -36819,7 +38598,19 @@
             "reserve"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "reserve",
+              "positions": [
+                {
+                  "x": 102.242981,
+                  "y": -6.813,
+                  "z": 65.56604
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "6399ca5fe101160ce05706ac",
@@ -37397,10 +39188,10 @@
       "traderId": "638f541a29ffd1183d187f57",
       "traderName": "Lightkeeper",
       "minPlayerLevel": 0,
-      "primaryMapId": "reserve",
+      "primaryMapId": "the-lab",
       "mapIds": [
-        "reserve",
         "the-lab",
+        "reserve",
         "lighthouse"
       ],
       "summary": "Eliminate Raiders · Search the weapon testing area in The Lab",
@@ -37417,8 +39208,8 @@
           "type": "shoot",
           "optional": false,
           "mapIds": [
-            "reserve",
-            "the-lab"
+            "the-lab",
+            "reserve"
           ],
           "details": [
             "Required count: 20",
@@ -37523,7 +39314,54 @@
             "the-lab"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "the-lab",
+              "positions": [
+                {
+                  "x": -161.39708,
+                  "y": 4.80383,
+                  "z": -346.8847
+                },
+                {
+                  "x": -178.46817,
+                  "y": 4.99133,
+                  "z": -343.61017
+                },
+                {
+                  "x": -170.75114,
+                  "y": 5.1389303,
+                  "z": -343.6096
+                },
+                {
+                  "x": -178.30911,
+                  "y": 4.99103,
+                  "z": -344.88052
+                },
+                {
+                  "x": -167.89156,
+                  "y": 4.13383,
+                  "z": -343.64188
+                },
+                {
+                  "x": -169.11845,
+                  "y": 5.15173,
+                  "z": -342.1145
+                },
+                {
+                  "x": -163.07448,
+                  "y": 4.7945304,
+                  "z": -342.11642
+                },
+                {
+                  "x": -160.83812,
+                  "y": 4.5300303,
+                  "z": -340.5346
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "639ae5445b201a534f436ef3",
@@ -38942,7 +40780,54 @@
             "streets-of-tarkov"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "streets-of-tarkov",
+              "positions": [
+                {
+                  "x": -53.875004,
+                  "y": 2.1701927,
+                  "z": 198.96199
+                },
+                {
+                  "x": 223.6565,
+                  "y": 3.4719124,
+                  "z": 369.44104
+                },
+                {
+                  "x": -9.284,
+                  "y": 2.8763084,
+                  "z": 340.78802
+                },
+                {
+                  "x": 83.254,
+                  "y": 0.4772606,
+                  "z": -10.395325
+                },
+                {
+                  "x": 311.462,
+                  "y": 3.3989067,
+                  "z": 413.36804
+                },
+                {
+                  "x": 105.076996,
+                  "y": -1.6062355,
+                  "z": 54.95146
+                },
+                {
+                  "x": 131.34549,
+                  "y": 3.9481983,
+                  "z": 239.25699
+                },
+                {
+                  "x": 157.91998,
+                  "y": 3.6553307,
+                  "z": 455.95703
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "64f4fdfa67e11a7c6206de72",
@@ -38995,7 +40880,39 @@
             "streets-of-tarkov"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "streets-of-tarkov",
+              "positions": [
+                {
+                  "x": -41.1733,
+                  "y": 7.6146,
+                  "z": -110.08528
+                },
+                {
+                  "x": 41.592,
+                  "y": 1.5759997,
+                  "z": -53.944992
+                },
+                {
+                  "x": 58.483997,
+                  "y": 0.9229994,
+                  "z": -72.764984
+                },
+                {
+                  "x": -28.5096,
+                  "y": 7.3761997,
+                  "z": -117.110794
+                },
+                {
+                  "x": -27.506,
+                  "y": 7.433,
+                  "z": -109.47299
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "64f6aafd67e11a7c6206e0d2",
@@ -39929,7 +41846,44 @@
             "ground-zero"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "ground-zero",
+              "positions": [
+                {
+                  "x": 126.01849,
+                  "y": 23.708,
+                  "z": 26.2228
+                },
+                {
+                  "x": 129.716,
+                  "y": 23.283699,
+                  "z": 25.152
+                },
+                {
+                  "x": 128.2405,
+                  "y": 24.0651,
+                  "z": 25.1103
+                },
+                {
+                  "x": 119.667,
+                  "y": 23.7096,
+                  "z": 22.886
+                },
+                {
+                  "x": 130.274,
+                  "y": 23.6646,
+                  "z": 23.691
+                },
+                {
+                  "x": 113.972,
+                  "y": 24.1533,
+                  "z": 27.846
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "65817cd2881a7e07b3ec1249",
@@ -40382,7 +42336,44 @@
             "streets-of-tarkov"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "streets-of-tarkov",
+              "positions": [
+                {
+                  "x": -66.345375,
+                  "y": 2.6835337,
+                  "z": 462.52396
+                },
+                {
+                  "x": -60.640026,
+                  "y": 3.6684246,
+                  "z": 459.97244
+                },
+                {
+                  "x": -66.813,
+                  "y": 7.970781,
+                  "z": 459.4482
+                },
+                {
+                  "x": -41.541817,
+                  "y": 8.560753,
+                  "z": 455.14572
+                },
+                {
+                  "x": -66.81177,
+                  "y": 7.44332,
+                  "z": 453.45218
+                },
+                {
+                  "x": -48.330063,
+                  "y": 7.825501,
+                  "z": 460.1638
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "658167a0e53c40116f8632fa",
@@ -41385,7 +43376,39 @@
             "factory"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "factory",
+              "positions": [
+                {
+                  "x": 29.309954,
+                  "y": 3.7436,
+                  "z": -28.936857
+                },
+                {
+                  "x": 25.849241,
+                  "y": 4.4412,
+                  "z": -19.104244
+                },
+                {
+                  "x": 29.25024,
+                  "y": 3.7122,
+                  "z": -31.707458
+                },
+                {
+                  "x": 26.57465,
+                  "y": 4.5298,
+                  "z": -35.983276
+                },
+                {
+                  "x": 28.99989,
+                  "y": 3.7161999,
+                  "z": -17.564314
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "669faecceb01bf6324de66c4",
@@ -41823,7 +43846,19 @@
             "factory"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "factory",
+              "positions": [
+                {
+                  "x": 26.2490044,
+                  "y": 7.864,
+                  "z": -3.60200047
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "669fb4b21f2e5268651cc96a",
@@ -42358,7 +44393,44 @@
             "customs"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "customs",
+              "positions": [
+                {
+                  "x": 87.87459,
+                  "y": 4.687,
+                  "z": -162.60088
+                },
+                {
+                  "x": 76.28398,
+                  "y": 4.637,
+                  "z": -151.6633
+                },
+                {
+                  "x": 92.35701,
+                  "y": 4.666,
+                  "z": -161.4822
+                },
+                {
+                  "x": 88.0565,
+                  "y": 5.207,
+                  "z": -146.9258
+                },
+                {
+                  "x": 81.09361,
+                  "y": 4.701,
+                  "z": -152.63136
+                },
+                {
+                  "x": 88.46846,
+                  "y": 4.668,
+                  "z": -142.76546
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "66ab97d56cb6e3bfd7c79fbc",
@@ -43860,7 +45932,29 @@
             "reserve"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "reserve",
+              "positions": [
+                {
+                  "x": -66.87903,
+                  "y": -6.510002,
+                  "z": 29.537018
+                },
+                {
+                  "x": -71.63098,
+                  "y": -6.498,
+                  "z": 23.136017
+                },
+                {
+                  "x": -68.68298,
+                  "y": -6.487,
+                  "z": 32.394012
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "673f61ea87e01cfaf780a482",
@@ -44174,7 +46268,39 @@
             "shoreline"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "shoreline",
+              "positions": [
+                {
+                  "x": -315.52246,
+                  "y": -57.378002,
+                  "z": 478.8883
+                },
+                {
+                  "x": -310.60645,
+                  "y": -60.476,
+                  "z": 484.37933
+                },
+                {
+                  "x": -327.75842,
+                  "y": -60.329002,
+                  "z": 490.1643
+                },
+                {
+                  "x": -320.0194,
+                  "y": -61.319,
+                  "z": 483.55634
+                },
+                {
+                  "x": -320.92346,
+                  "y": -57.382004,
+                  "z": 490.2173
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "6740a20cc6daae7f8f12a77d",
@@ -44776,7 +46902,39 @@
             "woods"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "woods",
+              "positions": [
+                {
+                  "x": -54.61438,
+                  "y": 8.867821,
+                  "z": -494.30518
+                },
+                {
+                  "x": -57.89441,
+                  "y": 8.998819,
+                  "z": -501.51794
+                },
+                {
+                  "x": -51.343384,
+                  "y": 9.178821,
+                  "z": -500.9088
+                },
+                {
+                  "x": -54.814087,
+                  "y": 8.82082,
+                  "z": -495.8171
+                },
+                {
+                  "x": -59.948486,
+                  "y": 8.91482,
+                  "z": -491.684
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "6744ab1def61d56e020b5c60",
@@ -44980,12 +47138,12 @@
         "reserve",
         "woods",
         "lighthouse",
-        "interchange",
-        "factory",
         "icebreaker",
-        "ground-zero",
+        "interchange",
         "shoreline",
-        "streets-of-tarkov"
+        "factory",
+        "streets-of-tarkov",
+        "ground-zero"
       ],
       "summary": "Locate and obtain the incriminating letter on Customs · Use the transit from Customs to Reserve",
       "experience": 85400,
@@ -45005,7 +47163,39 @@
             "customs"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "customs",
+              "positions": [
+                {
+                  "x": 268.5923,
+                  "y": 12.743282,
+                  "z": -73.78987
+                },
+                {
+                  "x": 269.86456,
+                  "y": 13.439083,
+                  "z": -77.52385
+                },
+                {
+                  "x": 271.05127,
+                  "y": 12.777287,
+                  "z": -72.37828
+                },
+                {
+                  "x": 264.34637,
+                  "y": 13.310482,
+                  "z": -75.3349
+                },
+                {
+                  "x": 263.97394,
+                  "y": 14.140682,
+                  "z": -76.90471
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "6745c8ee54d6972417ad7bad",
@@ -45192,16 +47382,16 @@
           "type": "shoot",
           "optional": false,
           "mapIds": [
-            "reserve",
+            "icebreaker",
             "lighthouse",
             "interchange",
             "customs",
-            "factory",
-            "icebreaker",
-            "woods",
-            "ground-zero",
             "shoreline",
-            "streets-of-tarkov"
+            "factory",
+            "woods",
+            "streets-of-tarkov",
+            "reserve",
+            "ground-zero"
           ],
           "details": [
             "Required count: 10",
@@ -45248,12 +47438,12 @@
         "reserve",
         "woods",
         "lighthouse",
-        "interchange",
-        "factory",
         "icebreaker",
-        "ground-zero",
+        "interchange",
         "shoreline",
-        "streets-of-tarkov"
+        "factory",
+        "streets-of-tarkov",
+        "ground-zero"
       ],
       "summary": "Locate and obtain the incriminating letter on Customs · Use the transit from Customs to Reserve",
       "experience": 85400,
@@ -45273,7 +47463,39 @@
             "customs"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "customs",
+              "positions": [
+                {
+                  "x": 268.5923,
+                  "y": 12.743282,
+                  "z": -73.78987
+                },
+                {
+                  "x": 269.86456,
+                  "y": 13.439083,
+                  "z": -77.52385
+                },
+                {
+                  "x": 271.05127,
+                  "y": 12.777287,
+                  "z": -72.37828
+                },
+                {
+                  "x": 264.34637,
+                  "y": 13.310482,
+                  "z": -75.3349
+                },
+                {
+                  "x": 263.97394,
+                  "y": 14.140682,
+                  "z": -76.90471
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "6745cbee909d2013670a4a61",
@@ -45460,16 +47682,16 @@
           "type": "shoot",
           "optional": false,
           "mapIds": [
-            "reserve",
+            "icebreaker",
             "lighthouse",
             "interchange",
             "customs",
-            "factory",
-            "icebreaker",
-            "woods",
-            "ground-zero",
             "shoreline",
-            "streets-of-tarkov"
+            "factory",
+            "woods",
+            "streets-of-tarkov",
+            "reserve",
+            "ground-zero"
           ],
           "details": [
             "Required count: 10",
@@ -45625,7 +47847,34 @@
             "reserve"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "reserve",
+              "positions": [
+                {
+                  "x": -83.632996,
+                  "y": -0.545,
+                  "z": -28.823975
+                },
+                {
+                  "x": -57.940002,
+                  "y": -0.511,
+                  "z": -40.610992
+                },
+                {
+                  "x": -78.15442,
+                  "y": 0.296,
+                  "z": -35.22699
+                },
+                {
+                  "x": -75.83002,
+                  "y": -0.544,
+                  "z": -28.669983
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "6745fe8d48cd7aeda7152b24",
@@ -46276,7 +48525,39 @@
             "woods"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "woods",
+              "positions": [
+                {
+                  "x": 409.43433,
+                  "y": -13.544999,
+                  "z": 240.53363
+                },
+                {
+                  "x": 406.67554,
+                  "y": -12.627,
+                  "z": 228.49396
+                },
+                {
+                  "x": 344.3452,
+                  "y": -13.533008,
+                  "z": 233.94592
+                },
+                {
+                  "x": 368.36108,
+                  "y": -14.845004,
+                  "z": 251.69794
+                },
+                {
+                  "x": 361.62598,
+                  "y": -13.865008,
+                  "z": 201.54868
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "674606266884ca9cfc83530e",
@@ -46420,7 +48701,24 @@
             "woods"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "woods",
+              "positions": [
+                {
+                  "x": -619.19604,
+                  "y": 8.457,
+                  "z": 127.90881
+                },
+                {
+                  "x": -612.7649,
+                  "y": 9.221001,
+                  "z": 136.13657
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "6756bcb3f93f4c1fc2b2d685",
@@ -46823,7 +49121,34 @@
             "customs"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "customs",
+              "positions": [
+                {
+                  "x": 90.26784,
+                  "y": 7.894,
+                  "z": -59.860718
+                },
+                {
+                  "x": 90.65941,
+                  "y": 7.704,
+                  "z": -56.366837
+                },
+                {
+                  "x": 89.91673,
+                  "y": 7.25,
+                  "z": -58.057663
+                },
+                {
+                  "x": 90.80946,
+                  "y": 7.099,
+                  "z": -54.595688
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "675c04c1b68cc8180efb38c6",
@@ -46866,7 +49191,34 @@
             "customs"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "customs",
+              "positions": [
+                {
+                  "x": 90.44954,
+                  "y": 2.8818998,
+                  "z": -57.470688
+                },
+                {
+                  "x": 93.2574,
+                  "y": 1.3489997,
+                  "z": -61.865417
+                },
+                {
+                  "x": 96.90181,
+                  "y": 1.3229997,
+                  "z": -64.52138
+                },
+                {
+                  "x": 95.282974,
+                  "y": 1.8920999,
+                  "z": -59.045044
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "675c04f4db8807b75d0f38ec",
@@ -46915,7 +49267,34 @@
             "customs"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "customs",
+              "positions": [
+                {
+                  "x": -319.97205,
+                  "y": 1.0969999,
+                  "z": -178.6625
+                },
+                {
+                  "x": -316.35687,
+                  "y": 1.0849998,
+                  "z": -179.94904
+                },
+                {
+                  "x": -316.70236,
+                  "y": 1.1042001,
+                  "z": -178.13792
+                },
+                {
+                  "x": -318.4618,
+                  "y": 1.1559999,
+                  "z": -175.95013
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "675c1595a4c063af74ee5279",
@@ -47639,7 +50018,34 @@
             "customs"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "customs",
+              "positions": [
+                {
+                  "x": 46.575928,
+                  "y": 5.278,
+                  "z": -57.778732
+                },
+                {
+                  "x": 46.778778,
+                  "y": 4.462,
+                  "z": -58.13228
+                },
+                {
+                  "x": 50.02237,
+                  "y": 5.24,
+                  "z": -57.845093
+                },
+                {
+                  "x": 44.590317,
+                  "y": 4.4372,
+                  "z": -58.400833
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "675c37e07ac1a33fff170966",
@@ -47792,7 +50198,29 @@
             "ground-zero"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "ground-zero",
+              "positions": [
+                {
+                  "x": 89.392,
+                  "y": 23.635998,
+                  "z": 224.972
+                },
+                {
+                  "x": 86.822205,
+                  "y": 23.076801,
+                  "z": 226.09749
+                },
+                {
+                  "x": 88.976,
+                  "y": 23.175,
+                  "z": 225.284
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "67a0ab83359e2d00cf9d6b06",
@@ -48292,7 +50720,29 @@
             "ground-zero"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "ground-zero",
+              "positions": [
+                {
+                  "x": 78.571,
+                  "y": 16.3689,
+                  "z": 100.85899
+                },
+                {
+                  "x": 80.1339,
+                  "y": 15.839001,
+                  "z": 96.27539
+                },
+                {
+                  "x": 78.8748,
+                  "y": 15.758503,
+                  "z": 96.33389
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "6a57565d0c4e021f681b32f0",
@@ -48623,8 +51073,8 @@
       "mapIds": [
         "lighthouse",
         "customs",
-        "woods",
         "shoreline",
+        "woods",
         "icebreaker"
       ],
       "summary": "Eliminate Rogues",
@@ -48644,8 +51094,8 @@
           "mapIds": [
             "lighthouse",
             "customs",
-            "woods",
             "shoreline",
+            "woods",
             "icebreaker"
           ],
           "details": [
@@ -49440,7 +51890,129 @@
             "lighthouse"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "lighthouse",
+              "positions": [
+                {
+                  "x": -65.779,
+                  "y": 5.8256,
+                  "z": -734.927
+                },
+                {
+                  "x": -197.6766,
+                  "y": 5.7923,
+                  "z": -651.9562
+                },
+                {
+                  "x": -139.22,
+                  "y": 2.4206,
+                  "z": -686.048
+                },
+                {
+                  "x": 0.19200134,
+                  "y": 2.8773,
+                  "z": -598.199
+                },
+                {
+                  "x": -122.483,
+                  "y": 5.4249,
+                  "z": -733.80457
+                },
+                {
+                  "x": -68.6482,
+                  "y": 2.978,
+                  "z": -697.1657
+                },
+                {
+                  "x": -134.9648,
+                  "y": 2.879,
+                  "z": -678.8499
+                },
+                {
+                  "x": -28.763802,
+                  "y": 2.8203,
+                  "z": -525.2898
+                },
+                {
+                  "x": 50.545998,
+                  "y": 5.927,
+                  "z": -649.859
+                },
+                {
+                  "x": -61.8229,
+                  "y": 2.7611,
+                  "z": -689.448
+                },
+                {
+                  "x": -133.4922,
+                  "y": 2.8779,
+                  "z": -497.9937
+                },
+                {
+                  "x": -100.754,
+                  "y": 1.0697,
+                  "z": -491.3172
+                },
+                {
+                  "x": 27.950996,
+                  "y": 9.0999,
+                  "z": -650.5705
+                },
+                {
+                  "x": -114.446,
+                  "y": 9.1008,
+                  "z": -731.515
+                },
+                {
+                  "x": 30.520096,
+                  "y": 9.1071,
+                  "z": -646.7069
+                },
+                {
+                  "x": -178.272,
+                  "y": 5.8178,
+                  "z": -649.599
+                },
+                {
+                  "x": -63.175003,
+                  "y": 5.2796,
+                  "z": -627.414
+                },
+                {
+                  "x": -46.718002,
+                  "y": 8.1166,
+                  "z": -519.991
+                },
+                {
+                  "x": -171.334,
+                  "y": 9.2309,
+                  "z": -633.393
+                },
+                {
+                  "x": -69.882,
+                  "y": 2.4355,
+                  "z": -654.61597
+                },
+                {
+                  "x": -100.294,
+                  "y": 1.024,
+                  "z": -492.171
+                },
+                {
+                  "x": -134.978,
+                  "y": 2.879,
+                  "z": -678.816
+                },
+                {
+                  "x": -100.336,
+                  "y": 1.0239,
+                  "z": -491.862
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "6391d9e7ee79ee703e3012e5",
@@ -49621,7 +52193,129 @@
             "lighthouse"
           ],
           "details": [],
-          "zones": []
+          "zones": [],
+          "possibleLocations": [
+            {
+              "mapId": "lighthouse",
+              "positions": [
+                {
+                  "x": -65.779,
+                  "y": 5.8256,
+                  "z": -734.927
+                },
+                {
+                  "x": -197.6766,
+                  "y": 5.7923,
+                  "z": -651.9562
+                },
+                {
+                  "x": -139.22,
+                  "y": 2.4206,
+                  "z": -686.048
+                },
+                {
+                  "x": 0.19200134,
+                  "y": 2.8773,
+                  "z": -598.199
+                },
+                {
+                  "x": -122.483,
+                  "y": 5.4249,
+                  "z": -733.80457
+                },
+                {
+                  "x": -68.6482,
+                  "y": 2.978,
+                  "z": -697.1657
+                },
+                {
+                  "x": -134.9648,
+                  "y": 2.879,
+                  "z": -678.8499
+                },
+                {
+                  "x": -28.763802,
+                  "y": 2.8203,
+                  "z": -525.2898
+                },
+                {
+                  "x": 50.545998,
+                  "y": 5.927,
+                  "z": -649.859
+                },
+                {
+                  "x": -61.8229,
+                  "y": 2.7611,
+                  "z": -689.448
+                },
+                {
+                  "x": -133.4922,
+                  "y": 2.8779,
+                  "z": -497.9937
+                },
+                {
+                  "x": -100.754,
+                  "y": 1.0697,
+                  "z": -491.3172
+                },
+                {
+                  "x": 27.950996,
+                  "y": 9.0999,
+                  "z": -650.5705
+                },
+                {
+                  "x": -114.446,
+                  "y": 9.1008,
+                  "z": -731.515
+                },
+                {
+                  "x": 30.520096,
+                  "y": 9.1071,
+                  "z": -646.7069
+                },
+                {
+                  "x": -178.272,
+                  "y": 5.8178,
+                  "z": -649.599
+                },
+                {
+                  "x": -63.175003,
+                  "y": 5.2796,
+                  "z": -627.414
+                },
+                {
+                  "x": -46.718002,
+                  "y": 8.1166,
+                  "z": -519.991
+                },
+                {
+                  "x": -171.334,
+                  "y": 9.2309,
+                  "z": -633.393
+                },
+                {
+                  "x": -69.882,
+                  "y": 2.4355,
+                  "z": -654.61597
+                },
+                {
+                  "x": -100.294,
+                  "y": 1.024,
+                  "z": -492.171
+                },
+                {
+                  "x": -134.978,
+                  "y": 2.879,
+                  "z": -678.816
+                },
+                {
+                  "x": -100.336,
+                  "y": 1.0239,
+                  "z": -491.862
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "6391d9e7ee79ee703e3012e5",
