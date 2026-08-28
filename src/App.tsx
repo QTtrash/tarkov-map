@@ -16,6 +16,7 @@ import {
   getOverlayState,
   loadSettings,
   openDirectory,
+  publishQuestPois,
   registerGlobalShortcuts,
   rescanDirectories,
   saveSettings,
@@ -313,6 +314,11 @@ export function App() {
       ),
     [activeQuestPois, customPins, definition.id, focusedQuestPoi, poiBundle, settings.showQuestMarkers],
   );
+
+  // The snapshot names its map because the overlay can be showing a different one.
+  useEffect(() => {
+    void publishQuestPois({ mapId: definition.id, pois: activeQuestPois });
+  }, [activeQuestPois, definition.id, overlayState.ready]);
 
   useEffect(() => {
     if (!definition) return;

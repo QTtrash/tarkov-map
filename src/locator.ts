@@ -1,5 +1,5 @@
 import { invoke } from "@tauri-apps/api/core";
-import { listen, type UnlistenFn } from "@tauri-apps/api/event";
+import { emitTo, listen, type UnlistenFn } from "@tauri-apps/api/event";
 import type {
   LocatorSettings,
   LocatorSnapshot,
@@ -8,6 +8,7 @@ import type {
   OcrTextCapture,
   OverlayState,
   PlayerFix,
+  QuestPoiSnapshot,
   QuestProgress,
   QuestProfile,
   QuestGameMode,
@@ -22,6 +23,7 @@ import {
   parseOcrText,
   parseOverlayState,
   parsePlayerFix,
+  parseQuestPoiSnapshot,
   parseQuestProgress,
   parseQuestProgressEntry,
   parseQuestProfiles,
@@ -130,6 +132,23 @@ export async function getLocatorSnapshot(): Promise<LocatorSnapshot> {
 export async function subscribeOverlayState(handler: (state: OverlayState) => void): Promise<UnlistenFn> {
   if (!isTauriRuntime()) return () => undefined;
   return listen<OverlayState>("overlay://state-changed", (event) => handler(event.payload));
+}
+
+// Quest objectives are derived from quest progress inside the main window's quest panel, so the
+// overlay receives the computed markers over the app's own event channel.
+export async function publishQuestPois(snapshot: QuestPoiSnapshot) {
+  if (isTauriRuntime()) await emitTo("overlay", "quest://objective-pois", parseQuestPoiSnapshot(snapshot));
+}
+
+export async function subscribeQuestPois(handler: (snapshot: QuestPoiSnapshot) => void): Promise<UnlistenFn> {
+  if (!isTauriRuntime()) return () => undefined;
+  return listen<unknown>("quest://objective-pois", (event) => {
+    try {
+      handler(parseQuestPoiSnapshot(event.payload));
+    } catch (error) {
+      console.warn("Ignored invalid native event payload", error);
+    }
+  });
 }
 
 export async function setOverlayClickThrough(enabled: boolean) {

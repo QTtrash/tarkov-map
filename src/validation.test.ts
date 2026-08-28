@@ -1,6 +1,13 @@
 import { describe, expect, it, vi } from "vitest";
 import { defaultSettings } from "./locator";
-import { parseCustomPins, parseQuestBundle, parseQuestProgress, parseSettings, readStoredJson } from "./validation";
+import {
+  parseCustomPins,
+  parseQuestBundle,
+  parseQuestPoiSnapshot,
+  parseQuestProgress,
+  parseSettings,
+  readStoredJson,
+} from "./validation";
 
 describe("runtime boundary validation", () => {
   it("accepts current settings and rejects unsupported or unsafe values", () => {
@@ -28,6 +35,49 @@ describe("runtime boundary validation", () => {
       ]),
     ).toThrow();
     expect(() => parseQuestProgress([{ taskId: "task", status: "invented", updatedAt: 1 }])).toThrow();
+  });
+
+  it("accepts quest objective snapshots relayed to the overlay and rejects malformed ones", () => {
+    const poi = {
+      id: "quest-active-task-objective-customs-0",
+      kind: "quest-objective",
+      category: "quest-objective",
+      mapId: "customs",
+      name: "Debut",
+      description: "Eliminate Scavs",
+      taskId: "task",
+      objectiveId: "objective",
+      position: { x: 10, y: 0, z: 20 },
+    };
+    const snapshot = { mapId: "customs", pois: [poi] };
+    expect(parseQuestPoiSnapshot(snapshot)).toEqual(snapshot);
+    expect(parseQuestPoiSnapshot({ mapId: "customs", pois: [] })).toEqual({ mapId: "customs", pois: [] });
+    const possibleLocation = {
+      ...poi,
+      id: "quest-active-task-objective-customs-possible-0",
+      kind: "quest-possible-location",
+      locationIndex: 0,
+      locationCount: 2,
+    };
+    expect(parseQuestPoiSnapshot({ mapId: "customs", pois: [possibleLocation] })).toEqual({
+      mapId: "customs",
+      pois: [possibleLocation],
+    });
+    expect(() => parseQuestPoiSnapshot({ ...snapshot, mapId: "../escape" })).toThrow();
+    expect(() => parseQuestPoiSnapshot({ mapId: "customs", pois: [{ ...poi, taskId: "" }] })).toThrow();
+    expect(() => parseQuestPoiSnapshot({ mapId: "customs", pois: [{ ...poi, kind: "extract" }] })).toThrow();
+    expect(() => parseQuestPoiSnapshot({ mapId: "woods", pois: [poi] })).toThrow();
+    expect(() =>
+      parseQuestPoiSnapshot({
+        mapId: "customs",
+        pois: [{ ...possibleLocation, locationIndex: possibleLocation.locationCount }],
+      }),
+    ).toThrow();
+    expect(() => parseQuestPoiSnapshot({ mapId: "customs", pois: [{ ...poi, aliases: ["x".repeat(257)] }] })).toThrow();
+    expect(() =>
+      parseQuestPoiSnapshot({ mapId: "customs", pois: [{ ...poi, outline: Array(65).fill(poi.position) }] }),
+    ).toThrow();
+    expect(() => parseQuestPoiSnapshot({ mapId: "customs", pois: Array.from({ length: 129 }, () => poi) })).toThrow();
   });
 
   it("parses quest bundles generated before possible locations existed", () => {

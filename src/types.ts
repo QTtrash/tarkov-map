@@ -256,6 +256,13 @@ export interface QuestObjectivePoi extends PoiBase {
   locationCount?: number;
 }
 
+// Carries the map the objectives were computed for so the overlay can discard a snapshot
+// that no longer matches the map it is showing.
+export interface QuestPoiSnapshot {
+  mapId: string;
+  pois: QuestObjectivePoi[];
+}
+
 export interface CustomPinPoi extends PoiBase {
   kind: "custom-pin";
   note: string;
