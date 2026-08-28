@@ -12,7 +12,7 @@ import {
   subscribeLocator,
 } from "../locator";
 import { allLootGroupIds, defaultVisiblePoiCategories, loadPoiBundle } from "../poi";
-import { recognizeRaidExtracts } from "../raid";
+import { accumulateRaidExtracts } from "../raid";
 import type {
   LocatorSettings,
   MapAssetState,
@@ -114,7 +114,8 @@ export function OverlayApp() {
     return () => controller.abort();
   }, [definition, retryKey]);
   useEffect(() => {
-    if (capture && bundle) setRaidExtracts(recognizeRaidExtracts(capture, definition.id, bundle.pois));
+    if (capture && bundle)
+      setRaidExtracts((previous) => accumulateRaidExtracts(previous, capture, definition.id, bundle.pois));
   }, [bundle, capture, definition.id]);
   const visible = useMemo(
     () =>
@@ -123,7 +124,12 @@ export function OverlayApp() {
       ),
     [settings.visibleMapLayers],
   );
-  const active = useMemo(() => new Set(raidExtracts?.activeExtractIds ?? []), [raidExtracts]);
+  // The reading is kept while the map changes, but only ever shown on the map it describes.
+  const raidExtractsForMap = useMemo(
+    () => (raidExtracts && raidExtracts.mapId === definition.id ? raidExtracts : null),
+    [raidExtracts, definition.id],
+  );
+  const active = useMemo(() => new Set(raidExtractsForMap?.activeExtractIds ?? []), [raidExtractsForMap]);
   const visibleLootGroups = useMemo(
     () => new Set(settings.visibleLootGroups ?? allLootGroupIds),
     [settings.visibleLootGroups],
@@ -193,8 +199,8 @@ export function OverlayApp() {
         )}
         <div className="overlay-readout">
           <strong>
-            {raidExtracts?.status === "recognized"
-              ? `${raidExtracts.activeExtractIds.length} ACTIVE EXITS`
+            {raidExtractsForMap?.status === "recognized"
+              ? `${raidExtractsForMap.activeExtractIds.length} ACTIVE EXITS`
               : "EXITS UNKNOWN"}
           </strong>
           <span>{fix ? `${fix.position.x.toFixed(1)} / ${fix.position.z.toFixed(1)}` : "TAKE SCREENSHOT"}</span>
