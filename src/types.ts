@@ -247,11 +247,13 @@ export interface LockedDoorPoi extends PoiBase {
 }
 
 export interface QuestObjectivePoi extends PoiBase {
-  kind: "quest-objective";
+  kind: "quest-objective" | "quest-possible-location";
   mapId: string;
   taskId: string;
   objectiveId: string;
   description: string;
+  locationIndex?: number;
+  locationCount?: number;
 }
 
 export interface CustomPinPoi extends PoiBase {
@@ -298,6 +300,8 @@ export interface QuestObjective {
   mapIds: string[];
   details: string[];
   zones: Array<{ mapId: string; position: Vec3; outline: Vec3[]; top: number | null; bottom: number | null }>;
+  // Candidate spawn points for find-item objectives: the item is at one of these, not all of them.
+  possibleLocations: Array<{ mapId: string; positions: Vec3[] }>;
 }
 
 export interface QuestDefinition {

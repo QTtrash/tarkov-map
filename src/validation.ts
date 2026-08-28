@@ -248,6 +248,11 @@ const quest = z.object({
       zones: z.array(
         z.object({ mapId, position: vec3, outline: z.array(vec3), top: finite.nullable(), bottom: finite.nullable() }),
       ),
+      // Defaulted so bundles generated before this field existed still parse.
+      possibleLocations: z
+        .array(z.object({ mapId, positions: z.array(vec3).max(64) }))
+        .max(16)
+        .default([]),
     }),
   ),
   requirements: z.array(z.object({ taskId: identifier, statuses: z.array(z.string()) })),

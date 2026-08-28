@@ -36,12 +36,38 @@ export function buildActiveQuestObjectivePois(
     .filter((quest) => quest.mapIds.includes(mapId))
     .filter((quest) => effectiveQuestStatus(quest, progress) === "active")
     .flatMap((quest) =>
-      quest.objectives.flatMap((objective) =>
-        objective.zones
-          .filter((zone) => zone.mapId === mapId)
-          .map((zone, zoneIndex) => ({
-            id: `quest-active-${quest.id}-${objective.id}-${mapId}-${zoneIndex}`,
-            kind: "quest-objective" as const,
+      quest.objectives.flatMap((objective) => {
+        const possiblePositions = objective.possibleLocations
+          .filter((location) => location.mapId === mapId)
+          .flatMap((location) => location.positions)
+          .filter(
+            (position, index, positions) =>
+              positions.findIndex(
+                (candidate) => candidate.x === position.x && candidate.y === position.y && candidate.z === position.z,
+              ) === index,
+          );
+
+        return [
+          ...objective.zones
+            .filter((zone) => zone.mapId === mapId)
+            .map((zone, zoneIndex) => ({
+              id: `quest-active-${quest.id}-${objective.id}-${mapId}-${zoneIndex}`,
+              kind: "quest-objective" as const,
+              category: "quest-objective" as const,
+              mapId,
+              name: quest.name,
+              aliases: [objective.description],
+              description: objective.description,
+              taskId: quest.id,
+              objectiveId: objective.id,
+              position: zone.position,
+              outline: zone.outline,
+              top: zone.top,
+              bottom: zone.bottom,
+            })),
+          ...possiblePositions.map((position, positionIndex) => ({
+            id: `quest-active-${quest.id}-${objective.id}-${mapId}-possible-${positionIndex}`,
+            kind: "quest-possible-location" as const,
             category: "quest-objective" as const,
             mapId,
             name: quest.name,
@@ -49,12 +75,12 @@ export function buildActiveQuestObjectivePois(
             description: objective.description,
             taskId: quest.id,
             objectiveId: objective.id,
-            position: zone.position,
-            outline: zone.outline,
-            top: zone.top,
-            bottom: zone.bottom,
+            position,
+            locationIndex: positionIndex,
+            locationCount: possiblePositions.length,
           })),
-      ),
+        ];
+      }),
     );
 }
 
