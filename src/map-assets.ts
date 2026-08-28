@@ -30,7 +30,9 @@ export function prepareSvgMap(source: string, definition: MapDefinition, activeF
   const svg = document.importNode(parsed, true) as unknown as SVGSVGElement;
   const baseLayer = definition.baseAsset.type === "svg" ? definition.baseAsset.baseLayer : null;
   const floor = definition.floors.find((candidate) => candidate.id === activeFloor);
-  const activeLayer = floor?.svgLayer ?? activeFloor;
+  // A known floor with a null svgLayer is an elevation band with no packaged artwork, so the
+  // base layer stays on its own. Only an unknown floor falls back to treating the id as a layer.
+  const activeLayer = floor ? floor.svgLayer : activeFloor;
   const visible = new Set([baseLayer, activeLayer].filter((value): value is string => Boolean(value)));
   const available = new Set<string>();
 
@@ -47,7 +49,7 @@ export function prepareSvgMap(source: string, definition: MapDefinition, activeF
   if (baseLayer && !available.has(baseLayer)) {
     throw new Error(`Map asset is missing base layer ${baseLayer}`);
   }
-  if (activeLayer !== baseLayer && !available.has(activeLayer)) {
+  if (activeLayer && activeLayer !== baseLayer && !available.has(activeLayer)) {
     throw new Error(`Map asset is missing floor layer ${activeLayer}`);
   }
   return svg;
