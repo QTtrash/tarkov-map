@@ -82,15 +82,49 @@ const poi = z
     bottom: finite.nullable().optional(),
   })
   .loose();
-const questObjectivePoi = poi.extend({
-  kind: z.literal("quest-objective"),
+const questPoiShape = {
+  id: identifier,
   category: z.literal("quest-objective"),
   mapId,
+  name: z.string().min(1).max(256),
+  aliases: z.array(z.string().max(256)).max(16).optional(),
+  description: z.string().max(512),
   taskId: identifier,
   objectiveId: identifier,
-  description: z.string(),
-});
-const questPoiSnapshot = z.object({ mapId, pois: z.array(questObjectivePoi).max(128) });
+  position: vec3,
+  outline: z.array(vec3).max(64).optional(),
+  top: finite.nullable().optional(),
+  bottom: finite.nullable().optional(),
+};
+const questObjectivePoi = z.union([
+  z.object({ ...questPoiShape, kind: z.literal("quest-objective") }),
+  z.object({
+    ...questPoiShape,
+    kind: z.literal("quest-possible-location"),
+    locationIndex: z.number().int().nonnegative().max(127),
+    locationCount: z.number().int().positive().max(128),
+  }),
+]);
+const questPoiSnapshot = z
+  .object({ mapId, pois: z.array(questObjectivePoi).max(128) })
+  .superRefine((snapshot, context) => {
+    snapshot.pois.forEach((candidate, index) => {
+      if (candidate.mapId !== snapshot.mapId) {
+        context.addIssue({
+          code: "custom",
+          message: "Quest POI map does not match its snapshot",
+          path: ["pois", index, "mapId"],
+        });
+      }
+      if (candidate.kind === "quest-possible-location" && candidate.locationIndex >= candidate.locationCount) {
+        context.addIssue({
+          code: "custom",
+          message: "Quest POI location index is outside its candidate set",
+          path: ["pois", index, "locationIndex"],
+        });
+      }
+    });
+  });
 const customPin = z.object({
   id: identifier,
   kind: z.literal("custom-pin"),
@@ -258,6 +292,11 @@ const quest = z.object({
       zones: z.array(
         z.object({ mapId, position: vec3, outline: z.array(vec3), top: finite.nullable(), bottom: finite.nullable() }),
       ),
+      // Defaulted so bundles generated before this field existed still parse.
+      possibleLocations: z
+        .array(z.object({ mapId, positions: z.array(vec3).max(64) }))
+        .max(16)
+        .default([]),
     }),
   ),
   requirements: z.array(z.object({ taskId: identifier, statuses: z.array(z.string()) })),

@@ -137,7 +137,7 @@ export async function subscribeOverlayState(handler: (state: OverlayState) => vo
 // Quest objectives are derived from quest progress inside the main window's quest panel, so the
 // overlay receives the computed markers over the app's own event channel.
 export async function publishQuestPois(snapshot: QuestPoiSnapshot) {
-  if (isTauriRuntime()) await emitTo("overlay", "quest://objective-pois", snapshot);
+  if (isTauriRuntime()) await emitTo("overlay", "quest://objective-pois", parseQuestPoiSnapshot(snapshot));
 }
 
 export async function subscribeQuestPois(handler: (snapshot: QuestPoiSnapshot) => void): Promise<UnlistenFn> {
