@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "mapId": "lighthouse",
-  "generatedAt": "2026-08-21T20:26:46.460Z",
+  "generatedAt": "2026-08-28T08:20:39.297Z",
   "sources": [
     "https://json.tarkov.dev/regular/maps",
     "https://json.tarkov.dev/regular/maps_en"
@@ -20638,7 +20638,7 @@
       },
       "bossId": "bossKnight",
       "bossName": "Knight",
-      "spawnChance": 0.15,
+      "spawnChance": 0.2,
       "zoneChance": 0.5
     },
     {
@@ -20657,7 +20657,7 @@
       },
       "bossId": "bossKnight",
       "bossName": "Knight",
-      "spawnChance": 0.15,
+      "spawnChance": 0.2,
       "zoneChance": 0.5
     },
     {

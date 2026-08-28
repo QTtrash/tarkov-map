@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "mapId": "shoreline",
-  "generatedAt": "2026-08-21T20:26:46.586Z",
+  "generatedAt": "2026-08-28T08:20:39.390Z",
   "sources": [
     "https://json.tarkov.dev/regular/maps",
     "https://json.tarkov.dev/regular/maps_en"
@@ -5246,7 +5246,7 @@
       },
       "bossId": "bossSanitar",
       "bossName": "Sanitar",
-      "spawnChance": 0.45,
+      "spawnChance": 0.6,
       "zoneChance": 0.5
     },
     {
@@ -5265,7 +5265,7 @@
       },
       "bossId": "bossSanitar",
       "bossName": "Sanitar",
-      "spawnChance": 0.45,
+      "spawnChance": 0.6,
       "zoneChance": 0.5
     },
     {
@@ -5284,7 +5284,7 @@
       },
       "bossId": "bossKnight",
       "bossName": "Knight",
-      "spawnChance": 0.15,
+      "spawnChance": 0.2,
       "zoneChance": 1
     },
     {
@@ -5303,7 +5303,7 @@
       },
       "bossId": "sectantPriest",
       "bossName": "Cultist Priest",
-      "spawnChance": 0.05,
+      "spawnChance": 0.17,
       "zoneChance": 0.2
     },
     {
@@ -5322,7 +5322,7 @@
       },
       "bossId": "sectantPriest",
       "bossName": "Cultist Priest",
-      "spawnChance": 0.05,
+      "spawnChance": 0.17,
       "zoneChance": 0.2
     },
     {
@@ -5341,7 +5341,7 @@
       },
       "bossId": "sectantPriest",
       "bossName": "Cultist Priest",
-      "spawnChance": 0.05,
+      "spawnChance": 0.17,
       "zoneChance": 0.6
     },
     {

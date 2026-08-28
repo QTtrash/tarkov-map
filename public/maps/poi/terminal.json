@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "mapId": "terminal",
-  "generatedAt": "2026-08-21T20:26:46.620Z",
+  "generatedAt": "2026-08-28T08:20:39.420Z",
   "sources": [
     "https://json.tarkov.dev/regular/maps",
     "https://json.tarkov.dev/regular/maps_en"
@@ -880,12 +880,12 @@
       "zoneChance": 1
     },
     {
-      "id": "boss-bossSanitar-0",
+      "id": "boss-bossBully-0",
       "kind": "boss-zone",
       "category": "boss-zone",
-      "name": "Sanitar · 2ScavPort29",
+      "name": "Reshala · 2ScavPort29",
       "aliases": [
-        "bossSanitar",
+        "bossBully",
         "Zone2ScavPort29"
       ],
       "position": {
@@ -893,8 +893,8 @@
         "y": -60.35034086666667,
         "z": 190.15002266666667
       },
-      "bossId": "bossSanitar",
-      "bossName": "Sanitar",
+      "bossId": "bossBully",
+      "bossName": "Reshala",
       "spawnChance": 0.2,
       "zoneChance": 1
     },
@@ -937,12 +937,12 @@
       "zoneChance": 1
     },
     {
-      "id": "boss-bossBully-0",
+      "id": "boss-bossSanitar-0",
       "kind": "boss-zone",
       "category": "boss-zone",
-      "name": "Reshala · 2ScavPort29",
+      "name": "Sanitar · 2ScavPort29",
       "aliases": [
-        "bossBully",
+        "bossSanitar",
         "Zone2ScavPort29"
       ],
       "position": {
@@ -950,8 +950,8 @@
         "y": -60.35034086666667,
         "z": 190.15002266666667
       },
-      "bossId": "bossBully",
-      "bossName": "Reshala",
+      "bossId": "bossSanitar",
+      "bossName": "Sanitar",
       "spawnChance": 0.2,
       "zoneChance": 1
     },

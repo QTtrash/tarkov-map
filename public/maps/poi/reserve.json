@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "mapId": "reserve",
-  "generatedAt": "2026-08-21T20:26:46.500Z",
+  "generatedAt": "2026-08-28T08:20:39.337Z",
   "sources": [
     "https://json.tarkov.dev/regular/maps",
     "https://json.tarkov.dev/regular/maps_en"
@@ -3208,7 +3208,7 @@
       },
       "bossId": "bossGluhar",
       "bossName": "Glukhar",
-      "spawnChance": 0.3,
+      "spawnChance": 0.35,
       "zoneChance": 0.25
     },
     {
@@ -3227,7 +3227,7 @@
       },
       "bossId": "bossGluhar",
       "bossName": "Glukhar",
-      "spawnChance": 0.3,
+      "spawnChance": 0.35,
       "zoneChance": 0.25
     },
     {
@@ -3246,7 +3246,7 @@
       },
       "bossId": "bossGluhar",
       "bossName": "Glukhar",
-      "spawnChance": 0.3,
+      "spawnChance": 0.35,
       "zoneChance": 0.25
     },
     {
@@ -3265,7 +3265,7 @@
       },
       "bossId": "bossGluhar",
       "bossName": "Glukhar",
-      "spawnChance": 0.3,
+      "spawnChance": 0.35,
       "zoneChance": 0.25
     },
     {

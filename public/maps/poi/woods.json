@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "mapId": "woods",
-  "generatedAt": "2026-08-21T20:26:46.657Z",
+  "generatedAt": "2026-08-28T08:20:39.453Z",
   "sources": [
     "https://json.tarkov.dev/regular/maps",
     "https://json.tarkov.dev/regular/maps_en"
@@ -7536,7 +7536,7 @@
       },
       "bossId": "bossKojaniy",
       "bossName": "Shturman",
-      "spawnChance": 0.45,
+      "spawnChance": 0.6,
       "zoneChance": 1
     },
     {
@@ -7555,7 +7555,7 @@
       },
       "bossId": "bossKnight",
       "bossName": "Knight",
-      "spawnChance": 0.15,
+      "spawnChance": 0.2,
       "zoneChance": 1
     },
     {
@@ -7574,7 +7574,7 @@
       },
       "bossId": "sectantPriest",
       "bossName": "Cultist Priest",
-      "spawnChance": 0.1,
+      "spawnChance": 0.2,
       "zoneChance": 0.5
     },
     {
@@ -7593,7 +7593,7 @@
       },
       "bossId": "sectantPriest",
       "bossName": "Cultist Priest",
-      "spawnChance": 0.1,
+      "spawnChance": 0.2,
       "zoneChance": 0.5
     },
     {
