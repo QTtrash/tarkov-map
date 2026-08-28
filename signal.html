@@ -109,42 +109,42 @@
       <section class="community-section" id="community" aria-labelledby="community-title">
         <header class="community-heading">
           <div>
-            <p class="eyebrow">V1.3.1 / EXPERIMENTAL COMPATIBILITY</p>
-            <h2 id="community-title">Quest-log import, without pretending every build matches.</h2>
+            <p class="eyebrow">V1.4.0 / OVERLAY INTELLIGENCE</p>
+            <h2 id="community-title">The compact overlay now carries the squad and the objective.</h2>
           </div>
           <div class="community-intro">
-            <p>Raid Signal imports only explicit quest records it can safely recognize and attribute. Current Tarkov builds may not retain that format, so v1.3.1 scans both notification and output logs, explains zero-event results, and lets players copy a privacy-safe compatibility summary.</p>
+            <p>Raid Signal v1.4.0 brings live squad positions, active quest markers, and candidate find-item locations into the native overlay while keeping decrypted state inside the desktop process.</p>
             <div class="community-contributor">
-              <span>COMMUNITY REQUEST</span>
-              <strong><a href="https://www.reddit.com/user/iShadowLTu/" target="_blank" rel="noopener noreferrer">u/iShadowLTu</a></strong>
-              <p>Asked whether Raid Signal could read task events from the logs it already locates and automatically show objectives for active tasks. The experiment began in <a href="https://github.com/QTtrash/tarkov-map/pull/19" target="_blank" rel="noopener noreferrer">PR #19</a>; current-format compatibility remains community-tested and explicitly experimental.</p>
+              <span>COMMUNITY CONTRIBUTOR</span>
+              <strong><a href="https://github.com/Reiss-Cashmore" target="_blank" rel="noopener noreferrer">@Reiss-Cashmore</a></strong>
+              <p>Contributed a five-PR series covering candidate quest locations, quest and squad overlay bridges, missing SVG floor artwork, and persistent extract recognition. Start with <a href="https://github.com/QTtrash/tarkov-map/pull/25" target="_blank" rel="noopener noreferrer">PR #25</a> and <a href="https://github.com/QTtrash/tarkov-map/pull/27" target="_blank" rel="noopener noreferrer">PR #27</a>.</p>
             </div>
           </div>
         </header>
 
-        <div class="community-sync-board" role="img" aria-label="Notification and output logs move through local compatibility diagnostics; only safely recognized quest events may be imported, and no log or quest data is relayed">
-          <header><span>LOCAL QUEST SIGNAL</span><b>PVP / PVE / SEASONAL</b></header>
+        <div class="community-sync-board" role="img" aria-label="The main desktop validates local quest and decrypted squad snapshots before sending them through process-local events to the compact overlay; the relay still receives ciphertext only">
+          <header><span>PROCESS-LOCAL OVERLAY SIGNAL</span><b>QUESTS / SQUAD / EXTRACTS</b></header>
           <div class="community-sync-board__grid">
-            <article><span>01 / TARKOV LOGS</span><strong>SCAN BOTH SOURCES</strong><code>NOTIFICATION<br />OUTPUT<br />BOUNDED READS</code><small>Local and opt-in</small></article>
+            <article><span>01 / MAIN WINDOW</span><strong>DERIVE LOCALLY</strong><code>QUEST MARKERS<br />SQUAD POSITIONS<br />EXTRACT PANEL</code><small>No second relay client</small></article>
             <i aria-hidden="true">→</i>
-            <article><span>02 / REVIEW</span><strong>VISIBLE DIAGNOSTICS</strong><code>EVENT COUNTS<br />FORMAT STATUS<br />SAFE COPY</code><small>No paths or log contents</small></article>
+            <article><span>02 / BOUNDARY</span><strong>VALIDATE + BOUND</strong><code>MAP MATCH<br />PAYLOAD LIMITS<br />FINITE VALUES</code><small>Invalid events are dropped</small></article>
             <i aria-hidden="true">→</i>
-            <article><span>03 / MAP</span><strong>RECOGNIZED ONLY</strong><code>NO ID GUESSING<br />NO TRACE INFERENCE<br />MANUAL FALLBACK</code><small>Accuracy before automation</small></article>
+            <article><span>03 / OVERLAY</span><strong>ONE LIVE PICTURE</strong><code>SQUAD ARROWS<br />QUEST TARGETS<br />KNOWN EXTRACTS</code><small>Process-local rendering</small></article>
           </div>
-          <footer><span>DESKTOP ONLY / OPT-IN</span><b>LOGS + QUEST STATE NEVER ENTER ROOM PROTOCOL V1</b></footer>
+          <footer><span>DESKTOP PROCESS ONLY</span><b>ROOM PROTOCOL V1 AND CIPHERTEXT-ONLY RELAY UNCHANGED</b></footer>
         </div>
 
-        <div class="community-flow" aria-label="Experimental quest-log compatibility workflow">
-          <article><span>01</span><strong>SEE WHAT RAN</strong><p>Folder rescan, log scan, configured root, active session, and import outcomes now have distinct visible states.</p></article>
-          <article><span>02</span><strong>REPORT SAFELY</strong><p>Copy counts-only diagnostics and submit them through the dedicated compatibility form—never post raw logs.</p></article>
-          <article><span>03</span><strong>HELP MAP THE FORMAT</strong><p>Players who can accept, complete, or fail a quest today can help identify a trustworthy current event structure.</p></article>
+        <div class="community-flow" aria-label="Raid Signal v1.4.0 overlay improvements">
+          <article><span>01</span><strong>FIND THE ITEM</strong><p>Hollow markers show every known candidate location for active find-item objectives without stacking duplicate coordinates.</p></article>
+          <article><span>02</span><strong>KEEP THE SQUAD VISIBLE</strong><p>Fresh squad positions appear in the overlay and age out with the same local rules as the desktop map.</p></article>
+          <article><span>03</span><strong>KEEP THE SIGNAL</strong><p>Recognized extracts survive unrelated screenshots, while no-artwork elevation bands retain the base map.</p></article>
         </div>
 
         <footer class="community-footer">
-          <p>Automatic import is experimental. No recognized events means nothing is imported; manual quest tracking remains available. Raw logs must never be posted publicly.</p>
+          <p>Quest-log import remains experimental. Manual quest tracking stays available, and raw Tarkov logs must never be posted publicly.</p>
           <div>
-            <a href="https://github.com/QTtrash/tarkov-map/pull/19" target="_blank" rel="noopener noreferrer">VIEW PR #19 ↗</a>
-            <a href="https://github.com/QTtrash/tarkov-map/issues/new?template=quest_log_compatibility.yml" target="_blank" rel="noopener noreferrer">REPORT COMPATIBILITY ↗</a>
+            <a href="https://github.com/QTtrash/tarkov-map/pull/25" target="_blank" rel="noopener noreferrer">VIEW PR #25 ↗</a>
+            <a href="https://github.com/QTtrash/tarkov-map/pull/27" target="_blank" rel="noopener noreferrer">VIEW PR #27 ↗</a>
           </div>
         </footer>
 
