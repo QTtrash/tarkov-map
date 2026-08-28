@@ -67,6 +67,11 @@ records the successful build, Microsoft Defender scan, independent ClamAV scan,
 and publication gate. These controls provide traceable release evidence; they
 are not a third-party security audit or anti-cheat approval.
 
+After installation, use the
+[v1.4.0 manual Windows test](docs/MANUAL_TEST_V1.4.0.md) to check the map,
+overlay, candidate quest locations, screenshot locator, extract persistence,
+and optional encrypted sharing flows.
+
 Quest-log compatibility reports must use the app's **Copy Diagnostics** action.
 Never publish raw Tarkov logs; they can contain account, network, token, path,
 and chat data. Use the dedicated

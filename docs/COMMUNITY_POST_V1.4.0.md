@@ -1,8 +1,9 @@
 # Reddit draft — Raid Signal v1.4.0
 
-This is a generic cross-post draft. Before publishing, choose the title and
-flair that best fit each community's rules, remove any sections that are not
-relevant there, and avoid posting the same wording repeatedly in a short period.
+This is a paste-ready generic cross-post draft. Before publishing, choose the
+title and flair that best fit each community's rules, remove any sections that
+are not relevant there, and avoid posting the same wording repeatedly in a
+short period.
 
 Suggested titles:
 
@@ -20,9 +21,10 @@ community requires it.
 
 Hi everyone,
 
-Raid Signal v1.4.0 is available. This release brings more of the desktop's live
-tactical context into the compact native overlay and adds real candidate spawn
-locations for find-item quest objectives.
+Raid Signal v1.4.0 is available. Raid Signal is a free, open-source Windows map
+and compact overlay for Escape from Tarkov. This release brings more of the
+desktop's live tactical context into the native overlay and adds real candidate
+spawn locations for find-item quest objectives.
 
 What is new:
 
@@ -76,8 +78,9 @@ https://discord.gg/pz4QHAu9WN
 
 The Windows installer is currently unsigned, so Windows may show an
 unknown-publisher warning. The release includes a SHA-256 checksum, release
-manifest, SPDX SBOM, Microsoft Defender and ClamAV scan gates, and GitHub build
-provenance. These are verification materials, not a third-party security audit.
+manifest, SPDX SBOM, Microsoft Defender and ClamAV scan gates, and
+GitHub/Sigstore build provenance. These are verification materials, not a
+third-party security audit or anti-cheat approval.
 
 AI-assisted development disclosure: AI tools were used during implementation,
 testing, maintainer review, investigation, and drafting this post. Contributor
