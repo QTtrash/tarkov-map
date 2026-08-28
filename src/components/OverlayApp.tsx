@@ -10,6 +10,7 @@ import {
   overlayReady,
   setOverlayClickThrough,
   subscribeLocator,
+  subscribeSquadPositions,
   subscribeQuestPois,
 } from "../locator";
 import { composePoiBundle, composeVisibleCategories } from "../map-overlays";
@@ -25,6 +26,7 @@ import type {
   PoiCategory,
   QuestPoiSnapshot,
   RaidExtractState,
+  SquadPosition,
 } from "../types";
 import { UiIcon } from "./Icons";
 import { MapView } from "./MapView";
@@ -35,6 +37,7 @@ const idleAsset: MapAssetState = { status: "idle", asset: null, message: null };
 export function OverlayApp() {
   const [settings, setSettings] = useState<LocatorSettings>(defaultSettings);
   const [fix, setFix] = useState<PlayerFix | null>(null);
+  const [squadPositions, setSquadPositions] = useState<SquadPosition[]>([]);
   const [questSnapshot, setQuestSnapshot] = useState<QuestPoiSnapshot | null>(null);
   const [context, setContext] = useState<MapContext>({ mapId: null, inRaid: false, source: "manual" });
   const [bundle, setBundle] = useState<MapPoiBundle | null>(null);
@@ -49,6 +52,7 @@ export function OverlayApp() {
     let disposed = false;
     let cleanup: (() => void) | undefined;
     let cleanupInvalidate: (() => void) | undefined;
+    let cleanupSquad: (() => void) | undefined;
     let cleanupQuest: (() => void) | undefined;
     const applyContext = (next: MapContext) => {
       setContext(next);
@@ -68,8 +72,21 @@ export function OverlayApp() {
         return;
       }
       cleanupInvalidate = await listen("overlay://invalidate-map", () => setRetryKey((current) => current + 1));
+      if (disposed) {
+        cleanupInvalidate();
+        return;
+      }
       // Subscribe before signalling readiness so the snapshot the main window sends cannot be missed.
+      cleanupSquad = await subscribeSquadPositions(setSquadPositions);
+      if (disposed) {
+        cleanupSquad();
+        return;
+      }
       cleanupQuest = await subscribeQuestPois(setQuestSnapshot);
+      if (disposed) {
+        cleanupQuest();
+        return;
+      }
       const [loaded, snapshot] = await Promise.all([loadSettings(), getLocatorSnapshot()]);
       if (disposed) return;
       setSettings(loaded);
@@ -90,6 +107,7 @@ export function OverlayApp() {
       window.removeEventListener("keydown", onKeyDown);
       cleanup?.();
       cleanupInvalidate?.();
+      cleanupSquad?.();
       cleanupQuest?.();
     };
   }, []);
@@ -198,6 +216,7 @@ export function OverlayApp() {
           selectedPoiId={null}
           focusPoiId={null}
           activeExtractIds={active}
+          squadPositions={squadPositions}
           onFollowChange={noop}
           onSelectPoi={noop}
           onAssetStateChange={onAssetStateChange}

@@ -15,6 +15,7 @@ import type {
   QuestStatus,
   QuestSyncPreview,
   QuestSyncResult,
+  SquadPosition,
 } from "./types";
 import {
   parseLocatorSnapshot,
@@ -30,6 +31,7 @@ import {
   parseQuestSyncPreview,
   parseQuestSyncResult,
   parseSettings,
+  parseSquadPositions,
   readStoredJson,
 } from "./validation";
 import { allLootGroupIds } from "./poi";
@@ -132,6 +134,23 @@ export async function getLocatorSnapshot(): Promise<LocatorSnapshot> {
 export async function subscribeOverlayState(handler: (state: OverlayState) => void): Promise<UnlistenFn> {
   if (!isTauriRuntime()) return () => undefined;
   return listen<OverlayState>("overlay://state-changed", (event) => handler(event.payload));
+}
+
+// Squad positions are decrypted in the main window, so the overlay webview receives them
+// over the app's own event channel rather than holding a second relay connection.
+export async function publishSquadPositions(positions: SquadPosition[]) {
+  if (isTauriRuntime()) await emitTo("overlay", "squad://positions", parseSquadPositions(positions));
+}
+
+export async function subscribeSquadPositions(handler: (positions: SquadPosition[]) => void): Promise<UnlistenFn> {
+  if (!isTauriRuntime()) return () => undefined;
+  return listen<unknown>("squad://positions", (event) => {
+    try {
+      handler(parseSquadPositions(event.payload));
+    } catch (error) {
+      console.warn("Ignored invalid native event payload", error);
+    }
+  });
 }
 
 // Quest objectives are derived from quest progress inside the main window's quest panel, so the
