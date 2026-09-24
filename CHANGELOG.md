@@ -6,6 +6,32 @@ All notable changes to Raid Signal are recorded here. The format follows
 
 ## [Unreleased]
 
+## [1.4.1] - 2026-09-24
+
+### Added
+
+- Show enabled extraction names at the initial overview on desktop, overlay,
+  and phone, with edge-aware placement and accessible crowded-label handling.
+- Open the matching quest and objective from map markers with bundled offline
+  descriptions, location previews, attributed generic quest artwork, and safe
+  optional Tarkov Wiki links. Candidate locations remain explicitly identified.
+- Delete individual phone-companion waypoints or clear only the current map,
+  with immediate updates and local persistence.
+
+### Fixed
+
+- Preserve the requested quest objective and floor when focusing across maps.
+- Prevent waypoint tooltip markup injection and keyboard events leaking into
+  map interactions.
+- Serve bundled WebP quest images with the correct content type.
+
+### Security and privacy
+
+- Keep settings schema v2 and room protocol v1 compatible. Quest profiles and
+  progress remain local; invitation fragments and ciphertext-only relaying are
+  unchanged. Images load from the bundled assets without third-party requests.
+- Update Sharp to 0.35.4 to resolve its reported dependency vulnerability.
+
 ## [1.4.0] - 2026-08-28
 
 ### Added
@@ -139,7 +165,8 @@ All notable changes to Raid Signal are recorded here. The format follows
   selection.
 - End-to-end encrypted Internet and LAN squad sharing with a phone companion.
 
-[Unreleased]: https://github.com/QTtrash/tarkov-map/compare/v1.4.0...HEAD
+[Unreleased]: https://github.com/QTtrash/tarkov-map/compare/v1.4.1...HEAD
+[1.4.1]: https://github.com/QTtrash/tarkov-map/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/QTtrash/tarkov-map/compare/v1.3.1...v1.4.0
 [1.3.1]: https://github.com/QTtrash/tarkov-map/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/QTtrash/tarkov-map/compare/v1.2.0...v1.3.0

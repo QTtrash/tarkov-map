@@ -43,22 +43,22 @@ game files. No official approval or anti-cheat guarantee is implied.
 ## Install and verify
 
 Download the Windows installer and SHA-256 file from the immutable
-[v1.4.0 release](https://github.com/QTtrash/tarkov-map/releases/tag/v1.4.0).
+[v1.4.1 release](https://github.com/QTtrash/tarkov-map/releases/tag/v1.4.1).
 Installers are unsigned initially, so Windows may display an unknown-publisher
 warning. Do not download installers from repository commits or third-party mirrors.
 
 Verify the checksum in PowerShell from the directory containing both downloads:
 
 ```powershell
-$expected = (Get-Content .\Raid-Signal-Setup-1.4.0.exe.sha256).Split()[0]
-$actual = (Get-FileHash .\Raid-Signal-Setup-1.4.0.exe -Algorithm SHA256).Hash.ToLowerInvariant()
+$expected = (Get-Content .\Raid-Signal-Setup-1.4.1.exe.sha256).Split()[0]
+$actual = (Get-FileHash .\Raid-Signal-Setup-1.4.1.exe -Algorithm SHA256).Hash.ToLowerInvariant()
 if ($actual -ne $expected) { throw "Raid Signal checksum mismatch" }
 ```
 
 With the GitHub CLI installed, verify that GitHub Actions produced the artifact:
 
 ```text
-gh attestation verify Raid-Signal-Setup-1.4.0.exe -R QTtrash/tarkov-map
+gh attestation verify Raid-Signal-Setup-1.4.1.exe -R QTtrash/tarkov-map
 ```
 
 The release also contains `release.json` and an SPDX SBOM. The
@@ -68,7 +68,7 @@ and publication gate. These controls provide traceable release evidence; they
 are not a third-party security audit or anti-cheat approval.
 
 After installation, use the
-[v1.4.0 manual Windows test](docs/MANUAL_TEST_V1.4.0.md) to check the map,
+[v1.4.1 manual Windows test](docs/MANUAL_TEST_V1.4.1.md) to check the map,
 overlay, candidate quest locations, screenshot locator, extract persistence,
 and optional encrypted sharing flows.
 

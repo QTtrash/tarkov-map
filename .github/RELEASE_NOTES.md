@@ -1,29 +1,29 @@
 ## What changed
 
-Raid Signal v1.4.0 brings the desktop’s live tactical context into the compact
-native overlay and adds real candidate locations for find-item quest objectives.
+Raid Signal v1.4.1 makes extraction names readable at the map overview, adds
+useful quest-marker details, and gives phone users control over their waypoints.
 
-- Live squad members now appear on the native overlay without opening a second
-  relay connection or moving decrypted positions outside the desktop process.
-- Active quest markers, including hollow candidate-location markers, now appear
-  in the overlay when quest markers are enabled.
-- Find-item objectives can show every known candidate spawn from the refreshed
-  Regular, PvE, and Seasonal PvP intelligence snapshot.
-- Floors that intentionally have no packaged SVG layer keep the base artwork
-  visible.
-- The last recognized extract panel remains available when a later screenshot
-  contains unrelated text and clears when the raid ends.
-
-Thank you [@Reiss-Cashmore](https://github.com/Reiss-Cashmore) for contributing
-the five-PR feature and fix series behind the overlay, quest-location, map-layer,
-and extract improvements.
+- Enabled extraction names appear immediately on desktop, compact overlay, and
+  phone, preserving filters, floors, active styling, and map interaction.
+- Quest markers open the correct quest and objective, including offline text,
+  a location preview, and bundled artwork where available. Generic quest images
+  and possible spawn locations are clearly labeled.
+- Quest artwork comes from Tarkov.dev's task image metadata and image CDN;
+  credits and source links appear with the image. See the
+  [asset provenance and restrictions](https://github.com/QTtrash/tarkov-map/blob/v1.4.1/ASSET_LICENSES.md).
+- Phone users can delete one waypoint or clear waypoints on the current map;
+  other maps' waypoints remain intact after reloading.
+- Related fixes preserve cross-map quest focus, render waypoint tooltips safely,
+  contain keyboard interactions, and serve WebP images correctly.
+- Sharp is updated to 0.35.4 to resolve its reported dependency vulnerability.
 
 ## Compatibility, privacy, and limits
 
-Settings schema v2 and room protocol v1 remain compatible. The overlay receives
-only bounded, validated process-local snapshots from the main desktop webview.
-Invitation keys remain in URL fragments, the relay still forwards ciphertext
-only, and no position history is stored.
+Settings schema v2 and room protocol v1 remain compatible. Quest profiles and
+progress remain local and are not synchronized to the phone. Bundled quest
+images work offline without external image requests. Invitation keys remain in
+URL fragments, the relay forwards ciphertext only, and no position history is
+stored.
 
 Quest-log import remains experimental because current Tarkov builds may not
 retain a safely attributable supported event format. Manual quest selection is
