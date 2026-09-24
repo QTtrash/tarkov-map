@@ -99,7 +99,7 @@ export function OverlayApp() {
       if (!disposed) setBundleError(`Overlay initialization failed: ${String(error)}`);
     });
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") void hideOverlay();
+      if (event.key === "Escape" && !event.defaultPrevented) void hideOverlay();
     };
     window.addEventListener("keydown", onKeyDown);
     return () => {
@@ -215,6 +215,7 @@ export function OverlayApp() {
           visibleLootGroups={visibleLootGroups}
           selectedPoiId={null}
           focusPoiId={null}
+          questMode={questSnapshot?.gameMode ?? "regular"}
           activeExtractIds={active}
           squadPositions={squadPositions}
           onFollowChange={noop}

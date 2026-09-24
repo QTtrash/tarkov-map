@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet.markercluster";
 import { prepareSvgMap, versionedMapAssetPath } from "../map-assets";
+import { installExtractionLabels } from "./map-extraction-labels";
+import { QuestDetails } from "./QuestDetails";
 import { allLootGroupIds, lootGroupForType, poiMatchesFloor } from "../poi";
 import {
   assetForFloor,
@@ -23,6 +25,9 @@ import type {
   PlayerFix,
   PoiCategory,
   SquadPosition,
+  QuestGameMode,
+  QuestObjectivePoi,
+  ExtractPoi,
 } from "../types";
 
 interface MapViewProps {
@@ -37,6 +42,10 @@ interface MapViewProps {
   selectedPoiId: string | null;
   focusPoiId: string | null;
   activeExtractIds?: Set<string>;
+  questMode?: QuestGameMode;
+  onFocusHandled?: () => void;
+  onDeleteWaypoint?: (id: string) => void;
+  deletableWaypointIds?: ReadonlySet<string>;
   onFollowChange: (follow: boolean) => void;
   onSelectPoi: (id: string | null) => void;
   onCreateWaypoint?: (position: { x: number; z: number }) => void;
@@ -64,7 +73,12 @@ export function MapView({
   onSelectPoi,
   onCreateWaypoint,
   onAssetStateChange,
+  questMode = "regular",
+  onFocusHandled,
+  onDeleteWaypoint,
+  deletableWaypointIds,
 }: MapViewProps) {
+  const [questDetail, setQuestDetail] = useState<QuestObjectivePoi | null>(null);
   const [squadNow, setSquadNow] = useState(() => Date.now());
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
@@ -91,7 +105,7 @@ export function MapView({
       zoomSnap: 0.25,
       zoomDelta: 0.5,
       wheelPxPerZoomLevel: 90,
-      minZoom: definition.minZoom,
+      minZoom: -6,
       maxZoom: definition.maxZoom,
       maxBoundsViscosity: 0.85,
       zoomControl: false,
@@ -99,7 +113,9 @@ export function MapView({
     });
     L.control.zoom({ position: "bottomright" }).addTo(map);
     map.setMaxBounds(mapBounds(definition).pad(0.5));
-    map.fitBounds(mapBounds(definition), { animate: false, padding: [30, 30] });
+    const overviewPadding = L.point(96, 100);
+    map.setMinZoom(Math.min(definition.minZoom, map.getBoundsZoom(mapBounds(definition), false, overviewPadding)));
+    map.fitBounds(mapBounds(definition), { animate: false, paddingTopLeft: [32, 40], paddingBottomRight: [64, 60] });
     const updateDetail = () => {
       if (containerRef.current)
         containerRef.current.dataset.detail = String(map.getZoom() >= definition.minZoom + 1.25);
@@ -115,7 +131,11 @@ export function MapView({
       if ((event as unknown as { originalEvent?: Event }).originalEvent) onFollowChange(false);
     });
     mapRef.current = map;
-    const resizeObserver = new ResizeObserver(() => map.invalidateSize({ animate: false }));
+    const resizeObserver = new ResizeObserver(() => {
+      map.invalidateSize({ animate: false });
+      map.setMinZoom(-6);
+      map.setMinZoom(Math.min(definition.minZoom, map.getBoundsZoom(mapBounds(definition), false, overviewPadding)));
+    });
     resizeObserver.observe(containerRef.current);
     return () => {
       resizeObserver.disconnect();
@@ -134,6 +154,7 @@ export function MapView({
     const map = mapRef.current;
     if (!map) return;
     let cancelled = false;
+    const controller = new AbortController();
     let candidate: L.Layer | null = null;
     let committed = false;
     const asset = assetForFloor(definition, activeFloor);
@@ -152,6 +173,7 @@ export function MapView({
       onAssetStateChange?.({ status: "ready", asset: assetName, message });
     };
     const fail = (error: unknown) => {
+      if (cancelled) return;
       console.error(error);
       if (candidate) candidate.removeFrom(map);
       candidate = null;
@@ -211,7 +233,7 @@ export function MapView({
     }
 
     void versionedMapAssetPath(asset.path)
-      .then((path) => fetch(path, { cache: "no-store" }))
+      .then((path) => fetch(path, { signal: controller.signal }))
       .then((response) => {
         if (!response.ok) throw new Error(`Unable to load ${asset.path}`);
         return response.text();
@@ -226,6 +248,7 @@ export function MapView({
       .catch(fail);
     return () => {
       cancelled = true;
+      controller.abort();
       if (candidate && !committed) candidate.removeFrom(map);
     };
   }, [activeFloor, definition, onAssetStateChange]);
@@ -263,18 +286,25 @@ export function MapView({
           riseOnHover: true,
           zIndexOffset: poi.kind === "extract" ? 300 : poi.kind === "transit" ? 250 : 100,
         });
-        marker.bindTooltip(poi.name, { direction: "top", offset: [0, -12], className: "poi-tooltip" });
-        marker.bindPopup(popupContent(poi, allPois, onSelectPoi), {
-          className: "poi-popup",
-          offset: [0, -8],
-          closeButton: false,
-        });
+        const tooltip = document.createElement("span");
+        tooltip.textContent = poi.name;
+        marker.bindTooltip(tooltip, { direction: "top", offset: [0, -12], className: "poi-tooltip" });
+        if (poi.kind !== "quest-objective" && poi.kind !== "quest-possible-location")
+          marker.bindPopup(
+            popupContent(poi, allPois, onSelectPoi, deletableWaypointIds?.has(poi.id) ? onDeleteWaypoint : undefined),
+            {
+              className: "poi-popup",
+              offset: [0, -8],
+              closeButton: false,
+            },
+          );
         marker.on("mouseover", () => outline?.setStyle({ opacity: 0.9, fillOpacity: 0.1 }));
         marker.on("mouseout", () => {
           if (selectedPoiRef.current !== poi.id) outline?.setStyle({ opacity: 0, fillOpacity: 0 });
         });
         marker.on("click", () => {
           onSelectPoi(poi.id);
+          if (poi.kind === "quest-objective" || poi.kind === "quest-possible-location") setQuestDetail(poi);
           outline?.setStyle({ opacity: 1, fillOpacity: 0.12 });
         });
         marker.addTo(group);
@@ -283,6 +313,14 @@ export function MapView({
         if (group instanceof L.MarkerClusterGroup) parents.set(poi.id, group);
       }
       group.addTo(map);
+      for (const [id, marker] of markers) {
+        const element = marker.getElement();
+        const poi = allPois.get(id);
+        element?.setAttribute("aria-label", poi?.name ?? "Map marker");
+        element?.setAttribute("data-poi-id", id);
+        if (poi?.kind === "quest-objective" || poi?.kind === "quest-possible-location")
+          element?.setAttribute("data-objective-id", poi.objectiveId);
+      }
       groups.push(group);
     }
     poiMarkersRef.current = markers;
@@ -294,7 +332,17 @@ export function MapView({
       poiParentsRef.current.clear();
       poiOutlinesRef.current.clear();
     };
-  }, [activeExtractIds, activeFloor, definition, onSelectPoi, poiBundle, visibleLootGroups, visiblePoiCategories]);
+  }, [
+    activeExtractIds,
+    activeFloor,
+    definition,
+    onSelectPoi,
+    poiBundle,
+    visibleLootGroups,
+    visiblePoiCategories,
+    onDeleteWaypoint,
+    deletableWaypointIds,
+  ]);
 
   useEffect(() => {
     selectedPoiRef.current = selectedPoiId;
@@ -302,7 +350,10 @@ export function MapView({
     for (const id of ids) {
       const poi = poiBundle?.pois.find((candidate) => candidate.id === id);
       const marker = poiMarkersRef.current.get(id);
-      if (poi && marker) marker.setIcon(poiIcon(poi, id === selectedPoiId, activeExtractIds.has(id)));
+      if (poi && marker) {
+        marker.setIcon(poiIcon(poi, id === selectedPoiId, activeExtractIds.has(id)));
+        marker.getElement()?.setAttribute("aria-label", poi.name);
+      }
       const outline = poiOutlinesRef.current.get(id);
       outline?.setStyle(id === selectedPoiId ? { opacity: 1, fillOpacity: 0.12 } : { opacity: 0, fillOpacity: 0 });
     }
@@ -311,18 +362,54 @@ export function MapView({
 
   useEffect(() => {
     const map = mapRef.current;
+    if (!map) return;
+    const extracts = (poiBundle?.pois ?? [])
+      .filter((poi): poi is ExtractPoi => poi.kind === "extract" && poiMarkersRef.current.has(poi.id))
+      .map((poi) => ({ poi, marker: poiMarkersRef.current.get(poi.id)! }));
+    return installExtractionLabels(map, extracts, activeExtractIds, selectedPoiId);
+  }, [
+    activeExtractIds,
+    activeFloor,
+    definition,
+    poiBundle,
+    selectedPoiId,
+    visibleLootGroups,
+    visiblePoiCategories,
+    onDeleteWaypoint,
+    deletableWaypointIds,
+  ]);
+
+  useEffect(() => {
+    const map = mapRef.current;
     if (!map || !focusPoiId) return;
     const marker = poiMarkersRef.current.get(focusPoiId);
     if (!marker) return;
+    let cancelled = false;
     const parent = poiParentsRef.current.get(focusPoiId);
     const reveal = () => {
+      if (cancelled) return;
       map.setView(marker.getLatLng(), Math.max(map.getZoom(), definition.minZoom + 2), { animate: true });
-      marker.openPopup();
+      const poi = poiBundle?.pois.find((candidate) => candidate.id === focusPoiId);
+      if (poi?.kind === "quest-objective" || poi?.kind === "quest-possible-location") setQuestDetail(poi);
+      else marker.openPopup();
       onSelectPoi(focusPoiId);
+      onFocusHandled?.();
     };
     if (parent) parent.zoomToShowLayer(marker, reveal);
     else reveal();
-  }, [definition.minZoom, focusPoiId, onSelectPoi, visiblePoiCategories]);
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    activeFloor,
+    definition.minZoom,
+    focusPoiId,
+    onSelectPoi,
+    onFocusHandled,
+    poiBundle,
+    visibleLootGroups,
+    visiblePoiCategories,
+  ]);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -392,20 +479,33 @@ export function MapView({
   }, [definition.id, squadNow, squadPositions]);
 
   return (
-    <div
-      className="map-canvas"
-      ref={containerRef}
-      role="application"
-      tabIndex={0}
-      aria-label={`${definition.displayName} map`}
-      aria-keyshortcuts={onCreateWaypoint ? "Enter" : undefined}
-      title={onCreateWaypoint ? "Use arrow keys to pan and Enter to create a waypoint at the map center" : undefined}
-      onKeyDown={(event) => {
-        if (event.key !== "Enter" || !onCreateWaypoint || !mapRef.current) return;
-        event.preventDefault();
-        const center = mapRef.current.getCenter();
-        onCreateWaypoint({ x: center.lng, z: center.lat });
-      }}
-    />
+    <>
+      <div
+        className="map-canvas"
+        ref={containerRef}
+        role="application"
+        tabIndex={0}
+        aria-label={`${definition.displayName} map`}
+        aria-keyshortcuts={onCreateWaypoint ? "Enter" : undefined}
+        title={onCreateWaypoint ? "Use arrow keys to pan and Enter to create a waypoint at the map center" : undefined}
+        onKeyDown={(event) => {
+          if (event.target !== event.currentTarget || event.key !== "Enter" || !onCreateWaypoint || !mapRef.current)
+            return;
+          event.preventDefault();
+          const center = mapRef.current.getCenter();
+          onCreateWaypoint({ x: center.lng, z: center.lat });
+        }}
+      />
+      {questDetail && (
+        <QuestDetails
+          poi={questDetail}
+          mode={questMode}
+          onClose={() => {
+            setQuestDetail(null);
+            containerRef.current?.focus();
+          }}
+        />
+      )}
+    </>
   );
 }

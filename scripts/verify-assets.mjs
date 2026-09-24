@@ -1,6 +1,8 @@
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import { questImagesSchema } from "../src/quest-images.ts";
+import { validatedWikiUrl } from "../src/quest-links.ts";
 
 const root = path.resolve(import.meta.dirname, "..");
 const mapsRoot = path.join(root, "public", "maps");
@@ -60,7 +62,49 @@ for (const mode of ["regular", "pve", "pvp-season"]) {
   if (!possibleLocationCount) throw new Error(`No possible quest locations found for ${mode}`);
 }
 
+const questImages = questImagesSchema.parse(await readJson(path.join(mapsRoot, "quests/images.json")));
+for (const mode of ["regular", "pve", "pvp-season"]) {
+  const bundle = await readJson(path.join(mapsRoot, "quests", `${mode}.json`));
+  const known = new Set(
+    bundle.quests
+      .filter((quest) =>
+        quest.objectives.some((objective) => objective.zones?.length || objective.possibleLocations?.length),
+      )
+      .map((quest) => quest.id),
+  );
+  for (const image of questImages.images.filter((entry) => entry.gameMode === mode)) {
+    const relative = image.path.replace(/^\/maps\//, "");
+    const bytes = await readFile(path.join(mapsRoot, relative));
+    if (
+      !known.has(image.taskId) ||
+      checksums[relative] !== image.sha256 ||
+      bytes.length !== image.bytes ||
+      bytes.toString("ascii", 0, 4) !== "RIFF" ||
+      bytes.toString("ascii", 8, 12) !== "WEBP"
+    )
+      throw new Error(`Invalid quest image: ${image.taskId}`);
+  }
+}
+
 const poiFiles = Object.keys(checksums).filter((file) => file.startsWith("poi/") && file.endsWith(".json"));
+const questLinks = await readJson(path.join(mapsRoot, "quests/wiki-links.json"));
+if (questLinks.schemaVersion !== 1 || !Array.isArray(questLinks.links) || questLinks.links.length > 3000) {
+  throw new Error("Invalid quest Wiki metadata");
+}
+for (const mode of ["regular", "pve", "pvp-season"]) {
+  const bundle = await readJson(path.join(mapsRoot, "quests", `${mode}.json`));
+  const known = new Set(bundle.quests.map((quest) => quest.id));
+  const seen = new Set();
+  for (const link of questLinks.links.filter((entry) => entry.gameMode === mode)) {
+    if (!known.has(link.taskId) || seen.has(link.taskId) || !validatedWikiUrl(link.wikiUrl)) {
+      throw new Error(`Invalid Wiki link in ${mode}`);
+    }
+    seen.add(link.taskId);
+  }
+}
+if (questLinks.links.some((link) => !["regular", "pve", "pvp-season"].includes(link.gameMode))) {
+  throw new Error("Invalid Wiki link mode");
+}
 if (poiFiles.length !== 13) throw new Error(`Expected 13 POI bundles, found ${poiFiles.length}`);
 for (const relative of poiFiles) {
   const bundle = await readJson(path.join(mapsRoot, relative));

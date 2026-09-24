@@ -260,6 +260,7 @@ export interface QuestObjectivePoi extends PoiBase {
 // that no longer matches the map it is showing.
 export interface QuestPoiSnapshot {
   mapId: string;
+  gameMode?: QuestGameMode;
   pois: QuestObjectivePoi[];
 }
 

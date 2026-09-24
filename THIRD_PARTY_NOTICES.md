@@ -15,4 +15,16 @@ Icebreaker and Labyrinth map images are provided by [RE3MR](https://reemr.se/) u
 
 The former Icebreaker and Labyrinth tiles sourced from assets.tarkov.dev have been removed and are not distributed.
 
+Quest location previews reuse the attributed bundled maps; they are not in-game
+quest screenshots. Optional Tarkov Wiki links come from narrowly matched
+Tarkov.dev URL metadata. Generic quest artwork is supplied through
+[the Tarkov.dev API](https://tarkov.dev/api/) and hosted upstream on
+assets.tarkov.dev. Escape from Tarkov game artwork © Battlestate Games. The
+236 bundled images are unchanged and individually sourced and hashed in
+`public/maps/quests/images.json`. Inclusion follows the user's confirmation of
+permission with attribution; no broader image license is asserted. These images
+are separate from both the Apache-2.0 code and CC BY-NC-SA map artwork. Wiki text
+and HTML are not redistributed.
+See the 2026-09-24 entry in `ASSET_LICENSES.md` for source and checksum details.
+
 IBM Plex Sans Condensed and IBM Plex Mono are distributed under the SIL Open Font License 1.1. The font package licenses are included with their respective `@fontsource` dependencies.

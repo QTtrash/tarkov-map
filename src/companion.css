@@ -339,3 +339,66 @@ body.companion-body {
     animation: none;
   }
 }
+
+.companion-shell {
+  grid-template-rows: 54px 58px minmax(0, 1fr) auto;
+}
+.companion-header button,
+.companion-controls button {
+  min-height: 44px;
+  font-size: 10px;
+}
+.companion-waypoint-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  padding: 6px max(10px, env(safe-area-inset-left)) max(6px, env(safe-area-inset-bottom));
+  border-top: 1px solid var(--rule);
+  background: var(--panel);
+}
+.companion-waypoint-controls button {
+  min-height: 44px;
+  padding: 8px;
+  border: 1px solid var(--rule);
+  color: var(--bone);
+  background: var(--raised);
+  font-size: 13px;
+}
+.companion-waypoint-controls button:disabled {
+  opacity: 0.5;
+}
+.companion-waypoint-controls > span {
+  font-size: 12px;
+  color: var(--muted);
+}
+.companion-waypoint-controls p {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 12px;
+}
+@media (max-width: 640px) {
+  .companion-shell {
+    grid-template-rows: 54px 58px minmax(0, 1fr) auto;
+  }
+  .companion-controls label {
+    min-width: 100px;
+    padding: 0 8px;
+  }
+  .companion-controls button {
+    margin: 0 4px;
+    padding: 0 5px;
+    font-size: 9px;
+  }
+  .companion-body .quest-marker-dialog {
+    width: calc(100vw - 12px);
+    max-height: calc(100vh - 12px);
+  }
+  .companion-body .quest-marker-body {
+    padding: 12px;
+  }
+  .companion-body .quest-marker-backdrop {
+    padding: 6px;
+    align-items: end;
+  }
+}

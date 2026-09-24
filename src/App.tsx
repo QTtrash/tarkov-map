@@ -7,7 +7,7 @@ import { SharePanel } from "./components/SharePanel";
 import { SettingsDialog } from "./components/SettingsDialog";
 import { AboutDialog } from "./components/AboutDialog";
 import { getMapDefinition, maps } from "./data/maps";
-import { getActiveFloor } from "./floor";
+import { chooseAutomaticFloor, getActiveFloor } from "./floor";
 import {
   chooseDirectory,
   clearPlayerPosition,
@@ -41,6 +41,7 @@ import type {
   PlayerFix,
   PoiCategory,
   QuestObjectivePoi,
+  QuestGameMode,
   RaidExtractState,
   SquadPosition,
 } from "./types";
@@ -116,6 +117,8 @@ export function App() {
   const [showAbout, setShowAbout] = useState(false);
   const [showQuests, setShowQuests] = useState(false);
   const [showSharing, setShowSharing] = useState(false);
+  const [questMode, setQuestMode] = useState<QuestGameMode>("regular");
+  const focusHandled = useCallback(() => setFocusPoiId(null), []);
   const [activeQuestPois, setActiveQuestPois] = useState<QuestObjectivePoi[]>([]);
   const [focusedQuestPoi, setFocusedQuestPoi] = useState<QuestObjectivePoi | null>(null);
   const [customPins, setCustomPins] = useState<CustomPinPoi[]>(() =>
@@ -281,7 +284,7 @@ export function App() {
   const definition = getMapDefinition(mapSession.viewedMapId) ?? maps[0];
   const detectedDefinition = getMapDefinition(mapSession.detectedMapId);
   useEffect(() => {
-    setFocusedQuestPoi(null);
+    setFocusedQuestPoi((current) => (current?.mapId === definition.id ? current : null));
   }, [definition.id]);
   const visibleFix = fix && (!fix.mapId || fix.mapId === definition.id) ? fix : null;
   const activeFloor = useMemo(
@@ -323,8 +326,12 @@ export function App() {
 
   // The snapshot names its map because the overlay can be showing a different one.
   useEffect(() => {
-    void publishQuestPois({ mapId: definition.id, pois: activeQuestPois });
-  }, [activeQuestPois, definition.id, overlayState.ready]);
+    void publishQuestPois({
+      mapId: definition.id,
+      gameMode: questMode,
+      pois: activeQuestPois.filter((poi) => poi.mapId === definition.id),
+    });
+  }, [activeQuestPois, definition.id, overlayState.ready, questMode]);
 
   useEffect(() => {
     if (!definition) return;
@@ -332,8 +339,6 @@ export function App() {
     setPoiBundle(null);
     setPoiLoading(true);
     setPoiError(null);
-    setSelectedPoiId(null);
-    setFocusPoiId(null);
     void loadPoiBundle(definition.poiPath, controller.signal)
       .then(setPoiBundle)
       .catch((error) => {
@@ -373,6 +378,8 @@ export function App() {
       setMapSession((current) => selectViewedMap(current, mapId));
       updateSettings({ selectedMap: mapId, autoFloor: true });
       setFocusedQuestPoi(null);
+      setSelectedPoiId(null);
+      setFocusPoiId(null);
       setFloorMode("auto");
     },
     [updateSettings],
@@ -468,7 +475,11 @@ export function App() {
     (mapId: string, poi: QuestObjectivePoi | null) => {
       viewMap(mapId);
       setFocusedQuestPoi(poi);
-      if (poi) updateSettings({ showQuestMarkers: true });
+      if (poi) {
+        const target = getMapDefinition(mapId);
+        if (target) setFloorMode(chooseAutomaticFloor(target, poi.position));
+        updateSettings({ showQuestMarkers: true, followPlayer: false });
+      }
       setShowQuests(false);
       setSelectedPoiId(poi?.id ?? null);
       setFocusPoiId(poi?.id ?? null);
@@ -754,6 +765,8 @@ export function App() {
             visibleLootGroups={visibleLootGroups}
             selectedPoiId={selectedPoiId}
             focusPoiId={focusPoiId}
+            onFocusHandled={focusHandled}
+            questMode={questMode}
             activeExtractIds={activeExtractIds}
             onFollowChange={setFollow}
             onSelectPoi={selectPoi}
@@ -831,6 +844,7 @@ export function App() {
         onClose={() => setShowQuests(false)}
         onFocusObjective={focusQuestObjective}
         onActiveObjectivePoisChange={setActiveQuestPois}
+        onCatalogModeChange={setQuestMode}
         onEnableQuestMarkersOnce={() => {
           if (!settings.showQuestMarkers) updateSettings({ showQuestMarkers: true });
         }}

@@ -34,6 +34,11 @@
   to public compatibility reports.
 - Quest profiles, player levels, and progress remain local. They are not included
   in room protocol v1 and never reach either relay or the phone companion.
+- Quest details render bundled text, map previews, and attributed generic quest
+  artwork, not Wiki HTML or remote images. Image metadata validates exact quest
+  IDs, local paths, source URLs, file sizes, and SHA-256 identities. Optional Wiki article URLs are validated against a single HTTPS host;
+  the native opener is scoped to that host's article path. Browser links suppress
+  referrers and opener access. No invitation or progress is appended to links.
 - Main-window-to-overlay quest and squad snapshots are size-bounded and validated
   on both publication and receipt. Decrypted squad positions remain inside the
   desktop process; the overlay does not hold an invitation key or relay
