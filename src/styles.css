@@ -2408,3 +2408,211 @@ a:focus-visible {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* Extraction names have their own screen-space layout; transit labels retain data-detail. */
+.extraction-label-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 620;
+  overflow: hidden;
+  pointer-events: none;
+}
+.extraction-label-layer > svg {
+  position: absolute;
+  inset: 0;
+}
+.extraction-label-layer line {
+  stroke: #cfcebb;
+  stroke-width: 1;
+  opacity: 0.65;
+}
+.extraction-label {
+  position: absolute;
+  display: block;
+  width: max-content;
+  max-width: min(160px, 42vw);
+  padding: 4px 6px;
+  overflow: hidden;
+  border-left: 2px solid currentColor;
+  color: var(--bone);
+  background: #101310f5;
+  box-shadow: 0 2px 5px #0009;
+  font:
+    500 12px/1.25 "IBM Plex Sans Condensed",
+    sans-serif;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.extraction-label.raid-active,
+.extraction-overflow .raid-active {
+  border-left: 3px solid var(--pmc);
+  color: #fff5df !important;
+  background: #1b251df5;
+}
+.extraction-label.selected {
+  outline: 1px solid var(--bone);
+}
+.extract-number {
+  position: absolute;
+  right: -6px;
+  top: -10px;
+  min-width: 17px;
+  padding: 2px;
+  color: var(--bone);
+  background: #101310;
+  border: 1px solid var(--muted);
+  text-align: center;
+  font:
+    600 11px/1 "IBM Plex Mono",
+    monospace;
+  pointer-events: none;
+}
+.extraction-overflow {
+  position: absolute;
+  left: 8px;
+  bottom: 42px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  pointer-events: auto;
+  border: 1px solid var(--rule);
+  background: #101310f5;
+}
+.extraction-overflow button {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  padding: 5px 8px;
+  border-bottom: 1px solid var(--rule);
+  background: transparent;
+  color: var(--bone);
+  text-align: left;
+  font-size: 13px;
+}
+.poi-popup-content .delete-waypoint {
+  min-height: 44px;
+  font-size: 14px;
+}
+.quest-marker-dialog {
+  display: flex;
+  flex-direction: column;
+  width: min(620px, calc(100vw - 24px));
+  max-height: calc(100vh - 24px);
+  min-height: 0;
+}
+.quest-marker-dialog > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid var(--rule);
+}
+.quest-marker-dialog h2 {
+  margin: 5px 0 0;
+  font-size: 24px;
+}
+.quest-marker-body {
+  padding: 16px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.quest-marker-body h3 {
+  margin: 16px 0 6px;
+  font-size: 17px;
+}
+.quest-marker-body p {
+  margin: 0 0 12px;
+}
+.quest-marker-body li {
+  margin: 4px 0;
+}
+.quest-marker-summary {
+  color: var(--muted);
+}
+.quest-marker-dialog button,
+.quest-wiki-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--rule);
+  background: var(--raised);
+  color: var(--bone);
+  font-size: 14px;
+}
+.quest-location-caution {
+  padding: 10px;
+  border-left: 3px solid var(--usec);
+  background: var(--raised);
+}
+.quest-location-preview {
+  margin: 16px 0;
+}
+.quest-preview-map {
+  width: 100%;
+  height: 210px;
+  background: var(--canvas);
+  pointer-events: none;
+}
+.quest-location-preview figcaption {
+  padding: 8px 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+.quest-wiki-unavailable {
+  color: var(--muted);
+  font-size: 13px;
+}
+.overlay-shell .quest-marker-dialog {
+  width: calc(100vw - 16px);
+  max-height: calc(100vh - 16px);
+}
+.overlay-shell .quest-marker-body {
+  padding: 12px;
+  font-size: 14px;
+}
+.overlay-shell .quest-preview-map {
+  height: 140px;
+}
+.overlay-shell .quest-marker-backdrop {
+  padding: 8px;
+}
+.quest-marker-dialog > header {
+  flex-shrink: 0;
+  height: auto;
+  min-height: 72px;
+}
+
+.quest-marker-images {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.quest-artwork {
+  margin: 16px 0;
+  min-width: 0;
+}
+.quest-artwork img {
+  display: block;
+  width: 100%;
+  height: 210px;
+  object-fit: contain;
+  background: var(--canvas);
+}
+.quest-artwork figcaption {
+  padding: 8px 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+@media (max-width: 640px) {
+  .quest-marker-images {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+}
+.overlay-shell .quest-artwork img {
+  height: 140px;
+}

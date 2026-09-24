@@ -43,6 +43,16 @@ files. The Cloudflare Worker adapter is not a supported runtime.
   summary copied by the desktop UI.
 - `src/components/map-view-helpers.ts` owns Leaflet rendering primitives;
   `MapView.tsx` owns their lifecycle and synchronization.
+- `src/quest-catalog.ts` caches validated bundled quest text by mode. Read-only
+  marker details resolve exact task/objective IDs, and location previews reuse
+  bundled maps. Generic quest artwork uses a separately validated, lazy-loaded
+  local manifest and attributed local WebP files. The pure `quest-images.ts`
+  schema is shared by runtime validation and the narrow asset importer.
+  Overlay snapshots may include an optional catalog mode (older
+  snapshots default to regular); this stays inside the desktop process.
+- Companion waypoint changes affect only validated phone-local storage. Map
+  membership continues to use existing pin IDs; no settings or room-protocol
+  migration is required.
 - `SettingsDialog.tsx` and `AboutDialog.tsx` own modal presentation; `App.tsx`
   owns application state and orchestration.
 - `src-tauri/src/model.rs` owns native settings and command payload models.

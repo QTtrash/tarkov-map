@@ -59,7 +59,7 @@ export function Dialog({ children, className, titleId, onClose }: DialogProps) {
 
   return (
     <div
-      className="dialog-backdrop"
+      className={`dialog-backdrop${className === "quest-marker-dialog" ? " quest-marker-backdrop" : ""}`}
       role="presentation"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) onClose();

@@ -24,7 +24,7 @@ import type {
   QuestStatus,
   QuestSyncPreview,
 } from "../types";
-import { parseQuestBundle } from "../validation";
+import { loadQuestCatalog } from "../quest-catalog";
 import { Dialog } from "./Dialog";
 import { UiIcon } from "./Icons";
 
@@ -36,6 +36,7 @@ interface QuestPanelProps {
   onActiveObjectivePoisChange?: (pois: QuestObjectivePoi[]) => void;
   onEnableQuestMarkersOnce?: () => void;
   onImportComplete?: () => void;
+  onCatalogModeChange?: (mode: QuestGameMode) => void;
 }
 
 type StatusFilter = "all" | "actionable" | QuestDisplayStatus;
@@ -68,8 +69,12 @@ export function QuestPanel({
   onActiveObjectivePoisChange,
   onEnableQuestMarkersOnce,
   onImportComplete,
+  onCatalogModeChange,
 }: QuestPanelProps) {
   const [mode, setMode] = useState<QuestGameMode>("regular");
+  useEffect(() => {
+    onCatalogModeChange?.(mode);
+  }, [mode, onCatalogModeChange]);
   const [bundle, setBundle] = useState<QuestBundle | null>(null);
   const [progress, setProgress] = useState<QuestProgress[]>([]);
   const [profiles, setProfiles] = useState<QuestProfile[]>([]);
@@ -154,15 +159,10 @@ export function QuestPanel({
   useEffect(() => {
     const controller = new AbortController();
     setError(null);
-    void Promise.all([
-      fetch(`/maps/quests/${mode}.json`, { signal: controller.signal }).then((response) => {
-        if (!response.ok) throw new Error(`Quest data unavailable (${response.status})`);
-        return response.json();
-      }),
-      getQuestProgress(mode, selectedProfile?.profileKey),
-    ])
+    void Promise.all([loadQuestCatalog(mode), getQuestProgress(mode, selectedProfile?.profileKey)])
       .then(([nextBundle, nextProgress]) => {
-        setBundle(parseQuestBundle(nextBundle));
+        if (controller.signal.aborted) return;
+        setBundle(nextBundle);
         setProgress(nextProgress);
         setExpanded(new Set());
       })
@@ -201,8 +201,8 @@ export function QuestPanel({
   }, [bundle, mapId, mode, playerLevel, progressIndex, query, showAllMaps, statusFilter, traderFilter]);
 
   const activeObjectivePois = useMemo<QuestObjectivePoi[]>(
-    () => buildActiveQuestObjectivePois(bundle, mapId, progressIndex),
-    [bundle, mapId, progressIndex],
+    () => buildActiveQuestObjectivePois(bundle?.gameMode === mode ? bundle : null, mapId, progressIndex),
+    [bundle, mapId, mode, progressIndex],
   );
 
   useEffect(() => {

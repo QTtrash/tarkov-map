@@ -27,6 +27,7 @@ tokio = { version = "1", features = ["net", "sync"] }
 tauri = { version = "2", features = [] }
 tauri-plugin-window-state = "2"
 tauri-plugin-global-shortcut = "2"
+tauri-plugin-opener = "2"
 
 [target.'cfg(windows)'.dependencies]
 winreg = "0.56"

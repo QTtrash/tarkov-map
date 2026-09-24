@@ -129,10 +129,7 @@ function glyphMarkup(category: PoiCategory, lootGroup?: LootGroupId) {
 
 export function poiIcon(poi: MapPoi, selected: boolean, active = false) {
   const lootGroup = poi.kind === "loot" ? lootGroupForType(poi.lootType) : undefined;
-  const label =
-    poi.kind === "extract" || poi.kind === "transit"
-      ? `<span class="poi-marker-label">${escapeHtml(poi.name)}</span>`
-      : "";
+  const label = poi.kind === "transit" ? `<span class="poi-marker-label">${escapeHtml(poi.name)}</span>` : "";
   const candidate = poi.kind === "quest-possible-location" ? " quest-possible-location" : "";
   return L.divIcon({
     className: "poi-marker-shell",
@@ -142,7 +139,12 @@ export function poiIcon(poi: MapPoi, selected: boolean, active = false) {
   });
 }
 
-export function popupContent(poi: MapPoi, index: Map<string, MapPoi>, onFocus: (id: string) => void) {
+export function popupContent(
+  poi: MapPoi,
+  index: Map<string, MapPoi>,
+  onFocus: (id: string) => void,
+  onDeleteWaypoint?: (id: string) => void,
+) {
   const content = document.createElement("div");
   content.className = "poi-popup-content";
   const kicker = document.createElement("span");
@@ -189,6 +191,20 @@ export function popupContent(poi: MapPoi, index: Map<string, MapPoi>, onFocus: (
     button.addEventListener("click", () => onFocus(linked.id));
     content.append(button);
   }
+  if (poi.kind === "custom-pin" && onDeleteWaypoint) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "delete-waypoint";
+    button.textContent = "Delete waypoint";
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      onDeleteWaypoint(poi.id);
+    });
+    content.append(button);
+  }
+  L.DomEvent.disableClickPropagation(content);
+  L.DomEvent.disableScrollPropagation(content);
+  content.addEventListener("keydown", (event) => event.stopPropagation());
   return content;
 }
 

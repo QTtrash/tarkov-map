@@ -23,6 +23,55 @@ observations do not replace the per-file checksum ledger.
 
 ## Redistribution boundary
 
+### Quest location previews and Wiki links (2026-09-24)
+
+Objective location previews crop and annotate the already bundled artwork at
+runtime. They retain its existing authorship, license, and usage restrictions;
+the separately sourced generic quest artwork below does not change those map terms.
+
+`public/maps/quests/wiki-links.json` contains only quest identifiers, modes, and
+direct Wiki URLs matched against the existing quest snapshot. Sources are
+`https://json.tarkov.dev/{regular,pve,pvp-season}/tasks`, retrieved 2026-09-24;
+credit Tarkov.dev contributors and the corresponding Tarkov Wiki editors. The
+SHA-256 is `49b2dd28a2bfffe1c07780b50d6e2ff7c0fc5a23d21894b34fd45796fb7e0ff2`,
+also recorded in the checksum ledger. This is URL reference metadata, not a
+redistribution of Wiki text, HTML, or images. Linked content retains its own
+terms. `scripts/sync-quest-links.mjs` updates only this metadata and its ledger
+entry; it does not refresh existing quest data or artwork.
+
+### Generic quest artwork (2026-09-24)
+
+The user confirmed permission to include quest images with source attribution.
+This integration relies on that confirmation; it does not assert an independently
+verified blanket image license or apply the API software license to the images.
+Escape from Tarkov game artwork remains © Battlestate Games. Credit Tarkov.dev
+as the image provider, not as the claimed author of the game artwork.
+
+- Scope: 236 unmodified WebP images for existing quests with mapped objectives,
+  shared across 684 mode/quest pairs; 14,045,678 bytes in total.
+- Files: `public/maps/quests/images/*.webp`. No other quest text or map artwork
+  was refreshed. The images are generic quest illustrations, not confirmed
+  objective/location photographs.
+- Source: the `taskImageLink` field of the
+  [Tarkov.dev API](https://tarkov.dev/api/), fetched from
+  `https://json.tarkov.dev/{regular,pve,pvp-season}/tasks` on 2026-09-24.
+  Original images are served by `https://assets.tarkov.dev/<quest-id>.webp`.
+- Per-image original URL, quest/mode, byte count, and SHA-256 are recorded in
+  `public/maps/quests/images.json`; every image is also included in
+  `public/maps/asset-checksums.json`. The metadata SHA-256 is
+  `6b04da96d33f3ae6b80f161496feb5eca831bf8556c4787b465c877457c583b0`.
+- Importer: `scripts/sync-quest-images.mjs`, limited to existing mapped quests,
+  a single HTTPS source host, bounded WebP files, and exact quest IDs.
+- Display: unchanged artwork, scaled with preserved aspect ratio. Captions
+  identify generic artwork, Tarkov.dev/assets.tarkov.dev, and Battlestate Games.
+  Runtime loads use bundled local files, not third-party image requests.
+
+These images are excluded from the project's Apache-2.0 code license and the
+map artwork's CC BY-NC-SA license. Preserve their provenance and source credit;
+this permission confirmation does not grant downstream parties new rights.
+
+### General redistribution requirements
+
 - Do not assume Apache-2.0 applies to anything under `public/maps/`.
 - Preserve this ledger, `THIRD_PARTY_NOTICES.md`, `NOTICE`, the in-app
   attribution, and `public/maps/LICENSE.md` when redistributing bundled assets.

@@ -75,6 +75,8 @@ describe("runtime boundary validation", () => {
     };
     const snapshot = { mapId: "customs", pois: [poi] };
     expect(parseQuestPoiSnapshot(snapshot)).toEqual(snapshot);
+    expect(parseQuestPoiSnapshot({ ...snapshot, gameMode: "pve" }).gameMode).toBe("pve");
+    expect(() => parseQuestPoiSnapshot({ ...snapshot, gameMode: "unknown" })).toThrow();
     expect(parseQuestPoiSnapshot({ mapId: "customs", pois: [] })).toEqual({ mapId: "customs", pois: [] });
     const possibleLocation = {
       ...poi,

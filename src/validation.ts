@@ -1,4 +1,6 @@
 import { z } from "zod";
+import { questImagesSchema } from "./quest-images";
+import { validatedWikiUrl } from "./quest-links";
 import type {
   CustomPinPoi,
   LocatorSettings,
@@ -107,7 +109,11 @@ const questObjectivePoi = z.union([
   }),
 ]);
 const questPoiSnapshot = z
-  .object({ mapId, pois: z.array(questObjectivePoi).max(128) })
+  .object({
+    mapId,
+    gameMode: z.enum(["regular", "pve", "pvp-season"]).optional(),
+    pois: z.array(questObjectivePoi).max(128),
+  })
   .superRefine((snapshot, context) => {
     snapshot.pois.forEach((candidate, index) => {
       if (candidate.mapId !== snapshot.mapId) {
@@ -353,6 +359,27 @@ export const parseQuestSyncResult = (value: unknown) => questSyncResult.parse(va
 export const parseAssetChecksums = (value: unknown) =>
   z.record(z.string(), z.string().regex(/^[a-f0-9]{64}$/)).parse(value);
 
+export const parseQuestLinks = (value: unknown) =>
+  z
+    .object({
+      schemaVersion: z.literal(1),
+      generatedAt: z.string().max(64),
+      sources: z.array(z.string().url().max(2048)).max(3),
+      links: z
+        .array(
+          z.object({
+            gameMode: questGameMode,
+            taskId: identifier,
+            wikiUrl: z
+              .string()
+              .max(2048)
+              .refine((url) => validatedWikiUrl(url) !== null),
+          }),
+        )
+        .max(3000),
+    })
+    .parse(value);
+
 export function readStoredJson<T>(key: string, parse: (value: unknown) => T, fallback: T): T {
   try {
     const stored = localStorage.getItem(key);
@@ -361,3 +388,5 @@ export function readStoredJson<T>(key: string, parse: (value: unknown) => T, fal
     return fallback;
   }
 }
+
+export const parseQuestImages = (value: unknown) => questImagesSchema.parse(value);

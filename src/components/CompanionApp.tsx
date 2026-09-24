@@ -1,9 +1,24 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { maps, getMapDefinition } from "../data/maps";
 import { allLootGroupIds, defaultVisiblePoiCategories, loadPoiBundle, lootGroupForType } from "../poi";
-import { composePoiBundle, composeVisibleCategories } from "../map-overlays";
+import { chooseAutomaticFloor } from "../floor";
+import {
+  companionPinsKey,
+  maxCompanionPins,
+  persistCompanionWaypoints,
+  removeCompanionWaypoints,
+} from "../companion-waypoints";
+import { composePoiBundle, composeVisibleCategories, pinsForMap } from "../map-overlays";
 import { createSenderId, decryptPosition, EVICT_AFTER_MS, importRoomKey, parseInvitation } from "../sharing/protocol";
-import type { CustomPinPoi, LootGroupId, MapPoiBundle, PoiCategory, QuestObjectivePoi, SquadPosition } from "../types";
+import type {
+  CustomPinPoi,
+  LootGroupId,
+  MapPoiBundle,
+  PoiCategory,
+  QuestGameMode,
+  QuestObjectivePoi,
+  SquadPosition,
+} from "../types";
 import { IntelDrawer } from "./IntelDrawer";
 import { MapView } from "./MapView";
 import { QuestPanel } from "./QuestPanel";
@@ -85,14 +100,25 @@ export function CompanionApp() {
   const [poiError, setPoiError] = useState<string | null>(null);
   const [selectedPoiId, setSelectedPoiId] = useState<string | null>(null);
   const [focusPoiId, setFocusPoiId] = useState<string | null>(null);
+  const [questMode, setQuestMode] = useState<QuestGameMode>("regular");
+  const focusHandled = useCallback(() => setFocusPoiId(null), []);
   const [activeQuestPois, setActiveQuestPois] = useState<QuestObjectivePoi[]>([]);
   const [focusedQuestPoi, setFocusedQuestPoi] = useState<QuestObjectivePoi | null>(null);
   const [visible, setVisible] = useState<Set<PoiCategory>>(() => new Set(defaultVisiblePoiCategories));
   const [visibleLootGroups, setVisibleLootGroups] = useState<Set<LootGroupId>>(() => new Set(allLootGroupIds));
   const [showQuestMarkers, setShowQuestMarkers] = useState(false);
-  const [pins, setPins] = useState<CustomPinPoi[]>(() =>
-    readStoredJson("raid-signal-companion-pins", parseCustomPins, []),
-  );
+  const [pins, setPins] = useState<CustomPinPoi[]>(() => readStoredJson(companionPinsKey, parseCustomPins, []));
+  const pinsRef = useRef(pins);
+  const [pinMessage, setPinMessage] = useState<string | null>(null);
+  const updatePins = useCallback((next: CustomPinPoi[]) => {
+    pinsRef.current = next;
+    setPins(next);
+    setPinMessage(
+      persistCompanionWaypoints(next)
+        ? "Waypoints saved on this phone."
+        : "Changes are visible but could not be saved. Phone storage is unavailable or full.",
+    );
+  }, []);
   const highestSequence = useRef(new Map<string, number>());
   const followRef = useRef(follow);
   const invitationUrl = useRef(invitationFromLocation());
@@ -127,7 +153,19 @@ export function CompanionApp() {
       }
     : null;
 
-  useEffect(() => localStorage.setItem("raid-signal-companion-pins", JSON.stringify(pins)), [pins]);
+  const mapPins = useMemo(() => pinsForMap(pins, definition.id), [pins, definition.id]);
+  const deletableWaypointIds = useMemo(() => new Set(mapPins.map((pin) => pin.id)), [mapPins]);
+  const removePins = useCallback(
+    (id?: string) => {
+      const result = removeCompanionWaypoints(pinsRef.current, definition.id, id);
+      if (!result.removed.size) return;
+      setSelectedPoiId((current) => (current && result.removed.has(current) ? null : current));
+      setFocusPoiId((current) => (current && result.removed.has(current) ? null : current));
+      updatePins(result.pins);
+      requestAnimationFrame(() => document.querySelector<HTMLElement>(".companion-map .map-canvas")?.focus());
+    },
+    [definition.id, updatePins],
+  );
 
   useEffect(() => {
     let socket: WebSocket | null = null;
@@ -244,31 +282,46 @@ export function CompanionApp() {
     setMapId(nextMapId);
     setFloor("base");
     setFocusedQuestPoi(null);
+    setSelectedPoiId(null);
+    setFocusPoiId(null);
   }, []);
   const focusQuest = useCallback(
     (nextMapId: string, poi: QuestObjectivePoi | null) => {
       selectMap(nextMapId);
       setFocusedQuestPoi(poi);
-      if (poi) setShowQuestMarkers(true);
+      if (poi) {
+        setShowQuestMarkers(true);
+        const target = getMapDefinition(nextMapId);
+        if (target) setFloor(chooseAutomaticFloor(target, poi.position));
+      }
       setFocusPoiId(poi?.id ?? null);
       setQuestsOpen(false);
     },
     [selectMap],
   );
   const createPin = useCallback(
-    (position: { x: number; z: number }) =>
-      setPins((current) => [
-        ...current,
-        {
-          id: `pin-${definition.id}-${createSenderId()}`,
-          kind: "custom-pin",
-          category: "custom-pin",
-          name: "Companion waypoint",
-          note: "Saved on this phone",
-          position: { x: position.x, y: 0, z: position.z },
-        },
-      ]),
-    [definition.id],
+    (position: { x: number; z: number }) => {
+      if (pinsRef.current.length >= maxCompanionPins) {
+        setPinMessage("Waypoint limit reached (500). Delete or clear waypoints before adding another.");
+        return;
+      }
+      const pin: CustomPinPoi = {
+        id: `pin-${definition.id}-${createSenderId()}`,
+        kind: "custom-pin",
+        category: "custom-pin",
+        name: "Companion waypoint",
+        note: "Saved on this phone",
+        position: { x: position.x, y: 0, z: position.z },
+      };
+      try {
+        parseCustomPins([pin]);
+      } catch {
+        setPinMessage("This waypoint position is invalid.");
+        return;
+      }
+      updatePins([...pinsRef.current, pin]);
+    },
+    [definition.id, updatePins],
   );
   const toggleCategory = useCallback((category: PoiCategory) => {
     setVisible((current) => {
@@ -329,7 +382,7 @@ export function CompanionApp() {
       <section className="companion-controls">
         <label>
           <span>MAP</span>
-          <select value={definition.id} onChange={(event) => selectMap(event.target.value)}>
+          <select aria-label="Map" value={definition.id} onChange={(event) => selectMap(event.target.value)}>
             {maps.map((map) => (
               <option value={map.id} key={map.id}>
                 {map.displayName}
@@ -339,7 +392,7 @@ export function CompanionApp() {
         </label>
         <label>
           <span>LEVEL</span>
-          <select value={activeFloor} onChange={(event) => setFloor(event.target.value)}>
+          <select aria-label="Floor" value={activeFloor} onChange={(event) => setFloor(event.target.value)}>
             {floors.map((item) => (
               <option value={item.id} key={item.id}>
                 {item.name}
@@ -361,6 +414,7 @@ export function CompanionApp() {
       <section className="companion-map">
         {error && connection !== "online" && <p className="companion-connection-error">{error}</p>}
         <MapView
+          key={definition.id}
           definition={definition}
           activeFloor={activeFloor}
           fix={primaryFix}
@@ -371,6 +425,10 @@ export function CompanionApp() {
           visibleLootGroups={visibleLootGroups}
           selectedPoiId={selectedPoiId}
           focusPoiId={focusPoiId}
+          onFocusHandled={focusHandled}
+          questMode={questMode}
+          onDeleteWaypoint={removePins}
+          deletableWaypointIds={deletableWaypointIds}
           onFollowChange={setFollow}
           onSelectPoi={setSelectedPoiId}
           onCreateWaypoint={createPin}
@@ -427,12 +485,22 @@ export function CompanionApp() {
           }}
         />
       </section>
+      <footer className="companion-waypoint-controls">
+        <button onClick={() => removePins()} disabled={!mapPins.length}>
+          Clear waypoints on this map
+        </button>
+        <span>
+          {definition.displayName} · {mapPins.length} saved
+        </span>
+        {pinMessage && <p role="status">{pinMessage}</p>}
+      </footer>
       <QuestPanel
         open={questsOpen}
         mapId={definition.id}
         onClose={() => setQuestsOpen(false)}
         onFocusObjective={focusQuest}
         onActiveObjectivePoisChange={setActiveQuestPois}
+        onCatalogModeChange={setQuestMode}
       />
     </main>
   );
