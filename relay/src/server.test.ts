@@ -88,3 +88,24 @@ test("malformed paths cannot terminate the relay", async (context) => {
   const health = await fetch(`http://127.0.0.1:${port}/healthz`);
   assert.equal(health.status, 200);
 });
+
+test("bundled quest artwork is served as WebP with nosniff protection", async (context) => {
+  const staticRoot = await mkdtemp(join(tmpdir(), "raid-signal-image-test-"));
+  const bytes = Buffer.from("RIFFtestWEBPVP8 ");
+  await writeFile(join(staticRoot, "quest.webp"), bytes);
+  const child = spawn(process.execPath, ["--import", "tsx", "src/server.ts"], {
+    cwd: new URL("..", import.meta.url),
+    env: { ...process.env, PORT: "0", STATIC_ROOT: staticRoot },
+    stdio: ["ignore", "pipe", "pipe"],
+  });
+  context.after(() => child.kill("SIGTERM"));
+  const [ready] = await once(child.stdout, "data");
+  const port = Number(JSON.parse(String(ready)).port);
+  for (const method of ["GET", "HEAD"]) {
+    const response = await fetch(`http://127.0.0.1:${port}/quest.webp?v=test`, { method });
+    assert.equal(response.status, 200);
+    assert.equal(response.headers.get("content-type"), "image/webp");
+    assert.equal(response.headers.get("x-content-type-options"), "nosniff");
+    assert.deepEqual(Buffer.from(await response.arrayBuffer()), method === "HEAD" ? Buffer.alloc(0) : bytes);
+  }
+});
