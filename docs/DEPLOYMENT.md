@@ -21,3 +21,12 @@ manifest fails the deployment instead of publishing stale installer metadata.
 Do not commit the real environment file. Keep the service reachable publicly
 only through the trusted reverse proxy; the published host port binds to
 `127.0.0.1` by default.
+
+## Existing production VPS
+
+The protected live environment is `/home/truegrind/envs/raid-signal.env`, not
+the example checkout path. Deploy with
+`RAID_SIGNAL_ENV_FILE=/home/truegrind/envs/raid-signal.env ./ops/deploy`.
+The September 25 maintenance pins Node 22.23.3 and refreshes compatible web/relay
+dependencies. Preserve the existing immutable installer release tag: rebuilding
+the relay does not publish a new Windows installer.
