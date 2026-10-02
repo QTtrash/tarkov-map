@@ -13,7 +13,7 @@
     "test": "node --import tsx --test src/server.test.ts"
   },
   "dependencies": {
-    "ws": "^8.18.3"
+    "ws": "^8.22.0"
   },
   "devDependencies": {
     "@types/node": "^22.20.1",
