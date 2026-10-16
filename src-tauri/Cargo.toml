@@ -13,7 +13,7 @@ crate-type = ["staticlib", "cdylib", "rlib"]
 tauri-build = { version = "2", features = [] }
 
 [dependencies]
-dirs = "6"
+dirs = "7"
 chrono = { version = "0.4", default-features = false, features = ["std"] }
 notify = "8"
 regex = "1"
