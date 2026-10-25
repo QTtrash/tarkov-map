@@ -275,7 +275,7 @@ fn parse_event_file(path: &Path, markers: &[Marker], session_key: &str, scan: &m
             {
                 scan.lifecycle_hints += 1;
             }
-            if line.contains("ChatMessageReceived") {
+            let line = if let Some((_, payload)) = line.split_once("ChatMessageReceived") {
                 scan.chat_message_markers += 1;
                 if waiting_for_json && !json.is_empty() {
                     scan.malformed_records += 1;
@@ -286,8 +286,13 @@ fn parse_event_file(path: &Path, markers: &[Marker], session_key: &str, scan: &m
                 depth = 0;
                 in_string = false;
                 escaped = false;
-                return;
-            }
+                let Some(start) = payload.find('{') else {
+                    return;
+                };
+                &payload[start..]
+            } else {
+                line
+            };
             if !waiting_for_json {
                 return;
             }
@@ -621,6 +626,165 @@ mod tests {
     use super::*;
     use std::io::Write;
     use tempfile::tempdir;
+
+    const PVE_MARKERS: &str = "2026-08-21 10:00:00.000 Session mode: Pve\n2026-08-21 10:00:01.000 ProfileId:0123456789abcdef01234567\n";
+    const QUEST_MESSAGE: &str = r#"{"eventId":"event-1","message":{"_id":"message-1","type":10,"text":"abcdefabcdefabcdefabcdef started"}}"#;
+
+    fn scan_fixture(application: &str, notifications: &str, output: &str) -> QuestLogScan {
+        let root = tempdir().unwrap();
+        let session = root.path().join("log_2026.08.21_10-00-00_fixture");
+        std::fs::create_dir(&session).unwrap();
+        std::fs::write(session.join("application.log"), application).unwrap();
+        std::fs::write(session.join("notifications.log"), notifications).unwrap();
+        std::fs::write(session.join("output.log"), output).unwrap();
+        scan_logs(root.path(), false).unwrap()
+    }
+
+    #[test]
+    fn imports_inline_quest_transitions() {
+        for (kind, status, field) in [
+            (10, "active", "text"),
+            (11, "failed", "failMessageText"),
+            (12, "completed", "successMessageText"),
+        ] {
+            let payload = serde_json::json!({
+                "eventId": "event-1",
+                "message": {"type": kind, field: "abcdefabcdefabcdefabcdef"}
+            });
+            let scan = scan_fixture(
+                PVE_MARKERS,
+                &format!("2026-08-21 10:00:02.000 |notification|ChatMessageReceived: {payload}\n"),
+                "",
+            );
+            assert_eq!(scan.events.len(), 1, "inline message type {kind}");
+            let event = &scan.events[0];
+            assert_eq!(event.status, status);
+            assert_eq!(event.task_id, "abcdefabcdefabcdefabcdef");
+            assert_eq!(event.game_mode, "pve");
+            assert_eq!(event.profile_key, hash_text("0123456789abcdef01234567"));
+            assert_eq!(event.occurred_at, 1_787_306_402_000);
+            assert_eq!(scan.chat_message_markers, 1);
+            assert_eq!(scan.malformed_records, 0);
+            assert_eq!(scan.unattributed_records, 0);
+        }
+    }
+
+    #[test]
+    fn imports_inline_started_multiline_json() {
+        let payload = serde_json::json!({
+            "eventId": "event-1",
+            "message": {
+                "type": 12,
+                "successMessageText": "abcdefabcdefabcdefabcdef complete",
+                "description": "braces { } and escaped \"quotes\""
+            }
+        });
+        let pretty = serde_json::to_string_pretty(&payload).unwrap();
+        let scan = scan_fixture(
+            PVE_MARKERS,
+            "",
+            &format!("2026-08-21 10:00:02.000 ChatMessageReceived: {pretty}\n"),
+        );
+        assert_eq!(scan.events.len(), 1);
+        assert_eq!(scan.events[0].status, "completed");
+        assert_eq!(scan.chat_message_markers, 1);
+        assert_eq!(scan.malformed_records, 0);
+    }
+
+    #[test]
+    fn deduplicates_inline_and_following_line_payloads() {
+        let scan = scan_fixture(
+            PVE_MARKERS,
+            &format!("2026-08-21 10:00:02.000 ChatMessageReceived {QUEST_MESSAGE}\n"),
+            &format!("2026-08-21 10:00:02.000 ChatMessageReceived\n{QUEST_MESSAGE}\n"),
+        );
+        assert_eq!(scan.events.len(), 1);
+        assert_eq!(scan.chat_message_markers, 2);
+        assert_eq!(scan.profiles[0].event_count, 1);
+        assert_eq!(scan.malformed_records, 0);
+    }
+
+    #[test]
+    fn rejects_inline_events_without_profile_or_mode() {
+        for application in [
+            "2026-08-21 10:00:00.000 Session mode: Pve\n",
+            "2026-08-21 10:00:01.000 ProfileId:0123456789abcdef01234567\n",
+            "",
+        ] {
+            let scan = scan_fixture(
+                application,
+                &format!("2026-08-21 10:00:02.000 ChatMessageReceived: {QUEST_MESSAGE}\n"),
+                "",
+            );
+            assert!(scan.events.is_empty());
+            assert!(scan.profiles.is_empty());
+            assert_eq!(scan.unattributed_records, 1);
+        }
+    }
+
+    #[test]
+    fn reports_malformed_inline_json_and_recovers_at_next_event() {
+        for malformed in [r#"{"message":invalid}"#, r#"{"message":{"type":12,"#] {
+            let record = format!("2026-08-21 10:00:02.000 ChatMessageReceived: {malformed}\n");
+            let scan = scan_fixture(PVE_MARKERS, &record, "");
+            assert!(scan.events.is_empty());
+            assert_eq!(scan.malformed_records, 1);
+
+            let recovered = scan_fixture(
+                PVE_MARKERS,
+                &format!("{record}2026-08-21 10:00:03.000 ChatMessageReceived: {QUEST_MESSAGE}\n"),
+                "",
+            );
+            assert_eq!(recovered.events.len(), 1);
+            assert_eq!(recovered.malformed_records, 1);
+        }
+    }
+
+    #[test]
+    fn rejects_oversized_inline_payloads_and_recovers_at_next_event() {
+        let oversized_line = format!(
+            "2026-08-21 10:00:02.000 ChatMessageReceived: {{\"padding\":\"{}\",\"message\":{{\"type\":10,\"text\":\"abcdefabcdefabcdefabcdef\"}}}}\n",
+            "x".repeat(MAX_LINE_BYTES),
+        );
+        let padding = "x".repeat(MAX_JSON_BYTES / 2);
+        let oversized_json = format!(
+            "2026-08-21 10:00:02.000 ChatMessageReceived: {{\"padding1\":\"{padding}\",\n\"padding2\":\"{padding}\",\n\"message\":{{\"type\":10,\"text\":\"abcdefabcdefabcdefabcdef\"}}}}\n",
+        );
+        for record in [oversized_line, oversized_json] {
+            let scan = scan_fixture(PVE_MARKERS, &record, "");
+            assert!(scan.events.is_empty());
+
+            let recovered = scan_fixture(
+                PVE_MARKERS,
+                &format!("{record}2026-08-21 10:00:03.000 ChatMessageReceived: {QUEST_MESSAGE}\n"),
+                "",
+            );
+            assert_eq!(recovered.events.len(), 1);
+            assert_eq!(recovered.events[0].occurred_at, 1_787_306_403_000);
+        }
+    }
+
+    #[test]
+    fn rejects_unrelated_inline_chat_and_lifecycle_hints() {
+        let scan = scan_fixture(
+            PVE_MARKERS,
+            concat!(
+                "2026-08-21 10:00:02.000 ChatMessageReceived: {\"message\":{\"type\":1,\"text\":\"abcdefabcdefabcdefabcdef\"}}\n",
+                "2026-08-21 10:00:03.000 ChatMessageReceived: {\"message\":{\"type\":10,\"text\":\"no task identifier\"}}\n",
+                "2026-08-21 10:00:04.000 AcceptQuest abcdefabcdefabcdefabcdef\n",
+                "2026-08-21 10:00:05.000 SendQuestComplete abcdefabcdefabcdefabcdef\n",
+                "2026-08-21 10:00:06.000 SendQuestFail abcdefabcdefabcdefabcdef\n",
+                "2026-08-21 10:00:07.000 EFT.Quests.Quest:SetStatus abcdefabcdefabcdefabcdef\n",
+            ),
+            "",
+        );
+        assert!(scan.events.is_empty());
+        assert!(scan.profiles.is_empty());
+        assert_eq!(scan.chat_message_markers, 2);
+        assert_eq!(scan.lifecycle_hints, 4);
+        assert_eq!(scan.malformed_records, 0);
+        assert_eq!(scan.unattributed_records, 0);
+    }
 
     #[test]
     fn imports_multiline_notification_with_profile_and_mode() {
