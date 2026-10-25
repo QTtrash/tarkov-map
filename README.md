@@ -4,8 +4,6 @@ Local-first Escape from Tarkov map intelligence and end-to-end encrypted squad
 position sharing for Windows.
 
 [![Release](https://img.shields.io/github/v/release/QTtrash/tarkov-map?display_name=tag&sort=semver)](https://github.com/QTtrash/tarkov-map/releases/latest)
-[![CI](https://github.com/QTtrash/tarkov-map/actions/workflows/ci.yml/badge.svg)](https://github.com/QTtrash/tarkov-map/actions/workflows/ci.yml)
-[![Security](https://github.com/QTtrash/tarkov-map/actions/workflows/security.yml/badge.svg)](https://github.com/QTtrash/tarkov-map/actions/workflows/security.yml)
 [![License](https://img.shields.io/badge/code-Apache--2.0-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Windows-0078D4.svg)](https://github.com/QTtrash/tarkov-map/releases)
 
@@ -55,17 +53,22 @@ $actual = (Get-FileHash .\Raid-Signal-Setup-1.4.1.exe -Algorithm SHA256).Hash.To
 if ($actual -ne $expected) { throw "Raid Signal checksum mismatch" }
 ```
 
-With the GitHub CLI installed, verify that GitHub Actions produced the artifact:
+For the existing v1.4.1 release, use the GitHub CLI to verify its original
+GitHub Actions build provenance:
 
 ```text
 gh attestation verify Raid-Signal-Setup-1.4.1.exe -R QTtrash/tarkov-map
 ```
 
-The release also contains `release.json` and an SPDX SBOM. The
+The v1.4.1 release also contains `release.json` and an SPDX SBOM. The historical
 [release workflow history](https://github.com/QTtrash/tarkov-map/actions/workflows/release.yml)
 records the successful build, Microsoft Defender scan, independent ClamAV scan,
 and publication gate. These controls provide traceable release evidence; they
 are not a third-party security audit or anti-cheat approval.
+
+GitHub Actions and Dependabot update configuration have since been removed.
+Future releases follow the [manual release procedure](docs/RELEASING.md) and do
+not receive GitHub Actions build provenance.
 
 After installation, use the
 [v1.4.1 manual Windows test](docs/MANUAL_TEST_V1.4.1.md) to check the map,
@@ -99,7 +102,7 @@ Useful commands:
 | `npm test`              | Frontend/domain unit tests                     |
 | `npm run test:e2e`      | Playwright critical user journeys              |
 | `npm run assets:verify` | Verify bundled hashes and intelligence bundles |
-| `npm run check:all`     | Required local and CI quality gate             |
+| `npm run check:all`     | Required local quality gate                    |
 
 ## System shape
 

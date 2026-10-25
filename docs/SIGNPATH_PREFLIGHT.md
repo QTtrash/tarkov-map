@@ -10,13 +10,15 @@ SignPath Foundation confirms this project's eligibility in writing.
 - Homepage: <https://signal.mouchsiadis-solutions.com>
 - Repository: <https://github.com/QTtrash/tarkov-map>
 - Current release: <https://github.com/QTtrash/tarkov-map/releases/tag/v1.4.0>
-- Distribution: Windows NSIS installer built on a GitHub-hosted Windows runner
+- Distribution: Windows NSIS installer; future releases are built manually in a
+  clean Windows checkout following `RELEASING.md`
 - Original code license: Apache-2.0
 - Asset boundary: bundled community map artwork is CC BY-NC-SA 4.0 and other
   data remains under the terms recorded in `ASSET_LICENSES.md`
-- Release controls: protected `v*` tags, required GitHub release-environment
-  approval, CI, CodeQL, secret scans, Rust audit, Microsoft Defender, ClamAV,
-  SHA-256, SPDX SBOM, and GitHub artifact provenance
+- Release controls: protected `v*` tags, maintainer-run local verification,
+  Microsoft Defender and ClamAV scans, SHA-256, release manifest, and SPDX SBOM.
+  Actions workflows have been removed; historical releases retain their original
+  GitHub artifact provenance, but future manual builds do not receive it
 - Maintainer roles: `QTtrash` is currently the sole committer, reviewer, and
   release approver; outside contributions require maintainer review
 - Privacy policy: `PRIVACY.md`
@@ -41,19 +43,23 @@ all maintainers use multi-factor authentication before submitting.
 
 ## If accepted
 
+The former GitHub Actions integration is no longer available. Confirm a supported
+manual-build submission and approval process with SignPath before implementation;
+do not add Actions workflows as part of this change.
+
 1. Add the required public **Code signing policy** with named roles, the privacy
    policy, and the exact SignPath credit required by the Foundation.
 2. Install the SignPath GitHub App and protect `.signpath/policies/**` with
    CODEOWNERS.
-3. Store the submission token in the protected GitHub `release` environment and
-   pin the SignPath action to a reviewed commit.
-4. Submit the GitHub-hosted unsigned artifact for manual approval, retrieve the
+3. Configure credentials securely for the approved submission process; never
+   commit credentials to the repository.
+4. Submit the unsigned artifact for manual approval, retrieve the
    signed artifact, and verify publisher and timestamp on the installer and
    installed executable.
 5. Generate checksums and the release manifest only after signing, scan the
-   signed installer with Defender and ClamAV, attest the final files, and publish
+   signed installer with Defender and ClamAV, record the verification, and publish
    a new patch release. Never replace assets attached to an immutable release.
 
-If SignPath declines the application, retain the existing checksum, SBOM,
-provenance, malware scans, and explicit unsigned-installer warning. Removing or
+If SignPath declines the application, retain checksums, SBOMs, malware scans,
+historical provenance, and the explicit unsigned-installer warning. Removing or
 replacing map assets is a separate product decision.
